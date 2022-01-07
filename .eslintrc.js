@@ -20,17 +20,25 @@ module.exports = {
     'no-restricted-syntax': 0,
     'import/prefer-default-export': 0,
     'import/no-default-export': 2,
+    'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
   },
   overrides: [
     {
-      files: ['*.jsx'],
-      rules: {
-        'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
-      },
-    },
-    {
       files: ['*.config.js'],
       rules: { 'import/no-default-export': 0, 'import/no-extraneous-dependencies': 0 },
+    },
+    {
+      files: ['**/?(*.)+(spec|test).[jt]s?(x)'],
+      env: {
+        jest: true,
+      },
+      extends: [
+        'plugin:jest/recommended',
+        'plugin:jest/style',
+        'plugin:jest-formatting/recommended',
+        'plugin:testing-library/react',
+      ],
+      rules: {},
     },
   ],
 };
