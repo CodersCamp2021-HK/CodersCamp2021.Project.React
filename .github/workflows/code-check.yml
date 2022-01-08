@@ -68,8 +68,8 @@ jobs:
           path: ./dist
 
       - name: Deploy app to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3.7.0-6
         if: ${{ github.event_name != 'pull_request' && always() }}
+        uses: peaceiris/actions-gh-pages@v3.7.0-6
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: "./dist"
