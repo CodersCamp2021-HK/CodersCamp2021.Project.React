@@ -20,6 +20,7 @@ module.exports = {
     'no-restricted-syntax': 0,
     'import/prefer-default-export': 0,
     'import/no-default-export': 2,
+    'react/prop-types': 0,
     'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
   },
   overrides: [
