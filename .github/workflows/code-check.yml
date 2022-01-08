@@ -30,8 +30,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Build
-        run: yarn build --base=/CodersCamp2021.Project.JavaScript/
+      # - name: Build
+      #   run: yarn build --base=/CodersCamp2021.Project.React/
 
       - name: Build Storybook
         run: yarn build-storybook
