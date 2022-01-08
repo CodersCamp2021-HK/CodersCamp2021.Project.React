@@ -22,6 +22,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "jest",
+    "lint": "yarn eslint ./src/**/*.js?(x)",
     "test:dev": "jest --watch --runInBand",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"

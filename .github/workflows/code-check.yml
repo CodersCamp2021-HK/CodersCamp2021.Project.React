@@ -49,6 +49,7 @@ jobs:
           verbose: true
 
       - name: Upload build as artifact
+        if: github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v2
         with:
           name: app-dist
