@@ -11,6 +11,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
+    'plugin:storybook/recommended',
   ],
   parserOptions: {
     ecmaVersion: 'latest',
@@ -20,12 +21,13 @@ module.exports = {
     'no-restricted-syntax': 0,
     'import/prefer-default-export': 0,
     'import/no-default-export': 2,
+    'react/jsx-props-no-spreading': 0,
     'react/prop-types': 0,
     'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
   },
   overrides: [
     {
-      files: ['*.config.js'],
+      files: ['*.config.js', '*.stories.jsx'],
       rules: { 'import/no-default-export': 0, 'import/no-extraneous-dependencies': 0 },
     },
     {
