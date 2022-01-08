@@ -34,7 +34,7 @@ jobs:
       #   run: yarn build --base=/CodersCamp2021.Project.React/
 
       - name: Build Storybook
-        run: yarn build-storybook
+        run: yarn build-storybook --quiet
 
       - name: Lint
         run: yarn lint
