@@ -18,6 +18,8 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'no-plusplus': 0,
+    'no-param-reassign': [2, { props: true, ignorePropertyModificationsFor: ['ref'] }],
     'no-restricted-syntax': 0,
     'import/prefer-default-export': 0,
     'import/no-default-export': 2,

@@ -1,0 +1,3 @@
+class KeyboardInput {}
+
+export { KeyboardInput };
