@@ -3,6 +3,8 @@ class Sprite {
 
   #crop;
 
+  #scale;
+
   #width;
 
   #height;
@@ -11,14 +13,14 @@ class Sprite {
    *
    * @param {string} imgUrl
    * @param {import('./Crop').Crop} crop
-   * @param {number} width
-   * @param {number} height
+   * @param {number | undefined} scale
    */
-  constructor(imgUrl, crop, width, height) {
+  constructor(imgUrl, crop, scale = undefined) {
     this.#imgUrl = imgUrl;
     this.#crop = crop;
-    this.#width = width;
-    this.#height = height;
+    this.#scale = scale ?? 1;
+    this.#width = crop.width * this.#scale;
+    this.#height = crop.height * this.#scale;
   }
 
   get width() {
@@ -31,6 +33,13 @@ class Sprite {
 
   get crop() {
     return this.#crop;
+  }
+
+  /**
+   * @param {import("./Crop").Crop} crop
+   */
+  setCrop(crop) {
+    return new Sprite(this.imgUrl, crop, this.#scale);
   }
 
   get imgUrl() {

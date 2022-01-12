@@ -1,6 +1,8 @@
 import { scenes } from '../scenes';
 import { GameLoop } from './GameLoop';
 
+/** @typedef {Readonly<{ keyboardInput:import('../proxy').KeyboardInput , ui:import('../proxy').UI}>} Proxy */
+
 /** @typedef {keyof typeof import('../scenes').scenes} SceneName */
 
 // TODO
@@ -14,8 +16,10 @@ class GameEngineSingleton {
   /** @type {SceneName | undefined} */
   #currentSceneName;
 
-  /** @type {import('../proxy/KeyboardInput').KeyboardInput | undefined} */
-  #keyboardInput;
+  /**
+   * @type {Proxy | undefined}
+   */
+  #proxy;
 
   constructor() {
     this.#gameLoop = new GameLoop((frame) => {
@@ -24,13 +28,14 @@ class GameEngineSingleton {
   }
 
   /**
-   * @param {import("../proxy/Display").Display} display
-   * @param {import("../proxy/DisplayBuffer").DisplayBuffer} buffer
-   * @param {import("../proxy/KeyboardInput").KeyboardInput} keyboardInput
+   * @param {import("../proxy").Display} display
+   * @param {import("../proxy").DisplayBuffer} buffer
+   * @param {import("../proxy").KeyboardInput} keyboardInput
+   * @param {import("../proxy").UI} ui
    */
-  initialize(display, buffer, keyboardInput) {
+  initialize(display, buffer, keyboardInput, ui) {
     this.#gameLoop.setDisplay(display, buffer);
-    this.#keyboardInput = keyboardInput;
+    this.#proxy = { keyboardInput, ui };
   }
 
   /**
@@ -59,7 +64,8 @@ class GameEngineSingleton {
     this.#gameLoop.reset();
     if (this.#currentSceneName) {
       this.#scene?.destroy();
-      this.#scene = new scenes[this.#currentSceneName]();
+      // @ts-ignore
+      this.#scene = new scenes[this.#currentSceneName](this.#proxy);
       this.#scene.activate();
     }
     return this;

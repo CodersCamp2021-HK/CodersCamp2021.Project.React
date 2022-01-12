@@ -13,14 +13,24 @@ class GameScene {
 
   #currentID = 0;
 
-  constructor() {
+  #proxy;
+
+  /**
+   * @param {import('./GameEngine').Proxy} proxy
+   */
+  constructor(proxy) {
     if (this.constructor === GameScene) {
       throw new Error("Abstract classes can't be instantiated.");
     }
+    this.#proxy = proxy;
   }
 
   activate() {
     throw new Error('Abstract method');
+  }
+
+  get proxy() {
+    return this.#proxy;
   }
 
   /**
