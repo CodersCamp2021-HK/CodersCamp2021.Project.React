@@ -23,7 +23,7 @@ class Vector2D {
    * @param {number} y
    */
   setY(y) {
-    return new Vector2D(y, this.y);
+    return new Vector2D(this.x, y);
   }
 
   get x() {
@@ -32,6 +32,24 @@ class Vector2D {
 
   get y() {
     return this.#y;
+  }
+
+  static get Zero() {
+    return new Vector2D(0, 0);
+  }
+
+  /**
+   * @param {Vector2D} v
+   */
+  equals(v) {
+    return this.x === v.x && this.y === v.y;
+  }
+
+  /**
+   * @param {Vector2D} v
+   */
+  add(v) {
+    return new Vector2D(this.x + v.x, this.y + v.y);
   }
 }
 

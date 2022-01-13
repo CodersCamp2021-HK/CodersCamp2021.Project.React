@@ -5,7 +5,7 @@ class MainScene extends GameScene {
   activate() {
     this.createGameObject(DistanceUpdater, { args: { UI: this.proxy.ui } });
     this.createGameObject(Background);
-    this.createGameObject(Trex);
+    this.createGameObject(Trex, { args: { keyboard: this.proxy.keyboardInput } });
   }
 }
 

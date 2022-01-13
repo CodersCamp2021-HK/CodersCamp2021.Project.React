@@ -1,14 +1,22 @@
+import { css } from '@emotion/react';
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useGameEngine, UIProxy } from '../shared';
-import { GameCanvas } from './GameCanvas';
+
+const btn = css({
+  border: '1px black solid',
+  padding: '5px 15px',
+  '&:hover': {
+    background: '#e1e1e1',
+  },
+});
 
 const GameUI = () => {
   const gameEngine = useGameEngine();
   const [running, setRunning] = useState(false);
   const [distance, setDistance] = useState(0);
 
-  /** @type {React.MutableRefObject<HTMLCanvasElement | undefined>} */
-  const ref = useRef();
+  /** @type {React.MutableRefObject<HTMLCanvasElement | null>} */
+  const ref = useRef(null);
 
   const uiProxy = useMemo(() => new UIProxy((val) => setDistance(val)), []);
 
@@ -19,11 +27,11 @@ const GameUI = () => {
   }, [gameEngine, uiProxy]);
 
   return (
-    <>
-      <div css={{ display: 'flex', gap: '10px' }}>
-        <span>UI Root</span>
+    <div css={{ display: 'flex', flexDirection: 'column', gap: '10px', margin: '20px', height: '300px' }}>
+      <div css={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
         {running ? (
           <button
+            css={btn}
             type='button'
             onClick={() => {
               gameEngine.stop();
@@ -34,6 +42,7 @@ const GameUI = () => {
           </button>
         ) : (
           <button
+            css={btn}
             type='button'
             onClick={() => {
               gameEngine.start();
@@ -44,6 +53,7 @@ const GameUI = () => {
           </button>
         )}
         <button
+          css={btn}
           type='button'
           onClick={() => {
             gameEngine.reset();
@@ -55,8 +65,8 @@ const GameUI = () => {
         </button>
         <span>Distance: {distance}</span>
       </div>
-      <GameCanvas ref={ref} />
-    </>
+      <canvas css={{ width: '500px', height: '200px' }} height={200} width={500} id='GameCanvas' ref={ref} />
+    </div>
   );
 };
 

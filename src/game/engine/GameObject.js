@@ -61,7 +61,7 @@ class GameObject {
    * @param {keyof T} name
    */
   getArg(name) {
-    return this.#props.args?.[name];
+    return this.#props.args[name];
   }
 
   update(/** @type {import('../shared/Frame').Frame} */ frame) {
