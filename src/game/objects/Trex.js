@@ -2,16 +2,20 @@ import { AssetsManager } from '../assets';
 import { Vector2D } from '../shared';
 import { GameObject } from '../engine/GameObject';
 
-const JUMP_HIGHEST_POINT = -100;
-const JUMP_SPEED = 4;
-
 /**
- * @typedef {import('../shared').Sprite} Sprite
+ * @typedef {import('../shared').Sprite} TrexSprite
  */
 
 /**
  * @typedef {'run' | 'jump' | 'bend' | 'colision'} TrexState
  */
+
+const JUMP_HIGHEST_POINT = -90;
+const JUMP_SPEED = 4;
+const JUMP_DELAY = 10;
+const SPRITE_ANIMATION_UPDATE = 10;
+const BACKGROUND_OFFSET = 10;
+const MARGIN_LEFT = 10;
 
 /**
  * @extends {GameObject<{ keyboard: import('../proxy').KeyboardInput}>}
@@ -24,6 +28,8 @@ class Trex extends GameObject {
   #jumpOffset = Vector2D.Zero;
 
   #jumpY = -JUMP_SPEED;
+
+  #jumpDelay = JUMP_DELAY;
 
   /**
    * @type {TrexState}
@@ -45,16 +51,22 @@ class Trex extends GameObject {
       this.#stateTransition('run', AssetsManager.trexRun1);
       this.#updateSprite(() => this.#toggleSprite(AssetsManager.trexRun1, AssetsManager.trexRun2));
     }
-    const spritePosition = new Vector2D(10, frame.buffer.height - this.#sprite.height - 10);
+    const spritePosition = new Vector2D(MARGIN_LEFT, frame.buffer.height - this.#sprite.height - BACKGROUND_OFFSET);
     frame.buffer.draw(spritePosition, this.#sprite);
   }
 
   #animateJump(/** @type {import('../shared/Frame').Frame} */ frame) {
-    const baseSpritePosition = new Vector2D(10, frame.buffer.height - this.#sprite.height - 10);
+    const baseSpritePosition = new Vector2D(MARGIN_LEFT, frame.buffer.height - this.#sprite.height - BACKGROUND_OFFSET);
     this.#jumpOffset = this.#jumpOffset.setY(this.#jumpOffset.y + this.#jumpY);
-    if (this.#jumpOffset.y === JUMP_HIGHEST_POINT) {
-      this.#jumpY = JUMP_SPEED;
+    if (this.#jumpOffset.y <= JUMP_HIGHEST_POINT) {
+      this.#jumpY = 0;
+      this.#jumpDelay -= 1;
     }
+    if (this.#jumpOffset.y <= JUMP_HIGHEST_POINT && this.#jumpDelay === 0) {
+      this.#jumpY = JUMP_SPEED;
+      this.#jumpDelay = JUMP_DELAY;
+    }
+
     if (this.#jumpOffset.equals(Vector2D.Zero)) {
       this.#jumpY = -JUMP_SPEED;
       this.#state = 'run';
@@ -65,7 +77,7 @@ class Trex extends GameObject {
 
   /**
    * @param {TrexState} state
-   * @param {Sprite} sprite
+   * @param {TrexSprite} sprite
    */
   #stateTransition(state, sprite) {
     if (this.#state !== state) {
@@ -76,11 +88,11 @@ class Trex extends GameObject {
   }
 
   /**
-   * @param {() => Sprite} fn
+   * @param {() => TrexSprite} fn
    */
   #updateSprite(fn) {
     this.#frameCount += 1;
-    if (this.#frameCount === 10) {
+    if (this.#frameCount === SPRITE_ANIMATION_UPDATE) {
       this.#sprite = fn();
       this.#frameCount = 0;
     }
@@ -88,9 +100,9 @@ class Trex extends GameObject {
 
   /**
    *
-   * @param {Sprite} s1
-   * @param {Sprite} s2
-   * @returns {Sprite}
+   * @param {TrexSprite} s1
+   * @param {TrexSprite} s2
+   * @returns {TrexSprite}
    */
   #toggleSprite(s1, s2) {
     return this.#sprite === s1 ? s2 : s1;

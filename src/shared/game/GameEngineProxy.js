@@ -4,7 +4,10 @@ import { CanvasDisplay } from './CanvasDisplay';
 import { WindowKeyboardInput } from './WindowKeyboardInput';
 
 class GameEngineProxy {
-  #gameEngine = GameEngine;
+  /**
+   * @type {GameEngine | undefined}
+   */
+  #gameEngine;
 
   /**
    * @param {HTMLCanvasElement} canvas
@@ -14,21 +17,21 @@ class GameEngineProxy {
     const display = new CanvasDisplay(canvas);
     const buffer = new CanvasBuffer(canvas);
     const keyboardInput = new WindowKeyboardInput();
-    this.#gameEngine.initialize(display, buffer, keyboardInput, ui);
+    this.#gameEngine = new GameEngine(display, buffer, keyboardInput, ui);
     this.#gameEngine.load('main');
     return this;
   }
 
   start() {
-    this.#gameEngine.start();
+    this.#gameEngine?.start();
   }
 
   stop() {
-    this.#gameEngine.stop();
+    this.#gameEngine?.stop();
   }
 
   reset() {
-    this.#gameEngine.reset();
+    this.#gameEngine?.reset();
   }
 }
 

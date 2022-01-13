@@ -12,7 +12,8 @@ const btn = css({
 
 const GameUI = () => {
   const gameEngine = useGameEngine();
-  const [running, setRunning] = useState(false);
+  const [running, setRunning] = useState(true);
+  const [lose, setLose] = useState(false);
   const [distance, setDistance] = useState(0);
 
   /** @type {React.MutableRefObject<HTMLCanvasElement | null>} */
@@ -22,7 +23,7 @@ const GameUI = () => {
 
   useLayoutEffect(() => {
     if (ref.current) {
-      gameEngine.initialize(ref.current, uiProxy);
+      gameEngine.initialize(ref.current, uiProxy).start();
     }
   }, [gameEngine, uiProxy]);
 
@@ -65,6 +66,11 @@ const GameUI = () => {
         </button>
         <span>Distance: {distance}</span>
       </div>
+      {lose && (
+        <span css={{ fontSize: '35px', textTransform: 'uppercase', position: 'absolute', left: '190px', top: '110px' }}>
+          You Lose
+        </span>
+      )}
       <canvas css={{ width: '500px', height: '200px' }} height={200} width={500} id='GameCanvas' ref={ref} />
     </div>
   );

@@ -7,7 +7,7 @@ import { GameLoop } from './GameLoop';
 
 // TODO
 /** @typedef {'created' | 'running' | 'stopped' } GameEngineState */
-class GameEngineSingleton {
+class GameEngine {
   #gameLoop;
 
   /** @type {import('./GameScene').GameScene | undefined} */
@@ -21,19 +21,16 @@ class GameEngineSingleton {
    */
   #proxy;
 
-  constructor() {
-    this.#gameLoop = new GameLoop((frame) => {
-      this.#onFrame(frame);
-    });
-  }
-
   /**
    * @param {import("../proxy").Display} display
    * @param {import("../proxy").DisplayBuffer} buffer
    * @param {import("../proxy").KeyboardInput} keyboardInput
    * @param {import("../proxy").UI} ui
    */
-  initialize(display, buffer, keyboardInput, ui) {
+  constructor(display, buffer, keyboardInput, ui) {
+    this.#gameLoop = new GameLoop((frame) => {
+      this.#onFrame(frame);
+    });
     this.#gameLoop.setDisplay(display, buffer);
     this.#proxy = { keyboardInput, ui };
   }
@@ -78,7 +75,5 @@ class GameEngineSingleton {
     this.#scene?.update(frame);
   }
 }
-
-const GameEngine = new GameEngineSingleton();
 
 export { GameEngine };

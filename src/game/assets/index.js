@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import spritesUrl from './sprites.png';
 import { Sprite, Vector2D } from '../shared';
 import { Crop } from '../shared/Crop';
@@ -12,6 +13,12 @@ const AssetsManager = Object.freeze({
   trexBend1: new Sprite(spritesUrl, new Crop(new Vector2D(2206, 36), 118, 60), scale),
   trexBend2: new Sprite(spritesUrl, new Crop(new Vector2D(2324, 36), 118, 60), scale),
   ground: new Sprite(spritesUrl, new Crop(new Vector2D(2, 104), 1000, 24), scale),
+  bird1: new Sprite(spritesUrl, new Crop(new Vector2D(260, 14), 92, 68), scale),
+  bird2: new Sprite(spritesUrl, new Crop(new Vector2D(352, 2), 92, 60), scale),
+  cactusSmall: _.range(0, 6).map((x) => new Sprite(spritesUrl, new Crop(new Vector2D(446 + x * 34, 2), 34, 70), scale)),
+  cactusLarge: _.range(0, 3).map(
+    (x) => new Sprite(spritesUrl, new Crop(new Vector2D(652 + x * 50, 2), 50, 100), scale),
+  ),
 });
 
 export { AssetsManager };

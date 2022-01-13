@@ -43,7 +43,7 @@ class GameObject {
   }
 
   /**
-   * @param {GameObject<{}>} obj
+   * @param {GameObject} obj
    */
   destroy(obj) {
     this.#props.scene.destroyGameObject(obj);

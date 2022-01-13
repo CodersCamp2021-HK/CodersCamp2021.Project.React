@@ -3715,6 +3715,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash@npm:^4.14.178":
+  version: 4.14.178
+  resolution: "@types/lodash@npm:4.14.178"
+  checksum: a69a04a60bfc5257c3130a554b4efa0c383f0141b7b3db8ab7cf07ad2a46ea085fce66d0242da41da7e5647b133d5dfb2c15add9cbed8d7fef955e4a1e5b3128
+  languageName: node
+  linkType: hard
+
 "@types/mdast@npm:^3.0.0":
   version: 3.0.10
   resolution: "@types/mdast@npm:3.0.10"
@@ -5835,6 +5842,7 @@ __metadata:
     "@testing-library/user-event": ^13.5.0
     "@types/eslint": ^8.2.2
     "@types/jest": ^27.4.0
+    "@types/lodash": ^4.14.178
     "@types/prettier": ^2.4.2
     "@types/react": ^17.0.38
     "@types/react-dom": ^17.0.11
@@ -5855,6 +5863,7 @@ __metadata:
     eslint-plugin-testing-library: ^5.0.1
     jest: ^27.4.7
     jest-transform-stub: ^2.0.0
+    lodash: ^4.17.21
     prettier: ^2.5.1
     react: ^17.0.2
     react-dom: ^17.0.2
