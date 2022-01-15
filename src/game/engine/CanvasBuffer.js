@@ -1,6 +1,6 @@
-import { DisplayBuffer } from '../../game/proxy';
+import { Sprite } from '../shared';
 
-class CanvasBuffer extends DisplayBuffer {
+class CanvasBuffer {
   #canvas;
 
   #ctx;
@@ -12,7 +12,6 @@ class CanvasBuffer extends DisplayBuffer {
    * @param {HTMLCanvasElement} canvas
    */
   constructor(canvas) {
-    super();
     this.#canvas = document.createElement('canvas');
     this.#canvas.width = canvas.width;
     this.#canvas.height = canvas.height;
@@ -45,22 +44,38 @@ class CanvasBuffer extends DisplayBuffer {
 
   /**
    *
-   * @param {import('../../game/shared').Vector2D} position
-   * @param {import('../../game/shared').Sprite} sprite
+   * @param {import('../shared').Vector2D} position
+   * @param {Sprite | import('../shared').Shape} sprite
    */
   draw(position, sprite) {
-    const img = this.#getImg(sprite.imgUrl);
-    this.#ctx.drawImage(
-      img,
-      sprite.crop.origin.x,
-      sprite.crop.origin.y,
-      sprite.crop.width,
-      sprite.crop.height,
-      position.x,
-      position.y,
-      sprite.width,
-      sprite.height,
-    );
+    if (sprite instanceof Sprite) {
+      const img = this.#getImg(sprite.imgUrl);
+      this.#ctx.drawImage(
+        img,
+        sprite.crop.origin.x,
+        sprite.crop.origin.y,
+        sprite.crop.width,
+        sprite.crop.height,
+        position.x,
+        position.y,
+        sprite.width,
+        sprite.height,
+      );
+    } else {
+      const shape = sprite;
+      if (shape.fill) {
+        const tmp = this.#ctx.fillStyle;
+        this.#ctx.fillStyle = shape.fill;
+        this.#ctx.fill(shape.path);
+        this.#ctx.fillStyle = tmp;
+      }
+      if (shape.stroke) {
+        const tmp = this.#ctx.strokeStyle;
+        this.#ctx.strokeStyle = shape.stroke;
+        this.#ctx.stroke(shape.path);
+        this.#ctx.strokeStyle = tmp;
+      }
+    }
   }
 
   /**

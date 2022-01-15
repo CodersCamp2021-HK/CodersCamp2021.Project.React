@@ -1,7 +1,10 @@
 import { scenes } from '../scenes';
+import { CanvasBuffer } from './CanvasBuffer';
+import { CanvasDisplay } from './CanvasDisplay';
 import { GameLoop } from './GameLoop';
+import { WindowKeyboardInput } from './WindowKeyboardInput';
 
-/** @typedef {Readonly<{ keyboardInput:import('../proxy').KeyboardInput , ui:import('../proxy').UI}>} Proxy */
+/** @typedef {Readonly<{ keyboard: WindowKeyboardInput , ui:import('../../shared').UIProxy}>} Services */
 
 /** @typedef {keyof typeof import('../scenes').scenes} SceneName */
 
@@ -17,22 +20,22 @@ class GameEngine {
   #currentSceneName;
 
   /**
-   * @type {Proxy | undefined}
+   * @type {Services}
    */
-  #proxy;
+  #services;
 
   /**
-   * @param {import("../proxy").Display} display
-   * @param {import("../proxy").DisplayBuffer} buffer
-   * @param {import("../proxy").KeyboardInput} keyboardInput
-   * @param {import("../proxy").UI} ui
+   * @param {HTMLCanvasElement} canvas
+   * @param {import('../../shared').UIProxy} ui
    */
-  constructor(display, buffer, keyboardInput, ui) {
-    this.#gameLoop = new GameLoop((frame) => {
+  constructor(canvas, ui) {
+    const display = new CanvasDisplay(canvas);
+    const buffer = new CanvasBuffer(canvas);
+    const keyboard = new WindowKeyboardInput();
+    this.#gameLoop = new GameLoop(display, buffer, (frame) => {
       this.#onFrame(frame);
     });
-    this.#gameLoop.setDisplay(display, buffer);
-    this.#proxy = { keyboardInput, ui };
+    this.#services = { keyboard, ui };
   }
 
   /**
@@ -61,8 +64,7 @@ class GameEngine {
     this.#gameLoop.reset();
     if (this.#currentSceneName) {
       this.#scene?.destroy();
-      // @ts-ignore
-      this.#scene = new scenes[this.#currentSceneName](this.#proxy);
+      this.#scene = new scenes[this.#currentSceneName](this.#services);
       this.#scene.activate();
     }
     return this;

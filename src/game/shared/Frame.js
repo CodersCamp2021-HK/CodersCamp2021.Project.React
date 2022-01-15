@@ -7,7 +7,7 @@ class Frame {
 
   /**
    * @param {number} frameID
-   * @param {import('../proxy').DisplayBuffer} buffer
+   * @param {import('../engine').CanvasBuffer} buffer
    * @param {number} elapsed
    */
   constructor(frameID, buffer, elapsed) {

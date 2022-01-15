@@ -3,10 +3,8 @@ import { Frame } from '../shared';
 /** @typedef {'created' | 'running' | 'stopped' | 'error'} GameLoopState */
 /** @typedef {(frame: Frame) => void} OnFrame */
 class GameLoop {
-  /** @type {import('../proxy').DisplayBuffer | undefined} */
   #buffer;
 
-  /** @type {import('../proxy').Display | undefined} */
   #display;
 
   /** @type {number | undefined} */
@@ -23,19 +21,14 @@ class GameLoop {
   #onFrame;
 
   /**
+   * @param {import('./CanvasDisplay').CanvasDisplay} display
+   * @param {import('./CanvasBuffer').CanvasBuffer} buffer
    * @param {OnFrame} fn
    */
-  constructor(fn) {
-    this.#onFrame = fn;
-  }
-
-  /**
-   * @param {import('../proxy').Display} display: ;
-   * @param {import('../proxy').DisplayBuffer} buffer
-   */
-  setDisplay(display, buffer) {
+  constructor(display, buffer, fn) {
     this.#display = display;
     this.#buffer = buffer;
+    this.#onFrame = fn;
   }
 
   start() {
@@ -69,10 +62,6 @@ class GameLoop {
 
   #update(/** @type {number} */ timestamp) {
     try {
-      if (this.#display === undefined || this.#buffer === undefined) {
-        throw new Error('Display device not set');
-      }
-
       if (this.#prevTimestamp === undefined) {
         this.#prevTimestamp = timestamp;
       }
@@ -98,7 +87,7 @@ class GameLoop {
     }
 
     if (this.#buffer) {
-      this.#display?.flush(this.#buffer);
+      this.#display.flush(this.#buffer);
     }
     this.#rafID = this.#raf();
     this.#update(timestamp);

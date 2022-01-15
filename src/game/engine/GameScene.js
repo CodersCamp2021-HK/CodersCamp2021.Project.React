@@ -1,4 +1,8 @@
 /* eslint-disable class-methods-use-this */
+import { Shape } from '../shared';
+import { BoxCollider } from './BoxCollider';
+import { CollisionDetector } from './CollisionDetector';
+
 /** @typedef {'CREATED' | 'ACTIVE' | 'DESTROYED'} GameObjectStatus */
 
 class GameScene {
@@ -13,60 +17,76 @@ class GameScene {
 
   #currentID = 0;
 
-  #proxy;
+  #services;
+
+  #collisionDetector = new CollisionDetector();
+
+  #proxy = Object.freeze({
+    createGameObject: this.createGameObject.bind(this),
+    destroyGameObject: this.destroyGameObject.bind(this),
+    attachCollider: (/** @type {import("./Collider").Collider} */ collider) => {
+      this.#collisionDetector.add(collider);
+    },
+    detachCollider: (/** @type {import("./Collider").Collider} */ collider) => {
+      this.#collisionDetector.remove(collider);
+    },
+  });
 
   /**
-   * @param {import('./GameEngine').Proxy} proxy
+   * @param {import('./GameEngine').Services} services
    */
-  constructor(proxy) {
+  constructor(services) {
     if (this.constructor === GameScene) {
       throw new Error("Abstract classes can't be instantiated.");
     }
-    this.#proxy = proxy;
+    this.#services = services;
   }
 
   activate() {
     throw new Error('Abstract method');
   }
 
-  get proxy() {
-    return this.#proxy;
+  get services() {
+    return this.#services;
   }
 
   /**
    * @param {import('../shared').Frame} frame
    */
   update(frame) {
-    try {
-      this.#gameObjects.forEach((gameObject) => {
-        gameObject.update(frame);
-      });
-    } finally {
-      this.#updateActive();
-      this.#updateDestroy();
-    }
+    this.#collisionDetector.detectCollisions();
+    this.#gameObjects.forEach((gameObject) => {
+      gameObject.update(frame);
+    });
+    this.#updateActive();
+    this.#debugColliders(frame.buffer);
+    this.#updateDestroy();
   }
 
   destroy() {
-    this.#currentID = 0;
+    this.#updateActive();
+    this.#gameObjects.forEach((x) => this.#markedToDestroy.add(x));
     this.#gameObjects = [];
+    this.#updateDestroy();
+    this.#currentID = 0;
     this.#markedToActivate = [];
     this.#markedToDestroy.clear();
+    this.#collisionDetector.clear();
   }
 
   /**
-   * @template {Record<string, any>} T
-   * @template {import('./GameObject').GameObjectConstructor<T>} C
-   * @param {C} cls
-   * @param {{ name?: string, args?: T }} params
-   * @returns {import('./GameObject').GameObject<T>}
+   * @template {Record<string, any>} A
+   * @template {import('./GameObject').GameObject<A>} R
+   * @param {import('./GameObject').GameObjectConstructor<A, R>} Cls
+   * @param {{ name?: string, args?: A }} params
+   * @returns {R}
    */
-  createGameObject(cls, params = {}) {
-    const args = /** @type {T} */ (params.args ?? {});
-    // eslint-disable-next-line new-cap
-    const obj = new cls({
+  createGameObject(Cls, params = {}) {
+    const args = /** @type {A} */ (params.args ?? {});
+    const obj = new Cls({
       metadata: { id: this.#nextID(), name: params.name },
-      scene: this,
+      scene: this.#proxy,
+      services: this.#services,
       args,
     });
     this.#markedToActivate.push(obj);
@@ -100,14 +120,31 @@ class GameScene {
     return [false];
   }
 
+  /**
+   * @param {import('./CanvasBuffer').CanvasBuffer} buffer
+   */
+  #debugColliders(buffer) {
+    this.#collisionDetector.colliders.forEach((collider) => {
+      if (collider instanceof BoxCollider) {
+        const path = new Path2D();
+        path.rect(collider.position.x, collider.position.y, collider.box.x, collider.box.y);
+        buffer.draw(collider.position, new Shape(path, undefined, 'red'));
+      }
+    });
+  }
+
   #updateActive() {
-    this.#gameObjects.push(...this.#markedToActivate);
+    const markedToActivate = [...this.#markedToActivate];
     this.#markedToActivate = [];
+    this.#gameObjects.push(...markedToActivate);
+    markedToActivate.forEach((x) => x.activate());
   }
 
   #updateDestroy() {
     this.#gameObjects = this.#gameObjects.filter((x) => !this.#markedToDestroy.has(x));
+    const markedToDestroy = [...this.#markedToDestroy.values()];
     this.#markedToDestroy.clear();
+    markedToDestroy.forEach((x) => x.onDestroy());
   }
 
   #nextID() {

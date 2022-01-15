@@ -1,9 +1,7 @@
 import { useState, createContext, useContext } from 'react';
 import { GameEngineProxy } from './GameEngineProxy';
 
-/** @type {React.Context<GameEngineProxy>} */
-// @ts-ignore
-const ctx = createContext(undefined);
+const ctx = /** @type {React.Context<GameEngineProxy | undefined>} */ (createContext(undefined));
 
 /**
  * @param {{ children: React.ReactChild }} props

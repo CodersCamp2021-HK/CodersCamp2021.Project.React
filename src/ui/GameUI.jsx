@@ -19,7 +19,25 @@ const GameUI = () => {
   /** @type {React.MutableRefObject<HTMLCanvasElement | null>} */
   const ref = useRef(null);
 
-  const uiProxy = useMemo(() => new UIProxy((val) => setDistance(val)), []);
+  const reset = () => {
+    gameEngine.reset();
+    setRunning(false);
+    setLose(false);
+    setDistance(0);
+  };
+
+  const uiProxy = useMemo(
+    () =>
+      new UIProxy(
+        (val) => setDistance(val),
+        () => {
+          setLose(true);
+          gameEngine.stop();
+          setRunning(false);
+        },
+      ),
+    [gameEngine],
+  );
 
   useLayoutEffect(() => {
     if (ref.current) {
@@ -46,6 +64,9 @@ const GameUI = () => {
             css={btn}
             type='button'
             onClick={() => {
+              if (lose) {
+                reset();
+              }
               gameEngine.start();
               setRunning(true);
             }}
@@ -53,15 +74,7 @@ const GameUI = () => {
             Start
           </button>
         )}
-        <button
-          css={btn}
-          type='button'
-          onClick={() => {
-            gameEngine.reset();
-            setRunning(false);
-            setDistance(0);
-          }}
-        >
+        <button css={btn} type='button' onClick={reset}>
           Reset
         </button>
         <span>Distance: {distance}</span>

@@ -1,6 +1,7 @@
 import { AssetsManager } from '../assets';
 import { Vector2D } from '../shared';
 import { GameObject } from '../engine/GameObject';
+import { BoxCollider } from '../engine/BoxCollider';
 
 /**
  * @typedef {import('../shared').Sprite} TrexSprite
@@ -12,14 +13,11 @@ import { GameObject } from '../engine/GameObject';
 
 const JUMP_HIGHEST_POINT = -90;
 const JUMP_SPEED = 4;
-const JUMP_DELAY = 10;
+const JUMP_DELAY = 15;
 const SPRITE_ANIMATION_UPDATE = 10;
 const BACKGROUND_OFFSET = 10;
 const MARGIN_LEFT = 10;
 
-/**
- * @extends {GameObject<{ keyboard: import('../proxy').KeyboardInput}>}
- */
 class Trex extends GameObject {
   #frameCount = 0;
 
@@ -36,27 +34,40 @@ class Trex extends GameObject {
    */
   #state = 'run';
 
-  update(/** @type {import('../shared/Frame').Frame} */ frame) {
-    const keyboard = this.getArg('keyboard');
-    if (keyboard.pressed('ArrowUp') || this.#state === 'jump') {
-      this.#stateTransition('jump', AssetsManager.trexJump);
-      this.#animateJump(frame);
-      return;
-    }
-
-    if (keyboard.pressed('ArrowDown')) {
-      this.#stateTransition('bend', AssetsManager.trexBend1);
-      this.#updateSprite(() => this.#toggleSprite(AssetsManager.trexBend1, AssetsManager.trexBend2));
-    } else {
-      this.#stateTransition('run', AssetsManager.trexRun1);
-      this.#updateSprite(() => this.#toggleSprite(AssetsManager.trexRun1, AssetsManager.trexRun2));
-    }
-    const spritePosition = new Vector2D(MARGIN_LEFT, frame.buffer.height - this.#sprite.height - BACKGROUND_OFFSET);
-    frame.buffer.draw(spritePosition, this.#sprite);
+  activate() {
+    this.setCollider(BoxCollider, [new Vector2D(this.#sprite.width, this.#sprite.height)]);
   }
 
-  #animateJump(/** @type {import('../shared/Frame').Frame} */ frame) {
-    const baseSpritePosition = new Vector2D(MARGIN_LEFT, frame.buffer.height - this.#sprite.height - BACKGROUND_OFFSET);
+  /**
+   * @param {import('../shared').Frame} frame
+   */
+  update(frame) {
+    if (this.keyboard.pressed('ArrowUp') || this.#state === 'jump') {
+      const baseSpritePosition = new Vector2D(
+        MARGIN_LEFT,
+        frame.buffer.height - this.#sprite.height - BACKGROUND_OFFSET,
+      );
+      this.#stateTransition('jump', AssetsManager.trexJump);
+      this.#animateJump();
+      this.position = baseSpritePosition.add(this.#jumpOffset);
+    } else {
+      if (this.keyboard.pressed('ArrowDown')) {
+        this.#stateTransition('bend', AssetsManager.trexBend1);
+        this.#updateSprite(() => this.#toggleSprite(AssetsManager.trexBend1, AssetsManager.trexBend2));
+      } else {
+        this.#stateTransition('run', AssetsManager.trexRun1);
+        this.#updateSprite(() => this.#toggleSprite(AssetsManager.trexRun1, AssetsManager.trexRun2));
+      }
+      this.position = new Vector2D(MARGIN_LEFT, frame.buffer.height - this.#sprite.height - BACKGROUND_OFFSET);
+    }
+    frame.buffer.draw(this.position, this.#sprite);
+  }
+
+  onCollision() {
+    this.ui.setLose();
+  }
+
+  #animateJump() {
     this.#jumpOffset = this.#jumpOffset.setY(this.#jumpOffset.y + this.#jumpY);
     if (this.#jumpOffset.y <= JUMP_HIGHEST_POINT) {
       this.#jumpY = 0;
@@ -71,8 +82,6 @@ class Trex extends GameObject {
       this.#jumpY = -JUMP_SPEED;
       this.#state = 'run';
     }
-    const spritePosition = baseSpritePosition.add(this.#jumpOffset);
-    frame.buffer.draw(spritePosition, this.#sprite);
   }
 
   /**
@@ -84,6 +93,7 @@ class Trex extends GameObject {
       this.#state = state;
       this.#frameCount = 0;
       this.#sprite = sprite;
+      this.#updateCollider();
     }
   }
 
@@ -96,6 +106,10 @@ class Trex extends GameObject {
       this.#sprite = fn();
       this.#frameCount = 0;
     }
+  }
+
+  #updateCollider() {
+    /** @type {BoxCollider} */ (this.collider).box = new Vector2D(this.#sprite.width, this.#sprite.height);
   }
 
   /**

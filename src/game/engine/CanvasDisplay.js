@@ -1,7 +1,4 @@
-import { Display } from '../../game/proxy';
-import { CanvasBuffer } from './CanvasBuffer';
-
-class CanvasDisplay extends Display {
+class CanvasDisplay {
   #canvas;
 
   #ctx;
@@ -10,7 +7,6 @@ class CanvasDisplay extends Display {
    * @param {HTMLCanvasElement} canvas
    */
   constructor(canvas) {
-    super();
     this.#canvas = canvas;
     const ctx = canvas.getContext('2d', { alpha: false });
     if (!ctx) {
@@ -20,12 +16,9 @@ class CanvasDisplay extends Display {
   }
 
   /**
-   * @param {import("../../game/proxy/DisplayBuffer").DisplayBuffer} buffer
+   * @param {import("./CanvasBuffer").CanvasBuffer} buffer
    */
   flush(buffer) {
-    if (!(buffer instanceof CanvasBuffer)) {
-      throw new Error('Only canvas buffer is supported');
-    }
     this.#ctx.clearRect(0, 0, this.#canvas.width, this.#canvas.height);
     this.#ctx.drawImage(buffer.canvas, 0, 0);
   }

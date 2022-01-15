@@ -1,7 +1,4 @@
 import { GameEngine } from '../../game/engine';
-import { CanvasBuffer } from './CanvasBuffer';
-import { CanvasDisplay } from './CanvasDisplay';
-import { WindowKeyboardInput } from './WindowKeyboardInput';
 
 class GameEngineProxy {
   /**
@@ -11,13 +8,10 @@ class GameEngineProxy {
 
   /**
    * @param {HTMLCanvasElement} canvas
-   * @param {import('../../game/proxy').UI} ui
+   * @param {import('../ui').UIProxy} ui
    */
   initialize(canvas, ui) {
-    const display = new CanvasDisplay(canvas);
-    const buffer = new CanvasBuffer(canvas);
-    const keyboardInput = new WindowKeyboardInput();
-    this.#gameEngine = new GameEngine(display, buffer, keyboardInput, ui);
+    this.#gameEngine = new GameEngine(canvas, ui);
     this.#gameEngine.load('main');
     return this;
   }

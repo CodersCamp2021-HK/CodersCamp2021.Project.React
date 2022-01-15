@@ -1,29 +1,44 @@
 import _ from 'lodash';
 import { Bird } from './Bird';
-import { Cactus } from './Cactus';
 import { GameObject } from '../engine/GameObject';
+import { CactusGroup } from './CactusGroup';
 
-function getNextObstacleAfterCount() {
-  return _.random(90, 120);
-}
+const SPEEDUP_FRAMES_COUNT = 5 * 60;
+const MAX_SPEEDUP = 60;
 
 class ObstaclesGenerator extends GameObject {
   #frameCount = 0;
 
-  #nextObstacleAfter = getNextObstacleAfterCount();
+  #speedupFrameCount = 0;
+
+  #speed = 0;
+
+  #nextObstacleAfter = this.#getNextObstacleAfterCount();
 
   update() {
     this.#frameCount += 1;
+    this.#speedupFrameCount += 1;
+    if (this.#speed < MAX_SPEEDUP && this.#speedupFrameCount === SPEEDUP_FRAMES_COUNT) {
+      this.#speed += 1;
+      this.#speedupFrameCount = 0;
+    }
     if (this.#frameCount === this.#nextObstacleAfter) {
       this.#createRandomObstacle();
       this.#frameCount = 0;
-      this.#nextObstacleAfter = getNextObstacleAfterCount();
+      this.#nextObstacleAfter = this.#getNextObstacleAfterCount();
     }
   }
 
   #createRandomObstacle() {
-    const Cls = _.random() === 0 ? Bird : Cactus;
-    this.create(Cls);
+    if (_.random() === 0) {
+      this.create(CactusGroup);
+      return;
+    }
+    this.create(Bird);
+  }
+
+  #getNextObstacleAfterCount() {
+    return _.random(90 - this.#speed, 120 - this.#speed);
   }
 }
 

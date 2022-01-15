@@ -8,7 +8,10 @@ const SPEED = 6;
 class Background extends GameObject {
   #sprite = AssetsManager.ground;
 
-  update(/** @type {import('../shared/Frame').Frame} */ frame) {
+  /**
+   * @param {import('../shared').Frame} frame
+   */
+  update(frame) {
     const bgPosition = new Vector2D(0, frame.buffer.height - this.#sprite.height - 10);
     const xOffset =
       this.#sprite.crop.origin.x + SPEED + this.#sprite.crop.width > TOTAL_WIDTH
