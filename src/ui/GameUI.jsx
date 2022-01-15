@@ -12,7 +12,7 @@ const btn = css({
 
 const GameUI = () => {
   const gameEngine = useGameEngine();
-  const [running, setRunning] = useState(true);
+  const [running, setRunning] = useState(false);
   const [lose, setLose] = useState(false);
   const [distance, setDistance] = useState(0);
 
@@ -41,7 +41,7 @@ const GameUI = () => {
 
   useLayoutEffect(() => {
     if (ref.current) {
-      gameEngine.initialize(ref.current, uiProxy).start();
+      gameEngine.initialize(ref.current, uiProxy);
     }
   }, [gameEngine, uiProxy]);
 
