@@ -50,3 +50,49 @@ class Bird extends GameObject {
 }
 
 export { Bird };
+
+/*
+import _ from 'lodash';
+import { AssetsManager } from '../assets';
+import { BoxCollider } from '../engine/BoxCollider';
+import { GameObject } from '../engine/GameObject';
+import { Vector2D } from '../shared';
+
+const SPEED = 5;
+const ANIMATION_INTERVAL = 15;
+
+class Bird extends GameObject {
+  onActivate(buffer) {
+    this.animation = new SpriteAnimation(ANIMATION_INTERVAL, [AssetsManager.bird1, AssetsManager.bird2]);
+    this.transform.position = new Vector2D(
+      buffer.width + this.animation.sprite.width,
+      buffer.height - this.animation.sprite.height - 50,
+    );
+    this.transform.width = this.animation.sprite.width;
+    this.transform.height = this.animation.sprite.height;
+    this.rigidbody.addGravity().addVelocity(new Vector2D(-SPEED, 0));
+    this.colliders.add(BoxCollider, [new Vector2D(this.animation.sprite.width, this.animation.sprite.height)]);
+  }
+
+  onUpdate() {
+    if (this.transform.position.x < -this.animation.sprite.width) {
+      this.destroy(this);
+    }
+  }
+}
+
+class Transform {
+
+}
+
+class Rigidbody {
+
+}
+
+class Animation {
+  
+}
+
+export { Bird };
+
+ */
