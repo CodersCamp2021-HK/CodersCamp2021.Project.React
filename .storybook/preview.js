@@ -1,4 +1,4 @@
-import { GlobalStyles } from '../src/theme';
+import { GlobalStyles } from '../src/shared/theme';
 import '../src/public/index.css';
 
 export const parameters = {
