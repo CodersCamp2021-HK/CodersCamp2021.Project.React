@@ -6,7 +6,7 @@ class Crop {
   #height;
 
   /**
-   * @param {import('./Vector2D').Vector2D} origin
+   * @param {import('./Vector').Vector} origin
    * @param {number} width
    * @param {number} height
    */
@@ -43,7 +43,7 @@ class Crop {
   }
 
   /**
-   * @param {import('./Vector2D').Vector2D} origin
+   * @param {import('./Vector').Vector} origin
    */
   setOrigin(origin) {
     return new Crop(origin, this.#width, this.#height);

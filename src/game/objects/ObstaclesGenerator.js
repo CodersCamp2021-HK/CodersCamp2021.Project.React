@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { Bird } from './Bird';
-import { GameObject } from '../engine/GameObject';
+import { GameObject } from '../engine';
 import { CactusGroup } from './CactusGroup';
 
 const SPEEDUP_FRAMES_COUNT = 5 * 60;
@@ -15,7 +15,7 @@ class ObstaclesGenerator extends GameObject {
 
   #nextObstacleAfter = this.#getNextObstacleAfterCount();
 
-  update() {
+  onUpdate() {
     this.#frameCount += 1;
     this.#speedupFrameCount += 1;
     if (this.#speed < MAX_SPEEDUP && this.#speedupFrameCount === SPEEDUP_FRAMES_COUNT) {

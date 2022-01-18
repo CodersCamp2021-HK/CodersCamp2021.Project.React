@@ -1,12 +1,12 @@
 import { Background, DistanceUpdater, ObstaclesGenerator, TrexStatefull } from '../objects';
-import { GameScene } from '../engine/GameScene';
+import { GameScene } from '../engine';
 
 class MainScene extends GameScene {
-  activate() {
-    this.createGameObject(DistanceUpdater);
-    this.createGameObject(Background);
-    this.createGameObject(TrexStatefull);
-    this.createGameObject(ObstaclesGenerator);
+  onActivate() {
+    this.create(DistanceUpdater);
+    this.create(Background);
+    this.create(TrexStatefull);
+    this.create(ObstaclesGenerator);
   }
 }
 

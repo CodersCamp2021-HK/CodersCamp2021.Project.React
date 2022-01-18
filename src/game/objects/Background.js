@@ -1,6 +1,6 @@
 import { AssetsManager } from '../assets';
-import { GameObject } from '../engine/GameObject';
-import { Vector2D } from '../shared';
+import { GameObject } from '../engine';
+import { Vector } from '../shared';
 
 const TOTAL_WIDTH = 2402;
 const SPEED = 6;
@@ -11,8 +11,8 @@ class Background extends GameObject {
   /**
    * @param {import('../shared').Frame} frame
    */
-  update(frame) {
-    const bgPosition = new Vector2D(0, frame.buffer.height - this.#sprite.height - 10);
+  onUpdate(frame) {
+    const bgPosition = new Vector(0, frame.buffer.height - this.#sprite.height - 10);
     const xOffset =
       this.#sprite.crop.origin.x + SPEED + this.#sprite.crop.width > TOTAL_WIDTH
         ? 2

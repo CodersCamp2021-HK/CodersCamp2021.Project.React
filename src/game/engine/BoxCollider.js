@@ -1,12 +1,12 @@
-import { Vector2D } from '../shared';
-import { Collider } from './Collider';
+import { Shape, Vector } from '../shared';
+import { Collider } from './internals/Collider';
 
 class BoxCollider extends Collider {
   #box;
 
   /**
    * @param {import('./GameObject').GameObject} gameObject
-   * @param {import('../shared').Vector2D} box
+   * @param {import('../shared').Vector} box
    */
   constructor(gameObject, box) {
     super(gameObject);
@@ -22,12 +22,12 @@ class BoxCollider extends Collider {
   }
 
   /**
-   * @returns {[import('../shared').Vector2D, import('../shared').Vector2D, import('../shared').Vector2D, import('../shared').Vector2D]}
+   * @returns {[import('../shared').Vector, import('../shared').Vector, import('../shared').Vector, import('../shared').Vector]}
    */
   get points() {
     const { position } = this.gameObject;
-    const vx = Vector2D.Zero.setX(this.#box.x);
-    const vy = Vector2D.Zero.setY(this.#box.y);
+    const vx = Vector.Zero.setX(this.#box.x);
+    const vy = Vector.Zero.setY(this.#box.y);
     return [position, position.add(vx), position.add(vy), position.add(vx).add(vy)];
   }
 
@@ -54,6 +54,15 @@ class BoxCollider extends Collider {
     }
 
     throw new Error('Not supported collision detection.');
+  }
+
+  /**
+   * @param {import("./internals/CanvasBuffer").CanvasBuffer} buffer
+   */
+  DEBUG_Draw(buffer) {
+    const path = new Path2D();
+    path.rect(this.position.x, this.position.y, this.box.x, this.box.y);
+    buffer.draw(this.position, new Shape(path, undefined, 'red'));
   }
 }
 

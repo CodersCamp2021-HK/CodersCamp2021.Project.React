@@ -1,41 +1,44 @@
-import { scenes } from '../scenes';
-import { CanvasBuffer } from './CanvasBuffer';
-import { CanvasDisplay } from './CanvasDisplay';
-import { GameLoop } from './GameLoop';
-import { WindowKeyboardInput } from './WindowKeyboardInput';
+import { CanvasBuffer } from './internals/CanvasBuffer';
+import { CanvasDisplay } from './internals/CanvasDisplay';
+import { GameLoop } from './internals/GameLoop';
+import { GameSceneManager } from './internals/GameSceneManager';
+import { WindowKeyboardInput } from './internals/WindowKeyboardInput';
 
 /** @typedef {Readonly<{ keyboard: WindowKeyboardInput , ui:import('../../shared').UIProxy}>} Services */
 
-/** @typedef {keyof typeof import('../scenes').scenes} SceneName */
-
-// TODO
-/** @typedef {'created' | 'running' | 'stopped' } GameEngineState */
+/**
+ * @template {Record<string, typeof import('./GameScene').GameScene>} TScenes
+ */
 class GameEngine {
-  #gameLoop;
-
-  /** @type {import('./GameScene').GameScene | undefined} */
-  #scene;
+  /** @typedef {keyof TScenes} SceneName */
 
   /** @type {SceneName | undefined} */
   #currentSceneName;
 
-  /**
-   * @type {Services}
-   */
-  #services;
+  #gameLoop;
+
+  #sceneManager;
+
+  #scenes;
 
   /**
    * @param {HTMLCanvasElement} canvas
    * @param {import('../../shared').UIProxy} ui
+   * @param {TScenes} scenes
    */
-  constructor(canvas, ui) {
+  constructor(canvas, ui, scenes) {
     const display = new CanvasDisplay(canvas);
     const buffer = new CanvasBuffer(canvas);
     const keyboard = new WindowKeyboardInput();
+    this.#scenes = scenes;
+    this.#sceneManager = new GameSceneManager({ keyboard, ui });
     this.#gameLoop = new GameLoop(display, buffer, (frame) => {
       this.#onFrame(frame);
     });
-    this.#services = { keyboard, ui };
+  }
+
+  get scene() {
+    return this.#currentSceneName;
   }
 
   /**
@@ -48,7 +51,7 @@ class GameEngine {
   }
 
   start() {
-    if (!this.#scene) {
+    if (!this.#currentSceneName) {
       throw new Error('Scene not loaded');
     }
     this.#gameLoop.start();
@@ -63,18 +66,16 @@ class GameEngine {
   reset() {
     this.#gameLoop.reset();
     if (this.#currentSceneName) {
-      this.#scene?.destroy();
-      this.#scene = new scenes[this.#currentSceneName](this.#services);
-      this.#scene.activate();
+      this.#sceneManager.load(this.#scenes[this.#currentSceneName]);
     }
     return this;
   }
 
   /**
-   * @param {import('../shared/Frame').Frame} frame
+   * @param {import('../shared').Frame} frame
    */
   #onFrame(frame) {
-    this.#scene?.update(frame);
+    this.#sceneManager.update(frame);
   }
 }
 

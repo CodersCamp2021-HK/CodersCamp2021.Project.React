@@ -1,5 +1,5 @@
 import { AssetsManager } from '../../assets';
-import { Vector2D } from '../../shared';
+import { Vector } from '../../shared';
 import { TrexState } from './TrexState';
 
 const JUMP_HIGHEST_POINT = -90;
@@ -15,7 +15,7 @@ class TrexJump extends TrexState {
   constructor(trex) {
     super(trex);
     this.#sprite = AssetsManager.trexJump;
-    /** @type {import('../../engine/BoxCollider').BoxCollider} */ (this.trex.collider).box = new Vector2D(
+    /** @type {import('../../engine').BoxCollider} */ (this.trex.collider).box = new Vector(
       this.#sprite.width,
       this.#sprite.height,
     );
@@ -23,7 +23,7 @@ class TrexJump extends TrexState {
 
   #sprite;
 
-  #jumpOffset = Vector2D.Zero;
+  #jumpOffset = Vector.Zero;
 
   #jumpY = -JUMP_SPEED;
 
@@ -33,7 +33,7 @@ class TrexJump extends TrexState {
    * @param {import('../../shared').Frame} frame
    */
   update(frame) {
-    const baseSpritePosition = new Vector2D(MARGIN_LEFT, frame.buffer.height - this.#sprite.height - BACKGROUND_OFFSET);
+    const baseSpritePosition = new Vector(MARGIN_LEFT, frame.buffer.height - this.#sprite.height - BACKGROUND_OFFSET);
     this.#jumpOffset = this.#jumpOffset.setY(this.#jumpOffset.y + this.#jumpY);
     if (this.#jumpOffset.y <= JUMP_HIGHEST_POINT) {
       this.#jumpY = 0;
@@ -44,9 +44,9 @@ class TrexJump extends TrexState {
       this.#jumpDelay = JUMP_DELAY;
     }
 
-    if (this.#jumpOffset.equals(Vector2D.Zero)) {
+    if (this.#jumpOffset.equals(Vector.Zero)) {
       this.#jumpY = -JUMP_SPEED;
-      this.trex.transitionState('run').update(frame);
+      this.trex.transitionState('run').onUpdate(frame);
       return;
     }
     this.position = baseSpritePosition.add(this.#jumpOffset);
