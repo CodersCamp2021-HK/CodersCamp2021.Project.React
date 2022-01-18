@@ -21,6 +21,12 @@ class LevelMap extends GameObject {
   /** @type {number} */
   #widthTiles = 0;
 
+  /** @type {Vector2D?} */
+  #startPos = null;
+
+  /** @type {Vector2D?} */
+  #endPos = null;
+
   /**
    * @param {number} x
    * @param {number} y
@@ -42,9 +48,24 @@ class LevelMap extends GameObject {
   #getTileSprite(x, y) {
     const neighbours = _.times(3, (row) => _.times(3, (col) => this.#getTileType(x + col - 1, y + row - 1)));
     const tileRule = tileRules.find((rule) => patternsMatch(neighbours, rule.pattern)) ?? tileRules[0];
-    const texturePos = this.#getTileType(x, y) === 'X' ? tileRule.solidPos : tileRule.backgroundPos;
 
-    return this.#tileSprites[texturePos.y][texturePos.x];
+    return this.#tileSprites[tileRule.texturePos.y][tileRule.texturePos.x];
+  }
+
+  /**
+   * @param {'S' | 'E'} symbol
+   * @returns {Vector2D?} position of special tile in the map
+   */
+  #findSpecialTile(symbol) {
+    for (let y = 0; y < this.#heightTiles; y++) {
+      for (let x = 0; x < this.#widthTiles; x++) {
+        if (this.#tiles[y][x] === symbol) {
+          return new Vector2D(x, y);
+        }
+      }
+    }
+
+    return null;
   }
 
   activate() {
@@ -52,6 +73,9 @@ class LevelMap extends GameObject {
 
     this.#heightTiles = this.#tiles.length;
     this.#widthTiles = Math.max(...this.#tiles.map((row) => row.length));
+
+    this.#startPos = this.#findSpecialTile('S');
+    this.#endPos = this.#findSpecialTile('E');
   }
 
   /**
@@ -64,8 +88,11 @@ class LevelMap extends GameObject {
       }
     }
 
-    frame.buffer.draw(new Vector2D(2.75 * TILE_SIZE, 5.25 * TILE_SIZE), this.#doorSprite);
-    frame.buffer.draw(new Vector2D(10.75 * TILE_SIZE, 5.25 * TILE_SIZE), this.#doorSprite);
+    _.each([this.#startPos, this.#endPos], (pos) => {
+      if (pos) {
+        frame.buffer.draw(pos.add(new Vector2D(-0.25, -0.75)).scale(TILE_SIZE), this.#doorSprite);
+      }
+    });
   }
 }
 

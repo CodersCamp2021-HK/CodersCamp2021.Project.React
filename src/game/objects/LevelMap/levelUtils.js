@@ -34,18 +34,16 @@ function rotateClockwiseMatrix3x3(input, times = 1) {
 
 /**
  * @param {string[]} templates
- * @returns {Readonly<{ pattern: ("X" | "." | "?")[][], solidPos: Vector2D, backgroundPos: Vector2D }[]>}
+ * @returns {Readonly<{ pattern: ("X" | "." | "?")[][], texturePos: Vector2D }[]>}
  */
 export function generateTileRules(templates) {
   return Object.freeze(
     templates.flatMap((ruleTemplate, templateIndex) => {
-      const TILE_ORIENTATIONS = 4;
       const pattern = stringToCharMatrix(ruleTemplate);
 
-      return _.times(TILE_ORIENTATIONS, (n) => ({
+      return _.times(4, (n) => ({
         pattern: /** @type {('X' | '.' | '?')[][]} */ (rotateClockwiseMatrix3x3(pattern, n)),
-        solidPos: new Vector2D(n, templateIndex),
-        backgroundPos: new Vector2D(TILE_ORIENTATIONS + n, templateIndex),
+        texturePos: new Vector2D(n, templateIndex),
       }));
     }),
   );
