@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import spritesUrl from './sprites.png';
+import terrainUrl from './tileset.png';
+import doorUrl from './idleDoor.png';
 import { Sprite, Vector2D } from '../shared';
 import { Crop } from '../shared/Crop';
 
@@ -19,6 +21,10 @@ const AssetsManager = Object.freeze({
   cactusLarge: _.range(0, 3).map(
     (x) => new Sprite(spritesUrl, new Crop(new Vector2D(652 + x * 50, 2), 50, 100), scale),
   ),
+  terrain: _.range(0, 1).map((y) =>
+    _.range(0, 8).map((x) => new Sprite(terrainUrl, new Crop(new Vector2D(x * 32, y * 32), 32, 32), 1)),
+  ),
+  door: new Sprite(doorUrl, new Crop(new Vector2D(0, 0), 64, 96)),
 });
 
 export { AssetsManager };

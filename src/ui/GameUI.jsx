@@ -84,7 +84,7 @@ const GameUI = () => {
           You Lose
         </span>
       )}
-      <canvas css={{ width: '500px', height: '200px' }} height={200} width={500} id='GameCanvas' ref={ref} />
+      <canvas css={{ width: '500px', height: '500px' }} height={500} width={500} id='GameCanvas' ref={ref} />
     </div>
   );
 };
