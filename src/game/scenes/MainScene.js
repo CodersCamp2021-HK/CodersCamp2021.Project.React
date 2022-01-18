@@ -1,4 +1,4 @@
-import { Terrain } from '../objects';
+import { LevelMap } from '../objects';
 import { GameScene } from '../engine/GameScene';
 
 const map = `
@@ -14,7 +14,7 @@ XXXXXXXXXXXXXX
 
 class MainScene extends GameScene {
   activate() {
-    this.createGameObject(Terrain, { args: { map } });
+    this.createGameObject(LevelMap, { args: { map } });
     // this.createGameObject(DistanceUpdater);
     // this.createGameObject(Background);
     // this.createGameObject(Trex);

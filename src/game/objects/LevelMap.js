@@ -96,13 +96,13 @@ function patternsMatch(first, second) {
   return true;
 }
 
-class Terrain extends GameObject {
-  #sprites = AssetsManager.terrain;
+class LevelMap extends GameObject {
+  #tileSprites = AssetsManager.tileset;
 
   #doorSprite = AssetsManager.door;
 
   /** @type {string[][]} */
-  #map = [];
+  #tiles = [];
 
   /** @type {number} */
   #heightTiles = 0;
@@ -120,7 +120,7 @@ class Terrain extends GameObject {
       return 'X';
     }
 
-    return this.#map[y][x] === 'X' ? 'X' : '.';
+    return this.#tiles[y][x] === 'X' ? 'X' : '.';
   }
 
   /**
@@ -133,14 +133,14 @@ class Terrain extends GameObject {
     const tileRule = tileRules.find((rule) => patternsMatch(neighbours, rule.pattern)) ?? tileRules[0];
     const texturePos = this.#getTileType(x, y) === 'X' ? tileRule.solidPos : tileRule.backgroundPos;
 
-    return this.#sprites[texturePos.y][texturePos.x];
+    return this.#tileSprites[texturePos.y][texturePos.x];
   }
 
   activate() {
-    this.#map = stringToCharMatrix(/** @type {string} */ (this.getArg('map')));
+    this.#tiles = stringToCharMatrix(/** @type {string} */ (this.getArg('map')));
 
-    this.#heightTiles = this.#map.length;
-    this.#widthTiles = Math.max(...this.#map.map((row) => row.length));
+    this.#heightTiles = this.#tiles.length;
+    this.#widthTiles = Math.max(...this.#tiles.map((row) => row.length));
   }
 
   /**
@@ -158,4 +158,4 @@ class Terrain extends GameObject {
   }
 }
 
-export { Terrain };
+export { LevelMap };

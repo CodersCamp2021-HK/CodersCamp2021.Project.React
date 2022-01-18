@@ -21,7 +21,7 @@ const AssetsManager = Object.freeze({
   cactusLarge: _.range(0, 3).map(
     (x) => new Sprite(spritesUrl, new Crop(new Vector2D(652 + x * 50, 2), 50, 100), scale),
   ),
-  terrain: _.range(2).map((y) =>
+  tileset: _.range(2).map((y) =>
     _.range(8).map((x) => new Sprite(tilesetUrl, new Crop(new Vector2D(x * 32, y * 32), 32, 32), 1)),
   ),
   door: new Sprite(doorUrl, new Crop(new Vector2D(0, 0), 64, 96)),
