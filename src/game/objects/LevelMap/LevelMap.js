@@ -2,10 +2,8 @@ import _ from 'lodash';
 import { AssetsManager } from '../../assets';
 import { GameObject } from '../../engine/GameObject';
 import { Vector2D } from '../../shared';
-import { patternsMatch, stringToCharMatrix } from './levelUtils';
+import { patternsMatch, stringToCharMatrix, TILE_SIZE } from './levelUtils';
 import { tileRules } from './tileRules';
-
-const TILE_SIZE = 32;
 
 class LevelMap extends GameObject {
   #tileSprites = AssetsManager.tileset;

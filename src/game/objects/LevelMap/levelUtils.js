@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import { Vector2D } from '../../shared';
 
+export const TILE_SIZE = 32;
+
 /**
  * @param {string} input string with 3 non-empty lines and 3 non-whitespace characters in each line
  * @returns {string[][]} array of 3 rows, each one being an array of 3 characters
@@ -34,19 +36,25 @@ function rotateClockwiseMatrix3x3(input, times = 1) {
 
 /**
  * @param {string[]} templates
- * @returns {Readonly<{ pattern: ("X" | "." | "?")[][], texturePos: Vector2D }[]>}
+ * @returns {[Readonly<{ pattern: ("X" | "." | "?")[][], texturePos: Vector2D }[]>, number]} a tuple of tile rule array and tileset row count
  */
 export function generateTileRules(templates) {
-  return Object.freeze(
-    templates.flatMap((ruleTemplate, templateIndex) => {
-      const pattern = stringToCharMatrix(ruleTemplate);
+  return [
+    Object.freeze(
+      templates.flatMap((ruleTemplate, templateIndex) => {
+        const pattern = stringToCharMatrix(ruleTemplate);
 
-      return _.times(4, (n) => ({
-        pattern: /** @type {('X' | '.' | '?')[][]} */ (rotateClockwiseMatrix3x3(pattern, n)),
-        texturePos: new Vector2D(n, templateIndex),
-      }));
-    }),
-  );
+        return _.uniqWith(
+          _.times(4, (n) => ({
+            pattern: /** @type {('X' | '.' | '?')[][]} */ (rotateClockwiseMatrix3x3(pattern, n)),
+            texturePos: new Vector2D(n, templateIndex),
+          })),
+          (firstRule, secondRule) => _.isEqual(firstRule.pattern, secondRule.pattern),
+        );
+      }),
+    ),
+    templates.length,
+  ];
 }
 
 /**

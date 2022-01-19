@@ -1,16 +1,19 @@
 import { generateTileRules } from './levelUtils';
 
-export const tileRules = generateTileRules(
+const [tileRules, tilesetRowCount] = generateTileRules(
   /**
-   * Array of pattern templates - each one is a string containing 3 lines, each of which contains 3 characters.
-   * It describes the "neighbourhood" of a given tile - its 8 neighbouring tiles. Meanings of characters:
+   * Each tile type has a number of different sprites depending on it's surroundings.
+   * Which sprite should be used depends on the 8 tiles next to a given tile.
+   * Those rules are generated based on this array.
+   * Each array element corresponds to a single row in tileset.png.
+   * It describes the neighbourhood corresponding to the first element in the given row of tileset.png.
+   *
+   * Meanings of symbols:
    * - 'X' - there is a solid block at this place
    * - '.' - there is only background at this place
    * - '?' - it is irrelevant what this place contains
-   * Each pattern template corresponds to a single row in tileset.png.
    * For each pattern template, there are four tile rules generated - one for each rotation: 0, 90, 180 and 270 deg.
-   * @type {('X' | '.' | '?')[][]}
-   * */ [
+   */ [
     `XXX
      XXX
      XXX`,
@@ -101,8 +104,7 @@ export const tileRules = generateTileRules(
     `?.X
      X..
      ?X?`,
-    `???
-     ???
-     ???`,
   ],
 );
+
+export { tileRules, tilesetRowCount };
