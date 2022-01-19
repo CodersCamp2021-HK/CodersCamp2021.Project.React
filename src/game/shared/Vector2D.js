@@ -51,6 +51,13 @@ class Vector2D {
   add(v) {
     return new Vector2D(this.x + v.x, this.y + v.y);
   }
+
+  /**
+   * @param {number} s
+   */
+  scale(s) {
+    return new Vector2D(this.x * s, this.y * s);
+  }
 }
 
 export { Vector2D };
