@@ -6,7 +6,11 @@ import { patternsMatch, stringToCharMatrix, TILE_SIZE } from './levelUtils';
 import { tileRules } from './tileRules';
 
 /**
- * @typedef {{ map: string }} LevelInfo
+ * @typedef {Object} LevelInfo Object containing information about a given level.
+ * @property {string} map A representation of the map in form of a multiline string,
+ * where 'X' encodes a wall, '.' a background, 'S' the start door and 'E' the end door.
+ * The map is as wide as the amount of columns in the string and as high as the amount
+ * of rows. It should have a rectangular shape.
  */
 
 class LevelScene extends GameScene {
