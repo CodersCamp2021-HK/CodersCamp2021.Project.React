@@ -1,4 +1,4 @@
-import { Collision } from '../shared';
+import { Collision } from '../../shared';
 
 class CollisionDetector {
   /**
@@ -31,7 +31,7 @@ class CollisionDetector {
   }
 
   detectCollisions() {
-    /** @type {import('../shared/Collision').Collision[]} */
+    /** @type {import('../../shared').Collision[]} */
     const collisions = [];
     this.#colliders.forEach((collider1) => {
       this.#colliders.forEach((collider2) => {

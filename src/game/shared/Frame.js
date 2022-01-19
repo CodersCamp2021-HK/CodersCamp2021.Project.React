@@ -1,3 +1,7 @@
+/**
+ * @typedef {{get width(): number; get height(): number; draw(position: import('./Vector').Vector, sprite: import('./Sprite').Sprite | import('./Shape').Shape): void}} Buffer
+ */
+
 class Frame {
   #frameID;
 
@@ -7,7 +11,7 @@ class Frame {
 
   /**
    * @param {number} frameID
-   * @param {import('../engine').CanvasBuffer} buffer
+   * @param {Buffer} buffer
    * @param {number} elapsed
    */
   constructor(frameID, buffer, elapsed) {

@@ -1,4 +1,4 @@
-import { Sprite } from '../shared';
+import { Sprite } from '../../shared';
 
 class CanvasBuffer {
   #canvas;
@@ -44,8 +44,8 @@ class CanvasBuffer {
 
   /**
    *
-   * @param {import('../shared').Vector2D} position
-   * @param {Sprite | import('../shared').Shape} sprite
+   * @param {import('../../shared').Vector} position
+   * @param {Sprite | import('../../shared').Shape} sprite
    */
   draw(position, sprite) {
     if (sprite instanceof Sprite) {

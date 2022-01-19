@@ -1,8 +1,7 @@
 import _ from 'lodash';
-import { GameObject } from '../engine/GameObject';
+import { GameObject, BoxCollider } from '../engine';
 import { AssetsManager } from '../assets';
-import { Vector2D } from '../shared';
-import { BoxCollider } from '../engine/BoxCollider';
+import { Vector } from '../shared';
 
 /**
  * @typedef {import('../shared').Sprite} CactusSprite
@@ -17,34 +16,34 @@ function randomizeCactusSprite() {
   );
 }
 
-/**
- * @extends {GameObject<{ offset: Vector2D  }>}
- */
 class Cactus extends GameObject {
   #sprite = randomizeCactusSprite();
 
-  #offset = Vector2D.Zero;
+  #offset = Vector.Zero;
 
-  activate() {
-    this.#offset = this.getArg('offset');
-    this.setCollider(BoxCollider, [new Vector2D(this.#sprite.width, this.#sprite.height)]);
-  }
-
-  get width() {
-    return this.#sprite.width;
+  /**
+   * @param {{ offset: Vector  }} props
+   */
+  onActivate({ offset }) {
+    this.#offset = offset;
+    this.setCollider(BoxCollider, [new Vector(this.#sprite.width, this.#sprite.height)]);
   }
 
   /**
    * @param {import('../shared').Frame} frame
    */
-  update(frame) {
-    const basePosition = new Vector2D(
+  onUpdate(frame) {
+    const basePosition = new Vector(
       frame.buffer.width + this.#sprite.width,
       frame.buffer.height - this.#sprite.height - BACKGROUND_OFFSET,
     );
     this.#offset = this.#offset.setX(this.#offset.x - SPEED);
     this.position = basePosition.add(this.#offset);
     frame.buffer.draw(this.position, this.#sprite);
+  }
+
+  get width() {
+    return this.#sprite.width;
   }
 }
 

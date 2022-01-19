@@ -4,8 +4,8 @@ class Collision {
   #gameObject2;
 
   /**
-   * @param {import('../engine/GameObject').GameObject} gameObject1
-   * @param {import('../engine/GameObject').GameObject} gameObject2
+   * @param {import('../engine').GameObject} gameObject1
+   * @param {import('../engine').GameObject} gameObject2
    */
   constructor(gameObject1, gameObject2) {
     if (gameObject1 === gameObject2) {

@@ -4,7 +4,7 @@ class Rigidbody {
   }
 
   /**
-   * @param { import('../shared/Vector2D').Vector2D } v
+   * @param { import('../../shared').Vector } v
    */
   addVelocity(v) {
     this.velocity = true;
@@ -12,7 +12,7 @@ class Rigidbody {
   }
 
   /**
-   * @param { import('../shared/Vector2D').Vector2D } v
+   * @param { import('../../shared').Vector } v
    */
   addAcceleration(v) {
     this.acceleration = true;

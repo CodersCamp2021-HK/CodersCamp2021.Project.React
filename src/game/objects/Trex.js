@@ -1,7 +1,6 @@
 import { AssetsManager } from '../assets';
-import { Vector2D } from '../shared';
-import { GameObject } from '../engine/GameObject';
-import { BoxCollider } from '../engine/BoxCollider';
+import { Vector } from '../shared';
+import { GameObject, BoxCollider } from '../engine';
 
 /**
  * @typedef {import('../shared').Sprite} TrexSprite
@@ -23,7 +22,7 @@ class Trex extends GameObject {
 
   #sprite = AssetsManager.trexRun1;
 
-  #jumpOffset = Vector2D.Zero;
+  #jumpOffset = Vector.Zero;
 
   #jumpY = -JUMP_SPEED;
 
@@ -34,19 +33,16 @@ class Trex extends GameObject {
    */
   #state = 'run';
 
-  activate() {
-    this.setCollider(BoxCollider, [new Vector2D(this.#sprite.width, this.#sprite.height)]);
+  onActivate() {
+    this.setCollider(BoxCollider, [new Vector(this.#sprite.width, this.#sprite.height)]);
   }
 
   /**
    * @param {import('../shared').Frame} frame
    */
-  update(frame) {
+  onUpdate(frame) {
     if (this.keyboard.pressed('ArrowUp') || this.#state === 'jump') {
-      const baseSpritePosition = new Vector2D(
-        MARGIN_LEFT,
-        frame.buffer.height - this.#sprite.height - BACKGROUND_OFFSET,
-      );
+      const baseSpritePosition = new Vector(MARGIN_LEFT, frame.buffer.height - this.#sprite.height - BACKGROUND_OFFSET);
       this.#stateTransition('jump', AssetsManager.trexJump);
       this.#animateJump();
       this.position = baseSpritePosition.add(this.#jumpOffset);
@@ -58,7 +54,7 @@ class Trex extends GameObject {
         this.#stateTransition('run', AssetsManager.trexRun1);
         this.#updateSprite(() => this.#toggleSprite(AssetsManager.trexRun1, AssetsManager.trexRun2));
       }
-      this.position = new Vector2D(MARGIN_LEFT, frame.buffer.height - this.#sprite.height - BACKGROUND_OFFSET);
+      this.position = new Vector(MARGIN_LEFT, frame.buffer.height - this.#sprite.height - BACKGROUND_OFFSET);
     }
     frame.buffer.draw(this.position, this.#sprite);
   }
@@ -78,7 +74,7 @@ class Trex extends GameObject {
       this.#jumpDelay = JUMP_DELAY;
     }
 
-    if (this.#jumpOffset.equals(Vector2D.Zero)) {
+    if (this.#jumpOffset.equals(Vector.Zero)) {
       this.#jumpY = -JUMP_SPEED;
       this.#state = 'run';
     }
@@ -109,7 +105,7 @@ class Trex extends GameObject {
   }
 
   #updateCollider() {
-    /** @type {BoxCollider} */ (this.collider).box = new Vector2D(this.#sprite.width, this.#sprite.height);
+    /** @type {BoxCollider} */ (this.collider).box = new Vector(this.#sprite.width, this.#sprite.height);
   }
 
   /**

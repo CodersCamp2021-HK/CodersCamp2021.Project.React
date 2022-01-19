@@ -1,7 +1,9 @@
-const GRAVITY_ACCELERATION = 0.01;
+import { Vector } from '../../shared';
+
+const GRAVITY_ACCELERATION = 0.001;
 
 class Transform {
-  position;
+  position = Vector.Zero;
 
   width;
 
@@ -16,7 +18,7 @@ class Transform {
   }
 
   /**
-   * @param { import('../shared/Vector2D').Vector2D } v
+   * @param { import('../../shared').Vector } v
    */
   velocity(v) {
     if (this.vector === undefined) this.vector = this.position;
@@ -25,7 +27,7 @@ class Transform {
   }
 
   /**
-   * @param { import('../shared/Vector2D').Vector2D } v
+   * @param { import('../../shared').Vector } v
    */
   acceleration(v) {
     if (this.vector === undefined) this.vector = this.position;
@@ -41,7 +43,7 @@ class Transform {
   }
 
   setPosition() {
-    this.position = this.vector;
+    this.position = this.vector ?? this.position;
   }
 }
 

@@ -16,10 +16,10 @@ class TrexRun extends TrexAnimated {
    */
   update(frame) {
     if (this.trex.keyboard.pressed('ArrowUp')) {
-      return this.trex.transitionState('jump').update(frame);
+      return this.trex.transitionState('jump').onUpdate(frame);
     }
     if (this.trex.keyboard.pressed('ArrowDown')) {
-      return this.trex.transitionState('bend').update(frame);
+      return this.trex.transitionState('bend').onUpdate(frame);
     }
     return super.update(frame);
   }
