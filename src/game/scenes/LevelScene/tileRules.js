@@ -13,6 +13,8 @@ const [tileRules, tilesetRowCount] = generateTileRules(
    * - '.' - there is only background at this place
    * - '?' - it is irrelevant what this place contains
    * For each pattern template, there are four tile rules generated - one for each rotation: 0, 90, 180 and 270 deg.
+   *
+   * tileRules.test.js should verify that exactly one rule matches each possible neighbourhood.
    */ [
     `XXX
      XXX

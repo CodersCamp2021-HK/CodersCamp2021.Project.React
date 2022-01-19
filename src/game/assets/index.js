@@ -4,8 +4,8 @@ import tilesetUrl from './tileset.png';
 import doorUrl from './idleDoor.png';
 import { Sprite, Vector2D } from '../shared';
 import { Crop } from '../shared/Crop';
-import { tilesetRowCount } from '../objects/LevelMap/tileRules';
-import { TILE_SIZE } from '../objects/LevelMap/levelUtils';
+import { tilesetRowCount } from '../scenes/LevelScene/tileRules';
+import { TILE_SIZE } from '../scenes/LevelScene/levelUtils';
 
 const scale = 0.5;
 
@@ -25,7 +25,7 @@ const AssetsManager = Object.freeze({
   ),
   tileset: _.range(tilesetRowCount).map((y) =>
     _.range(4).map(
-      (x) => new Sprite(tilesetUrl, new Crop(new Vector2D(x * TILE_SIZE, y * TILE_SIZE), TILE_SIZE, TILE_SIZE), 1),
+      (x) => new Sprite(tilesetUrl, new Crop(new Vector2D(x * TILE_SIZE, y * TILE_SIZE), TILE_SIZE, TILE_SIZE)),
     ),
   ),
   door: new Sprite(doorUrl, new Crop(new Vector2D(0, 0), 2 * TILE_SIZE, 3 * TILE_SIZE)),

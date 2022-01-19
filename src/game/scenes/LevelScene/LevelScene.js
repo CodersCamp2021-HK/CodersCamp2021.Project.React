@@ -1,29 +1,48 @@
 import _ from 'lodash';
 import { AssetsManager } from '../../assets';
-import { GameObject } from '../../engine/GameObject';
+import { GameScene } from '../../engine/GameScene';
 import { Vector2D } from '../../shared';
 import { patternsMatch, stringToCharMatrix, TILE_SIZE } from './levelUtils';
 import { tileRules } from './tileRules';
 
-class LevelMap extends GameObject {
+/**
+ * @typedef {{ map: string }} LevelInfo
+ */
+
+class LevelScene extends GameScene {
+  /**
+   * @param {import('../../engine/GameEngine').Services} services
+   * @param {LevelInfo} levelInfo
+   */
+  constructor(services, levelInfo) {
+    super(services);
+
+    this.#tiles = stringToCharMatrix(levelInfo.map);
+    this.#heightTiles = this.#tiles.length;
+    this.#widthTiles = Math.max(...this.#tiles.map((row) => row.length));
+
+    this.#startPos = this.#findSpecialTile('S');
+    this.#endPos = this.#findSpecialTile('E');
+  }
+
   #tileSprites = AssetsManager.tileset;
 
   #doorSprite = AssetsManager.door;
 
   /** @type {string[][]} */
-  #tiles = [];
+  #tiles;
 
   /** @type {number} */
-  #heightTiles = 0;
+  #heightTiles;
 
   /** @type {number} */
-  #widthTiles = 0;
+  #widthTiles;
 
   /** @type {Vector2D?} */
-  #startPos = null;
+  #startPos;
 
   /** @type {Vector2D?} */
-  #endPos = null;
+  #endPos;
 
   /**
    * @param {number} x
@@ -66,15 +85,8 @@ class LevelMap extends GameObject {
     return null;
   }
 
-  activate() {
-    this.#tiles = stringToCharMatrix(/** @type {string} */ (this.getArg('map')));
-
-    this.#heightTiles = this.#tiles.length;
-    this.#widthTiles = Math.max(...this.#tiles.map((row) => row.length));
-
-    this.#startPos = this.#findSpecialTile('S');
-    this.#endPos = this.#findSpecialTile('E');
-  }
+  // eslint-disable-next-line class-methods-use-this
+  activate() {}
 
   /**
    * @param {import('../../shared').Frame} frame
@@ -94,4 +106,4 @@ class LevelMap extends GameObject {
   }
 }
 
-export { LevelMap };
+export { LevelScene };

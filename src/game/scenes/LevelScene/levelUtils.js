@@ -7,7 +7,7 @@ export const TILE_SIZE = 32;
  * @param {string} input string with 3 non-empty lines and 3 non-whitespace characters in each line
  * @returns {string[][]} array of 3 rows, each one being an array of 3 characters
  */
-export function stringToCharMatrix(input) {
+function stringToCharMatrix(input) {
   return input
     .trim()
     .split('\n')
@@ -38,7 +38,7 @@ function rotateClockwiseMatrix3x3(input, times = 1) {
  * @param {string[]} templates
  * @returns {[Readonly<{ pattern: ("X" | "." | "?")[][], texturePos: Vector2D }[]>, number]} a tuple of tile rule array and tileset row count
  */
-export function generateTileRules(templates) {
+function generateTileRules(templates) {
   return [
     Object.freeze(
       templates.flatMap((ruleTemplate, templateIndex) => {
@@ -49,6 +49,7 @@ export function generateTileRules(templates) {
             pattern: /** @type {('X' | '.' | '?')[][]} */ (rotateClockwiseMatrix3x3(pattern, n)),
             texturePos: new Vector2D(n, templateIndex),
           })),
+          // Remove duplicates if pattern is symmetric
           (firstRule, secondRule) => _.isEqual(firstRule.pattern, secondRule.pattern),
         );
       }),
@@ -62,13 +63,14 @@ export function generateTileRules(templates) {
  * @param {('X' | '.' | '?')[][]} second
  * @returns {boolean}
  */
-export function patternsMatch(first, second) {
+function patternsMatch(first, second) {
   for (let row = 0; row < 3; row++) {
     for (let col = 0; col < 3; col++) {
       const elem1 = first[row][col];
       const elem2 = second[row][col];
 
-      if (elem1 !== elem2 && elem1 !== '?' && elem2 !== '?') {
+      // '?' matches everything
+      if (elem1 !== '?' && elem2 !== '?' && elem1 !== elem2) {
         return false;
       }
     }
@@ -76,3 +78,5 @@ export function patternsMatch(first, second) {
 
   return true;
 }
+
+export { stringToCharMatrix, generateTileRules, patternsMatch };
