@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import spritesUrl from './sprites.png';
 import tilesetUrl from './tileset.png';
-import doorUrl from './idleDoor.png';
+import doorUrl from './door.png';
 import { Sprite, Vector2D } from '../shared';
 import { Crop } from '../shared/Crop';
 import { tilesetRowCount } from '../scenes/LevelScene/tileRules';
@@ -28,7 +28,7 @@ const AssetsManager = Object.freeze({
       (x) => new Sprite(tilesetUrl, new Crop(new Vector2D(x * TILE_SIZE, y * TILE_SIZE), TILE_SIZE, TILE_SIZE)),
     ),
   ),
-  door: new Sprite(doorUrl, new Crop(new Vector2D(0, 0), 2 * TILE_SIZE, 3 * TILE_SIZE)),
+  door: new Sprite(doorUrl, new Crop(new Vector2D(0, 0), 46, 56)),
 });
 
 export { AssetsManager };

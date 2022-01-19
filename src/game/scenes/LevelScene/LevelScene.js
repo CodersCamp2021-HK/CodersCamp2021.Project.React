@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { AssetsManager } from '../../assets';
 import { GameScene } from '../../engine/GameScene';
+import { BackgroundTiles, Door, SolidTile } from '../../objects';
 import { Vector2D } from '../../shared';
 import { patternsMatch, stringToCharMatrix, TILE_SIZE } from './levelUtils';
 import { tileRules } from './tileRules';
@@ -24,9 +25,6 @@ class LevelScene extends GameScene {
     this.#tiles = stringToCharMatrix(levelInfo.map);
     this.#heightTiles = this.#tiles.length;
     this.#widthTiles = Math.max(...this.#tiles.map((row) => row.length));
-
-    this.#startPos = this.#findSpecialTile('S');
-    this.#endPos = this.#findSpecialTile('E');
   }
 
   #tileSprites = AssetsManager.tileset;
@@ -42,23 +40,17 @@ class LevelScene extends GameScene {
   /** @type {number} */
   #widthTiles;
 
-  /** @type {Vector2D?} */
-  #startPos;
-
-  /** @type {Vector2D?} */
-  #endPos;
-
   /**
    * @param {number} x
    * @param {number} y
-   * @returns {'X' | '.'} where 'X' - solid block, '.' - background
+   * @returns {'solid' | 'background'}
    */
   #getTileType(x, y) {
     if (x < 0 || x >= this.#widthTiles || y < 0 || y >= this.#heightTiles) {
-      return 'X';
+      return 'solid';
     }
 
-    return this.#tiles[y][x] === 'X' ? 'X' : '.';
+    return this.#tiles[y][x] === 'X' ? 'solid' : 'background';
   }
 
   /**
@@ -67,7 +59,9 @@ class LevelScene extends GameScene {
    * @returns {import('../../shared').Sprite}
    */
   #getTileSprite(x, y) {
-    const neighbours = _.times(3, (row) => _.times(3, (col) => this.#getTileType(x + col - 1, y + row - 1)));
+    const neighbours = _.times(3, (row) =>
+      _.times(3, (col) => (this.#getTileType(x + col - 1, y + row - 1) === 'solid' ? 'X' : '.')),
+    );
     const tileRule = tileRules.find((rule) => patternsMatch(neighbours, rule.pattern)) ?? tileRules[0];
 
     return this.#tileSprites[tileRule.texturePos.y][tileRule.texturePos.x];
@@ -89,24 +83,30 @@ class LevelScene extends GameScene {
     return null;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  activate() {}
+  activate() {
+    /** @type {{ position: Vector2D, sprite: import('../../shared').Sprite }[]} */
+    const backgroundTiles = [];
 
-  /**
-   * @param {import('../../shared').Frame} frame
-   */
-  update(frame) {
     for (let y = 0; y < this.#heightTiles; y++) {
       for (let x = 0; x < this.#widthTiles; x++) {
-        frame.buffer.draw(new Vector2D(x * TILE_SIZE, y * TILE_SIZE), this.#getTileSprite(x, y));
+        const data = { position: new Vector2D(x * TILE_SIZE, y * TILE_SIZE), sprite: this.#getTileSprite(x, y) };
+
+        if (this.#getTileType(x, y) === 'solid') {
+          this.createGameObject(SolidTile, {
+            args: data,
+          });
+        } else {
+          backgroundTiles.push(data);
+        }
       }
     }
 
-    _.each([this.#startPos, this.#endPos], (pos) => {
-      if (pos) {
-        frame.buffer.draw(pos.add(new Vector2D(-0.25, -0.75)).scale(TILE_SIZE), this.#doorSprite);
-      }
-    });
+    this.createGameObject(BackgroundTiles, { args: { tiles: backgroundTiles } });
+
+    this.createGameObject(Door, { args: { position: this.#findSpecialTile('S')?.scale(TILE_SIZE), type: 'start' } });
+    this.createGameObject(Door, { args: { position: this.#findSpecialTile('E')?.scale(TILE_SIZE), type: 'end' } });
+
+    // TODO: Spawn player at this.#findSpecialTile('S')
   }
 }
 
