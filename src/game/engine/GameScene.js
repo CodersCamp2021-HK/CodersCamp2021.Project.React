@@ -2,6 +2,8 @@
 import { Shape } from '../shared';
 import { BoxCollider } from './BoxCollider';
 import { CollisionDetector } from './CollisionDetector';
+import { Rigidbody } from './Rigidbody';
+import { Transform } from './Transform';
 
 /** @typedef {'CREATED' | 'ACTIVE' | 'DESTROYED'} GameObjectStatus */
 
@@ -84,6 +86,8 @@ class GameScene {
   createGameObject(Cls, params = {}) {
     const args = /** @type {A} */ (params.args ?? {});
     const obj = new Cls({
+      rigidbody: new Rigidbody(),
+      transform: new Transform(),
       metadata: { id: this.#nextID(), name: params.name },
       scene: this.#proxy,
       services: this.#services,

@@ -2,6 +2,8 @@
 /* eslint-disable class-methods-use-this */
 
 import { Vector2D } from '../shared';
+import { Rigidbody } from './Rigidbody';
+import { Transform } from './Transform';
 
 /**
  * @template {unknown[]} T
@@ -23,7 +25,7 @@ import { Vector2D } from '../shared';
 
 /**
  * @template {Record<string, any>} T
- * @typedef {Readonly<{metadata: GameObjectMetadata, scene: SceneProxy, services: import('./GameEngine').Services , args: T}>} GameObjectProps
+ * @typedef {Readonly<{rigidbody: Rigidbody, transform: Transform, metadata: GameObjectMetadata, scene: SceneProxy, services: import('./GameEngine').Services , args: T}>} GameObjectProps
  */
 
 /**
@@ -54,10 +56,12 @@ class GameObject {
   /**
    * @param {GameObjectProps<T>} props
    */
-  constructor({ metadata, scene, services, args }) {
+  constructor({ rigidbody, transform, metadata, scene, services, args }) {
     if (this.constructor === GameObject) {
       throw new Error("Abstract classes can't be instantiated.");
     }
+    this.rigidbody = rigidbody;
+    this.transform = transform;
     this.#metadata = metadata;
     this.#scene = scene;
     this.#services = services;
@@ -133,7 +137,10 @@ class GameObject {
   /**
    * @param {import('../shared').Frame} frame
    */
-  update(frame) {}
+
+  update(frame) {
+    this.rigidbody.update(this.transform);
+  }
 
   onDestroy() {
     this.removeCollider();
