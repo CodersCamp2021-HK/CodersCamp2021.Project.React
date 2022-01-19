@@ -1,6 +1,5 @@
-import _ from 'lodash';
 import { AssetsManager } from '../assets';
-import { BoxCollider } from '../engine/BoxCollider';
+// import { BoxCollider } from '../engine/BoxCollider';
 import { GameObject } from '../engine/GameObject';
 import { Vector2D } from '../shared';
 import { Animation } from '../engine/Animation';

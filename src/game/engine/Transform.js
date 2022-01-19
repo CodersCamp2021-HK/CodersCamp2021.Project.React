@@ -1,5 +1,3 @@
-import { Vector2D } from '../shared';
-
 const GRAVITY_ACCELERATION = 0.01;
 
 class Transform {
@@ -18,7 +16,7 @@ class Transform {
   }
 
   /**
-   * @param { Vector2D } v
+   * @param { import('../shared/Vector2D').Vector2D } v
    */
   velocity(v) {
     if (this.vector === undefined) this.vector = this.position;
@@ -27,7 +25,7 @@ class Transform {
   }
 
   /**
-   * @param { Vector2D } v
+   * @param { import('../shared/Vector2D').Vector2D } v
    */
   acceleration(v) {
     if (this.vector === undefined) this.vector = this.position;

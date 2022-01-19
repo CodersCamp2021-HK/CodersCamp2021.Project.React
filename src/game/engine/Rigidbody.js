@@ -1,13 +1,10 @@
-import { Vector2D } from '../shared';
-import { Transform } from './Transform';
-
 class Rigidbody {
   addGravity() {
     this.gravity = true;
   }
 
   /**
-   * @param {Vector2D} v
+   * @param { import('../shared/Vector2D').Vector2D } v
    */
   addVelocity(v) {
     this.velocity = true;
@@ -15,7 +12,7 @@ class Rigidbody {
   }
 
   /**
-   * @param {Vector2D} v
+   * @param { import('../shared/Vector2D').Vector2D } v
    */
   addAcceleration(v) {
     this.acceleration = true;
@@ -23,7 +20,7 @@ class Rigidbody {
   }
 
   /**
-   * @param { Transform } transform
+   * @param { import('./Transform').Transform } transform
    */
   update(transform) {
     if (this.gravity) transform.gravity();
