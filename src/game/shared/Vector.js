@@ -1,4 +1,4 @@
-class Vector2D {
+class Vector {
   #x;
 
   #y;
@@ -16,14 +16,14 @@ class Vector2D {
    * @param {number} x
    */
   setX(x) {
-    return new Vector2D(x, this.y);
+    return new Vector(x, this.y);
   }
 
   /**
    * @param {number} y
    */
   setY(y) {
-    return new Vector2D(this.x, y);
+    return new Vector(this.x, y);
   }
 
   get x() {
@@ -35,29 +35,29 @@ class Vector2D {
   }
 
   static get Zero() {
-    return new Vector2D(0, 0);
+    return new Vector(0, 0);
   }
 
   /**
-   * @param {Vector2D} v
+   * @param {Vector} v
    */
   equals(v) {
     return this.x === v.x && this.y === v.y;
   }
 
   /**
-   * @param {Vector2D} v
+   * @param {Vector} v
    */
   add(v) {
-    return new Vector2D(this.x + v.x, this.y + v.y);
+    return new Vector(this.x + v.x, this.y + v.y);
   }
 
   /**
    * @param {number} s
    */
   scale(s) {
-    return new Vector2D(this.x * s, this.y * s);
+    return new Vector(this.x * s, this.y * s);
   }
 }
 
-export { Vector2D };
+export { Vector };

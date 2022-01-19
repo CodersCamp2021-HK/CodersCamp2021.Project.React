@@ -1,18 +1,25 @@
 import _ from 'lodash';
-import { GameObject } from '../engine/GameObject';
+import { GameObject } from '../engine';
 
+/**
+ * @typedef {{position: import('../shared').Vector, sprite: import('../shared').Sprite}[]} Tiles
+ */
 class BackgroundTiles extends GameObject {
-  /** @type {{position: import('../shared').Vector2D, sprite: import('../shared').Sprite}[]} */
+  /** @type {Tiles} */
   #tiles = [];
 
-  activate() {
-    this.#tiles = this.getArg('tiles') ?? [];
+  /**
+   * @param {Object} props
+   * @param {Tiles} props.tiles
+   */
+  onActivate({ tiles }) {
+    this.#tiles = tiles;
   }
 
   /**
    * @param {import('../shared').Frame} frame
    */
-  update(frame) {
+  onUpdate(frame) {
     _.each(this.#tiles, (tile) => {
       frame.buffer.draw(tile.position, tile.sprite);
     });

@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { Vector2D } from '../shared';
-import { GameObject } from '../engine/GameObject';
+import { Vector } from '../shared';
+import { GameObject } from '../engine';
 import { Cactus } from './Cactus';
 
 class CactusGroup extends GameObject {
@@ -11,8 +11,8 @@ class CactusGroup extends GameObject {
    */
   #cactus = [];
 
-  activate() {
-    let offset = Vector2D.Zero;
+  onActivate() {
+    let offset = Vector.Zero;
     for (let i = 0; i < this.#numOfCactus; ++i) {
       const cactus = this.create(Cactus, { args: { offset } });
       this.#cactus.push(cactus);

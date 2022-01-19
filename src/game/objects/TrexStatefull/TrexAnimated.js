@@ -1,5 +1,5 @@
 import { AssetsManager } from '../../assets';
-import { Vector2D } from '../../shared';
+import { Vector } from '../../shared';
 import { TrexState } from './TrexState';
 
 const BACKGROUND_OFFSET = 10;
@@ -43,7 +43,7 @@ class TrexAnimated extends TrexState {
    * @param {import('../../shared').Frame} frame
    */
   update(frame) {
-    this.position = new Vector2D(MARGIN_LEFT, frame.buffer.height - this.#sprite.height - BACKGROUND_OFFSET);
+    this.position = new Vector(MARGIN_LEFT, frame.buffer.height - this.#sprite.height - BACKGROUND_OFFSET);
     this.#frameCount += 1;
     if (this.#frameCount === this.#updateAfter) {
       this.#updateSprite();
@@ -55,7 +55,7 @@ class TrexAnimated extends TrexState {
   #updateSprite() {
     this.#sprite = this.#sprites[this.#spriteNum];
     this.#spriteNum = (this.#spriteNum + 1) % this.#sprites.length;
-    /** @type {import('../../engine/BoxCollider').BoxCollider} */ (this.trex.collider).box = new Vector2D(
+    /** @type {import('../../engine').BoxCollider} */ (this.trex.collider).box = new Vector(
       this.#sprite.width,
       this.#sprite.height,
     );

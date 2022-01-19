@@ -1,6 +1,5 @@
-import { Vector2D } from '../../shared';
-import { GameObject } from '../../engine/GameObject';
-import { BoxCollider } from '../../engine/BoxCollider';
+import { Vector } from '../../shared';
+import { GameObject, BoxCollider } from '../../engine';
 import { TrexRun } from './TrexRun';
 import { TrexBend } from './TrexBend';
 import { TrexJump } from './TrexJump';
@@ -15,15 +14,15 @@ class TrexStatefull extends GameObject {
    */
   #state;
 
-  activate() {
-    this.setCollider(BoxCollider, [new Vector2D(0, 0)]);
+  onActivate() {
+    this.setCollider(BoxCollider, [new Vector(0, 0)]);
     this.#state = new TrexRun(this);
   }
 
   /**
    * @param {import('../../shared').Frame} frame
    */
-  update(frame) {
+  onUpdate(frame) {
     this.#state?.update(frame);
   }
 

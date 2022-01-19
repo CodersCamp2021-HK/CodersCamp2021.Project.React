@@ -1,8 +1,8 @@
-import { GameEngine } from '../../game/engine';
+import { GameEngine, scenes } from '../../game';
 
 class GameEngineProxy {
   /**
-   * @type {GameEngine | undefined}
+   * @type {GameEngine<typeof scenes> | undefined}
    */
   #gameEngine;
 
@@ -11,7 +11,7 @@ class GameEngineProxy {
    * @param {import('../ui').UIProxy} ui
    */
   initialize(canvas, ui) {
-    this.#gameEngine = new GameEngine(canvas, ui);
+    this.#gameEngine = new GameEngine(canvas, ui, scenes);
     this.#gameEngine.load('level1');
     return this;
   }

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Vector2D } from '../../shared';
+import { Vector } from '../../shared';
 
 export const TILE_SIZE = 32;
 
@@ -36,7 +36,7 @@ function rotateClockwiseMatrix3x3(input, times = 1) {
 
 /**
  * @param {string[]} templates
- * @returns {[Readonly<{ pattern: ("X" | "." | "?")[][], texturePos: Vector2D }[]>, number]} a tuple of tile rule array and tileset row count
+ * @returns {[Readonly<{ pattern: ("X" | "." | "?")[][], texturePos: Vector }[]>, number]} a tuple of tile rule array and tileset row count
  */
 function generateTileRules(templates) {
   return [
@@ -47,7 +47,7 @@ function generateTileRules(templates) {
         return _.uniqWith(
           _.times(4, (n) => ({
             pattern: /** @type {('X' | '.' | '?')[][]} */ (rotateClockwiseMatrix3x3(pattern, n)),
-            texturePos: new Vector2D(n, templateIndex),
+            texturePos: new Vector(n, templateIndex),
           })),
           // Remove duplicates if pattern is symmetric
           (firstRule, secondRule) => _.isEqual(firstRule.pattern, secondRule.pattern),

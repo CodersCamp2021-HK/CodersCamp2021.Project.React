@@ -16,7 +16,7 @@ class TrexBend extends TrexAnimated {
    */
   update(frame) {
     if (!this.trex.keyboard.pressed('ArrowDown')) {
-      return this.trex.transitionState('run').update(frame);
+      return this.trex.transitionState('run').onUpdate(frame);
     }
     return super.update(frame);
   }

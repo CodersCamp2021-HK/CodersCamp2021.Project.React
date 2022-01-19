@@ -1,4 +1,4 @@
-import { Frame } from '../shared';
+import { Frame } from '../../shared';
 
 /** @typedef {'created' | 'running' | 'stopped' | 'error'} GameLoopState */
 /** @typedef {(frame: Frame) => void} OnFrame */

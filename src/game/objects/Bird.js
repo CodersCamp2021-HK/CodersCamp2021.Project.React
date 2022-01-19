@@ -1,8 +1,7 @@
 import _ from 'lodash';
 import { AssetsManager } from '../assets';
-import { BoxCollider } from '../engine/BoxCollider';
-import { GameObject } from '../engine/GameObject';
-import { Vector2D } from '../shared';
+import { BoxCollider, GameObject } from '../engine';
+import { Vector } from '../shared';
 
 const SPEED = 5;
 
@@ -11,17 +10,17 @@ class Bird extends GameObject {
 
   #sprite = AssetsManager.bird1;
 
-  #offset = new Vector2D(0, _.random(-15, 15));
+  #offset = new Vector(0, _.random(-15, 15));
 
-  activate() {
-    this.setCollider(BoxCollider, [new Vector2D(this.#sprite.width, this.#sprite.height)]);
+  onActivate() {
+    this.setCollider(BoxCollider, [new Vector(this.#sprite.width, this.#sprite.height)]);
   }
 
   /**
    * @param {import('../shared').Frame} frame
    */
-  update(frame) {
-    const basePosition = new Vector2D(
+  onUpdate(frame) {
+    const basePosition = new Vector(
       frame.buffer.width + this.#sprite.width,
       frame.buffer.height - this.#sprite.height - 50,
     );
@@ -45,7 +44,7 @@ class Bird extends GameObject {
   }
 
   #updateCollider() {
-    /** @type {BoxCollider} */ (this.collider).box = new Vector2D(this.#sprite.width, this.#sprite.height);
+    /** @type {BoxCollider} */ (this.collider).box = new Vector(this.#sprite.width, this.#sprite.height);
   }
 }
 
@@ -56,7 +55,7 @@ import _ from 'lodash';
 import { AssetsManager } from '../assets';
 import { BoxCollider } from '../engine/BoxCollider';
 import { GameObject } from '../engine/GameObject';
-import { Vector2D } from '../shared';
+import { Vector } from '../shared';
 
 const SPEED = 5;
 const ANIMATION_INTERVAL = 15;
@@ -64,14 +63,14 @@ const ANIMATION_INTERVAL = 15;
 class Bird extends GameObject {
   onActivate(buffer) {
     this.animation = new SpriteAnimation(ANIMATION_INTERVAL, [AssetsManager.bird1, AssetsManager.bird2]);
-    this.transform.position = new Vector2D(
+    this.transform.position = new Vector(
       buffer.width + this.animation.sprite.width,
       buffer.height - this.animation.sprite.height - 50,
     );
     this.transform.width = this.animation.sprite.width;
     this.transform.height = this.animation.sprite.height;
-    this.rigidbody.addGravity().addVelocity(new Vector2D(-SPEED, 0));
-    this.colliders.add(BoxCollider, [new Vector2D(this.animation.sprite.width, this.animation.sprite.height)]);
+    this.rigidbody.addGravity().addVelocity(new Vector(-SPEED, 0));
+    this.colliders.add(BoxCollider, [new Vector(this.animation.sprite.width, this.animation.sprite.height)]);
   }
 
   onUpdate() {
