@@ -51,6 +51,13 @@ class Vector {
   add(v) {
     return new Vector(this.x + v.x, this.y + v.y);
   }
+
+  /**
+   * @param {number} s
+   */
+  scale(s) {
+    return new Vector(this.x * s, this.y * s);
+  }
 }
 
 export { Vector };
