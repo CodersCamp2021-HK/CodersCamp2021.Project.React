@@ -10,7 +10,7 @@ class Transform {
   height;
 
   /**
-   * @param {import('../shared/Vector').Vector} v
+   * @param {import('../../shared').Vector} v
    */
   setPosition(v) {
     this.position = this.position.add(v);

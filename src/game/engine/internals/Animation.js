@@ -37,10 +37,17 @@ class Animation {
     if (!this.#sprite) return;
     this.#frameCount += 1;
     if (this.#frameCount === this.#animationInterval) {
-      this.#sprite = this.#sprite === this.#assets[0] ? this.#assets[1] : this.#assets[0];
+      this.#sprite = this.#nextSprite();
       this.#frameCount = 0;
     }
     buffer.draw(position, this.#sprite);
+  }
+
+  #nextSprite() {
+    const nextElemIndex =
+      // @ts-ignore
+      this.#assets.indexOf(this.#sprite) + 1 === this.#assets.length ? 0 : this.#assets.indexOf(this.#sprite) + 1;
+    return this.#assets[nextElemIndex];
   }
 }
 
