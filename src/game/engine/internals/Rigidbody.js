@@ -1,34 +1,60 @@
+import { Vector } from '../../shared/Vector';
+
+const GRAVITY_ACCELERATION = 0.001;
+
 class Rigidbody {
+  resultVector = Vector.Zero;
+
+  gravityVector = Vector.Zero;
+
+  velocityVector = Vector.Zero;
+
+  accelerationVector = Vector.Zero;
+
+  gravityInit = 0;
+
+  velocityX = 0;
+
+  velocityY = 0;
+
   addGravity() {
-    this.gravity = true;
+    this.gravityVector = new Vector(0, GRAVITY_ACCELERATION);
+    this.resultVector = this.gravityVector;
   }
 
   /**
-   * @param { import('../../shared').Vector } v
+   * @param {import('../shared/Vector').Vector} v
    */
   addVelocity(v) {
-    this.velocity = true;
     this.velocityVector = v;
+    this.velocityX = this.velocityVector.x;
+    this.velocityY = this.velocityVector.y;
   }
 
   /**
-   * @param { import('../../shared').Vector } v
+   * @param {import('../shared/Vector').Vector} v
    */
   addAcceleration(v) {
-    this.acceleration = true;
     this.accelerationVector = v;
+    this.resultVector = this.resultVector.add(this.accelerationVector);
+  }
+
+  findResultVector() {
+    this.gravityInit += this.gravityVector.y;
+    this.velocityX += this.accelerationVector.x;
+    this.velocityY += this.accelerationVector.y;
+
+    this.resultVector = this.resultVector.setX(this.resultVector.x + this.velocityX);
+    this.resultVector = this.resultVector.setY(this.resultVector.y + this.gravityInit + this.velocityY);
   }
 
   /**
-   * @param { import('./Transform').Transform } transform
+   * @param {import('./Transform').Transform} transform
    */
   update(transform) {
-    if (this.gravity) transform.gravity();
-    // @ts-ignore
-    if (this.velocity) transform.velocity(this.velocityVector);
-    // @ts-ignore
-    if (this.acceleration) transform.acceleration(this.accelerationVector);
-    transform.setPosition();
+    this.findResultVector();
+    transform.setPosition(this.resultVector);
+    transform.setOrigin();
   }
 }
 
