@@ -1,23 +1,60 @@
 import { Vector } from '../../shared';
 
 class Transform {
-  position = Vector.Zero;
+  #position = Vector.Zero;
 
-  origin = Vector.Zero;
+  #origin = Vector.Zero;
 
-  width;
+  #width = 0;
 
-  height;
+  #height = 0;
+
+  get width() {
+    return this.#width;
+  }
+
+  /**
+   * @param {number} w
+   */
+  set width(w) {
+    this.#width = w;
+  }
+
+  get height() {
+    return this.#height;
+  }
+
+  /**
+   * @param {number} h
+   */
+  set height(h) {
+    this.#height = h;
+  }
+
+  get position() {
+    return this.#position;
+  }
 
   /**
    * @param {import('../../shared').Vector} v
    */
-  setPosition(v) {
-    this.position = this.position.add(v);
+  set position(v) {
+    this.#position = v;
   }
 
-  setOrigin() {
-    this.origin = new Vector(this.position.x + 0.5 * this.width, this.position.y + 0.5 * this.height);
+  get origin() {
+    return this.#origin;
+  }
+
+  /**
+   * @param {import('../../shared').Vector} v
+   */
+  updatePosition(v) {
+    this.#position = this.#position.add(v);
+  }
+
+  updateOrigin() {
+    this.#origin = new Vector(this.#position.x + 0.5 * this.#width, this.#position.y + 0.5 * this.#height);
   }
 }
 
