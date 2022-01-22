@@ -9,6 +9,8 @@ import backgroundUrl from '../../public/img/background.png';
 
 const LEVEL_GRID_SPACING = '2rem';
 
+const levels = Object.values(scenes).filter((scene) => scene.prototype instanceof LevelScene);
+
 const wrapper = css`
   min-height: 100vh;
   padding: 1rem;
@@ -53,22 +55,19 @@ const LevelSelectPage = () => {
         <img src={headerUrl} alt='Level Select' css={headerImg} />
       </header>
       <section css={levelGrid}>
-        {Object.values(scenes)
-          .filter((scene) => scene.prototype instanceof LevelScene)
-          .map((_, i) => {
-            const levelNumber = i + 1;
+        {levels.map((_, i) => {
+          const levelNumber = i + 1;
 
-            return (
-              // eslint-disable-next-line react/no-array-index-key
-              <LevelButton
-                key={levelNumber}
-                type={selected === levelNumber ? 'selected' : 'unlocked'}
-                onSelect={() => setSelected(levelNumber)}
-              >
-                {levelNumber}
-              </LevelButton>
-            );
-          })}
+          return (
+            <LevelButton
+              key={levelNumber}
+              type={selected === levelNumber ? 'selected' : 'unlocked'}
+              onSelect={() => setSelected(levelNumber)}
+            >
+              {levelNumber}
+            </LevelButton>
+          );
+        })}
       </section>
     </main>
   );
