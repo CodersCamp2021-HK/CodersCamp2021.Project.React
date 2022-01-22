@@ -40,6 +40,7 @@ class Transform {
    */
   set position(v) {
     this.#position = v;
+    this.#updateOrigin();
   }
 
   get origin() {
@@ -56,6 +57,10 @@ class Transform {
 
   #updatePosition() {
     this.#position = new Vector(this.#origin.x - 0.5 * this.#width, this.#origin.y - 0.5 * this.#height);
+  }
+
+  #updateOrigin() {
+    this.#origin = new Vector(this.#position.x + 0.5 * this.#width, this.#position.y + 0.5 * this.#height);
   }
 }
 
