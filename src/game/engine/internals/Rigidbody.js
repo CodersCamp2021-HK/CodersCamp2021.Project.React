@@ -30,6 +30,7 @@ class Rigidbody {
    */
   update(transform) {
     this.#velocityVector = this.#velocityVector.add(this.#accelerationVector);
+    // eslint-disable-next-line no-param-reassign
     transform.origin = transform.origin.add(this.#velocityVector);
   }
 }
