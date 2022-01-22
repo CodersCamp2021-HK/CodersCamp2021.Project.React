@@ -1,6 +1,6 @@
 import { Vector } from '../../shared';
 
-const GRAVITY_ACCELERATION = 0.001;
+const GRAVITY_ACCELERATION = 0.02;
 const GRAVITY_VECTOR = new Vector(0, GRAVITY_ACCELERATION);
 class Rigidbody {
   #resultVector = Vector.Zero;
@@ -28,13 +28,12 @@ class Rigidbody {
   }
 
   /**
-   * @param {import('./Transform').Transform} transform
+   * @param {import('./Transform').Transform} t
    */
-  update(transform) {
+  update(t) {
+    const transform = t;
     this.#velocityVector = this.#velocityVector.add(this.#accelerationVector);
-    this.#resultVector = this.#resultVector.add(this.#velocityVector);
-    // eslint-disable-next-line no-param-reassign
-    transform.position = transform.position.add(this.#resultVector);
+    transform.origin = transform.origin.add(this.#velocityVector);
   }
 }
 
