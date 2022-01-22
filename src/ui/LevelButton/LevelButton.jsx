@@ -26,6 +26,7 @@ const LevelButton = ({ children, type, onSelect }) => {
         opacity: type === 'locked' ? '0.25' : '1',
       }}
       onClick={onClick}
+      disabled={type === 'locked'}
     >
       {children}
     </button>
