@@ -40,6 +40,7 @@ class Transform {
    */
   set position(v) {
     this.#position = v;
+    this.#updateOrigin();
   }
 
   get origin() {
@@ -49,11 +50,11 @@ class Transform {
   /**
    * @param {import('../../shared').Vector} v
    */
-  updatePosition(v) {
-    this.#position = this.#position.add(v);
+  set origin(v) {
+    this.#origin = v;
   }
 
-  updateOrigin() {
+  #updateOrigin() {
     this.#origin = new Vector(this.#position.x + 0.5 * this.#width, this.#position.y + 0.5 * this.#height);
   }
 }

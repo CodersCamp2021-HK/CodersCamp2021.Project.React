@@ -2,9 +2,9 @@ import { AssetsManager } from '../assets';
 import { BoxCollider, GameObject } from '../engine';
 import { Vector } from '../shared';
 
-const SPEED_X = -0.02;
+const SPEED_X = -1;
 const SPEED_Y = 0;
-const ACCELERATION_X = -0.01;
+const ACCELERATION_X = -0.2;
 const ACCELERATION_Y = 0;
 const ANIMATION_INTERVAL = 15;
 
@@ -31,8 +31,6 @@ class Bird extends GameObject {
     );
     this.transform.width = this.sprite.width;
     this.transform.height = this.sprite.height;
-    this.rigidbody.update(this.transform);
-    this.animation.update(frame.buffer, this.transform.position);
     if (this.transform.position.x < -this.sprite.width) {
       this.destroy(this);
     }
