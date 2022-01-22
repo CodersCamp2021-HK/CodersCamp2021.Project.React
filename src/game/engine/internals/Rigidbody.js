@@ -3,8 +3,6 @@ import { Vector } from '../../shared';
 const GRAVITY_ACCELERATION = 0.02;
 const GRAVITY_VECTOR = new Vector(0, GRAVITY_ACCELERATION);
 class Rigidbody {
-  #resultVector = Vector.Zero;
-
   #velocityVector = Vector.Zero;
 
   #accelerationVector = Vector.Zero;
@@ -28,10 +26,9 @@ class Rigidbody {
   }
 
   /**
-   * @param {import('./Transform').Transform} t
+   * @param {import('./Transform').Transform} transform
    */
-  update(t) {
-    const transform = t;
+  update(transform) {
     this.#velocityVector = this.#velocityVector.add(this.#accelerationVector);
     transform.origin = transform.origin.add(this.#velocityVector);
   }
