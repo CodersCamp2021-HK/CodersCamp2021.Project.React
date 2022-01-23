@@ -1,7 +1,7 @@
 import React from 'react';
-import { theme } from '../../shared/theme';
-import levelButtonUrl from '../../public/img/levelButton.png';
-import levelButtonSelectedUrl from '../../public/img/levelButtonSelected.png';
+import { theme } from '../../../shared/theme';
+import levelButtonUrl from '../../../public/img/levelButton.png';
+import levelButtonSelectedUrl from '../../../public/img/levelButtonSelected.png';
 
 const LEVEL_BUTTON_SIZE = '4rem';
 

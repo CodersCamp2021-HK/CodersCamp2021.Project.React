@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { theme } from '../../shared/theme';
-import kingUrl from '../../public/img/king.svg';
-import pigUrl from '../../public/img/pig.svg';
+import { theme } from '../../../shared/theme';
+import kingUrl from '../../../public/img/king.svg';
+import pigUrl from '../../../public/img/pig.svg';
 
 const header = css`
   display: flex;
