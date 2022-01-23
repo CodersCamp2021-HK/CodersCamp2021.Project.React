@@ -3,9 +3,13 @@ import { LevelButton } from './LevelButton';
 
 describe('LevelButton', () => {
   it('should render the button', () => {
-    render(<LevelButton type='selected'>1</LevelButton>);
+    render(
+      <LevelButton type='selected' onSelect={() => {}}>
+        1
+      </LevelButton>,
+    );
 
-    const button = screen.getByRole('button', { text: '1' });
+    const button = screen.getByRole('button', { name: '1' });
     expect(button).toBeInTheDocument();
   });
 
@@ -17,7 +21,7 @@ describe('LevelButton', () => {
       </LevelButton>,
     );
 
-    const button = screen.getByRole('button', { text: '2' });
+    const button = screen.getByRole('button', { name: '2' });
     fireEvent.click(button);
 
     expect(onSelect).toHaveBeenCalledTimes(1);
@@ -31,7 +35,7 @@ describe('LevelButton', () => {
       </LevelButton>,
     );
 
-    const button = screen.getByRole('button', { text: '3' });
+    const button = screen.getByRole('button', { name: '3' });
     fireEvent.click(button);
 
     expect(button).toBeDisabled();
