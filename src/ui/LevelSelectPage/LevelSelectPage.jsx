@@ -5,7 +5,7 @@ import { LevelButton, LEVEL_BUTTON_SIZE } from '../LevelButton';
 import { PageHeader } from '../PageHeader';
 import { scenes } from '../../game/scenes';
 import { LevelScene } from '../../game/scenes/LevelScene';
-import backgroundUrl from '../../public/img/background.png';
+import backgroundUrl from '../../public/img/background.jpg';
 
 const LEVEL_GRID_SPACING = '2rem';
 
