@@ -4,7 +4,7 @@ import { StartButton } from './StartButton';
 describe('StartButton', () => {
   it('should render the button', () => {
     render(
-      <StartButton type='selected' onSelect={() => {}}>
+      <StartButton type='secondary' onClick={() => {}}>
         start
       </StartButton>,
     );
@@ -16,7 +16,7 @@ describe('StartButton', () => {
   it('can be clicked', () => {
     const onSelect = jest.fn();
     render(
-      <StartButton type='normal' onSelect={onSelect}>
+      <StartButton type='primary' onClick={onSelect}>
         start
       </StartButton>,
     );
@@ -30,7 +30,7 @@ describe('StartButton', () => {
   it('can not be clicked', () => {
     const onSelect = jest.fn();
     render(
-      <StartButton type='selected' onSelect={onSelect}>
+      <StartButton type='secondary' onClick={onSelect}>
         start
       </StartButton>,
     );

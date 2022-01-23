@@ -5,10 +5,10 @@ export default {
   component: Button,
   argTypes: {
     type: {
-      options: ['normal', 'selected'],
+      options: ['primary', 'secondary'],
     },
-    onSelect: {
-      action: 'selected',
+    onClick: {
+      action: 'secondary',
     },
   },
 };
@@ -16,14 +16,14 @@ export default {
 /** @type {typeof Button & Partial<{ args: object }>} */
 const Template = Button;
 
-export const Normal = Template.bind({});
-Normal.args = {
-  type: 'normal',
+export const Primal = Template.bind({});
+Primal.args = {
+  type: 'primary',
   children: 'sterowanie',
 };
 
-export const Selected = Template.bind({});
-Selected.args = {
-  type: 'selected',
+export const Secondary = Template.bind({});
+Secondary.args = {
+  type: 'secondary',
   children: 'sterowanie',
 };

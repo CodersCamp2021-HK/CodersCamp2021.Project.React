@@ -4,7 +4,7 @@ import { Button } from './Button';
 describe('Button', () => {
   it('should render the button', () => {
     render(
-      <Button type='selected' onSelect={() => {}}>
+      <Button type='secondary' onClick={() => {}}>
         Sterowanie
       </Button>,
     );
@@ -16,7 +16,7 @@ describe('Button', () => {
   it('can be clicked', () => {
     const onSelect = jest.fn();
     render(
-      <Button type='normal' onSelect={onSelect}>
+      <Button type='primary' onClick={onSelect}>
         Sterowanie
       </Button>,
     );
@@ -30,7 +30,7 @@ describe('Button', () => {
   it('can not be clicked', () => {
     const onSelect = jest.fn();
     render(
-      <Button type='selected' onSelect={onSelect}>
+      <Button type='secondary' onClick={onSelect}>
         Sterowanie
       </Button>,
     );

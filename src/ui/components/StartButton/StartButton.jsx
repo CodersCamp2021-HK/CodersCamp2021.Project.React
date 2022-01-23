@@ -7,14 +7,14 @@ const START_BUTTON_WIDTH_SIZE = '21.25rem';
 const START_FONT_SIZE = '22px';
 
 /**
- * @param {{ children: React.ReactNode, type: 'normal' | 'selected', onSelect: () => void }} props
+ * @param {{ children: React.ReactNode, type: 'primary' | 'secondary', onClick: () => void }} props
  */
-const StartButton = ({ children, type, onSelect }) => {
-  const onClick = React.useCallback(() => {
-    if (type === 'normal') {
-      onSelect();
+const StartButton = ({ children, type, onClick }) => {
+  const event = React.useCallback(() => {
+    if (type === 'primary') {
+      onClick();
     }
-  }, [type, onSelect]);
+  }, [type, onClick]);
 
   return (
     <button
@@ -23,11 +23,14 @@ const StartButton = ({ children, type, onSelect }) => {
         width: START_BUTTON_WIDTH_SIZE,
         height: START_BUTTON_HEIGHT_SIZE,
         background: `url(${StartButtonUrl}) center center / cover`,
-        color: type === 'selected' ? theme.colors.primary.main : theme.colors.common.white,
+        color: type === 'secondary' ? theme.colors.primary.main : theme.colors.common.white,
         fontSize: START_FONT_SIZE,
         textTransform: 'uppercase',
+        '&:hover': {
+          color: theme.colors.primary.main,
+        },
       }}
-      onClick={onClick}
+      onClick={event}
     >
       {children}
     </button>
