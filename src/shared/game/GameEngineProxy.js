@@ -12,7 +12,7 @@ class GameEngineProxy {
    */
   initialize(canvas, ui) {
     this.#gameEngine = new GameEngine(canvas, ui, scenes);
-    this.#gameEngine.load('level1');
+    this.#gameEngine.load('main');
     return this;
   }
 
