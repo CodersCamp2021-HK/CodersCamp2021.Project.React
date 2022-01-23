@@ -8,5 +8,5 @@ export default {
 /** @type {typeof PageHeaderComponent & Partial<{ args: object }>} */
 export const PageHeader = ({ children }) => <PageHeaderComponent>{children}</PageHeaderComponent>;
 PageHeader.args = {
-  content: 'King and Pigs',
+  children: 'King and Pigs',
 };
