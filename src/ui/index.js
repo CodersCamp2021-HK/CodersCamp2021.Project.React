@@ -1,1 +1,2 @@
-export * from './GameUI';
+export * from './components';
+export * from './pages';
