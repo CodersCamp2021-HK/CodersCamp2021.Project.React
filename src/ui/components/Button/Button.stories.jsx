@@ -19,11 +19,11 @@ const Template = Button;
 export const Normal = Template.bind({});
 Normal.args = {
   type: 'normal',
-  children: 'Sterowanie',
+  children: 'sterowanie',
 };
 
 export const Selected = Template.bind({});
 Selected.args = {
   type: 'selected',
-  children: 'Sterowanie',
+  children: 'sterowanie',
 };

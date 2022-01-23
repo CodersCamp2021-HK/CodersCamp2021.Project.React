@@ -21,6 +21,7 @@ const Button = ({ children, type, onSelect }) => {
         background: `url(${ButtonUrl}) center center / cover`,
         color: type === 'selected' ? theme.colors.primary.main : theme.colors.common.white,
         fontSize: FONT_SIZE,
+        textTransform: 'capitalize',
       }}
       onClick={onClick}
     >
