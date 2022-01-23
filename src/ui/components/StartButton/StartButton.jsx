@@ -10,7 +10,11 @@ const FONT_SIZE = '22px';
  * @param {{ children: React.ReactNode, type: 'normal' | 'selected', onSelect: () => void }} props
  */
 const StartButton = ({ children, type, onSelect }) => {
-  const onClick = React.useCallback(() => {}, [type, onSelect]);
+  const onClick = React.useCallback(() => {
+    if (type === 'normal') {
+      onSelect();
+    }
+  }, [type, onSelect]);
 
   return (
     <button
