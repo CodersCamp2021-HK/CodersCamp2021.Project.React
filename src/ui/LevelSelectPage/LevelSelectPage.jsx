@@ -2,9 +2,9 @@ import React from 'react';
 import { css } from '@emotion/react';
 import { theme } from '../../shared/theme';
 import { LevelButton, LEVEL_BUTTON_SIZE } from '../LevelButton';
+import { PageHeader } from '../PageHeader';
 import { scenes } from '../../game/scenes';
 import { LevelScene } from '../../game/scenes/LevelScene';
-import headerUrl from '../../public/img/header.png';
 import backgroundUrl from '../../public/img/background.png';
 
 const LEVEL_GRID_SPACING = '2rem';
@@ -20,16 +20,6 @@ const wrapper = css`
   align-items: center;
   gap: 1rem;
   background: ${theme.colors.background.solid} url(${backgroundUrl}) center center / cover;
-`;
-
-const header = css`
-  display: flex;
-  justify-content: center;
-`;
-
-const headerImg = css`
-  width: 100%;
-  max-width: max(60vw, 500px);
 `;
 
 const levelGrid = css`
@@ -51,9 +41,7 @@ const LevelSelectPage = () => {
 
   return (
     <main css={wrapper}>
-      <header css={header}>
-        <img src={headerUrl} alt='Level Select' css={headerImg} />
-      </header>
+      <PageHeader>Level Select</PageHeader>
       <section css={levelGrid}>
         {levels.map((_, i) => {
           const levelNumber = i + 1;
