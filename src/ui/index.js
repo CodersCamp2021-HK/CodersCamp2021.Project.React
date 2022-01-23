@@ -1,2 +1,2 @@
-export * from './GameUI';
-export { Popup } from './Popup/Popup';
+export * from './components';
+export * from './pages';

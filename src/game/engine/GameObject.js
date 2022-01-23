@@ -97,12 +97,24 @@ class GameObject {
     return this.#proxy.keyboard;
   }
 
+  get transform() {
+    return this.#proxy.transform;
+  }
+
+  get rigidbody() {
+    return this.#proxy.rigidbody;
+  }
+
   get position() {
-    return this.#proxy.position;
+    return this.#proxy.transform.position;
   }
 
   set position(val) {
-    this.#proxy.setPosition(val);
+    this.#proxy.transform.position = val;
+  }
+
+  get animation() {
+    return this.#proxy.animation;
   }
 
   // #endregion

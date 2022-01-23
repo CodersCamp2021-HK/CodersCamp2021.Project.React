@@ -1,97 +1,34 @@
-import _ from 'lodash';
 import { AssetsManager } from '../assets';
 import { BoxCollider, GameObject } from '../engine';
 import { Vector } from '../shared';
 
-const SPEED = 5;
-
-class Bird extends GameObject {
-  #frameCount = 0;
-
-  #sprite = AssetsManager.bird1;
-
-  #offset = new Vector(0, _.random(-15, 15));
-
-  onActivate() {
-    this.setCollider(BoxCollider, [new Vector(this.#sprite.width, this.#sprite.height)]);
-  }
-
-  /**
-   * @param {import('../shared').Frame} frame
-   */
-  onUpdate(frame) {
-    const basePosition = new Vector(
-      frame.buffer.width + this.#sprite.width,
-      frame.buffer.height - this.#sprite.height - 50,
-    );
-    this.#offset = this.#offset.setX(this.#offset.x - SPEED);
-    this.#updateSprite();
-
-    if (this.#offset.x < -(frame.buffer.width + 2 * this.#sprite.width)) {
-      this.destroy(this);
-    }
-    this.position = basePosition.add(this.#offset);
-    frame.buffer.draw(this.position, this.#sprite);
-  }
-
-  #updateSprite() {
-    this.#frameCount += 1;
-    if (this.#frameCount === 15) {
-      this.#sprite = this.#sprite === AssetsManager.bird1 ? AssetsManager.bird2 : AssetsManager.bird1;
-      this.#updateCollider();
-      this.#frameCount = 0;
-    }
-  }
-
-  #updateCollider() {
-    /** @type {BoxCollider} */ (this.collider).box = new Vector(this.#sprite.width, this.#sprite.height);
-  }
-}
-
-export { Bird };
-
-/*
-import _ from 'lodash';
-import { AssetsManager } from '../assets';
-import { BoxCollider } from '../engine/BoxCollider';
-import { GameObject } from '../engine/GameObject';
-import { Vector } from '../shared';
-
-const SPEED = 5;
+const SPEED_X = -2;
+const SPEED_Y = 0;
+const ACCELERATION_X = -0.2;
+const ACCELERATION_Y = 0;
 const ANIMATION_INTERVAL = 15;
 
 class Bird extends GameObject {
-  onActivate(buffer) {
-    this.animation = new SpriteAnimation(ANIMATION_INTERVAL, [AssetsManager.bird1, AssetsManager.bird2]);
-    this.transform.position = new Vector(
-      buffer.width + this.animation.sprite.width,
-      buffer.height - this.animation.sprite.height - 50,
-    );
-    this.transform.width = this.animation.sprite.width;
-    this.transform.height = this.animation.sprite.height;
-    this.rigidbody.addGravity().addVelocity(new Vector(-SPEED, 0));
-    this.colliders.add(BoxCollider, [new Vector(this.animation.sprite.width, this.animation.sprite.height)]);
+  onActivate() {
+    this.animation.reset(ANIMATION_INTERVAL, [AssetsManager.bird1, AssetsManager.bird2]);
+    this.transform.origin = new Vector(512 + this.sprite.width, 512 - this.sprite.height - 50);
+    this.transform.width = this.sprite.width;
+    this.transform.height = this.sprite.height;
+    this.rigidbody.addGravity();
+    this.rigidbody.addVelocity(new Vector(SPEED_X, SPEED_Y));
+    this.rigidbody.addAcceleration(new Vector(ACCELERATION_X, ACCELERATION_Y));
+    this.setCollider(BoxCollider, [new Vector(this.sprite.width, this.sprite.height)]);
+  }
+
+  get sprite() {
+    return /** @type {import('../shared').Sprite} */ (this.animation.sprite);
   }
 
   onUpdate() {
-    if (this.transform.position.x < -this.animation.sprite.width) {
+    if (this.transform.position.x < -this.sprite.width) {
       this.destroy(this);
     }
   }
 }
 
-class Transform {
-
-}
-
-class Rigidbody {
-
-}
-
-class Animation {
-  
-}
-
 export { Bird };
-
- */
