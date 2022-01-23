@@ -1,4 +1,6 @@
-import { Vector } from '../../shared';
+import { Animation } from './Animation';
+import { Rigidbody } from './Rigidbody';
+import { Transform } from './Transform';
 
 /**
  * @typedef {Readonly<{id: number, name?: string}>} GameObjectMetadata
@@ -59,9 +61,13 @@ class GameObjectImpl {
 
   #args;
 
-  #position = Vector.Zero;
-
   #proxy;
+
+  #transform = new Transform();
+
+  #rigidbody = new Rigidbody();
+
+  #animation = new Animation();
 
   /**
    * @type {import('./Collider').Collider | undefined}
@@ -84,17 +90,11 @@ class GameObjectImpl {
       ui: services.ui,
       keyboard: services.keyboard,
       id: metadata.id,
+      rigidbody: self.#rigidbody,
+      transform: self.#transform,
+      animation: self.#animation,
       get collider() {
         return self.#collider;
-      },
-      get position() {
-        return self.#position;
-      },
-      /**
-       * @param {Vector} val
-       */
-      setPosition(val) {
-        self.#position = val;
       },
     });
   }
@@ -135,6 +135,8 @@ class GameObjectImpl {
    */
   update(frame) {
     this.#obj.onUpdate(frame);
+    this.#rigidbody.update(this.#transform);
+    this.#animation.update(frame.buffer, this.#transform.position);
   }
 
   destroy() {
