@@ -5,10 +5,23 @@ import { tilesetRowCount } from '../scenes/LevelScene/tileRules';
 import doorUrl from './door.png';
 import spritesUrl from './sprites.png';
 import tilesetUrl from './tileset.png';
+import kingSpritesUrl from './kingSprites.png';
 
-const scale = 0.5;
+const scale = 2;
 
 const AssetsManager = Object.freeze({
+  kingIdle01: new Sprite(kingSpritesUrl, new Crop(new Vector(1569, 18), 37, 26), scale),
+  kingIdle02: new Sprite(kingSpritesUrl, new Crop(new Vector(1647, 18), 37, 26), scale),
+  kingIdle03: new Sprite(kingSpritesUrl, new Crop(new Vector(1725, 18), 37, 26), scale),
+  kingIdle04: new Sprite(kingSpritesUrl, new Crop(new Vector(1803, 18), 37, 26), scale),
+  kingIdle05: new Sprite(kingSpritesUrl, new Crop(new Vector(1881, 18), 37, 26), scale),
+  kingIdle06: new Sprite(kingSpritesUrl, new Crop(new Vector(1959, 18), 37, 26), scale),
+  kingIdle07: new Sprite(kingSpritesUrl, new Crop(new Vector(2037, 17), 37, 27), scale),
+  kingIdle08: new Sprite(kingSpritesUrl, new Crop(new Vector(2115, 16), 37, 28), scale),
+  kingIdle09: new Sprite(kingSpritesUrl, new Crop(new Vector(2193, 16), 37, 28), scale),
+  kingIdle10: new Sprite(kingSpritesUrl, new Crop(new Vector(2271, 17), 37, 27), scale),
+  kingIdle11: new Sprite(kingSpritesUrl, new Crop(new Vector(2349, 18), 37, 26), scale),
+
   trexJump: new Sprite(spritesUrl, new Crop(new Vector(1678, 2), 88, 94), scale),
   trexColision: new Sprite(spritesUrl, new Crop(new Vector(2030, 2), 88, 94), scale),
   trexRun1: new Sprite(spritesUrl, new Crop(new Vector(1854, 2), 88, 94), scale),
