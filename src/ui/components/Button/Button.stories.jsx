@@ -16,8 +16,8 @@ export default {
 /** @type {typeof Button & Partial<{ args: object }>} */
 const Template = Button;
 
-export const Primal = Template.bind({});
-Primal.args = {
+export const Primary = Template.bind({});
+Primary.args = {
   type: 'primary',
   children: 'sterowanie',
 };
