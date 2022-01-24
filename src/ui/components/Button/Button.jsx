@@ -16,10 +16,7 @@ const Button = ({ children, type, onClick }) => {
       css={{
         width: BUTTON_WIDTH_SIZE,
         height: BUTTON_HEIGHT_SIZE,
-        background:
-          type === 'silver'
-            ? `url(${ButtonSilverUrl}) center center / cover`
-            : `url(${ButtonGoldUrl}) center center / cover`,
+        background: `url(${type === 'silver' ? ButtonSilverUrl : ButtonGoldUrl}) center center / cover`,
         color: theme.colors.common.white,
         fontSize: BUTTON_FONT_SIZE,
         textTransform: type === 'gold' ? 'uppercase' : 'none',
