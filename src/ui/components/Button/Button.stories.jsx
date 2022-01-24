@@ -14,14 +14,14 @@ export default {
 /** @type {typeof Button & Partial<{ args: object }>} */
 const Template = Button;
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Silver = Template.bind({});
+Silver.args = {
   type: 'silver',
   children: 'Sterowanie',
 };
 
-export const Secondary = Template.bind({});
-Secondary.args = {
+export const Gold = Template.bind({});
+Gold.args = {
   type: 'gold',
   children: 'start',
 };
