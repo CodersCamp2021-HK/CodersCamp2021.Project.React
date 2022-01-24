@@ -4,7 +4,7 @@ import { Button } from './Button';
 describe('Button', () => {
   it('should render the button', () => {
     render(
-      <Button type='secondary' onClick={() => {}}>
+      <Button type='silver' onClick={() => {}}>
         Sterowanie
       </Button>,
     );
@@ -16,28 +16,14 @@ describe('Button', () => {
   it('can be clicked', () => {
     const onSelect = jest.fn();
     render(
-      <Button type='primary' onClick={onSelect}>
-        Sterowanie
+      <Button type='gold' onClick={onSelect}>
+        start
       </Button>,
     );
 
-    const button = screen.getByRole('button', { name: 'Sterowanie' });
+    const button = screen.getByRole('button', { name: 'start' });
     fireEvent.click(button);
 
     expect(onSelect).toHaveBeenCalledTimes(1);
-  });
-
-  it('can not be clicked', () => {
-    const onSelect = jest.fn();
-    render(
-      <Button type='secondary' onClick={onSelect}>
-        Sterowanie
-      </Button>,
-    );
-
-    const button = screen.getByRole('button', { name: 'Sterowanie' });
-    fireEvent.click(button);
-
-    expect(onSelect).toHaveBeenCalledTimes(0);
   });
 });

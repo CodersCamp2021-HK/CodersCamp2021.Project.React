@@ -5,11 +5,9 @@ export default {
   component: Button,
   argTypes: {
     type: {
-      options: ['primary', 'secondary'],
+      options: ['silver', 'gold'],
     },
-    onClick: {
-      action: 'secondary',
-    },
+    onClick: { onclick },
   },
 };
 
@@ -18,12 +16,12 @@ const Template = Button;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  type: 'primary',
-  children: 'sterowanie',
+  type: 'silver',
+  children: 'Sterowanie',
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-  type: 'secondary',
-  children: 'sterowanie',
+  type: 'gold',
+  children: 'start',
 };

@@ -1,36 +1,33 @@
-import React from 'react';
 import { theme } from '../../../shared/theme';
-import ButtonUrl from '../../../public/img/silverButton.png';
+import ButtonSilverUrl from '../../../public/img/silverButton.png';
+import ButtonGoldUrl from '../../../public/img/goldButton.png';
 
 const BUTTON_HEIGHT_SIZE = '8rem';
 const BUTTON_WIDTH_SIZE = '21.25rem';
-const BUTTON_FONT_SIZE = '22px';
+const BUTTON_FONT_SIZE = '1.375rem';
 
 /**
- * @param {{ children: React.ReactNode, type: 'primary' | 'secondary', onClick: () => void }} props
+ * @param {{ children: React.ReactNode, type: 'silver' | 'gold', onClick: () => void }} props
  */
 const Button = ({ children, type, onClick }) => {
-  const event = React.useCallback(() => {
-    if (type === 'primary') {
-      onClick();
-    }
-  }, [type, onClick]);
-
   return (
     <button
       type='button'
       css={{
         width: BUTTON_WIDTH_SIZE,
         height: BUTTON_HEIGHT_SIZE,
-        background: `url(${ButtonUrl}) center center / cover`,
-        color: type === 'secondary' ? theme.colors.primary.main : theme.colors.common.white,
+        background:
+          type === 'silver'
+            ? `url(${ButtonSilverUrl}) center center / cover`
+            : `url(${ButtonGoldUrl}) center center / cover`,
+        color: theme.colors.common.white,
         fontSize: BUTTON_FONT_SIZE,
-        textTransform: 'capitalize',
+        textTransform: type === 'gold' ? 'uppercase' : 'none',
         '&:hover': {
           color: theme.colors.primary.main,
         },
       }}
-      onClick={event}
+      onClick={onClick}
     >
       {children}
     </button>
