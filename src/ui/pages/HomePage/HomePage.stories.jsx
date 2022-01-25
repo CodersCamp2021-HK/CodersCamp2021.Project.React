@@ -1,7 +1,7 @@
 import { HomePage } from './HomePage';
 
 export default {
-  title: 'Pages/Home Page',
+  title: 'Pages/Home',
   component: HomePage,
   parameters: {
     layout: 'fullscreen',
