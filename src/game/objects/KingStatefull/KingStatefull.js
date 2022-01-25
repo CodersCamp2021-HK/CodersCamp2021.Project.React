@@ -10,6 +10,7 @@ import { KingIdle } from './KingIdle';
 import { KingJump } from './KingJump';
 import { KingRunLeft } from './KingRunLeft';
 import { KingRunRight } from './KingRunRight';
+import { SolidTile } from '..';
 
 /**
  * @typedef {'attack' | 'collision' | 'dead' | 'doorIn' | 'doorOut' | 'fall' | 'ground' | 'idle' | 'jump' | 'runLeft' | 'runRight' } KingStateKey
@@ -21,9 +22,30 @@ class KingStatefull extends GameObject {
    */
   #state;
 
-  onActivate() {
+  /**
+   * @type {boolean}
+   */
+  #isOnGround = false;
+
+  get isOnGround() {
+    return this.#isOnGround;
+  }
+
+  /**
+   * @param {Object} props
+   * @param {Vector} props.position
+   */
+  onActivate({ position }) {
+    this.rigidbody.addGravity();
     this.setCollider(BoxCollider, [new Vector(0, 0)]);
-    this.#state = new KingIdle(this);
+    this.position = position;
+    this.#state = new KingDoorIn(this);
+    this.transform.origin = new Vector(
+      // @ts-ignore
+      this.position.x + this.animation.sprite.width,
+      // @ts-ignore
+      this.position.y + this.animation.sprite.height,
+    );
   }
 
   /**
@@ -31,11 +53,37 @@ class KingStatefull extends GameObject {
    */
   onUpdate(frame) {
     this.#state?.update(frame);
+    this.#isOnGround = false;
   }
 
-  onCollision() {
-    this.ui.setLose();
-    this.transitionState('collision');
+  /**
+   * @param {import('../../shared').Collision} _collision
+   * @param {GameObject} target
+   */
+  onCollision(_collision, target) {
+    if (target instanceof SolidTile) {
+      const kingLines = /** @type {BoxCollider} */ (this.collider).lines;
+      const boxLines = /** @type {BoxCollider} */ (target.collider).lines;
+      const fromBoxToKing = this.transform.origin.subtract(target.transform.origin);
+
+      const xOverlap = Math.min(kingLines[0][1], boxLines[0][1]) - Math.max(kingLines[0][0], boxLines[0][0]);
+      const yOverlap = Math.min(kingLines[1][1], boxLines[1][1]) - Math.max(kingLines[1][0], boxLines[1][0]);
+
+      if (xOverlap + 0.11 < yOverlap) {
+        const resolutionOffset = new Vector(Math.sign(fromBoxToKing.x) * xOverlap, 0);
+        this.transform.position = this.transform.position.add(resolutionOffset);
+        this.rigidbody.velocity = this.rigidbody.velocity.setX(0);
+      } else {
+        if (Math.sign(fromBoxToKing.y) === -1) {
+          this.#isOnGround = true;
+        }
+        const resolutionOffset = new Vector(0, Math.sign(fromBoxToKing.y) * yOverlap);
+        this.transform.position = this.transform.position.add(resolutionOffset);
+        this.rigidbody.velocity = this.rigidbody.velocity.setY(0);
+      }
+    }
+    // this.ui.setLose();
+    // this.transitionState('collision');
   }
 
   /**
@@ -97,7 +145,6 @@ class KingStatefull extends GameObject {
         this.#state = undefined;
       }
     }
-
     return this;
   }
 }

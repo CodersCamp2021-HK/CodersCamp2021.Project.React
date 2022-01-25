@@ -53,6 +53,13 @@ class Vector {
   }
 
   /**
+   * @param {Vector} v
+   */
+  subtract(v) {
+    return new Vector(this.x - v.x, this.y - v.y);
+  }
+
+  /**
    * @param {number} s
    */
   scale(s) {

@@ -1,17 +1,15 @@
-import { AssetsManager } from '../../assets';
+import { BoxCollider } from '../../engine';
 import { Vector } from '../../shared';
 import { KingState } from './KingState';
-
-const BACKGROUND_OFFSET = 10;
-const MARGIN_LEFT = 10;
 
 class KingAnimated extends KingState {
   /**
    * @param {import('./KingStatefull').KingStatefull} king
    * @param {import('../../shared/Sprite').Sprite[]} sprites
    * @param {number} updateAfter
+   * @param {boolean} doOnce
    */
-  constructor(king, sprites, updateAfter) {
+  constructor(king, sprites, updateAfter, doOnce = false) {
     super(king);
     if (this.constructor === KingAnimated) {
       throw new Error('Abstract class ctor.');
@@ -19,47 +17,20 @@ class KingAnimated extends KingState {
     if (sprites.length <= 0) {
       throw new Error('Sprites length should be greater than 0.');
     }
-    this.#sprites = sprites;
-    this.#updateAfter = updateAfter;
-    this.#spriteNum = 0;
-    this.#sprite = AssetsManager.kingIdle01;
-    this.#updateSprite();
+    king.animation.reset(updateAfter, sprites, doOnce);
+    // eslint-disable-next-line no-param-reassign
+    king.transform.width = king.animation.sprite.width;
+    // eslint-disable-next-line no-param-reassign
+    king.transform.height = king.animation.sprite.height;
+    // @ts-ignore
+    king.setCollider(BoxCollider, [new Vector(king.animation.sprite.width, king.animation.sprite.height)]);
   }
-
-  #updateAfter;
-
-  #frameCount = 0;
-
-  #sprites;
-
-  #spriteNum;
-
-  /**
-   * @type {import('../../shared/Sprite').Sprite}
-   */
-  #sprite;
 
   /**
    * @param {import('../../shared/Frame').Frame} frame
    */
-  update(frame) {
-    this.position = new Vector(MARGIN_LEFT, frame.buffer.height - this.#sprite.height - BACKGROUND_OFFSET);
-    this.#frameCount += 1;
-    if (this.#frameCount === this.#updateAfter) {
-      this.#updateSprite();
-      this.#frameCount = 0;
-    }
-    frame.buffer.draw(this.position, this.#sprite);
-  }
-
-  #updateSprite() {
-    this.#sprite = this.#sprites[this.#spriteNum];
-    this.#spriteNum = (this.#spriteNum + 1) % this.#sprites.length;
-    /** @type {import('../../engine').BoxCollider} */ (this.king.collider).box = new Vector(
-      this.#sprite.width,
-      this.#sprite.height,
-    );
-  }
+  // eslint-disable-next-line class-methods-use-this, no-unused-vars
+  update(frame) {}
 }
 
 export { KingAnimated };
