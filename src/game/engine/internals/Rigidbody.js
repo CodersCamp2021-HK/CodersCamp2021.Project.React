@@ -7,6 +7,10 @@ class Rigidbody {
 
   #accelerationVector = Vector.Zero;
 
+  get velocity() {
+    return this.#velocityVector;
+  }
+
   addGravity() {
     this.addAcceleration(GRAVITY_VECTOR);
   }
@@ -16,6 +20,13 @@ class Rigidbody {
    */
   addVelocity(v) {
     this.#velocityVector = this.#velocityVector.add(v);
+  }
+
+  /**
+   * @param {import('../../shared').Vector} v
+   */
+  setVelocity(v) {
+    this.#velocityVector = v;
   }
 
   /**

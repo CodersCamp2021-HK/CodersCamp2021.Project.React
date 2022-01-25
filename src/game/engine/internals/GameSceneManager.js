@@ -69,10 +69,10 @@ class GameSceneManager {
       return;
     }
 
-    this.#collisionDetector.detectCollisions();
     this.#gameObjects.forEach((gameObject) => {
       gameObject.update(frame);
     });
+    this.#collisionDetector.detectCollisions();
     this.#updateActive();
     this.#DEBUG_Colliders(/** @type {import('./CanvasBuffer').CanvasBuffer} */ (frame.buffer));
     this.#updateDestroy();

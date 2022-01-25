@@ -10,6 +10,10 @@ function levelFrom(levelInfo) {
   return class extends LevelScene {
     onActivate() {
       super.initialize(levelInfo);
+
+      if (levelInfo.additionalObjects) {
+        levelInfo.additionalObjects(this.create.bind(this));
+      }
     }
   };
 }
