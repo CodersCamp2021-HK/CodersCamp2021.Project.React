@@ -12,7 +12,7 @@ import { tileRules } from './tileRules';
  * where 'X' encodes a wall, '.' a background, 'S' the start door and 'E' the end door.
  * The map is as wide as the amount of columns in the string and as high as the amount
  * of rows. It should have a rectangular shape.
- * @property {(create: typeof LevelScene.prototype.create) => void} [additionalObjects]
+ * @property {(create: (Cls: Parameters<typeof LevelScene.prototype.create>[0], pos: Vector, otherArgs?: Record<string, any>) => void) => void} [additionalObjects]
  */
 
 class LevelScene extends GameScene {
