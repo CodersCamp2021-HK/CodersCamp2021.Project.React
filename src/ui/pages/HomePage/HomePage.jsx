@@ -25,14 +25,14 @@ const HomePage = () => {
     <main css={wrapper}>
       <PageHeader>King and Pigs</PageHeader>
       <section css={btnGroup}>
+        <Button type='gold' onClick={() => {}}>
+          start
+        </Button>
         <Button type='silver' onClick={() => {}}>
-          Control
+          Controls
         </Button>
         <Button type='silver' onClick={() => {}}>
           Credits
-        </Button>
-        <Button type='gold' onClick={() => {}}>
-          start
         </Button>
       </section>
     </main>
