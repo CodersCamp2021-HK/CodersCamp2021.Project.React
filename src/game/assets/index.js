@@ -30,7 +30,7 @@ const AssetsManager = Object.freeze({
   pig: {
     idle: _.times(11, (x) => new Sprite(pigUrl, new Crop(new Vector(34 * x, 0), 34, 28))),
     jump: new Sprite(pigUrl, new Crop(new Vector(0, 28), 34, 28)),
-    fall: new Sprite(pigUrl, new Crop(new Vector(34, 28), 34, 28)),
+    fall: [new Sprite(pigUrl, new Crop(new Vector(34, 28), 34, 28))],
     ground: new Sprite(pigUrl, new Crop(new Vector(68, 28), 34, 28)),
     run: _.times(6, (x) => new Sprite(pigUrl, new Crop(new Vector(34 * x, 56), 34, 28))),
     attack: _.times(5, (x) => new Sprite(pigUrl, new Crop(new Vector(34 * x, 84), 34, 28))),

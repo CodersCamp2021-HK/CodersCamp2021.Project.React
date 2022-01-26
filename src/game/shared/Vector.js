@@ -65,6 +65,18 @@ class Vector {
   scale(s) {
     return new Vector(this.x * s, this.y * s);
   }
+
+  /**
+   * @param {Vector} v
+   */
+  dot(v) {
+    return this.x * v.x + this.y * v.y;
+  }
+
+  normalized() {
+    const length = Math.sqrt(this.x ** 2 + this.y ** 2);
+    return length === 0 ? Vector.Zero : new Vector(this.x / length, this.y / length);
+  }
 }
 
 export { Vector };

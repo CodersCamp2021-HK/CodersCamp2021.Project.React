@@ -25,13 +25,6 @@ class Rigidbody {
   /**
    * @param {import('../../shared').Vector} v
    */
-  setVelocity(v) {
-    this.#velocityVector = v;
-  }
-
-  /**
-   * @param {import('../../shared').Vector} v
-   */
   addAcceleration(v) {
     this.#accelerationVector = this.#accelerationVector.add(v);
   }
