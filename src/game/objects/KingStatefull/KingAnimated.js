@@ -18,19 +18,22 @@ class KingAnimated extends KingState {
       throw new Error('Sprites length should be greater than 0.');
     }
     king.animation.reset(updateAfter, sprites, doOnce);
-    // eslint-disable-next-line no-param-reassign
-    king.transform.width = king.animation.sprite.width;
-    // eslint-disable-next-line no-param-reassign
-    king.transform.height = king.animation.sprite.height;
-    // @ts-ignore
-    king.setCollider(BoxCollider, [new Vector(king.animation.sprite.width, king.animation.sprite.height)]);
   }
 
   /**
    * @param {import('../../shared/Frame').Frame} frame
    */
   // eslint-disable-next-line class-methods-use-this, no-unused-vars
-  update(frame) {}
+  update(frame) {
+    // eslint-disable-next-line no-param-reassign
+    this.king.transform.width = this.king.animation.sprite.width;
+    // eslint-disable-next-line no-param-reassign
+    this.king.transform.height = this.king.animation.sprite.height;
+    this.king.setCollider(BoxCollider, [
+      // @ts-ignore
+      new Vector(this.king.animation.sprite.width, this.king.animation.sprite.height),
+    ]);
+  }
 }
 
 export { KingAnimated };

@@ -1,6 +1,6 @@
 import { Vector } from '../../shared';
 
-const GRAVITY_ACCELERATION = 0.1;
+const GRAVITY_ACCELERATION = 0.2;
 const GRAVITY_VECTOR = new Vector(0, GRAVITY_ACCELERATION);
 class Rigidbody {
   #velocityVector = Vector.Zero;

@@ -6,14 +6,16 @@ import { KingDoorIn } from './KingDoorIn';
 import { KingDoorOut } from './KingDoorOut';
 import { KingFall } from './KingFall';
 import { KingGround } from './KingGround';
+import { KingHit } from './KingHit';
 import { KingIdle } from './KingIdle';
 import { KingJump } from './KingJump';
 import { KingRunLeft } from './KingRunLeft';
 import { KingRunRight } from './KingRunRight';
+// eslint-disable-next-line import/no-cycle
 import { SolidTile } from '..';
 
 /**
- * @typedef {'attack' | 'collision' | 'dead' | 'doorIn' | 'doorOut' | 'fall' | 'ground' | 'idle' | 'jump' | 'runLeft' | 'runRight' } KingStateKey
+ * @typedef {'attack' | 'collision' | 'dead' | 'doorIn' | 'doorOut' | 'fall' | 'ground' | 'hit' | 'idle' | 'jump' | 'runLeft' | 'runRight' } KingStateKey
  */
 
 class KingStatefull extends GameObject {
@@ -37,15 +39,9 @@ class KingStatefull extends GameObject {
    */
   onActivate({ position }) {
     this.rigidbody.addGravity();
+    this.transform.origin = position;
     this.setCollider(BoxCollider, [new Vector(0, 0)]);
-    this.position = position;
-    this.#state = new KingDoorIn(this);
-    this.transform.origin = new Vector(
-      // @ts-ignore
-      this.position.x + this.animation.sprite.width,
-      // @ts-ignore
-      this.position.y + this.animation.sprite.height,
-    );
+    this.#state = new KingDoorOut(this);
   }
 
   /**
@@ -69,7 +65,7 @@ class KingStatefull extends GameObject {
       const xOverlap = Math.min(kingLines[0][1], boxLines[0][1]) - Math.max(kingLines[0][0], boxLines[0][0]);
       const yOverlap = Math.min(kingLines[1][1], boxLines[1][1]) - Math.max(kingLines[1][0], boxLines[1][0]);
 
-      if (xOverlap + 0.11 < yOverlap) {
+      if (xOverlap < yOverlap) {
         const resolutionOffset = new Vector(Math.sign(fromBoxToKing.x) * xOverlap, 0);
         this.transform.position = this.transform.position.add(resolutionOffset);
         this.rigidbody.velocity = this.rigidbody.velocity.setX(0);
@@ -118,6 +114,11 @@ class KingStatefull extends GameObject {
 
       case 'ground': {
         this.#state = new KingGround(this);
+        break;
+      }
+
+      case 'hit': {
+        this.#state = new KingHit(this);
         break;
       }
 
