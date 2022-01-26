@@ -1,0 +1,59 @@
+import { SolidTile } from '.';
+import { AssetsManager } from '../assets';
+import { BoxCollider, GameObject, resolveCollisionsWithSolid } from '../engine';
+import { Vector } from '../shared';
+
+const ANIMATION_INTERVAL = 6;
+
+class Pig extends GameObject {
+  #isStanding = false;
+
+  /** @type {'idle' | 'fall'} */
+  #state = 'fall';
+
+  /**
+   * @param {{ initialPos: Vector }} props
+   */
+  onActivate({ initialPos }) {
+    this.animation.reset(ANIMATION_INTERVAL, AssetsManager.pig[this.#state]);
+
+    this.transform.origin = initialPos ?? Vector.Zero;
+    this.transform.width = this.#sprite.width;
+    this.transform.height = this.#sprite.height;
+
+    this.rigidbody.addGravity();
+
+    this.setCollider(BoxCollider, [new Vector(this.#sprite.width, this.#sprite.height)]);
+  }
+
+  onUpdate() {
+    const previousState = this.#state;
+    this.#state = this.#isStanding ? 'idle' : 'fall';
+
+    if (this.#state !== previousState) {
+      this.animation.reset(ANIMATION_INTERVAL, AssetsManager.pig[this.#state]);
+    }
+
+    this.#isStanding = false;
+  }
+
+  /**
+   * @param {import('../shared').Collision} _collision
+   * @param {GameObject} target
+   */
+  onCollision(_collision, target) {
+    if (target instanceof SolidTile) {
+      const normal = resolveCollisionsWithSolid(this, target, 0.5);
+
+      if (normal.y < 0) {
+        this.#isStanding = true;
+      }
+    }
+  }
+
+  get #sprite() {
+    return /** @type {import('../shared').Sprite} */ (this.animation.sprite);
+  }
+}
+
+export { Pig };
