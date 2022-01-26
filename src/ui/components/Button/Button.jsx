@@ -2,9 +2,9 @@ import { theme } from '../../../shared/theme';
 import ButtonSilverUrl from '../../../public/img/silverButton.png';
 import ButtonGoldUrl from '../../../public/img/goldButton.png';
 
-const BUTTON_HEIGHT_SIZE = '8rem';
-const BUTTON_WIDTH_SIZE = '21.25rem';
-const BUTTON_FONT_SIZE = '1.375rem';
+const BUTTON_HEIGHT_SIZE = '4.8rem';
+const BUTTON_WIDTH_SIZE = '12.75rem';
+const BUTTON_FONT_SIZE = '0.8rem';
 
 /**
  * @param {{ children: React.ReactNode, type: 'silver' | 'gold', onClick: () => void }} props
