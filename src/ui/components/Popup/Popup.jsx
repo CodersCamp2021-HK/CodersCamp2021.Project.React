@@ -78,8 +78,8 @@ const popupInner = css({
     background: theme.colors.gradient.steel,
   },
   '@media (max-width: 1200px)': {
-    width: '96%',
-    margin: '40px 0',
+    width: '94%',
+    margin: '5rem 0',
   },
   '@media (max-width: 1024px)': {
     '&:after': {
@@ -93,15 +93,19 @@ const popupInner = css({
   },
 });
 
+/**
+ * @param {{ open: boolean, children: React.ReactNode, onClose: () => void  }} props
+ */
+
 const Popup = ({ open, onClose, children }) => {
+  const portal = document.createElement('div');
+
   useEffect(() => {
-    const portal = document.createElement('div');
-    portal.setAttribute('id', 'portal');
     document.querySelector('body')?.append(portal);
     return () => {
-      document.getElementById('portal').remove();
+      document.querySelector('body')?.removeChild(portal);
     };
-  }, []);
+  });
 
   if (!open) return null;
 
@@ -155,8 +159,8 @@ const Popup = ({ open, onClose, children }) => {
         <div>{children}</div>
       </div>
     </div>,
-    document.getElementById('portal'),
+    portal,
   );
 };
 
-export { Popup };
+export { Popup, POPUP_INNER_BORDER_WIDTH };

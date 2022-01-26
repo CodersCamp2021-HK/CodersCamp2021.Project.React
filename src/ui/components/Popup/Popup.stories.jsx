@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { Popup } from './Popup';
+import { Popup, Button } from '..';
 import { theme } from '../../../shared/theme';
 import keyboardArrowsUrl from '../../../public/img/keyboard_arrows.png';
 import jumpUrl from '../../../public/img/jump.png';
@@ -8,11 +8,24 @@ import groundUrl from '../../../public/img/ground.png';
 import keyXUrl from '../../../public/img/key_x.png';
 import keyZUrl from '../../../public/img/key_z.png';
 import attackUrl from '../../../public/img/attack.png';
+import ButtonSilverUrl from '../../../public/img/silverButton.png';
+import { BUTTON_HEIGHT_SIZE, BUTTON_WIDTH_SIZE, BUTTON_FONT_SIZE } from '../Button';
+import { POPUP_INNER_BORDER_WIDTH } from '.';
 
-const POPUP_INNER_BORDER_WIDTH = '10px';
-
-const btn = css({
-  color: theme.colors.primary.main,
+const heading1 = css({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: BUTTON_WIDTH_SIZE,
+  height: BUTTON_HEIGHT_SIZE,
+  background: `url(${ButtonSilverUrl}) center center / cover`,
+  color: theme.colors.common.white,
+  fontSize: BUTTON_FONT_SIZE,
+  position: 'absolute',
+  top: '0',
+  transform: 'translateY(-50%)',
+  left: `-${POPUP_INNER_BORDER_WIDTH}`,
+  zIndex: 1,
 });
 
 const heading2 = css({
@@ -44,7 +57,7 @@ const content = css({
 const innerWrapper1 = css({
   position: 'relative',
   display: 'inline-block',
-  margin: '30px auto 0 auto',
+  margin: '2rem auto 0 auto',
   '& > div': {
     position: 'absolute',
   },
@@ -57,8 +70,8 @@ const col = css({
 const innerWrapper2 = css({
   display: 'inline-flex',
   flexDirection: 'column',
-  gap: '40px',
-  margin: '30px auto 0 auto',
+  gap: '2rem',
+  margin: '1.5rem auto 0 auto',
 });
 
 const image1 = css({
@@ -74,7 +87,7 @@ const image1 = css({
 const description = css({
   display: 'flex',
   alignItems: 'center',
-  gap: '25px',
+  gap: '1rem',
 });
 
 const keyLeftDescription = css({
@@ -128,10 +141,11 @@ export const PopupWithButton = () => {
 
   return (
     <div>
-      <button css={btn} onClick={handleOpen}>
-        open modal
-      </button>
+      <Button type='silver' onClick={handleOpen}>
+        Controls
+      </Button>
       <Popup open={open} onClose={handleClose}>
+        <div css={heading1}>Controls</div>
         <div css={content}>
           <div css={col}>
             <h2 css={heading2}>Movement</h2>
