@@ -49,6 +49,9 @@ class KingIdle extends KingAnimated {
     if (this.king.keyboard.pressed('ArrowDown')) {
       return this.king.transitionState('doorIn').onUpdate(frame);
     }
+    if (this.king.rigidbody.velocity.y > 0) {
+      return this.king.transitionState('fall').onUpdate(frame);
+    }
     if (this.king.keyboard.pressed('d')) {
       return this.king.transitionState('dead').onUpdate(frame);
     }
