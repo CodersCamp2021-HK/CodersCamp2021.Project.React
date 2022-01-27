@@ -2,9 +2,9 @@ import { Collision, Shape, Vector } from '../shared';
 import { Collider } from './internals/Collider';
 
 class BoxCollider extends Collider {
-  #dimensions;
+  dimensions;
 
-  #offset;
+  offset;
 
   /**
    * @param {import('./GameObject').GameObject} gameObject
@@ -13,33 +13,25 @@ class BoxCollider extends Collider {
    */
   constructor(gameObject, dimensions, offset) {
     super(gameObject);
-    this.#dimensions = dimensions;
-    this.#offset = offset ?? Vector.Zero;
-  }
-
-  get dimensions() {
-    return this.#dimensions;
-  }
-
-  set dimensions(val) {
-    this.#dimensions = val;
+    this.dimensions = dimensions;
+    this.offset = offset ?? Vector.Zero;
   }
 
   /**
    * @returns {[import('../shared').Vector, import('../shared').Vector, import('../shared').Vector, import('../shared').Vector]}
    */
   get points() {
-    const vx = new Vector(this.#dimensions.x, 0);
-    const vy = new Vector(0, this.#dimensions.y);
+    const vx = new Vector(this.dimensions.x, 0);
+    const vy = new Vector(0, this.dimensions.y);
     return [this.topLeft, this.topLeft.add(vx), this.topLeft.add(vy), this.bottomRight];
   }
 
   get topLeft() {
-    return this.gameObject.position.add(this.#offset);
+    return this.gameObject.position.add(this.offset);
   }
 
   get bottomRight() {
-    return this.topLeft.add(this.#dimensions);
+    return this.topLeft.add(this.dimensions);
   }
 
   get center() {

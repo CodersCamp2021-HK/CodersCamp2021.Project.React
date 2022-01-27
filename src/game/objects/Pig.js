@@ -23,7 +23,7 @@ class Pig extends GameObject {
 
     this.rigidbody.addGravity();
 
-    this.setCollider(BoxCollider, [new Vector(24, 17), new Vector(5, 11)]);
+    this.setCollider(BoxCollider, [new Vector(24, 18), new Vector(5, 10)]);
   }
 
   onUpdate() {
