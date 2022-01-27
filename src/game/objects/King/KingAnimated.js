@@ -4,7 +4,7 @@ import { KingState } from './KingState';
 
 class KingAnimated extends KingState {
   /**
-   * @param {import('./KingStatefull').KingStatefull} king
+   * @param {import('./King').King} king
    * @param {import('../../shared/Sprite').Sprite[]} sprites
    * @param {number} updateAfter
    * @param {boolean} doOnce

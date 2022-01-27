@@ -1,9 +1,9 @@
-import { KingStatefull } from '../objects';
+import { King } from '../objects';
 import { GameScene } from '../engine';
 
 class MainScene extends GameScene {
   onActivate() {
-    this.create(KingStatefull);
+    this.create(King);
   }
 }
 

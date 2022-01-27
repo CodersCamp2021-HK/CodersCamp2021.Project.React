@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { AssetsManager } from '../../assets';
 import { GameScene } from '../../engine';
-import { BackgroundTiles, Door, KingStatefull, SolidTile } from '../../objects';
+import { BackgroundTiles, Door, King, SolidTile } from '../../objects';
 import { Vector } from '../../shared';
 import { patternsMatch, stringToCharMatrix, TILE_SIZE } from './levelUtils';
 import { tileRules } from './tileRules';
@@ -114,7 +114,7 @@ class LevelScene extends GameScene {
       },
     });
 
-    this.create(KingStatefull, { args: { position: this.#findSpecialTile('S')?.scale(TILE_SIZE) ?? Vector.Zero } });
+    this.create(King, { args: { position: this.#findSpecialTile('S')?.scale(TILE_SIZE) ?? Vector.Zero } });
   }
 }
 

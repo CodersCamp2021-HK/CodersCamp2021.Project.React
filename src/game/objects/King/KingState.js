@@ -2,7 +2,7 @@ class KingState {
   #king;
 
   /**
-   * @param {import('./KingStatefull').KingStatefull} king
+   * @param {import('./King').King} king
    */
   constructor(king) {
     if (this.constructor === KingState) {

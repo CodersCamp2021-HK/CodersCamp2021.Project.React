@@ -1,24 +1,22 @@
 import { AssetsManager } from '../../assets';
-import { Vector } from '../../shared';
 import { KingAnimated } from './KingAnimated';
 
 const SPRITE_ANIMATION_UPDATE = 10;
 
-class KingJump extends KingAnimated {
+class KingFall extends KingAnimated {
   /**
-   * @param {import('./KingStatefull').KingStatefull} king
+   * @param {import('./King').King} king
    */
   constructor(king) {
-    super(king, [AssetsManager.kingJump], SPRITE_ANIMATION_UPDATE);
-    king.rigidbody.addVelocity(new Vector(0, -6));
+    super(king, [AssetsManager.kingFall], SPRITE_ANIMATION_UPDATE);
   }
 
   /**
    * @param {import('../../shared').Frame} frame
    */
   update(frame) {
-    if (this.king.rigidbody.velocity.y > 0) {
-      return this.king.transitionState('fall').onUpdate(frame);
+    if (this.king.isOnGround) {
+      return this.king.transitionState('ground').onUpdate(frame);
     }
     if (this.king.keyboard.pressed('ArrowRight')) {
       this.king.rigidbody.velocity = this.king.rigidbody.velocity.setX(1);
@@ -44,4 +42,4 @@ class KingJump extends KingAnimated {
   }
 }
 
-export { KingJump };
+export { KingFall };

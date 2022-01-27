@@ -17,7 +17,7 @@ import { SolidTile } from '../SolidTile';
  * @typedef {'attack' | 'collision' | 'dead' | 'doorIn' | 'doorOut' | 'fall' | 'ground' | 'hit' | 'idle' | 'jump' | 'runLeft' | 'runRight' } KingStateKey
  */
 
-class KingStatefull extends GameObject {
+class King extends GameObject {
   /**
    * @type {import('./KingState').KingState | undefined}
    */
@@ -144,4 +144,4 @@ class KingStatefull extends GameObject {
   }
 }
 
-export { KingStatefull };
+export { King };

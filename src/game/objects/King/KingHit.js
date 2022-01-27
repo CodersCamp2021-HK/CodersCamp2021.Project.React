@@ -5,7 +5,7 @@ const SPRITE_ANIMATION_UPDATE = 10;
 
 class KingHit extends KingAnimated {
   /**
-   * @param {import('./KingStatefull').KingStatefull} king
+   * @param {import('./King').King} king
    */
   constructor(king) {
     super(king, [AssetsManager.kingHit01, AssetsManager.kingHit02], SPRITE_ANIMATION_UPDATE, true);

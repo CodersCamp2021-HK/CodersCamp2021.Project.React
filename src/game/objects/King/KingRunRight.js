@@ -1,12 +1,12 @@
 import { AssetsManager } from '../../assets';
-import { Vector } from '../../shared';
+import { Vector } from '../../shared/Vector';
 import { KingAnimated } from './KingAnimated';
 
 const SPRITE_ANIMATION_UPDATE = 3;
 
-class KingRunLeft extends KingAnimated {
+class KingRunRight extends KingAnimated {
   /**
-   * @param {import('./KingStatefull').KingStatefull} king
+   * @param {import('./King').King} king
    */
   constructor(king) {
     super(
@@ -23,7 +23,7 @@ class KingRunLeft extends KingAnimated {
       ],
       SPRITE_ANIMATION_UPDATE,
     );
-    king.rigidbody.addVelocity(new Vector(-2, 0));
+    king.rigidbody.addVelocity(new Vector(2, 0));
   }
 
   /**
@@ -32,6 +32,9 @@ class KingRunLeft extends KingAnimated {
   update(frame) {
     if (this.king.keyboard.pressed('ArrowUp')) {
       return this.king.transitionState('jump').onUpdate(frame);
+    }
+    if (!this.king.keyboard.pressed('ArrowRight')) {
+      return this.king.transitionState('idle').onUpdate(frame);
     }
     if (this.king.keyboard.pressed('x')) {
       if (this.king.attackInfo.canAttack) {
@@ -43,11 +46,8 @@ class KingRunLeft extends KingAnimated {
       }
       return super.update(frame);
     }
-    if (!this.king.keyboard.pressed('ArrowLeft')) {
-      return this.king.transitionState('idle').onUpdate(frame);
-    }
     return super.update(frame);
   }
 }
 
-export { KingRunLeft };
+export { KingRunRight };

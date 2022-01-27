@@ -1,16 +1,16 @@
 import { AssetsManager } from '../../assets';
 import { KingAnimated } from './KingAnimated';
 
-const SPRITE_ANIMATION_UPDATE = 10;
+const SPRITE_ANIMATION_UPDATE = 5;
 
-class KingDead extends KingAnimated {
+class KingAttack extends KingAnimated {
   /**
-   * @param {import('./KingStatefull').KingStatefull} king
+   * @param {import('./King').King} king
    */
   constructor(king) {
     super(
       king,
-      [AssetsManager.kingDead01, AssetsManager.kingDead02, AssetsManager.kingDead03, AssetsManager.kingDead04],
+      [AssetsManager.kingAttack01, AssetsManager.kingAttack02, AssetsManager.kingAttack03],
       SPRITE_ANIMATION_UPDATE,
       true,
     );
@@ -20,11 +20,11 @@ class KingDead extends KingAnimated {
    * @param {import("../../shared/Frame").Frame} frame
    */
   update(frame) {
-    if (this.king.animation.isFinished && !this.king.keyboard.pressed('d')) {
+    if (this.king.animation.isFinished) {
       return this.king.transitionState('idle').onUpdate(frame);
     }
     return super.update(frame);
   }
 }
 
-export { KingDead };
+export { KingAttack };
