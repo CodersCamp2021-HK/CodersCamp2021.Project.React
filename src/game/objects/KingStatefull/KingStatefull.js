@@ -27,14 +27,19 @@ class KingStatefull extends GameObject {
 
   #canAttack = true;
 
+  #attackDelay = 500;
+
   get isOnGround() {
     return this.#isOnGround;
   }
 
-  get canAttack() {
-    return this.#canAttack;
+  get attackInfo() {
+    return { canAttack: this.#canAttack, attackDelay: this.#attackDelay };
   }
 
+  /**
+   * @param {boolean} canAttack
+   */
   set canAttack(canAttack) {
     this.#canAttack = canAttack;
   }

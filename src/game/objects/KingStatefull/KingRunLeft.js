@@ -34,7 +34,14 @@ class KingRunLeft extends KingAnimated {
       return this.king.transitionState('jump').onUpdate(frame);
     }
     if (this.king.keyboard.pressed('x')) {
-      return this.king.transitionState('attack').onUpdate(frame);
+      if (this.king.attackInfo.canAttack) {
+        this.king.canAttack = false;
+        setTimeout(() => {
+          this.king.canAttack = true;
+        }, this.king.attackInfo.attackDelay);
+        return this.king.transitionState('attack').onUpdate(frame);
+      }
+      return super.update(frame);
     }
     if (!this.king.keyboard.pressed('ArrowLeft')) {
       return this.king.transitionState('idle').onUpdate(frame);
