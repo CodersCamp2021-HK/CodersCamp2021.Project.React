@@ -41,7 +41,14 @@ class KingIdle extends KingAnimated {
       return this.king.transitionState('runRight').onUpdate(frame);
     }
     if (this.king.keyboard.pressed('x')) {
-      return this.king.transitionState('attack').onUpdate(frame);
+      if (this.king.canAttack) {
+        this.king.canAttack = false;
+        setTimeout(() => {
+          this.king.canAttack = true;
+        }, 500);
+        return this.king.transitionState('attack').onUpdate(frame);
+      }
+      return super.update(frame);
     }
     if (this.king.keyboard.pressed('ArrowUp')) {
       return this.king.transitionState('jump').onUpdate(frame);

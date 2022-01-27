@@ -20,7 +20,7 @@ class KingAttack extends KingAnimated {
    * @param {import("../../shared/Frame").Frame} frame
    */
   update(frame) {
-    if (this.king.animation.isFinished && !this.king.keyboard.pressed('x')) {
+    if (this.king.animation.isFinished) {
       return this.king.transitionState('idle').onUpdate(frame);
     }
     return super.update(frame);
