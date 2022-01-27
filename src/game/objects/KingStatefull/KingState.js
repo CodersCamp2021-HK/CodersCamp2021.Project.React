@@ -24,10 +24,10 @@ class KingState {
   }
 
   /**
-   * @param {import('../../shared/Frame').Frame} frame
+   * @param {import('../../shared/Frame').Frame} _frame
    */
-  // eslint-disable-next-line class-methods-use-this, no-unused-vars
-  update(frame) {
+  // eslint-disable-next-line class-methods-use-this
+  update(_frame) {
     throw new Error('Abstract method.');
   }
 }

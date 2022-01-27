@@ -21,18 +21,14 @@ class KingAnimated extends KingState {
   }
 
   /**
-   * @param {import('../../shared/Frame').Frame} frame
+   * @param {import('../../shared/Frame').Frame} _frame
    */
-  // eslint-disable-next-line class-methods-use-this, no-unused-vars
-  update(frame) {
-    // eslint-disable-next-line no-param-reassign
-    this.king.transform.width = this.king.animation.sprite.width;
-    // eslint-disable-next-line no-param-reassign
-    this.king.transform.height = this.king.animation.sprite.height;
-    this.king.setCollider(BoxCollider, [
-      // @ts-ignore
-      new Vector(this.king.animation.sprite.width, this.king.animation.sprite.height),
-    ]);
+  update(_frame) {
+    const width = this.king.animation.sprite?.width ?? 0;
+    const height = this.king.animation.sprite?.height ?? 0;
+    this.king.transform.width = width;
+    this.king.transform.height = height;
+    this.king.setCollider(BoxCollider, [new Vector(width, height)]);
   }
 }
 
