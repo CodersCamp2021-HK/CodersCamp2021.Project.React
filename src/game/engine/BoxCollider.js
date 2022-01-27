@@ -49,10 +49,10 @@ class BoxCollider extends Collider {
     if (collider instanceof BoxCollider) {
       for (const point of collider.points) {
         if (
-          this.position.x <= point.x &&
-          point.x <= this.position.x + this.box.x &&
-          this.position.y <= point.y &&
-          point.y <= this.position.y + this.box.y
+          this.position.x < point.x &&
+          point.x < this.position.x + this.box.x &&
+          this.position.y < point.y &&
+          point.y < this.position.y + this.box.y
         ) {
           return true;
         }
