@@ -38,12 +38,12 @@ class Pig extends GameObject {
   }
 
   /**
-   * @param {import('../shared').Collision} _collision
+   * @param {import('../shared').Collision} collision
    * @param {GameObject} target
    */
-  onCollision(_collision, target) {
+  onCollision(collision, target) {
     if (target instanceof SolidTile) {
-      const normal = resolveCollisionsWithSolid(this, target, 0.5);
+      const normal = resolveCollisionsWithSolid(this, collision.resolutionOffset, 0.5);
 
       if (normal.y < 0) {
         this.#isStanding = true;

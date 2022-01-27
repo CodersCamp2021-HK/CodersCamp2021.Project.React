@@ -1,4 +1,4 @@
-import { Shape, Vector } from '../shared';
+import { Collision, Shape, Vector } from '../shared';
 import { Collider } from './internals/Collider';
 
 class BoxCollider extends Collider {
@@ -43,21 +43,44 @@ class BoxCollider extends Collider {
   }
 
   /**
+   * @param {BoxCollider} boxCollider
+   * @returns {Collision?}
+   */
+  #hasCollisionWithBox(boxCollider) {
+    for (const point of boxCollider.points) {
+      if (
+        this.position.x < point.x &&
+        point.x < this.position.x + this.box.x &&
+        this.position.y < point.y &&
+        point.y < this.position.y + this.box.y
+      ) {
+        const pigLines = this.lines;
+        const boxLines = boxCollider.lines;
+        const fromBoxToPig = this.gameObject.transform.origin.subtract(boxCollider.gameObject.transform.origin);
+
+        // Source: http://blog.meltinglogic.com/2015/04/aabb-overlapping-area/
+        const xOverlap = Math.min(pigLines[0][1], boxLines[0][1]) - Math.max(pigLines[0][0], boxLines[0][0]);
+        const yOverlap = Math.min(pigLines[1][1], boxLines[1][1]) - Math.max(pigLines[1][0], boxLines[1][0]);
+
+        const resolutionOffset =
+          xOverlap < yOverlap
+            ? new Vector(Math.sign(fromBoxToPig.x) * xOverlap, 0)
+            : new Vector(0, Math.sign(fromBoxToPig.y) * yOverlap);
+
+        return new Collision(this.gameObject, boxCollider.gameObject, resolutionOffset);
+      }
+    }
+
+    return null;
+  }
+
+  /**
    * @param {Collider} collider
+   * @returns {Collision?}
    */
   hasCollisionWith(collider) {
     if (collider instanceof BoxCollider) {
-      for (const point of collider.points) {
-        if (
-          this.position.x < point.x &&
-          point.x < this.position.x + this.box.x &&
-          this.position.y < point.y &&
-          point.y < this.position.y + this.box.y
-        ) {
-          return true;
-        }
-      }
-      return false;
+      return this.#hasCollisionWithBox(collider);
     }
 
     throw new Error('Not supported collision detection.');
