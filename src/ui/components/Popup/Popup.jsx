@@ -105,7 +105,7 @@ const Popup = ({ open, onClose, children }) => {
     return () => {
       document.querySelector('body')?.removeChild(portal);
     };
-  });
+  },[]);
 
   if (!open) return null;
 
