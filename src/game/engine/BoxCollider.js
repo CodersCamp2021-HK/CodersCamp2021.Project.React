@@ -31,15 +31,12 @@ class BoxCollider extends Collider {
     return [position, position.add(vx), position.add(vy), position.add(vx).add(vy)];
   }
 
-  get lines() {
-    return [
-      [this.position.x, this.position.x + this.#box.x],
-      [this.position.y, this.position.y + this.#box.y],
-    ];
+  get topLeft() {
+    return this.gameObject.position;
   }
 
-  get position() {
-    return this.gameObject.position;
+  get bottomRight() {
+    return this.topLeft.add(this.#box);
   }
 
   /**
@@ -49,25 +46,25 @@ class BoxCollider extends Collider {
   #hasCollisionWithBox(boxCollider) {
     for (const point of boxCollider.points) {
       if (
-        this.position.x < point.x &&
-        point.x < this.position.x + this.box.x &&
-        this.position.y < point.y &&
-        point.y < this.position.y + this.box.y
+        this.topLeft.x < point.x &&
+        point.x < this.bottomRight.x &&
+        this.topLeft.y < point.y &&
+        point.y < this.bottomRight.y
       ) {
-        const pigLines = this.lines;
-        const boxLines = boxCollider.lines;
-        const fromBoxToPig = this.gameObject.transform.origin.subtract(boxCollider.gameObject.transform.origin);
+        const fromBoxToSelf = this.gameObject.transform.origin.subtract(boxCollider.gameObject.transform.origin);
 
         // Source: http://blog.meltinglogic.com/2015/04/aabb-overlapping-area/
-        const xOverlap = Math.min(pigLines[0][1], boxLines[0][1]) - Math.max(pigLines[0][0], boxLines[0][0]);
-        const yOverlap = Math.min(pigLines[1][1], boxLines[1][1]) - Math.max(pigLines[1][0], boxLines[1][0]);
+        const overlap = new Vector(
+          Math.min(this.bottomRight.x, boxCollider.bottomRight.x) - Math.max(this.topLeft.x, boxCollider.topLeft.x),
+          Math.min(this.bottomRight.y, boxCollider.bottomRight.y) - Math.max(this.topLeft.y, boxCollider.topLeft.y),
+        );
 
-        const resolutionOffset =
-          xOverlap < yOverlap
-            ? new Vector(Math.sign(fromBoxToPig.x) * xOverlap, 0)
-            : new Vector(0, Math.sign(fromBoxToPig.y) * yOverlap);
+        const resolutionVector =
+          overlap.x < overlap.y
+            ? new Vector(Math.sign(fromBoxToSelf.x) * overlap.x, 0)
+            : new Vector(0, Math.sign(fromBoxToSelf.y) * overlap.y);
 
-        return new Collision(this.gameObject, boxCollider.gameObject, resolutionOffset);
+        return new Collision(this.gameObject, boxCollider.gameObject, resolutionVector);
       }
     }
 
@@ -91,8 +88,8 @@ class BoxCollider extends Collider {
    */
   DEBUG_Draw(buffer) {
     const path = new Path2D();
-    path.rect(this.position.x, this.position.y, this.box.x, this.box.y);
-    buffer.draw(this.position, new Shape(path, undefined, 'red'));
+    path.rect(this.topLeft.x, this.topLeft.y, this.box.x, this.box.y);
+    buffer.draw(this.topLeft, new Shape(path, undefined, 'red'));
   }
 }
 
