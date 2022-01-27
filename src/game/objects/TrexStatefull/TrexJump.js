@@ -15,7 +15,7 @@ class TrexJump extends TrexState {
   constructor(trex) {
     super(trex);
     this.#sprite = AssetsManager.trexJump;
-    /** @type {import('../../engine').BoxCollider} */ (this.trex.collider).box = new Vector(
+    /** @type {import('../../engine').BoxCollider} */ (this.trex.collider).dimensions = new Vector(
       this.#sprite.width,
       this.#sprite.height,
     );

@@ -23,7 +23,7 @@ class Pig extends GameObject {
 
     this.rigidbody.addGravity();
 
-    this.setCollider(BoxCollider, [new Vector(this.#sprite.width, this.#sprite.height)]);
+    this.setCollider(BoxCollider, [new Vector(24, 17), new Vector(5, 11)]);
   }
 
   onUpdate() {
@@ -43,7 +43,7 @@ class Pig extends GameObject {
    */
   onCollision(collision, target) {
     if (target instanceof SolidTile) {
-      const normal = SolidTile.resolveCollisionWith(this, collision, 0.5);
+      const normal = SolidTile.resolveCollisionWith(this, collision, 0.25);
 
       if (normal.y < 0) {
         this.#isStanding = true;
