@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { BUTTON_HEIGHT_SIZE, BUTTON_WIDTH_SIZE, BUTTON_FONT_SIZE } from '../Button';
-import { Popup, POPUP_INNER_BORDER_WIDTH } from '../Popup';
+import { Popup, POPUP_INNER_BORDER_WIDTH, decoration } from '../Popup';
 import { theme } from '../../../shared/theme';
 import keyboardArrowsUrl from '../../../public/img/keyboard_arrows.png';
 import jumpUrl from '../../../public/img/jump.png';
@@ -9,6 +9,7 @@ import keyXUrl from '../../../public/img/key_x.png';
 import keyZUrl from '../../../public/img/key_z.png';
 import attackUrl from '../../../public/img/attack.png';
 import ButtonSilverUrl from '../../../public/img/silverButton.png';
+import steelDecorationUrl from '../../../public/img/stealDecoration.svg';
 
 const heading1 = css({
   display: 'flex',
@@ -33,6 +34,12 @@ const heading2 = css({
   textAlign: 'left',
 });
 
+const deco = css({
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+});
+
 const text = css({
   fontFamily: theme.fontFamily.primary,
   fontSize: theme.fontSize.primary,
@@ -43,6 +50,25 @@ const text = css({
 const content = css({
   display: 'flex',
   gap: POPUP_INNER_BORDER_WIDTH,
+  position: 'relative',
+  '&:after': {
+    content: '""',
+    width: POPUP_INNER_BORDER_WIDTH,
+    position: 'absolute',
+    left: '50%',
+    top: 0,
+    bottom: 0,
+    transform: 'translateX(-50%)',
+    background: theme.colors.gradient.steel,
+    '@media (max-width: 1024px)': {
+      left: 0,
+      right: 0,
+      top: '50%',
+      width: 'auto',
+      height: POPUP_INNER_BORDER_WIDTH,
+      transform: 'translateY(-50%)',
+    },
+  },
   '& > *': {
     flex: 1,
     padding: '4rem 2rem 3rem 2rem',
@@ -118,9 +144,21 @@ const exampleImg = css({
   },
 });
 
+/**
+ * @param {{ open: boolean, onClose: () => void  }} props
+ */
+
 const PopupControls = ({ open, onClose }) => {
   return (
     <Popup open={open} onClose={onClose}>
+      <img
+        src={steelDecorationUrl}
+        css={css`
+          ${deco};
+          ${decoration};
+        `}
+        alt=''
+      />
       <div css={heading1}>Controls</div>
       <div css={content}>
         <div css={col}>

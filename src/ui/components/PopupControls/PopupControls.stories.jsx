@@ -21,11 +21,11 @@ export const PopupWithButton = () => {
   };
 
   return (
-    <div>
+    <>
       <Button type='silver' onClick={handleOpen}>
         Controls
       </Button>
       <PopupControls open={open} onClose={handleClose} />
-    </div>
+    </>
   );
 };

@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import { css } from '@emotion/react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { theme } from '../../../shared/theme';
 import { CloseButton } from '../CloseButton';
 import steelDecorationUrl from '../../../public/img/stealDecoration.svg';
@@ -31,12 +31,6 @@ const decoThree = css({
 
 const decoFour = css({
   top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-});
-
-const decoFive = css({
-  top: '50%',
   left: `-${POPUP_INNER_BORDER_WIDTH}`,
   transform: 'translate(-50%, -50%)',
 });
@@ -45,6 +39,7 @@ const btnContainer = css({
   position: 'absolute',
   right: `-${POPUP_INNER_BORDER_WIDTH}`,
   top: `-${POPUP_INNER_BORDER_WIDTH}`,
+  zIndex: 1,
 });
 
 const popupContainer = css({
@@ -57,6 +52,7 @@ const popupContainer = css({
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: theme.colors.background.transparent,
+  transition: theme.transitions.default,
   overflowY: 'auto',
 });
 
@@ -67,31 +63,13 @@ const popupInner = css({
   borderImageSlice: 1,
   borderImageSource: theme.colors.gradient.steel,
   backgroundColor: theme.colors.primary.main,
-  '&:after': {
-    content: '""',
-    width: POPUP_INNER_BORDER_WIDTH,
-    position: 'absolute',
-    left: '50%',
-    top: 0,
-    bottom: 0,
-    transform: 'translateX(-50%)',
-    background: theme.colors.gradient.steel,
-  },
+  margin: '5rem 0',
   '@media (max-width: 1200px)': {
     width: '94%',
-    margin: '5rem 0',
-  },
-  '@media (max-width: 1024px)': {
-    '&:after': {
-      left: 0,
-      right: 0,
-      top: '50%',
-      width: 'auto',
-      height: POPUP_INNER_BORDER_WIDTH,
-      transform: 'translateY(-50%)',
-    },
   },
 });
+
+const portal = document.createElement('div');
 
 /**
  * @param {{ open: boolean, children: React.ReactNode, onClose: () => void  }} props
@@ -99,8 +77,7 @@ const popupInner = css({
 
 const Popup = ({ open, children, onClose}) => {
   if (!open) return null;
-  
-  const portal = document.createElement('div');
+  const popupRef = useRef();
 
   useEffect(() => {
     document.querySelector('body')?.append(portal);
@@ -111,7 +88,7 @@ const Popup = ({ open, children, onClose}) => {
 
 
   return ReactDOM.createPortal(
-    <div css={popupContainer}>
+    <div css={popupContainer} ref={popupRef} onClick={(e)=>(popupRef.current === e.target) ? onClose() : ''}>
       <div css={popupInner}>
         <img
           src={steelDecorationUrl}
@@ -145,14 +122,6 @@ const Popup = ({ open, children, onClose}) => {
           `}
           alt=''
         />
-        <img
-          src={steelDecorationUrl}
-          css={css`
-            ${decoFive};
-            ${decoration};
-          `}
-          alt=''
-        />
 
         <div css={btnContainer}>
           <CloseButton onClose={onClose} />
@@ -164,4 +133,4 @@ const Popup = ({ open, children, onClose}) => {
   );
 };
 
-export { Popup, POPUP_INNER_BORDER_WIDTH };
+export { Popup, POPUP_INNER_BORDER_WIDTH, decoration };
