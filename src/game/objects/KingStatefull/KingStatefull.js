@@ -1,5 +1,5 @@
 import { Vector } from '../../shared';
-import { GameObject, BoxCollider } from '../../engine';
+import { GameObject, BoxCollider, resolveCollisionsWithSolid } from '../../engine';
 import { KingAttack } from './KingAttack';
 import { KingDead } from './KingDead';
 import { KingDoorIn } from './KingDoorIn';
@@ -11,8 +11,7 @@ import { KingIdle } from './KingIdle';
 import { KingJump } from './KingJump';
 import { KingRunLeft } from './KingRunLeft';
 import { KingRunRight } from './KingRunRight';
-// eslint-disable-next-line import/no-cycle
-import { SolidTile } from '..';
+import { SolidTile } from '../SolidTile';
 
 /**
  * @typedef {'attack' | 'collision' | 'dead' | 'doorIn' | 'doorOut' | 'fall' | 'ground' | 'hit' | 'idle' | 'jump' | 'runLeft' | 'runRight' } KingStateKey
@@ -24,9 +23,6 @@ class KingStatefull extends GameObject {
    */
   #state;
 
-  /**
-   * @type {boolean}
-   */
   #isOnGround = false;
 
   get isOnGround() {
@@ -58,28 +54,11 @@ class KingStatefull extends GameObject {
    */
   onCollision(_collision, target) {
     if (target instanceof SolidTile) {
-      const kingLines = /** @type {BoxCollider} */ (this.collider).lines;
-      const boxLines = /** @type {BoxCollider} */ (target.collider).lines;
-      const fromBoxToKing = this.transform.origin.subtract(target.transform.origin);
-
-      const xOverlap = Math.min(kingLines[0][1], boxLines[0][1]) - Math.max(kingLines[0][0], boxLines[0][0]);
-      const yOverlap = Math.min(kingLines[1][1], boxLines[1][1]) - Math.max(kingLines[1][0], boxLines[1][0]);
-
-      if (xOverlap < yOverlap) {
-        const resolutionOffset = new Vector(Math.sign(fromBoxToKing.x) * xOverlap, 0);
-        this.transform.position = this.transform.position.add(resolutionOffset);
-        this.rigidbody.velocity = this.rigidbody.velocity.setX(0);
-      } else {
-        if (Math.sign(fromBoxToKing.y) === -1) {
-          this.#isOnGround = true;
-        }
-        const resolutionOffset = new Vector(0, Math.sign(fromBoxToKing.y) * yOverlap);
-        this.transform.position = this.transform.position.add(resolutionOffset);
-        this.rigidbody.velocity = this.rigidbody.velocity.setY(0);
+      const normal = resolveCollisionsWithSolid(this, target, 0);
+      if (normal.y < 0) {
+        this.#isOnGround = true;
       }
     }
-    // this.ui.setLose();
-    // this.transitionState('collision');
   }
 
   /**

@@ -25,7 +25,7 @@ class Animation {
    * @param {import('../../shared').Sprite[]} assets
    * @param {boolean} doOnce
    */
-  reset(animationInterval, assets, doOnce) {
+  reset(animationInterval, assets, doOnce = false) {
     this.#animationInterval = animationInterval;
     this.#assets = assets;
     // eslint-disable-next-line prefer-destructuring

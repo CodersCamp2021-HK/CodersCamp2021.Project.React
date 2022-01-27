@@ -42,7 +42,6 @@ class CollisionDetector {
     });
     collisions.forEach((collision) => {
       collision.gameObject1.onCollision(collision, collision.gameObject2);
-      collision.gameObject2.onCollision(collision, collision.gameObject1);
     });
   }
 }

@@ -114,8 +114,7 @@ class LevelScene extends GameScene {
       },
     });
 
-    this.create(KingStatefull, { args: { position: this.#findSpecialTile('S')?.scale(TILE_SIZE) } });
-    // TODO: Spawn player at this.#findSpecialTile('S')
+    this.create(KingStatefull, { args: { position: this.#findSpecialTile('S')?.scale(TILE_SIZE) ?? Vector.Zero } });
   }
 }
 
