@@ -1,6 +1,6 @@
 import { SolidTile } from '.';
 import { AssetsManager } from '../assets';
-import { BoxCollider, GameObject, resolveCollisionsWithSolid } from '../engine';
+import { BoxCollider, GameObject } from '../engine';
 import { Vector } from '../shared';
 
 const ANIMATION_INTERVAL = 6;
@@ -43,7 +43,7 @@ class Pig extends GameObject {
    */
   onCollision(collision, target) {
     if (target instanceof SolidTile) {
-      const normal = resolveCollisionsWithSolid(this, collision.resolutionVector, 0.5);
+      const normal = SolidTile.resolveCollisionWith(this, collision, 0.5);
 
       if (normal.y < 0) {
         this.#isStanding = true;
