@@ -29,16 +29,21 @@ class CollisionDetector {
   }
 
   detectCollisions() {
+    /** @type {import('../../shared').Collision[]} */
+    const collisions = [];
     this.#colliders.forEach((collider1) => {
       this.#colliders.forEach((collider2) => {
         if (collider1 !== collider2) {
           const collision = collider1.hasCollisionWith(collider2);
 
           if (collision) {
-            collision.gameObject1.onCollision(collision, collision.gameObject2);
+            collisions.push(collision);
           }
         }
       });
+    });
+    collisions.forEach((collision) => {
+      collision.gameObject1.onCollision(collision, collision.gameObject2);
     });
   }
 }
