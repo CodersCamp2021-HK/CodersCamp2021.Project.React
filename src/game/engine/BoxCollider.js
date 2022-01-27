@@ -31,6 +31,13 @@ class BoxCollider extends Collider {
     return [position, position.add(vx), position.add(vy), position.add(vx).add(vy)];
   }
 
+  get lines() {
+    return [
+      [this.position.x, this.position.x + this.#box.x],
+      [this.position.y, this.position.y + this.#box.y],
+    ];
+  }
+
   get position() {
     return this.gameObject.position;
   }
