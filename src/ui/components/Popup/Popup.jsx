@@ -97,7 +97,9 @@ const popupInner = css({
  * @param {{ open: boolean, children: React.ReactNode, onClose: () => void  }} props
  */
 
-const Popup = ({ open, onClose, children }) => {
+const Popup = ({ open, children, onClose}) => {
+  if (!open) return null;
+  
   const portal = document.createElement('div');
 
   useEffect(() => {
@@ -105,9 +107,8 @@ const Popup = ({ open, onClose, children }) => {
     return () => {
       document.querySelector('body')?.removeChild(portal);
     };
-  },[]);
+  }, []);
 
-  if (!open) return null;
 
   return ReactDOM.createPortal(
     <div css={popupContainer}>
