@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { useGameEngine, UIProxy } from '../shared';
+import { useGameEngine, UIProxy } from '../../shared';
 
 const btn = css({
   border: '1px black solid',

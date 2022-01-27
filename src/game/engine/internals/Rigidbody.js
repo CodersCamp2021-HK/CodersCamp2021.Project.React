@@ -7,6 +7,10 @@ class Rigidbody {
 
   #accelerationVector = Vector.Zero;
 
+  get velocity() {
+    return this.#velocityVector;
+  }
+
   addGravity() {
     this.addAcceleration(GRAVITY_VECTOR);
   }

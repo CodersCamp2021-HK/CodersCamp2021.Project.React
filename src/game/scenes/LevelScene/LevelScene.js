@@ -12,6 +12,7 @@ import { tileRules } from './tileRules';
  * where 'X' encodes a wall, '.' a background, 'S' the start door and 'E' the end door.
  * The map is as wide as the amount of columns in the string and as high as the amount
  * of rows. It should have a rectangular shape.
+ * @property {(create: (Cls: Parameters<typeof LevelScene.prototype.create>[0], pos: Vector, otherArgs?: Record<string, any>) => void) => void} [additionalObjects]
  */
 
 class LevelScene extends GameScene {
@@ -99,8 +100,20 @@ class LevelScene extends GameScene {
 
     this.create(BackgroundTiles, { args: { tiles: backgroundTiles } });
 
-    this.create(Door, { args: { position: this.#findSpecialTile('S')?.scale(TILE_SIZE), type: 'start' } });
-    this.create(Door, { args: { position: this.#findSpecialTile('E')?.scale(TILE_SIZE), type: 'end' } });
+    this.create(Door, {
+      args: {
+        position: this.#findSpecialTile('S')?.scale(TILE_SIZE) ?? Vector.Zero,
+        type: 'start',
+      },
+    });
+
+    this.create(Door, {
+      args: {
+        position: this.#findSpecialTile('E')?.scale(TILE_SIZE) ?? Vector.Zero,
+        type: 'end',
+      },
+    });
+
     this.create(KingStatefull, { args: { position: this.#findSpecialTile('S')?.scale(TILE_SIZE) } });
     // TODO: Spawn player at this.#findSpecialTile('S')
   }
