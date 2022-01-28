@@ -15,10 +15,10 @@ const collidingObjects = Object.freeze([
     Cls: Pig,
     restitution: 0.25,
   },
-  /* {
+  {
     Cls: King,
-    restitution: 0.1,
-  }, */
+    restitution: 0,
+  },
 ]);
 
 class SolidTile extends GameObject {
