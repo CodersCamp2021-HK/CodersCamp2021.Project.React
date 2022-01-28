@@ -1,3 +1,4 @@
+import { King } from '../../objects/King/King';
 import { Pig } from '../../objects/Pig';
 import { Vector } from '../../shared';
 import { levelFrom } from '../LevelScene';
@@ -17,6 +18,7 @@ const Level1 = levelFrom({
   additionalObjects: (create) => {
     create(Pig, new Vector(6, 2));
     create(Pig, new Vector(12, 1));
+    create(King, new Vector(2, 8));
   },
 });
 

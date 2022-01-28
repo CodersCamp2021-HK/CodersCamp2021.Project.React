@@ -3,6 +3,8 @@ import { BoxCollider, GameObject } from '../engine';
 import { Vector } from '../shared';
 // eslint-disable-next-line import/no-cycle
 import { Pig } from './Pig';
+// eslint-disable-next-line import/no-cycle
+import { King } from '.';
 
 /**
  * Associates colliding object classes with their restitutions.
@@ -13,6 +15,10 @@ const collidingObjects = Object.freeze([
     Cls: Pig,
     restitution: 0.25,
   },
+  /* {
+    Cls: King,
+    restitution: 0.1,
+  }, */
 ]);
 
 class SolidTile extends GameObject {

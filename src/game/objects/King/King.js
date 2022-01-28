@@ -1,5 +1,5 @@
 import { Vector } from '../../shared';
-import { GameObject, BoxCollider, resolveCollisionsWithSolid } from '../../engine';
+import { GameObject, BoxCollider } from '../../engine';
 import { KingAttack } from './KingAttack';
 import { KingDead } from './KingDead';
 import { KingDoorIn } from './KingDoorIn';
@@ -11,6 +11,7 @@ import { KingIdle } from './KingIdle';
 import { KingJump } from './KingJump';
 import { KingRunLeft } from './KingRunLeft';
 import { KingRunRight } from './KingRunRight';
+// eslint-disable-next-line import/no-cycle
 import { SolidTile } from '../SolidTile';
 
 /**
@@ -46,13 +47,15 @@ class King extends GameObject {
 
   /**
    * @param {Object} props
-   * @param {Vector} props.position
+   * @param {Vector} props.initialPos
    */
-  onActivate({ position }) {
-    this.rigidbody.addGravity();
-    this.transform.origin = position;
-    this.setCollider(BoxCollider, [new Vector(0, 0)]);
+  onActivate({ initialPos }) {
     this.#state = new KingDoorOut(this);
+    this.rigidbody.addGravity();
+    this.transform.origin = initialPos ?? Vector.Zero;
+    this.transform.width = this.animation.sprite?.width ?? 0;
+    this.transform.height = this.animation.sprite?.height ?? 0;
+    this.setCollider(BoxCollider, [new Vector(0, 0)]);
   }
 
   /**
@@ -64,15 +67,12 @@ class King extends GameObject {
   }
 
   /**
-   * @param {import('../../shared').Collision} _collision
+   * @param {import('../../shared').Collision} collision
    * @param {GameObject} target
    */
-  onCollision(_collision, target) {
-    if (target instanceof SolidTile) {
-      const normal = resolveCollisionsWithSolid(this, target, 0);
-      if (normal.y < 0) {
-        this.#isOnGround = true;
-      }
+  onCollision(collision, target) {
+    if (target instanceof SolidTile && collision.resolutionVector.y < 0) {
+      this.#isOnGround = true;
     }
   }
 
