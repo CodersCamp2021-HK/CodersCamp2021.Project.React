@@ -55,7 +55,7 @@ class TrexAnimated extends TrexState {
   #updateSprite() {
     this.#sprite = this.#sprites[this.#spriteNum];
     this.#spriteNum = (this.#spriteNum + 1) % this.#sprites.length;
-    /** @type {import('../../engine').BoxCollider} */ (this.trex.collider).box = new Vector(
+    /** @type {import('../../engine').BoxCollider} */ (this.trex.collider).dimensions = new Vector(
       this.#sprite.width,
       this.#sprite.height,
     );
