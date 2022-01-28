@@ -12,6 +12,7 @@ class Collider {
   /**
    * @abstract
    * @param {Collider} collider
+   * @returns {import('../../shared').Collision?}
    */
   hasCollisionWith(collider) {
     throw new Error('Abstract method');
