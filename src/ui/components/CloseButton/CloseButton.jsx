@@ -14,14 +14,12 @@ const btn = css({
   borderImageSlice: 1,
   borderImageSource: theme.colors.gradient.steel,
   background: `url(${closeButtonUrl}) center center / cover`,
-  transition: theme.transitions.default,
   svg: {
     path: {
       transition: theme.transitions.default,
     },
   },
   '&:hover': {
-    transition: theme.transitions.default,
     borderImageSource: theme.colors.gradient.selectedLevel,
     svg: {
       path: {
