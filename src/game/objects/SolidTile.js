@@ -1,6 +1,19 @@
 import { AssetsManager } from '../assets';
 import { BoxCollider, GameObject } from '../engine';
 import { Vector } from '../shared';
+// eslint-disable-next-line import/no-cycle
+import { Pig } from './Pig';
+
+/**
+ * Associates colliding object classes with their restitutions.
+ * If a class is not in this array it does not collide with SolidTile.
+ */
+const collidingObjects = Object.freeze([
+  {
+    Cls: Pig,
+    restitution: 0.25,
+  },
+]);
 
 class SolidTile extends GameObject {
   #sprite = AssetsManager.tileset[0][0];
@@ -24,25 +37,28 @@ class SolidTile extends GameObject {
   }
 
   /**
-   * @param {GameObject} object
    * @param {import('../shared').Collision} collision
-   * @param {number} restitution https://en.wikipedia.org/wiki/Coefficient_of_restitution
-   * @return {import('../shared').Vector} normal vector from the solid to the object
+   * @param {GameObject} target
    */
-  static resolveCollisionWith(object, collision, restitution) {
-    // eslint-disable-next-line no-param-reassign
-    object.transform.position = object.transform.position.add(collision.resolutionVector);
+  // eslint-disable-next-line class-methods-use-this
+  onCollision(collision, target) {
+    const entry = collidingObjects.find(({ Cls }) => target instanceof Cls);
+    if (entry) {
+      const { restitution } = entry;
+      const resolution = collision.resolutionVector.scale(-1);
 
-    const normal = collision.resolutionVector.normalized();
-    if (object.rigidbody.velocity.dot(normal) <= 0) {
-      // Source: http://www.chrishecker.com/images/e/e7/Gdmphys3.pdf
-      const j = -(1 + restitution) * object.rigidbody.velocity.dot(normal);
-      const impulse = normal.scale(j);
+      // eslint-disable-next-line no-param-reassign
+      target.transform.position = target.transform.position.add(resolution);
 
-      object.rigidbody.addVelocity(impulse);
+      const normal = resolution.normalized();
+      if (target.rigidbody.velocity.dot(normal) <= 0) {
+        // Source: http://www.chrishecker.com/images/e/e7/Gdmphys3.pdf
+        const j = -(1 + restitution) * target.rigidbody.velocity.dot(normal);
+        const impulse = normal.scale(j);
+
+        target.rigidbody.addVelocity(impulse);
+      }
     }
-
-    return normal;
   }
 }
 
