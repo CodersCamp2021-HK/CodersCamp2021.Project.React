@@ -70,10 +70,10 @@ const popupInner = css({
 });
 
 /**
- * @param {{ open: boolean, children: React.ReactNode, onClose: () => void  }} props
+ * @param {{ open: boolean, children: React.ReactNode, onClose: () => void, variant: 'LevelPopup' | 'Control'  }} props
  */
 
-const Popup = ({ open, children, onClose }) => {
+const Popup = ({ open, children, onClose, variant }) => {
   const popupRef = useRef();
   const portal = useMemo(() => document.createElement('div'), []);
 
@@ -95,14 +95,24 @@ const Popup = ({ open, children, onClose }) => {
       onClick={(e) => (popupRef.current === e.target ? onClose() : '')}
     >
       <div css={popupInner}>
-        <img src={steelDecorationUrl} css={[decoOne, decoration]} alt='' />
-        <img src={steelDecorationUrl} css={[decoTwo, decoration]} alt='' />
-        <img src={steelDecorationUrl} css={[decoThree, decoration]} alt='' />
-        <img src={steelDecorationUrl} css={[decoFour, decoration]} alt='' />
-
-        <div css={btnContainer}>
-          <CloseButton onClose={onClose} />
-        </div>
+        {variant === 'Control' ? (
+          <>
+            <img src={steelDecorationUrl} css={[decoOne, decoration]} alt='' />
+            <img src={steelDecorationUrl} css={[decoTwo, decoration]} alt='' />
+            <img src={steelDecorationUrl} css={[decoThree, decoration]} alt='' />
+            <img src={steelDecorationUrl} css={[decoFour, decoration]} alt='' />
+          </>
+        ) : (
+          <>
+            <img src={steelDecorationUrl} css={[decoTwo, decoration]} alt='' />
+            <img src={steelDecorationUrl} css={[decoFour, decoration]} alt='' />
+          </>
+        )}
+        {variant === 'Control' ? (
+          <div css={btnContainer}>
+            <CloseButton onClose={onClose} />
+          </div>
+        ) : null}
         <div>{children}</div>
       </div>
     </div>,
