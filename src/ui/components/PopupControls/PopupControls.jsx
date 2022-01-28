@@ -151,57 +151,30 @@ const exampleImg = css({
 const PopupControls = ({ open, onClose }) => {
   return (
     <Popup open={open} onClose={onClose}>
-      <img
-        src={steelDecorationUrl}
-        css={css`
-          ${deco};
-          ${decoration};
-        `}
-        alt=''
-      />
+      <img src={steelDecorationUrl} css={[deco, decoration]} alt='' />
       <div css={heading1}>Controls</div>
       <div css={content}>
         <div css={col}>
           <h2 css={heading2}>Movement</h2>
           <div css={innerWrapper1}>
-            <div
-              css={css`
-                ${keyLeftDescription};
-                ${description}
-              `}
-            >
+            <div css={[keyLeftDescription, description]}>
               <p css={text}>
                 Move
                 <br />
                 to left
               </p>
             </div>
-            <div
-              css={css`
-                ${keyRightDescription};
-                ${description}
-              `}
-            >
+            <div css={[keyRightDescription, description]}>
               <p css={text}>
                 Move <br />
                 to right
               </p>
             </div>
-            <div
-              css={css`
-                ${keyUpDescription};
-                ${description}
-              `}
-            >
+            <div css={[keyUpDescription, description]}>
               <img src={jumpUrl} css={exampleImg} alt='' />
               <p css={text}>Jump</p>
             </div>
-            <div
-              css={css`
-                ${keyDownDescription};
-                ${description}
-              `}
-            >
+            <div css={[keyDownDescription, description]}>
               <img src={groundUrl} css={exampleImg} alt='' />
               <p css={text}>Crouch</p>
             </div>
@@ -211,20 +184,12 @@ const PopupControls = ({ open, onClose }) => {
         <div css={col}>
           <h2 css={heading2}>Action</h2>
           <div css={innerWrapper2}>
-            <div
-              css={css`
-                ${description}
-              `}
-            >
+            <div css={description}>
               <img src={keyZUrl} alt='' />
               <p css={text}>Attack</p>
               <img src={attackUrl} css={exampleImg} alt='' />
             </div>
-            <div
-              css={css`
-                ${description}
-              `}
-            >
+            <div css={description}>
               <img src={keyXUrl} alt='' />
               <p css={text}>Throw</p>
               <img src={attackUrl} css={exampleImg} alt='' />

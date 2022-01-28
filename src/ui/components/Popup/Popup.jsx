@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import { css } from '@emotion/react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
 import { theme } from '../../../shared/theme';
 import { CloseButton } from '../CloseButton';
 import steelDecorationUrl from '../../../public/img/stealDecoration.svg';
@@ -69,57 +69,44 @@ const popupInner = css({
   },
 });
 
-const portal = document.createElement('div');
-
 /**
  * @param {{ open: boolean, children: React.ReactNode, onClose: () => void  }} props
  */
 
 const Popup = ({ open, children, onClose}) => {
-  if (!open) return null;
   const popupRef = useRef();
+  const portal = useMemo(() => document.createElement('div'), []);
 
   useEffect(() => {
-    document.querySelector('body')?.append(portal);
+    document.body?.appendChild(portal);
     return () => {
-      document.querySelector('body')?.removeChild(portal);
+      document.body?.removeChild(portal);
     };
   }, []);
 
+  if (!open) return null;
 
   return ReactDOM.createPortal(
-    <div css={popupContainer} ref={popupRef} onClick={(e)=>(popupRef.current === e.target) ? onClose() : ''}>
+    <div role="dialog" css={popupContainer} ref={popupRef} onClick={(e)=>(popupRef.current === e.target) ? onClose() : ''}>
       <div css={popupInner}>
         <img
           src={steelDecorationUrl}
-          css={css`
-            ${decoOne};
-            ${decoration};
-          `}
+          css={[decoOne, decoration]}
           alt=''
         />
         <img
           src={steelDecorationUrl}
-          css={css`
-            ${decoTwo};
-            ${decoration};
-          `}
+          css={[decoTwo, decoration]}
           alt=''
         />
         <img
           src={steelDecorationUrl}
-          css={css`
-            ${decoThree};
-            ${decoration};
-          `}
+          css={[decoThree, decoration]}
           alt=''
         />
         <img
           src={steelDecorationUrl}
-          css={css`
-            ${decoFour};
-            ${decoration};
-          `}
+          css={[decoFour, decoration]}
           alt=''
         />
 

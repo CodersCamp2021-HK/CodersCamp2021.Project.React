@@ -3,7 +3,7 @@ import { CloseButton } from './CloseButton';
 
 describe('Close button', () => {
   it('should render the close button', () => {
-    render(<CloseButton onClick={() => {}} />);
+    render(<CloseButton />);
 
     const button = screen.getByRole('button', { name: 'Close' });
     expect(button).toBeInTheDocument();
