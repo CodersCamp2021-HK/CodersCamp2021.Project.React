@@ -30,11 +30,11 @@ class KingJump extends KingAnimated {
       this.king.rigidbody.velocity = this.king.rigidbody.velocity.setX(0);
     }
     if (this.king.keyboard.pressed('x')) {
-      if (this.king.attackInfo.canAttack) {
-        this.king.canAttack = false;
-        setTimeout(() => {
-          this.king.canAttack = true;
-        }, this.king.attackInfo.attackDelay);
+      if (this.king.canAttack) {
+        if (this.king.canAttack) {
+          this.king.delayAttack();
+          return this.king.transitionState('attack').onUpdate(frame);
+        }
         return this.king.transitionState('attack').onUpdate(frame);
       }
       return super.update(frame);

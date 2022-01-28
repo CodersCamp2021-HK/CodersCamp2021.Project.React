@@ -34,15 +34,15 @@ class King extends GameObject {
     return this.#isOnGround;
   }
 
-  get attackInfo() {
-    return { canAttack: this.#canAttack, attackDelay: this.#attackDelay };
+  get canAttack() {
+    return this.#canAttack;
   }
 
-  /**
-   * @param {boolean} canAttack
-   */
-  set canAttack(canAttack) {
-    this.#canAttack = canAttack;
+  delayAttack() {
+    this.#canAttack = false;
+    setTimeout(() => {
+      this.#canAttack = true;
+    }, this.#attackDelay);
   }
 
   /**
