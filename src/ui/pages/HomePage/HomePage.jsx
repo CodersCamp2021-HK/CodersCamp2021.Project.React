@@ -1,6 +1,7 @@
+import React from 'react';
 import { css } from '@emotion/react';
 import { theme } from '../../../shared/theme';
-import { PageHeader, Button } from '../../components';
+import { PageHeader, Button, PopupControls } from '../../components';
 import backgroundUrl from '../../../public/img/background.jpg';
 
 const wrapper = css`
@@ -21,6 +22,16 @@ const btnGroup = css`
   gap: 3rem;
 `;
 const HomePage = () => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <main css={wrapper}>
       <PageHeader>King and Pigs</PageHeader>
@@ -28,12 +39,13 @@ const HomePage = () => {
         <Button type='gold' onClick={() => {}}>
           start
         </Button>
-        <Button type='silver' onClick={() => {}}>
+        <Button type='silver' onClick={handleOpen}>
           Controls
         </Button>
         <Button type='silver' onClick={() => {}}>
           Credits
         </Button>
+        <PopupControls open={open} onClose={handleClose} />
       </section>
     </main>
   );

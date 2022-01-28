@@ -1,4 +1,5 @@
 @import './preflight.css';
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono&display=swap');
 
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
@@ -10,8 +11,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-@media screen and (min-width: 1920px) {
+@media screen and (min-width: 1440px) {
   :root {
-    font-size: 24px;
+    font-size: 26px;
   }
 }
