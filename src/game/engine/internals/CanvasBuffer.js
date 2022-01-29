@@ -50,17 +50,28 @@ class CanvasBuffer {
   draw(position, sprite) {
     if (sprite instanceof Sprite) {
       const img = this.#getImg(sprite.imgUrl);
+
+      this.#ctx.save();
+      this.#ctx.setTransform(
+        sprite.flipped ? -1 : 1, // scaleX
+        0, // skewY
+        0, // skewX
+        1, // scaleY
+        position.x + (sprite.flipped ? sprite.width : 0), // posX
+        position.y, // posY
+      );
       this.#ctx.drawImage(
         img,
         sprite.crop.origin.x,
         sprite.crop.origin.y,
         sprite.crop.width,
         sprite.crop.height,
-        position.x,
-        position.y,
+        0,
+        0,
         sprite.width,
         sprite.height,
       );
+      this.#ctx.restore();
     } else {
       const shape = sprite;
       if (shape.fill) {
