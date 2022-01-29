@@ -1,21 +1,16 @@
 import { AssetsManager } from '../assets';
 import { BoxCollider, GameObject } from '../engine';
 import { Vector } from '../shared';
-// eslint-disable-next-line import/no-cycle
-import { Pig } from './Pig';
-
-/**
- * Associates colliding object classes with their restitutions.
- * If a class is not in this array it does not collide with SolidTile.
- */
-const collidingObjects = Object.freeze([
-  {
-    Cls: Pig,
-    restitution: 0.25,
-  },
-]);
 
 class SolidTile extends GameObject {
+  /**
+   * Associates colliding object classes with their restitutions.
+   * If a class is not in this array it does not collide with SolidTile.
+   *
+   * @type {Readonly<{ Cls: import('../engine/GameObject').GameObjectConstructor<Record<string, any>, import('../engine/GameObject').GameObject<Record<string, any>>>, restitution: number }[]>}
+   */
+  static collidingObjects = [];
+
   #sprite = AssetsManager.tileset[0][0];
 
   /**
@@ -42,7 +37,7 @@ class SolidTile extends GameObject {
    */
   // eslint-disable-next-line class-methods-use-this
   onCollision(collision, target) {
-    const entry = collidingObjects.find(({ Cls }) => target instanceof Cls);
+    const entry = SolidTile.collidingObjects.find(({ Cls }) => target instanceof Cls);
     if (entry) {
       const { restitution } = entry;
       const resolution = collision.resolutionVector.scale(-1);
@@ -61,5 +56,19 @@ class SolidTile extends GameObject {
     }
   }
 }
+
+// eslint-disable-next-line import/no-cycle
+import('.').then(({ Pig, King }) => {
+  SolidTile.collidingObjects = Object.freeze([
+    {
+      Cls: Pig,
+      restitution: 0.25,
+    },
+    {
+      Cls: King,
+      restitution: 0,
+    },
+  ]);
+});
 
 export { SolidTile };

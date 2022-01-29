@@ -5,11 +5,25 @@ import { tilesetRowCount } from '../scenes/LevelScene/tileRules';
 import doorUrl from './door.png';
 import spritesUrl from './sprites.png';
 import tilesetUrl from './tileset.png';
+import kingUrl from './king.png';
 import pigUrl from './pig.png';
 
-const scale = 0.5;
+const scale = 2;
 
 const AssetsManager = Object.freeze({
+  king: {
+    doorIn: _.times(8, (x) => new Sprite(kingUrl, new Crop(new Vector(78 * x, 0), 78, 58))),
+    doorOut: _.times(8, (x) => new Sprite(kingUrl, new Crop(new Vector(624 + 78 * x, 0), 78, 58))),
+    fall: [new Sprite(kingUrl, new Crop(new Vector(1248, 0), 78, 58))],
+    ground: [new Sprite(kingUrl, new Crop(new Vector(1326, 0), 78, 58))],
+    hit: _.times(2, (x) => new Sprite(kingUrl, new Crop(new Vector(1404 + 78 * x, 0), 78, 58))),
+    idle: _.times(11, (x) => new Sprite(kingUrl, new Crop(new Vector(1560 + 78 * x, 0), 78, 58))),
+    jump: [new Sprite(kingUrl, new Crop(new Vector(2418, 0), 78, 58))],
+    run: _.times(8, (x) => new Sprite(kingUrl, new Crop(new Vector(2496 + 78 * x, 0), 78, 58))),
+    attack: _.times(3, (x) => new Sprite(kingUrl, new Crop(new Vector(3120 + 78 * x, 0), 78, 58))),
+    dead: _.times(4, (x) => new Sprite(kingUrl, new Crop(new Vector(3354 + 78 * x, 0), 78, 58))),
+  },
+
   trexJump: new Sprite(spritesUrl, new Crop(new Vector(1678, 2), 88, 94), scale),
   trexColision: new Sprite(spritesUrl, new Crop(new Vector(2030, 2), 88, 94), scale),
   trexRun1: new Sprite(spritesUrl, new Crop(new Vector(1854, 2), 88, 94), scale),
