@@ -23,7 +23,7 @@ const NotFound = () => {
           padding-bottom: 2rem;
         `}
       >
-        Sorry, there's nothing here
+        Sorry, there&apos;s nothing here
       </h1>
       <Link to='/'>
         <Button type='silver' onClick={() => {}}>
