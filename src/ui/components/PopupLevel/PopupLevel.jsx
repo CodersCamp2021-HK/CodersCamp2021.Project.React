@@ -13,15 +13,15 @@ const box = css`
 `;
 
 const img = css`
-  width: 400px;
-  height: 350px;
-  margin-bottom: 100px;
-  margin-top: 50px;
+  width: 17.5rem;
+  height: 13rem;
+  margin-bottom: 6rem;
+  margin-top: 2rem;
 `;
 
 const button = css`
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
 `;
 
 /**
