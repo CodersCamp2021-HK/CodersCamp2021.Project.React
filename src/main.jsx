@@ -1,23 +1,53 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { GameEngineProvider, GlobalStyles } from './shared';
-import { GameUI } from './ui';
+import { GameUI, HomePage, LevelSelectPage } from './ui';
 import './public/index.css';
 
 const App = () => {
   return (
     <>
       <GlobalStyles />
-      <GameEngineProvider>
-        <GameUI />
-      </GameEngineProvider>
+      <HomePage />
     </>
   );
 };
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<App />} />
+        <Route
+          path='game'
+          element={
+            <GameEngineProvider>
+              <GameUI />
+            </GameEngineProvider>
+          }
+        />
+        <Route
+          path='level-select'
+          element={
+            <>
+              <GlobalStyles />
+              <LevelSelectPage />
+            </>
+          }
+        />
+        {/* comment out when credits page is done */}
+        {/* <Route
+          path='credits'
+          element={
+            <>
+              <GlobalStyles />
+              <Credits />
+            </>
+          }
+        /> */}
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),
 );
