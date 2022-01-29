@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import { theme } from '../../../shared/theme';
 import { PageHeader, Button, BUTTON_WIDTH_SIZE } from '../../components';
