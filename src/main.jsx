@@ -6,16 +6,12 @@ import { GameUI, HomePage, LevelSelectPage, NotFound } from './ui';
 import './public/index.css';
 
 const App = () => {
-  return (
-    <>
-      <GlobalStyles />
-      <HomePage />
-    </>
-  );
+  return <HomePage />;
 };
 
 ReactDOM.render(
   <React.StrictMode>
+    <GlobalStyles />
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App />} />
@@ -27,15 +23,7 @@ ReactDOM.render(
             </GameEngineProvider>
           }
         />
-        <Route
-          path='level-select'
-          element={
-            <>
-              <GlobalStyles />
-              <LevelSelectPage />
-            </>
-          }
-        />
+        <Route path='level-select' element={<LevelSelectPage />} />
         {/* comment out when credits page is done */}
         {/* <Route
           path='credits'
@@ -46,15 +34,7 @@ ReactDOM.render(
             </>
           }
         /> */}
-        <Route
-          path='*'
-          element={
-            <>
-              <GlobalStyles />
-              <NotFound />
-            </>
-          }
-        />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
