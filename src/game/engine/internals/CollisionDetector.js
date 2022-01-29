@@ -1,5 +1,3 @@
-import { Collision } from '../../shared';
-
 class CollisionDetector {
   /**
    * @type {import('./Collider').Collider[]}
@@ -35,14 +33,17 @@ class CollisionDetector {
     const collisions = [];
     this.#colliders.forEach((collider1) => {
       this.#colliders.forEach((collider2) => {
-        if (collider1 !== collider2 && collider1.hasCollisionWith(collider2)) {
-          collisions.push(new Collision(collider1.gameObject, collider2.gameObject));
+        if (collider1 !== collider2) {
+          const collision = collider1.hasCollisionWith(collider2);
+
+          if (collision) {
+            collisions.push(collision);
+          }
         }
       });
     });
     collisions.forEach((collision) => {
       collision.gameObject1.onCollision(collision, collision.gameObject2);
-      collision.gameObject2.onCollision(collision, collision.gameObject1);
     });
   }
 }

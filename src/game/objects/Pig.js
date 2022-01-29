@@ -1,7 +1,8 @@
-import { SolidTile } from '.';
+import { BoxCollider, GameObject } from '../engine';
 import { AssetsManager } from '../assets';
-import { BoxCollider, GameObject, resolveCollisionsWithSolid } from '../engine';
 import { Vector } from '../shared';
+// eslint-disable-next-line import/no-cycle
+import { SolidTile } from './SolidTile';
 
 const ANIMATION_INTERVAL = 6;
 
@@ -23,7 +24,7 @@ class Pig extends GameObject {
 
     this.rigidbody.addGravity();
 
-    this.setCollider(BoxCollider, [new Vector(this.#sprite.width, this.#sprite.height)]);
+    this.setCollider(BoxCollider, [new Vector(24, 18), new Vector(5, 10)]);
   }
 
   onUpdate() {
@@ -38,16 +39,12 @@ class Pig extends GameObject {
   }
 
   /**
-   * @param {import('../shared').Collision} _collision
+   * @param {import('../shared').Collision} collision
    * @param {GameObject} target
    */
-  onCollision(_collision, target) {
-    if (target instanceof SolidTile) {
-      const normal = resolveCollisionsWithSolid(this, target, 0.5);
-
-      if (normal.y < 0) {
-        this.#isStanding = true;
-      }
+  onCollision(collision, target) {
+    if (target instanceof SolidTile && collision.resolutionVector.y < 0) {
+      this.#isStanding = true;
     }
   }
 
