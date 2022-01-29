@@ -5,7 +5,7 @@ describe('CreditsPage', () => {
   it('should render the page', () => {
     render(<CreditsPage />);
 
-    const header = screen.getByRole('heading', { name: 'CreditsPage' });
+    const header = screen.getByRole('heading', { name: 'Credits' });
     expect(header).toBeInTheDocument();
   });
 });

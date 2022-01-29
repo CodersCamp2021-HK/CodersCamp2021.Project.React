@@ -1,8 +1,13 @@
-import React from 'react';
+// import React from 'react';
 import { css } from '@emotion/react';
 import { theme } from '../../../shared/theme';
-import { PageHeader, Button, BUTTON_WIDTH_SIZE } from '../../components';
+import { PageHeader, Button, BUTTON_WIDTH_SIZE, BUTTON_HEIGHT_SIZE, DevInfo } from '../../components';
 import backgroundUrl from '../../../public/img/background.jpg';
+import mmUrl from '../../../public/img/mm_pixel.png';
+import jsUrl from '../../../public/img/js_pixel.png';
+import tcUrl from '../../../public/img/tc_pixel.png';
+import kdUrl from '../../../public/img/kd_pixel.png';
+import hkUrl from '../../../public/img/hk_pixel.png';
 
 const wrapper = css`
   min-height: 100vh;
@@ -18,8 +23,8 @@ const wrapper = css`
 const creditsWrapper = css`
   position: relative;
   width: 100%;
-  max-width: max(min(50vw, 1000px), 500px);
-  max-height: 50vh;
+  height: 100%;
+  max-width: max(70vw, 850px);
 `;
 
 const credits = css`
@@ -28,12 +33,18 @@ const credits = css`
   background: ${theme.colors.background.transparent};
 `;
 
+const infoContainer = css`
+  margin: 1.85rem 2.54rem 3.54rem 2.54rem;
+  display: flex;
+  justify-content: space-between;
+`;
+
 const buttonWrapper = css`
   position: absolute;
   width: ${BUTTON_WIDTH_SIZE};
   margin-left: auto;
   margin-right: auto;
-  bottom: -${4.8 / 2}rem;
+  bottom: calc(-${BUTTON_HEIGHT_SIZE} / 2);
   left: 0;
   right: 0;
 `;
@@ -44,6 +55,17 @@ const CreditsPage = () => {
       <PageHeader>Credits</PageHeader>
       <div css={creditsWrapper}>
         <section css={credits}>
+          <div css={infoContainer}>
+            <div>
+              <DevInfo image={mmUrl} name='Marta Mejer' devRole='Tech lead, Programmer' />
+              <DevInfo image={jsUrl} name='Justyna Skrajna' devRole='Game designer, Programmer' />
+              <DevInfo image={tcUrl} name='Tomasz Chojnacki' devRole='Project manager, Programmer' />
+              <DevInfo image={kdUrl} name='Kamil Dudek' devRole='Scrum master, Programmer' />
+            </div>
+            <div>
+              <DevInfo image={hkUrl} name='Hubert Kawałek' devRole='Game coordinator, Programmer' />
+            </div>
+          </div>
           <div css={buttonWrapper}>
             <Button type='silver' onClick={() => {}}>
               homepage
