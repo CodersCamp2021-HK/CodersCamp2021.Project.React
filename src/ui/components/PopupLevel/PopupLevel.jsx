@@ -31,18 +31,21 @@ const button = css`
 const PopupLevel = ({ open, onClose, variant }) => {
   let showImg;
   let buttonText;
+  let altText;
   if (variant === 'victory') {
     showImg = victoryPopup;
     buttonText = 'next';
+    altText = 'victory';
   } else {
     showImg = defeatPopup;
     buttonText = 'retry';
+    altText = 'defeat';
   }
 
   return (
     <Popup open={open} onClose={onClose} variant='LevelPopup'>
       <div css={box}>
-        <img css={img} src={showImg} alt='Victory' />
+        <img css={img} src={showImg} alt={altText} />
         <div css={button}>
           <Button type='gold' onClick={() => {}}>
             {buttonText}
