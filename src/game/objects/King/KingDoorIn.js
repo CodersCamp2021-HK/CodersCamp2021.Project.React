@@ -8,21 +8,7 @@ class KingDoorIn extends KingAnimated {
    * @param {import('./King').King} king
    */
   constructor(king) {
-    super(
-      king,
-      [
-        AssetsManager.kingDoorIn01,
-        AssetsManager.kingDoorIn02,
-        AssetsManager.kingDoorIn03,
-        AssetsManager.kingDoorIn04,
-        AssetsManager.kingDoorIn05,
-        AssetsManager.kingDoorIn06,
-        AssetsManager.kingDoorIn07,
-        AssetsManager.kingDoorIn08,
-      ],
-      SPRITE_ANIMATION_UPDATE,
-      true,
-    );
+    super(king, AssetsManager.king.doorIn, SPRITE_ANIMATION_UPDATE, true);
   }
 
   /**

@@ -8,12 +8,7 @@ class KingAttack extends KingAnimated {
    * @param {import('./King').King} king
    */
   constructor(king) {
-    super(
-      king,
-      [AssetsManager.kingAttack01, AssetsManager.kingAttack02, AssetsManager.kingAttack03],
-      SPRITE_ANIMATION_UPDATE,
-      true,
-    );
+    super(king, AssetsManager.king.attack, SPRITE_ANIMATION_UPDATE, true);
   }
 
   /**

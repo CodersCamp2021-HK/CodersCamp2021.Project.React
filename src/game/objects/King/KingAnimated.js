@@ -1,5 +1,3 @@
-import { BoxCollider } from '../../engine';
-import { Vector } from '../../shared';
 import { KingState } from './KingState';
 
 class KingAnimated extends KingState {
@@ -28,7 +26,6 @@ class KingAnimated extends KingState {
     const height = this.king.animation.sprite?.height ?? 0;
     this.king.transform.width = width;
     this.king.transform.height = height;
-    this.king.setCollider(BoxCollider, [new Vector(width, height)]);
   }
 }
 

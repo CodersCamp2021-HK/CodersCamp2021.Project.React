@@ -8,21 +8,7 @@ class KingDoorOut extends KingAnimated {
    * @param {import('./King').King} king
    */
   constructor(king) {
-    super(
-      king,
-      [
-        AssetsManager.kingDoorOut01,
-        AssetsManager.kingDoorOut02,
-        AssetsManager.kingDoorOut03,
-        AssetsManager.kingDoorOut04,
-        AssetsManager.kingDoorOut05,
-        AssetsManager.kingDoorOut06,
-        AssetsManager.kingDoorOut07,
-        AssetsManager.kingDoorOut08,
-      ],
-      SPRITE_ANIMATION_UPDATE,
-      true,
-    );
+    super(king, AssetsManager.king.doorOut, SPRITE_ANIMATION_UPDATE, true);
   }
 
   /**

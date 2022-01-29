@@ -55,10 +55,10 @@ class King extends GameObject {
 
     const width = this.animation.sprite?.width ?? 0;
     const height = this.animation.sprite?.height ?? 0;
-    this.transform.origin = position.add(new Vector(width / 2, 0));
+    this.transform.origin = position.add(new Vector(width / 3, 0));
     this.transform.width = width;
     this.transform.height = height;
-    this.setCollider(BoxCollider, [new Vector(0, 0)]);
+    this.setCollider(BoxCollider, [new Vector(15, 26), new Vector(24, 20)]);
   }
 
   /**

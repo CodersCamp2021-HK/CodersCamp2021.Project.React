@@ -8,7 +8,7 @@ class KingGround extends KingAnimated {
    * @param {import('./King').King} king
    */
   constructor(king) {
-    super(king, [AssetsManager.kingGround], SPRITE_ANIMATION_UPDATE, true);
+    super(king, AssetsManager.king.ground, SPRITE_ANIMATION_UPDATE, true);
   }
 
   /**

@@ -9,7 +9,7 @@ class KingJump extends KingAnimated {
    * @param {import('./King').King} king
    */
   constructor(king) {
-    super(king, [AssetsManager.kingJump], SPRITE_ANIMATION_UPDATE);
+    super(king, AssetsManager.king.jump, SPRITE_ANIMATION_UPDATE);
     king.rigidbody.addVelocity(new Vector(0, -6));
   }
 
