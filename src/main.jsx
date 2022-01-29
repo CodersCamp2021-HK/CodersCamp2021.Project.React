@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { GameEngineProvider, GlobalStyles } from './shared';
-import { GameUI, HomePage, LevelSelectPage } from './ui';
+import { GameUI, HomePage, LevelSelectPage, NotFound } from './ui';
 import './public/index.css';
 
 const App = () => {
@@ -46,6 +46,15 @@ ReactDOM.render(
             </>
           }
         /> */}
+        <Route
+          path='*'
+          element={
+            <>
+              <GlobalStyles />
+              <NotFound />
+            </>
+          }
+        />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
