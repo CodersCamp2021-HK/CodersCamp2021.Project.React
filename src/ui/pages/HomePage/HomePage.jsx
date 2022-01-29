@@ -37,7 +37,7 @@ const HomePage = () => {
     <main css={wrapper}>
       <PageHeader>King and Pigs</PageHeader>
       <section css={btnGroup}>
-        <Link to='/game'>
+        <Link to='/level-select'>
           <Button type='gold' onClick={() => {}}>
             start
           </Button>
