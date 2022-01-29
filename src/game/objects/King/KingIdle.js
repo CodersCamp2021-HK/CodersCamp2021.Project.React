@@ -19,9 +19,11 @@ class KingIdle extends KingAnimated {
    */
   update(frame) {
     if (this.king.keyboard.pressed('ArrowLeft')) {
+      this.king.flipLeft();
       return this.king.transitionState('runLeft').onUpdate(frame);
     }
     if (this.king.keyboard.pressed('ArrowRight')) {
+      this.king.flipRight();
       return this.king.transitionState('runRight').onUpdate(frame);
     }
     if (this.king.keyboard.pressed('x')) {

@@ -19,9 +19,11 @@ class KingFall extends KingAnimated {
       return this.king.transitionState('ground').onUpdate(frame);
     }
     if (this.king.keyboard.pressed('ArrowRight')) {
+      this.king.flipRight();
       this.king.rigidbody.velocity = this.king.rigidbody.velocity.setX(1);
     }
     if (this.king.keyboard.pressed('ArrowLeft')) {
+      this.king.flipLeft();
       this.king.rigidbody.velocity = this.king.rigidbody.velocity.setX(-1);
     }
     if (!this.king.keyboard.pressed('ArrowRight') && !this.king.keyboard.pressed('ArrowLeft')) {

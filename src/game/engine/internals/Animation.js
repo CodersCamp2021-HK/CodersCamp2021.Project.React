@@ -1,6 +1,8 @@
 class Animation {
   #isFinished = false;
 
+  #flipped = false;
+
   /**
    * @type {boolean | undefined}
    */
@@ -20,6 +22,21 @@ class Animation {
    */
   #sprite;
 
+  get sprite() {
+    return this.#sprite;
+  }
+
+  get isFinished() {
+    return this.#isFinished;
+  }
+
+  /**
+   * @param {boolean} b
+   */
+  set flipped(b) {
+    this.#flipped = b;
+  }
+
   /**
    * @param {number} animationInterval
    * @param {import('../../shared').Sprite[]} assets
@@ -32,14 +49,6 @@ class Animation {
     this.#sprite = this.#assets.length > 0 ? this.#assets[0] : undefined;
     this.#frameCount = 0;
     this.#doOnce = doOnce;
-  }
-
-  get sprite() {
-    return this.#sprite;
-  }
-
-  get isFinished() {
-    return this.#isFinished;
   }
 
   /**
@@ -58,7 +67,8 @@ class Animation {
         this.#frameCount = 0;
       }
     }
-    buffer.draw(position, this.#sprite);
+    const spriteToDraw = this.#flipped ? this.#nextSprite().flip() : this.#nextSprite();
+    buffer.draw(position, spriteToDraw);
   }
 
   #nextSprite() {
