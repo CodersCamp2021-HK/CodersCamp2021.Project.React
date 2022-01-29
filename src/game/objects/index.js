@@ -4,7 +4,7 @@ export * from './ObstaclesGenerator';
 export * from './Trex';
 export * from './TrexStatefull';
 // eslint-disable-next-line import/no-cycle
-export * from './King/King';
+export * from './King';
 // eslint-disable-next-line import/no-cycle
 export * from './SolidTile';
 export * from './BackgroundTiles';

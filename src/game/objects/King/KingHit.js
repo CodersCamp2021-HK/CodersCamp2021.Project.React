@@ -16,7 +16,10 @@ class KingHit extends KingAnimated {
    */
   update(frame) {
     if (this.king.animation.isFinished && !this.king.keyboard.pressed('h')) {
-      return this.king.transitionState('idle').onUpdate(frame);
+      if (this.king.isOnGround) {
+        return this.king.transitionState('idle').onUpdate(frame);
+      }
+      return this.king.transitionState('fall').onUpdate(frame);
     }
     return super.update(frame);
   }

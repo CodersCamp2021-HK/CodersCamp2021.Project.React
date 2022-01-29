@@ -31,15 +31,11 @@ class KingJump extends KingAnimated {
     }
     if (this.king.keyboard.pressed('x')) {
       if (this.king.canAttack) {
-        if (this.king.canAttack) {
-          this.king.delayAttack();
-          return this.king.transitionState('attack').onUpdate(frame);
-        }
+        this.king.delayAttack();
         return this.king.transitionState('attack').onUpdate(frame);
       }
       return super.update(frame);
     }
-
     return super.update(frame);
   }
 }
