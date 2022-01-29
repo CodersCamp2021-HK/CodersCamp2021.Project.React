@@ -56,9 +56,22 @@ const popupContainer = css({
   overflowY: 'auto',
 });
 
-const popupInner = css({
+const popupInnerControls = css({
   position: 'relative',
   width: 'clamp(1160px, 60vw, 1920px)',
+  border: `${POPUP_INNER_BORDER_WIDTH} solid`,
+  borderImageSlice: 1,
+  borderImageSource: theme.colors.gradient.steel,
+  backgroundColor: theme.colors.primary.main,
+  margin: '5rem 0',
+  '@media (max-width: 1200px)': {
+    width: '94%',
+  },
+});
+
+const popupInnerLevelEnd = css({
+  position: 'relative',
+  width: 'clamp(500px, 60vw, 660px)',
   border: `${POPUP_INNER_BORDER_WIDTH} solid`,
   borderImageSlice: 1,
   borderImageSource: theme.colors.gradient.steel,
@@ -94,27 +107,24 @@ const Popup = ({ open, children, onClose, variant }) => {
       ref={popupRef}
       onClick={(e) => (popupRef.current === e.target ? onClose() : '')}
     >
-      <div css={popupInner}>
-        {variant === 'Control' ? (
-          <>
-            <img src={steelDecorationUrl} css={[decoOne, decoration]} alt='' />
-            <img src={steelDecorationUrl} css={[decoTwo, decoration]} alt='' />
-            <img src={steelDecorationUrl} css={[decoThree, decoration]} alt='' />
-            <img src={steelDecorationUrl} css={[decoFour, decoration]} alt='' />
-          </>
-        ) : (
-          <>
-            <img src={steelDecorationUrl} css={[decoTwo, decoration]} alt='' />
-            <img src={steelDecorationUrl} css={[decoFour, decoration]} alt='' />
-          </>
-        )}
-        {variant === 'Control' ? (
+      {variant === 'Control' ? (
+        <div css={popupInnerControls}>
+          <img src={steelDecorationUrl} css={[decoOne, decoration]} alt='' />
+          <img src={steelDecorationUrl} css={[decoTwo, decoration]} alt='' />
+          <img src={steelDecorationUrl} css={[decoThree, decoration]} alt='' />
+          <img src={steelDecorationUrl} css={[decoFour, decoration]} alt='' />
           <div css={btnContainer}>
             <CloseButton onClose={onClose} />
           </div>
-        ) : null}
-        <div>{children}</div>
-      </div>
+          <div>{children}</div>
+        </div>
+      ) : (
+        <div css={popupInnerLevelEnd}>
+          <img src={steelDecorationUrl} css={[decoTwo, decoration]} alt='' />
+          <img src={steelDecorationUrl} css={[decoFour, decoration]} alt='' />
+          <div>{children}</div>
+        </div>
+      )}
     </div>,
     portal,
   );
