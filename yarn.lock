@@ -5899,6 +5899,7 @@ __metadata:
     prettier: ^2.5.1
     react: ^17.0.2
     react-dom: ^17.0.2
+    react-router-dom: 6
     vite: ^2.7.10
   languageName: unknown
   linkType: soft
@@ -13210,7 +13211,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:^6.0.0":
+"react-router-dom@npm:6, react-router-dom@npm:^6.0.0":
   version: 6.2.1
   resolution: "react-router-dom@npm:6.2.1"
   dependencies:
