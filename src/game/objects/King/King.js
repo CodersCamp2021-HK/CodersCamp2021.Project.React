@@ -47,14 +47,17 @@ class King extends GameObject {
 
   /**
    * @param {Object} props
-   * @param {Vector} props.initialPos
+   * @param {Vector} props.position
    */
-  onActivate({ initialPos }) {
+  onActivate({ position }) {
     this.#state = new KingDoorOut(this);
     this.rigidbody.addGravity();
-    this.transform.origin = initialPos ?? Vector.Zero;
-    this.transform.width = this.animation.sprite?.width ?? 0;
-    this.transform.height = this.animation.sprite?.height ?? 0;
+
+    const width = this.animation.sprite?.width ?? 0;
+    const height = this.animation.sprite?.height ?? 0;
+    this.transform.origin = position.add(new Vector(width / 2, 0));
+    this.transform.width = width;
+    this.transform.height = height;
     this.setCollider(BoxCollider, [new Vector(0, 0)]);
   }
 
