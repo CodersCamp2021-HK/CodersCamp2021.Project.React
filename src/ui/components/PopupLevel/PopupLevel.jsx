@@ -15,7 +15,7 @@ const box = css`
 const img = css`
   width: 17.5rem;
   height: 13rem;
-  margin-bottom: 6rem;
+  margin-bottom: 3rem;
   margin-top: 2rem;
 `;
 
