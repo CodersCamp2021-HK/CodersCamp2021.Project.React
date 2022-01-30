@@ -10,6 +10,8 @@ const valueTheme = {
     },
     text: {
       primary: '#3f3851',
+      secondary1: '#92532f',
+      secondary2: '#48c38a',
     },
     background: {
       solid: '#3f3851',
