@@ -38,17 +38,13 @@ const HomePage = () => {
       <PageHeader>King and Pigs</PageHeader>
       <section css={btnGroup}>
         <Link to='/level-select'>
-          <Button type='gold' onClick={() => {}}>
-            start
-          </Button>
+          <Button type='gold'>start</Button>
         </Link>
         <Button type='silver' onClick={handleOpen}>
           Controls
         </Button>
         <Link to='/credits'>
-          <Button type='silver' onClick={() => {}}>
-            Credits
-          </Button>
+          <Button type='silver'>Credits</Button>
         </Link>
         <PopupControls open={open} onClose={handleClose} />
       </section>

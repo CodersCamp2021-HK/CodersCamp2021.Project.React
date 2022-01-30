@@ -7,7 +7,7 @@ const BUTTON_WIDTH_SIZE = '12.75rem';
 const BUTTON_FONT_SIZE = '0.8rem';
 
 /**
- * @param {{ children: React.ReactNode, type: 'silver' | 'gold', onClick: () => void }} props
+ * @param {{ children: React.ReactNode, type: 'silver' | 'gold', onClick?: () => void }} props
  */
 const Button = ({ children, type, onClick }) => {
   return (
