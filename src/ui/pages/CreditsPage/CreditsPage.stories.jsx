@@ -1,3 +1,4 @@
+import { MemoryRouter } from 'react-router-dom';
 import { CreditsPage } from './CreditsPage';
 
 export default {
@@ -8,4 +9,8 @@ export default {
   },
 };
 
-export const Credits = () => <CreditsPage />;
+export const Credits = () => (
+  <MemoryRouter>
+    <CreditsPage />
+  </MemoryRouter>
+);

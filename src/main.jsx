@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { GameEngineProvider, GlobalStyles } from './shared';
-import { GameUI, HomePage, LevelSelectPage, NotFound } from './ui';
+import { GameUI, HomePage, LevelSelectPage, CreditsPage, NotFound } from './ui';
 import './public/index.css';
 
 const App = () => {
@@ -24,16 +24,7 @@ ReactDOM.render(
           }
         />
         <Route path='level-select' element={<LevelSelectPage />} />
-        {/* comment out when credits page is done */}
-        {/* <Route
-          path='credits'
-          element={
-            <>
-              <GlobalStyles />
-              <Credits />
-            </>
-          }
-        /> */}
+        <Route path='credits' element={<CreditsPage />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>
