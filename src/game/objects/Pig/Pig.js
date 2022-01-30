@@ -1,40 +1,46 @@
 import { BoxCollider, GameObject } from '../../engine';
 import { AssetsManager } from '../../assets';
 import { Vector } from '../../shared';
+import { PigIdle } from './PigIdle';
 // eslint-disable-next-line import/no-cycle
 import { SolidTile } from '../SolidTile';
 
-const ANIMATION_INTERVAL = 6;
+const PIG_ANIMATION_INTERVAL = 10;
+const PIG_MAX_HP = 100;
+const PIG_DEFAULT_FACING = 'left';
 
 class Pig extends GameObject {
+  /** @type {import('./PigState').PigState} */
+  #state = new PigIdle(this);
+
+  /** @type {'left' | 'right'} */
+  #facing = PIG_DEFAULT_FACING;
+
   #isStanding = false;
 
-  /** @type {'idle' | 'fall'} */
-  #state = 'fall';
+  #kingWasSpotted = false;
+
+  #hp = PIG_MAX_HP;
 
   /**
-   * @param {{ initialPos: Vector }} props
+   * @param {{ initialPos: Vector, facing?: 'left' | 'right' }} props
    */
-  onActivate({ initialPos }) {
-    this.animation.reset(ANIMATION_INTERVAL, AssetsManager.pig[this.#state]);
-
+  onActivate({ initialPos, facing }) {
     this.transform.origin = initialPos ?? Vector.Zero;
-    this.transform.width = this.#sprite.width;
-    this.transform.height = this.#sprite.height;
+    this.transform.width = 34;
+    this.transform.height = 28;
+    this.#facing = facing ?? PIG_DEFAULT_FACING;
+    this.animation.reset(PIG_ANIMATION_INTERVAL, AssetsManager.pig.idle);
 
     this.rigidbody.addGravity();
-
     this.setCollider(BoxCollider, [new Vector(24, 18), new Vector(5, 10)]);
   }
 
-  onUpdate() {
-    const previousState = this.#state;
-    this.#state = this.#isStanding ? 'idle' : 'fall';
-
-    if (this.#state !== previousState) {
-      this.animation.reset(ANIMATION_INTERVAL, AssetsManager.pig[this.#state]);
-    }
-
+  /**
+   * @param {import('../../shared/Frame').Frame} frame
+   */
+  onUpdate(frame) {
+    this.#state.update(frame);
     this.#isStanding = false;
   }
 
@@ -46,10 +52,6 @@ class Pig extends GameObject {
     if (target instanceof SolidTile && collision.resolutionVector.y < 0) {
       this.#isStanding = true;
     }
-  }
-
-  get #sprite() {
-    return /** @type {import('../../shared').Sprite} */ (this.animation.sprite);
   }
 }
 
