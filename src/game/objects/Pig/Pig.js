@@ -1,8 +1,8 @@
-import { BoxCollider, GameObject } from '../engine';
-import { AssetsManager } from '../assets';
-import { Vector } from '../shared';
+import { BoxCollider, GameObject } from '../../engine';
+import { AssetsManager } from '../../assets';
+import { Vector } from '../../shared';
 // eslint-disable-next-line import/no-cycle
-import { SolidTile } from './SolidTile';
+import { SolidTile } from '../SolidTile';
 
 const ANIMATION_INTERVAL = 6;
 
@@ -39,7 +39,7 @@ class Pig extends GameObject {
   }
 
   /**
-   * @param {import('../shared').Collision} collision
+   * @param {import('../../shared').Collision} collision
    * @param {GameObject} target
    */
   onCollision(collision, target) {
@@ -49,7 +49,7 @@ class Pig extends GameObject {
   }
 
   get #sprite() {
-    return /** @type {import('../shared').Sprite} */ (this.animation.sprite);
+    return /** @type {import('../../shared').Sprite} */ (this.animation.sprite);
   }
 }
 
