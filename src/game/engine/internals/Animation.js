@@ -1,4 +1,13 @@
 class Animation {
+  #isFinished = false;
+
+  #flipped = false;
+
+  /**
+   * @type {boolean | undefined}
+   */
+  #doOnce;
+
   #frameCount = 0;
 
   #animationInterval = 0;
@@ -13,20 +22,33 @@ class Animation {
    */
   #sprite;
 
+  get sprite() {
+    return this.#sprite;
+  }
+
+  get isFinished() {
+    return this.#isFinished;
+  }
+
+  /**
+   * @param {boolean} b
+   */
+  set flipped(b) {
+    this.#flipped = b;
+  }
+
   /**
    * @param {number} animationInterval
    * @param {import('../../shared').Sprite[]} assets
+   * @param {boolean} doOnce
    */
-  reset(animationInterval, assets) {
+  reset(animationInterval, assets, doOnce = false) {
     this.#animationInterval = animationInterval;
     this.#assets = assets;
     // eslint-disable-next-line prefer-destructuring
     this.#sprite = this.#assets.length > 0 ? this.#assets[0] : undefined;
     this.#frameCount = 0;
-  }
-
-  get sprite() {
-    return this.#sprite;
+    this.#doOnce = doOnce;
   }
 
   /**
@@ -37,10 +59,16 @@ class Animation {
     if (!this.#sprite) return;
     this.#frameCount += 1;
     if (this.#frameCount === this.#animationInterval) {
-      this.#sprite = this.#nextSprite();
-      this.#frameCount = 0;
+      if (this.#nextSprite() === this.#assets[0] && this.#doOnce) {
+        this.#isFinished = true;
+      } else {
+        this.#isFinished = false;
+        this.#sprite = this.#nextSprite();
+        this.#frameCount = 0;
+      }
     }
-    buffer.draw(position, this.#sprite);
+    const spriteToDraw = this.#flipped ? this.#sprite.flip() : this.#sprite;
+    buffer.draw(position, spriteToDraw);
   }
 
   #nextSprite() {
