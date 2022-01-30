@@ -67,7 +67,7 @@ class Animation {
         this.#frameCount = 0;
       }
     }
-    const spriteToDraw = this.#flipped ? this.#nextSprite().flip() : this.#nextSprite();
+    const spriteToDraw = this.#flipped ? this.#sprite.flip() : this.#sprite;
     buffer.draw(position, spriteToDraw);
   }
 
