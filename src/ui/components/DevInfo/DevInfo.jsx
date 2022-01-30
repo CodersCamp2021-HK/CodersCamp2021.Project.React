@@ -19,20 +19,17 @@ const infoContainer = css`
   flex-direction: column;
   justify-content: center;
   font-family: ${theme.fontFamily.primary};
-  h2 {
-    color: ${theme.colors.text.secondary};
-  }
 `;
 
 /**
- * @param {{ image: string, name: string, devRole: string }} props
+ * @param {{ image: string, name: string, devRole: string, special: boolean }} props
  * */
-const DevInfo = ({ image, name, devRole }) => {
+const DevInfo = ({ image, name, devRole, special = false }) => {
   return (
     <div css={container}>
       <img src={image} alt={name} css={devImage} />
       <div css={infoContainer}>
-        <h2>{name}</h2>
+        <h2 css={{ color: special ? theme.colors.text.secondary2 : theme.colors.text.secondary1 }}>{name}</h2>
         <p>{devRole}</p>
       </div>
     </div>

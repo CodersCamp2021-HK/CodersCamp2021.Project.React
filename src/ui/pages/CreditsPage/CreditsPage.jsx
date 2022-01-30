@@ -7,6 +7,7 @@ import jsUrl from '../../../public/img/js_pixel.png';
 import tcUrl from '../../../public/img/tc_pixel.png';
 import kdUrl from '../../../public/img/kd_pixel.png';
 import hkUrl from '../../../public/img/hk_pixel.png';
+import logoUrl from '../../../public/img/coderscamp_logo.png';
 
 const wrapper = css`
   min-height: 100vh;
@@ -38,6 +39,30 @@ const infoContainer = css`
   justify-content: space-between;
 `;
 
+const info = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const thanks = css`
+  :not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+  line-height: 1.6;
+  font-family: ${theme.fontFamily.primary};
+  h2 {
+    color: ${theme.colors.text.secondary2};
+  }
+  img {
+    margin: 0.5rem 0;
+  }
+  a {
+    color: ${theme.colors.primary.main};
+    text-decoration: underline;
+  }
+`;
+
 const buttonWrapper = css`
   position: absolute;
   width: ${BUTTON_WIDTH_SIZE};
@@ -55,14 +80,33 @@ const CreditsPage = () => {
       <div css={creditsWrapper}>
         <section css={credits}>
           <div css={infoContainer}>
-            <div>
+            <div css={info}>
               <DevInfo image={mmUrl} name='Marta Mejer' devRole='Tech lead, Programmer' />
               <DevInfo image={jsUrl} name='Justyna Skrajna' devRole='Game designer, Programmer' />
               <DevInfo image={tcUrl} name='Tomasz Chojnacki' devRole='Project manager, Programmer' />
               <DevInfo image={kdUrl} name='Kamil Dudek' devRole='Scrum master, Programmer' />
             </div>
-            <div>
-              <DevInfo image={hkUrl} name='Hubert Kawałek' devRole='Game coordinator, Programmer' />
+            <div css={info}>
+              <DevInfo image={hkUrl} name='Hubert Kawałek' devRole='Game coordinator, Programmer' special='true' />
+              <div css={thanks}>
+                <h2>Special thanks to</h2>
+                <img src={logoUrl} alt='Coders Camp Logo' />
+                <p>for learning experience</p>
+              </div>
+              <div css={thanks}>
+                <h2>Many thanks to assets author</h2>
+                <a href='https://pixelfrog-assets.itch.io/kings-and-pigs' target='_blank' rel='noreferrer'>
+                  Author&apos;s page
+                </a>
+                <br />
+                <a
+                  href='https://github.com/CodersCamp2021-HK/CodersCamp2021.Project.React'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  Repository page
+                </a>
+              </div>
             </div>
           </div>
           <div css={buttonWrapper}>
