@@ -77,9 +77,6 @@ const popupInnerLevelEnd = css({
   borderImageSource: theme.colors.gradient.steel,
   backgroundColor: theme.colors.primary.main,
   margin: '5rem 0',
-  '@media (max-width: 1200px)': {
-    width: '94%',
-  },
 });
 
 /**
