@@ -1,41 +1,44 @@
 import { css } from '@emotion/react';
-import { useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { useGameEngine, UIProxy } from '../../shared';
+import { useLayoutEffect, useMemo, useRef, useEffect } from 'react';
+import { useGameEngine, UIProxy, theme } from '../../shared';
+import backgroundUrl from '../../public/img/background.jpg';
+import { PageHeader } from '../components';
 
-const btn = css({
-  border: '1px black solid',
-  padding: '5px 15px',
-  '&:hover': {
-    background: '#e1e1e1',
-  },
-});
+const wrapper = css`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: ${theme.colors.background.solid} url(${backgroundUrl}) center center / cover;
+`;
+
+const gameBorder = css`
+  width: 100%;
+  max-width: max(min(50vw, 1080px), 1076px);
+  max-height: 1000vh;
+  overflow-y: auto;
+  border: 1rem solid ${theme.colors.primary.main};
+  display: flex;
+  place-items: center;
+  background: ${theme.colors.background.transparent};
+`;
 
 const GameUI = () => {
   const gameEngine = useGameEngine();
-  const [running, setRunning] = useState(false);
-  const [lose, setLose] = useState(false);
-  const [distance, setDistance] = useState(0);
+
+  useEffect(() => {
+    gameEngine.start();
+  }, [gameEngine]);
 
   /** @type {React.MutableRefObject<HTMLCanvasElement | null>} */
   const ref = useRef(null);
 
-  const reset = () => {
-    gameEngine.reset();
-    setRunning(false);
-    setLose(false);
-    setDistance(0);
-  };
-
   const uiProxy = useMemo(
     () =>
-      new UIProxy(
-        (val) => setDistance(val),
-        () => {
-          setLose(true);
-          gameEngine.stop();
-          setRunning(false);
-        },
-      ),
+      new UIProxy(() => {
+        gameEngine.stop();
+      }),
     [gameEngine],
   );
 
@@ -46,45 +49,11 @@ const GameUI = () => {
   }, [gameEngine, uiProxy]);
 
   return (
-    <div css={{ display: 'flex', flexDirection: 'column', gap: '10px', margin: '20px', height: '300px' }}>
-      <div css={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-        {running ? (
-          <button
-            css={btn}
-            type='button'
-            onClick={() => {
-              gameEngine.stop();
-              setRunning(false);
-            }}
-          >
-            Stop
-          </button>
-        ) : (
-          <button
-            css={btn}
-            type='button'
-            onClick={() => {
-              if (lose) {
-                reset();
-              }
-              gameEngine.start();
-              setRunning(true);
-            }}
-          >
-            Start
-          </button>
-        )}
-        <button css={btn} type='button' onClick={reset}>
-          Reset
-        </button>
-        <span>Distance: {distance}</span>
+    <div css={wrapper}>
+      <PageHeader>Level 1</PageHeader>{' '}
+      <div css={gameBorder}>
+        <canvas css={{ width: '1024px', height: '608px' }} height={608} width={1024} id='GameCanvas' ref={ref} />
       </div>
-      {lose && (
-        <span css={{ fontSize: '35px', textTransform: 'uppercase', position: 'absolute', left: '190px', top: '110px' }}>
-          You Lose
-        </span>
-      )}
-      <canvas css={{ width: '512px', height: '512px' }} height={512} width={512} id='GameCanvas' ref={ref} />
     </div>
   );
 };
