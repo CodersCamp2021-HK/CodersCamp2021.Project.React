@@ -26,9 +26,7 @@ const NotFound = () => {
         Sorry, there&apos;s nothing here
       </h1>
       <Link to='/'>
-        <Button type='silver' onClick={() => {}}>
-          go back to homepage
-        </Button>
+        <Button type='silver'>go back to homepage</Button>
       </Link>
     </main>
   );
