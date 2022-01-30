@@ -37,22 +37,37 @@ const infoContainer = css`
   margin: 1.85rem 2.54rem 3.54rem 2.54rem;
   display: flex;
   justify-content: space-between;
+
+  @media screen and (max-width: 576px) {
+    flex-direction: column;
+  }
 `;
 
 const info = css`
+  :not(:last-child) {
+    margin-right: 1rem;
+  }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media screen and (max-width: 576px) {
+    :not(:last-child) {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
+  }
 `;
 
 const thanks = css`
   :not(:last-child) {
     margin-bottom: 0.5rem;
   }
-  line-height: 1.6;
   font-family: ${theme.fontFamily.primary};
+  line-height: 1.6;
+
   h2 {
-    color: ${theme.colors.text.secondary2};
+    -webkit-text-stroke: 0.04rem ${theme.colors.text.secondary2};
   }
   img {
     margin: 0.5rem 0;
@@ -87,7 +102,7 @@ const CreditsPage = () => {
               <DevInfo image={kdUrl} name='Kamil Dudek' devRole='Scrum master, Programmer' />
             </div>
             <div css={info}>
-              <DevInfo image={hkUrl} name='Hubert Kawałek' devRole='Game coordinator, Programmer' special='true' />
+              <DevInfo image={hkUrl} name='Hubert Kawałek' devRole='Game coordinator, Programmer' special />
               <div css={thanks}>
                 <h2>Special thanks to</h2>
                 <img src={logoUrl} alt='Coders Camp Logo' />
@@ -111,7 +126,7 @@ const CreditsPage = () => {
           </div>
           <div css={buttonWrapper}>
             <Button type='silver' onClick={() => {}}>
-              homepage
+              go back to homepage
             </Button>
           </div>
         </section>

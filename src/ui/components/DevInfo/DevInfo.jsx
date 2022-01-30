@@ -22,14 +22,22 @@ const infoContainer = css`
 `;
 
 /**
- * @param {{ image: string, name: string, devRole: string, special: boolean }} props
+ * @param {{ image: string, name: string, devRole: string, special?: boolean }} props
  * */
 const DevInfo = ({ image, name, devRole, special = false }) => {
   return (
     <div css={container}>
       <img src={image} alt={name} css={devImage} />
       <div css={infoContainer}>
-        <h2 css={{ color: special ? theme.colors.text.secondary2 : theme.colors.text.secondary1 }}>{name}</h2>
+        <h2
+          css={{
+            WebkitTextStroke: special
+              ? `0.04rem ${theme.colors.text.secondary2}`
+              : `0.04rem ${theme.colors.text.secondary1}`,
+          }}
+        >
+          {name}
+        </h2>
         <p>{devRole}</p>
       </div>
     </div>
