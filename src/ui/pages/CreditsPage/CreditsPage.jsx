@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { Link } from 'react-router-dom';
 import { theme } from '../../../shared/theme';
 import { PageHeader, Button, BUTTON_WIDTH_SIZE, BUTTON_HEIGHT_SIZE, DevInfo } from '../../components';
 import backgroundUrl from '../../../public/img/background.jpg';
@@ -118,9 +119,9 @@ const CreditsPage = () => {
           </div>
         </div>
         <div css={buttonWrapper}>
-          <Button type='silver' onClick={() => {}}>
-            go back to homepage
-          </Button>
+          <Link to='/'>
+            <Button type='silver'>go back to homepage</Button>
+          </Link>
         </div>
       </section>
     </main>

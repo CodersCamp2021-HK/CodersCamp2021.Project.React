@@ -1,16 +1,16 @@
 import { MemoryRouter } from 'react-router-dom';
-import { CreditsPage } from './CreditsPage';
+import { NotFound } from '.';
 
 export default {
-  title: 'Pages/Credits',
-  component: CreditsPage,
+  title: 'Pages/Not Found',
+  component: NotFound,
   parameters: {
     layout: 'fullscreen',
   },
 };
 
-export const Credits = () => (
+export const NotFoundPage = () => (
   <MemoryRouter>
-    <CreditsPage />
+    <NotFound />
   </MemoryRouter>
 );

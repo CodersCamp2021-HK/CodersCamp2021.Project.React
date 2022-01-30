@@ -1,16 +1,16 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { LevelSelectPage } from './LevelSelectPage';
+import { NotFound } from './NotFoundPage';
 
-describe('LevelSelectPage', () => {
+describe('NotFoundPage', () => {
   it('should render the page', () => {
     render(
       <MemoryRouter>
-        <LevelSelectPage />
+        <NotFound />
       </MemoryRouter>,
     );
 
-    const header = screen.getByRole('heading', { name: 'Level Select' });
+    const header = screen.getByRole('heading', { name: "Sorry, there's nothing here" });
     expect(header).toBeInTheDocument();
   });
 });

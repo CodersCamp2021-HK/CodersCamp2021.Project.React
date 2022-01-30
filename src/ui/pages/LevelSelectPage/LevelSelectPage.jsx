@@ -1,5 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/react';
+import { Link } from 'react-router-dom';
 import { theme } from '../../../shared/theme';
 import { PageHeader, LevelButton, LEVEL_BUTTON_SIZE } from '../../components';
 import { scenes } from '../../../game/scenes';
@@ -46,13 +47,14 @@ const LevelSelectPage = () => {
           const levelNumber = i + 1;
 
           return (
-            <LevelButton
-              key={levelNumber}
-              type={selected === levelNumber ? 'selected' : 'unlocked'}
-              onSelect={() => setSelected(levelNumber)}
-            >
-              {levelNumber}
-            </LevelButton>
+            <Link to='/game' key={levelNumber}>
+              <LevelButton
+                type={selected === levelNumber ? 'selected' : 'unlocked'}
+                onSelect={() => setSelected(levelNumber)}
+              >
+                {levelNumber}
+              </LevelButton>
+            </Link>
           );
         })}
       </section>

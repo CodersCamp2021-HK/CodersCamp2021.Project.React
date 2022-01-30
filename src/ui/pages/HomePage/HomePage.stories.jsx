@@ -1,3 +1,4 @@
+import { MemoryRouter } from 'react-router-dom';
 import { HomePage } from './HomePage';
 
 export default {
@@ -8,4 +9,8 @@ export default {
   },
 };
 
-export const Home = () => <HomePage />;
+export const Home = () => (
+  <MemoryRouter>
+    <HomePage />
+  </MemoryRouter>
+);
