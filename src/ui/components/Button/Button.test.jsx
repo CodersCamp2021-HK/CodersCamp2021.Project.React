@@ -3,11 +3,7 @@ import { Button } from './Button';
 
 describe('Button', () => {
   it('should render the button', () => {
-    render(
-      <Button type='silver' onClick={() => {}}>
-        Sterowanie
-      </Button>,
-    );
+    render(<Button type='silver'>Sterowanie</Button>);
 
     const button = screen.getByRole('button', { name: 'Sterowanie' });
     expect(button).toBeInTheDocument();

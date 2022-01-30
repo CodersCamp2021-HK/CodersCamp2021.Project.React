@@ -150,7 +150,7 @@ const exampleImg = css({
 
 const PopupControls = ({ open, onClose }) => {
   return (
-    <Popup open={open} onClose={onClose}>
+    <Popup open={open} onClose={onClose} variant='Control'>
       <img src={steelDecorationUrl} css={[deco, decoration]} alt='' />
       <div css={heading1}>Controls</div>
       <div css={content}>

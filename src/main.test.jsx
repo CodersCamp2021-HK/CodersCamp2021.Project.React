@@ -1,3 +1,5 @@
+import { act } from 'react-dom/test-utils';
+
 describe('main', () => {
   beforeEach(async () => {
     const root = document.createElement('div');
@@ -15,7 +17,9 @@ describe('main', () => {
     expect(root.children).toHaveLength(0);
 
     // When
-    await import('./main');
+    await act(async () => {
+      await import('./main');
+    });
 
     // Then
     expect(root.children).not.toHaveLength(0);
