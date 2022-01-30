@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { AssetsManager } from '../../assets';
 import { GameScene } from '../../engine';
-import { BackgroundTiles, Door, SolidTile } from '../../objects';
+import { BackgroundTiles, Door, SolidTile, King } from '../../objects';
 import { Vector } from '../../shared';
 import { patternsMatch, stringToCharMatrix, TILE_SIZE } from './levelUtils';
 import { tileRules } from './tileRules';
@@ -114,7 +114,11 @@ class LevelScene extends GameScene {
       },
     });
 
-    // TODO: Spawn player at this.#findSpecialTile('S')
+    this.create(King, {
+      args: {
+        position: this.#findSpecialTile('S')?.scale(TILE_SIZE) ?? Vector.Zero,
+      },
+    });
   }
 }
 
