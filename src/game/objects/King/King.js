@@ -45,6 +45,16 @@ class King extends GameObject {
     }, this.#attackDelay);
   }
 
+  flipRight() {
+    this.animation.flipped = false;
+    this.setCollider(BoxCollider, [new Vector(15, 26), new Vector(24, 20)]);
+  }
+
+  flipLeft() {
+    this.animation.flipped = true;
+    this.setCollider(BoxCollider, [new Vector(15, 26), new Vector(38, 20)]);
+  }
+
   /**
    * @param {Object} props
    * @param {Vector} props.position
