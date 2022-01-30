@@ -5,10 +5,25 @@ import { tilesetRowCount } from '../scenes/LevelScene/tileRules';
 import doorUrl from './door.png';
 import spritesUrl from './sprites.png';
 import tilesetUrl from './tileset.png';
+import kingUrl from './king.png';
+import pigUrl from './pig.png';
 
-const scale = 0.5;
+const scale = 2;
 
 const AssetsManager = Object.freeze({
+  king: {
+    doorIn: _.times(8, (x) => new Sprite(kingUrl, new Crop(new Vector(78 * x, 0), 78, 58))),
+    doorOut: _.times(8, (x) => new Sprite(kingUrl, new Crop(new Vector(624 + 78 * x, 0), 78, 58))),
+    fall: [new Sprite(kingUrl, new Crop(new Vector(1248, 0), 78, 58))],
+    ground: [new Sprite(kingUrl, new Crop(new Vector(1326, 0), 78, 58))],
+    hit: _.times(2, (x) => new Sprite(kingUrl, new Crop(new Vector(1404 + 78 * x, 0), 78, 58))),
+    idle: _.times(11, (x) => new Sprite(kingUrl, new Crop(new Vector(1560 + 78 * x, 0), 78, 58))),
+    jump: [new Sprite(kingUrl, new Crop(new Vector(2418, 0), 78, 58))],
+    run: _.times(8, (x) => new Sprite(kingUrl, new Crop(new Vector(2496 + 78 * x, 0), 78, 58))),
+    attack: _.times(3, (x) => new Sprite(kingUrl, new Crop(new Vector(3120 + 78 * x, 0), 78, 58))),
+    dead: _.times(4, (x) => new Sprite(kingUrl, new Crop(new Vector(3354 + 78 * x, 0), 78, 58))),
+  },
+
   trexJump: new Sprite(spritesUrl, new Crop(new Vector(1678, 2), 88, 94), scale),
   trexColision: new Sprite(spritesUrl, new Crop(new Vector(2030, 2), 88, 94), scale),
   trexRun1: new Sprite(spritesUrl, new Crop(new Vector(1854, 2), 88, 94), scale),
@@ -26,6 +41,16 @@ const AssetsManager = Object.freeze({
     ),
   ),
   door: new Sprite(doorUrl, new Crop(new Vector(0, 0), 46, 56)),
+  pig: {
+    idle: _.times(11, (x) => new Sprite(pigUrl, new Crop(new Vector(34 * x, 0), 34, 28))),
+    jump: new Sprite(pigUrl, new Crop(new Vector(0, 28), 34, 28)),
+    fall: [new Sprite(pigUrl, new Crop(new Vector(34, 28), 34, 28))],
+    ground: new Sprite(pigUrl, new Crop(new Vector(68, 28), 34, 28)),
+    run: _.times(6, (x) => new Sprite(pigUrl, new Crop(new Vector(34 * x, 56), 34, 28))),
+    attack: _.times(5, (x) => new Sprite(pigUrl, new Crop(new Vector(34 * x, 84), 34, 28))),
+    hit: _.times(2, (x) => new Sprite(pigUrl, new Crop(new Vector(34 * x, 112), 34, 28))),
+    dead: _.times(4, (x) => new Sprite(pigUrl, new Crop(new Vector(68 + 34 * x, 112), 34, 28))),
+  },
 });
 
 export { AssetsManager };

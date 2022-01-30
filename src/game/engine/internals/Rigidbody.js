@@ -1,6 +1,6 @@
 import { Vector } from '../../shared';
 
-const GRAVITY_ACCELERATION = 0.02;
+const GRAVITY_ACCELERATION = 0.2;
 const GRAVITY_VECTOR = new Vector(0, GRAVITY_ACCELERATION);
 class Rigidbody {
   #velocityVector = Vector.Zero;
@@ -9,6 +9,17 @@ class Rigidbody {
 
   addGravity() {
     this.addAcceleration(GRAVITY_VECTOR);
+  }
+
+  get velocity() {
+    return this.#velocityVector;
+  }
+
+  /**
+   * @param {import('../../shared').Vector} v
+   */
+  set velocity(v) {
+    this.#velocityVector = v;
   }
 
   /**

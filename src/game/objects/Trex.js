@@ -105,7 +105,7 @@ class Trex extends GameObject {
   }
 
   #updateCollider() {
-    /** @type {BoxCollider} */ (this.collider).box = new Vector(this.#sprite.width, this.#sprite.height);
+    /** @type {BoxCollider} */ (this.collider).dimensions = new Vector(this.#sprite.width, this.#sprite.height);
   }
 
   /**
