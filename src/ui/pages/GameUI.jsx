@@ -16,7 +16,7 @@ const wrapper = css`
 
 const gameBorder = css`
   width: 100%;
-  max-width: max(min(50vw, 1200px), 1200px);
+  max-width: max(min(50vw, 1080px), 1076px);
   max-height: 1000vh;
   overflow-y: auto;
 
@@ -103,7 +103,7 @@ const GameUI = () => {
         </span>
       )}
       <div css={gameBorder}>
-        <canvas css={{ width: '1150px', height: '512px' }} height={512} width={512} id='GameCanvas' ref={ref} />
+        <canvas css={{ width: '1024px', height: '608px' }} height={608} width={1024} id='GameCanvas' ref={ref} />
       </div>
     </div>
     // </div>
