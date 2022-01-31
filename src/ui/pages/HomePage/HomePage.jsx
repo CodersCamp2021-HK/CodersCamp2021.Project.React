@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { css } from '@emotion/react';
 import { theme } from '../../../shared/theme';
 import { PageHeader, Button, PopupControls } from '../../components';
@@ -36,15 +37,15 @@ const HomePage = () => {
     <main css={wrapper}>
       <PageHeader>King and Pigs</PageHeader>
       <section css={btnGroup}>
-        <Button type='gold' onClick={() => {}}>
-          start
-        </Button>
+        <Link to='/level-select'>
+          <Button type='gold'>start</Button>
+        </Link>
         <Button type='silver' onClick={handleOpen}>
           Controls
         </Button>
-        <Button type='silver' onClick={() => {}}>
-          Credits
-        </Button>
+        <Link to='/credits'>
+          <Button type='silver'>Credits</Button>
+        </Link>
         <PopupControls open={open} onClose={handleClose} />
       </section>
     </main>

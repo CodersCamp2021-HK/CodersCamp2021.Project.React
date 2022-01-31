@@ -1,16 +1,16 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { LevelSelectPage } from './LevelSelectPage';
+import { CreditsPage } from './CreditsPage';
 
-describe('LevelSelectPage', () => {
+describe('CreditsPage', () => {
   it('should render the page', () => {
     render(
       <MemoryRouter>
-        <LevelSelectPage />
+        <CreditsPage />
       </MemoryRouter>,
     );
 
-    const header = screen.getByRole('heading', { name: 'Level Select' });
+    const header = screen.getByRole('heading', { name: 'Credits' });
     expect(header).toBeInTheDocument();
   });
 });

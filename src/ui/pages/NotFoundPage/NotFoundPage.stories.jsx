@@ -1,16 +1,16 @@
 import { MemoryRouter } from 'react-router-dom';
-import { HomePage } from './HomePage';
+import { NotFound } from '.';
 
 export default {
-  title: 'Pages/Home',
-  component: HomePage,
+  title: 'Pages/Not Found',
+  component: NotFound,
   parameters: {
     layout: 'fullscreen',
   },
 };
 
-export const Home = () => (
+export const NotFoundPage = () => (
   <MemoryRouter>
-    <HomePage />
+    <NotFound />
   </MemoryRouter>
 );

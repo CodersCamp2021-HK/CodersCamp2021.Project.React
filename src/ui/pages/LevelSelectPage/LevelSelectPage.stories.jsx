@@ -1,3 +1,4 @@
+import { MemoryRouter } from 'react-router-dom';
 import { LevelSelectPage } from './LevelSelectPage';
 
 export default {
@@ -8,4 +9,8 @@ export default {
   },
 };
 
-export const LevelSelect = () => <LevelSelectPage />;
+export const LevelSelect = () => (
+  <MemoryRouter>
+    <LevelSelectPage />
+  </MemoryRouter>
+);
