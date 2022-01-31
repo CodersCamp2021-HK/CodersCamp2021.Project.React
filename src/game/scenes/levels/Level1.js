@@ -18,10 +18,7 @@ const Level1 = levelFrom({
   X.S.XXXXXXXXXXXX...............X
   X.S.XXXXXXXXXXXX...............X
   X.S.XXXXXX....................XX
-  X.S.XXXX.....XXX...............X
-  X.S.......XXXXXX...............X
-  X.S....XXXXXXXXX...............X
-  X.S.XXXXXXXXXXXX...............X
+  X..............................X
   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX`,
   additionalObjects: (create) => {
     create(Pig, new Vector(6, 2));
