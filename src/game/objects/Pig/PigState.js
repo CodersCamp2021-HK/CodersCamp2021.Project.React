@@ -1,3 +1,6 @@
+const PIG_ANIMATION_INTERVAL = 10;
+const PIG_DEFAULT_FACING = 'left';
+
 /**
  * @abstract
  */
@@ -6,13 +9,21 @@ class PigState {
 
   /**
    * @param {import('./Pig').Pig} pig
+   * @param {import('../../shared/Sprite').Sprite[]} sprites
+   * @param {boolean} doOnce
    */
-  constructor(pig) {
+  constructor(pig, sprites, doOnce = false) {
     if (this.constructor === PigState) {
       throw new Error('Abstract class constructor.');
     }
 
     this.#pig = pig;
+
+    pig.animation.reset(
+      PIG_ANIMATION_INTERVAL,
+      sprites.map((sprite) => (pig.facing === PIG_DEFAULT_FACING ? sprite : sprite.flip())),
+      doOnce,
+    );
   }
 
   get pig() {
@@ -26,4 +37,4 @@ class PigState {
   update(_frame) {}
 }
 
-export { PigState };
+export { PigState, PIG_DEFAULT_FACING };
