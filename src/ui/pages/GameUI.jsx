@@ -16,13 +16,8 @@ const wrapper = css`
 
 const gameBorder = css`
   position: relative;
-  width: 100%;
-  max-width: max(min(50vw, 1080px), 1076px);
-  max-height: 1000vh;
   border: 1rem solid ${theme.colors.primary.main};
-  display: flex;
-  place-items: center;
-  background: ${theme.colors.background.transparent};
+  margin-bottom: calc(${BUTTON_HEIGHT_SIZE} + 0.9rem);
 `;
 
 const buttonWrapper = css`
@@ -60,10 +55,10 @@ const GameUI = () => {
   }, [gameEngine, uiProxy]);
 
   return (
-    <div css={wrapper}>
+    <main css={wrapper}>
       <PageHeader>Level 1</PageHeader>{' '}
-      <div css={gameBorder}>
-        <canvas css={{ width: '1024px', height: '512' }} height={512} width={1024} id='GameCanvas' ref={ref} />
+      <section css={gameBorder}>
+        <canvas css={{ width: '65vw' }} height={512} width={1024} id='GameCanvas' ref={ref} />
 
         <div css={buttonWrapper}>
           <Link to='/'>
@@ -73,8 +68,8 @@ const GameUI = () => {
             </Button>
           </Link>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 
