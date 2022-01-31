@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { useLayoutEffect, useMemo, useRef, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useGameEngine, UIProxy, theme } from '../../shared';
 import backgroundUrl from '../../public/img/background.jpg';
 import { PageHeader } from '../components';
@@ -48,9 +49,11 @@ const GameUI = () => {
     }
   }, [gameEngine, uiProxy]);
 
+  const params = useParams();
+
   return (
     <div css={wrapper}>
-      <PageHeader>Level 1</PageHeader>{' '}
+      <PageHeader>Level {params.levelSelectId}</PageHeader>{' '}
       <div css={gameBorder}>
         <canvas css={{ width: '1024px', height: '608px' }} height={608} width={1024} id='GameCanvas' ref={ref} />
       </div>
