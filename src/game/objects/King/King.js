@@ -11,6 +11,7 @@ import { KingIdle } from './KingIdle';
 import { KingJump } from './KingJump';
 import { KingRunLeft } from './KingRunLeft';
 import { KingRunRight } from './KingRunRight';
+import { Door } from '../Door';
 // eslint-disable-next-line import/no-cycle
 import { SolidTile } from '../SolidTile';
 
@@ -65,7 +66,7 @@ class King extends GameObject {
 
     const width = this.animation.sprite?.width ?? 0;
     const height = this.animation.sprite?.height ?? 0;
-    this.transform.origin = position.add(new Vector(width / 3, 0));
+    this.transform.origin = position.add(new Vector(width / 3, 13));
     this.transform.width = width;
     this.transform.height = height;
     this.setCollider(BoxCollider, [new Vector(15, 26), new Vector(24, 20)]);
@@ -86,6 +87,9 @@ class King extends GameObject {
   onCollision(collision, target) {
     if (target instanceof SolidTile && collision.resolutionVector.y < 0) {
       this.#isOnGround = true;
+    } else if (target instanceof Door && !(this.#state instanceof KingDoorIn)) {
+      target.open();
+      this.transitionState('doorIn');
     }
   }
 
