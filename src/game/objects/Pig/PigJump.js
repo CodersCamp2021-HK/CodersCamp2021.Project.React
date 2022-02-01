@@ -1,12 +1,16 @@
 import { AssetsManager } from '../../assets';
+import { Vector } from '../../shared';
 import { PigState } from './PigState';
 
-class PigIdle extends PigState {
+const PIG_JUMP_IMPULSE = new Vector(0, -6);
+
+class PigJump extends PigState {
   /**
    * @param {import('./Pig').Pig} pig
    */
   constructor(pig) {
-    super(pig, AssetsManager.pig.idle);
+    super(pig, AssetsManager.pig.jump);
+    pig.rigidbody.addVelocity(PIG_JUMP_IMPULSE);
   }
 
   /**
@@ -15,10 +19,8 @@ class PigIdle extends PigState {
   update(_frame) {
     if (this.pig.isFalling) {
       this.pig.transitionState('fall');
-    } else if (this.pig.kingWasSpotted) {
-      this.pig.transitionState('run');
     }
   }
 }
 
-export { PigIdle };
+export { PigJump };

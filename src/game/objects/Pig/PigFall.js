@@ -14,7 +14,7 @@ class PigFall extends PigState {
    */
   update(_frame) {
     if (this.pig.isStanding) {
-      this.pig.transitionState('idle');
+      this.pig.transitionState('ground');
     }
   }
 }

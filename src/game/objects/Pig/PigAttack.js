@@ -1,24 +1,22 @@
 import { AssetsManager } from '../../assets';
 import { PigState } from './PigState';
 
-class PigIdle extends PigState {
+class PigAttack extends PigState {
   /**
    * @param {import('./Pig').Pig} pig
    */
   constructor(pig) {
-    super(pig, AssetsManager.pig.idle);
+    super(pig, AssetsManager.pig.attack, true);
   }
 
   /**
    * @param {import('../../shared').Frame} _frame
    */
   update(_frame) {
-    if (this.pig.isFalling) {
-      this.pig.transitionState('fall');
-    } else if (this.pig.kingWasSpotted) {
+    if (this.pig.animation.isFinished) {
       this.pig.transitionState('run');
     }
   }
 }
 
-export { PigIdle };
+export { PigAttack };
