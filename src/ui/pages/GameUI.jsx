@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { useLayoutEffect, useMemo, useRef, useEffect } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
+import { _ } from 'lodash';
 import { levels } from './LevelSelectPage/LevelSelectPage';
 import { useGameEngine, UIProxy, theme } from '../../shared';
 import backgroundUrl from '../../public/img/background.jpg';
@@ -57,9 +58,7 @@ const GameUI = () => {
   }, [gameEngine, uiProxy]);
 
   const levelExists = () => {
-    const levelsArray = Array(levels)
-      .fill()
-      .map((x, i) => i + 1);
+    const levelsArray = _.range(1, levels.length + 1);
 
     return levelsArray.includes(Number(params.levelSelectId));
   };
