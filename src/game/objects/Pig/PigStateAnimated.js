@@ -19,11 +19,7 @@ class PigStateAnimated {
 
     this.#pig = pig;
 
-    pig.animation.reset(
-      PIG_ANIMATION_INTERVAL,
-      sprites.map((sprite) => (pig.facing === PIG_DEFAULT_FACING ? sprite : sprite.flip())),
-      doOnce,
-    );
+    pig.animation.reset(PIG_ANIMATION_INTERVAL, sprites, doOnce);
   }
 
   get pig() {

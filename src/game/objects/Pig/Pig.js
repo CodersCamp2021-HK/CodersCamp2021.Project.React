@@ -13,6 +13,7 @@ import { PIG_DEFAULT_FACING } from './PigStateAnimated';
 import { SolidTile } from '../SolidTile';
 
 const PIG_MAX_HP = 100;
+const PIG_HALF_DETECTION_SIZE = new Vector(64, 32);
 
 const stateMap = Object.freeze({
   idle: PigIdle,
@@ -45,8 +46,15 @@ class Pig extends GameObject {
 
   #hp = PIG_MAX_HP;
 
+  /** @type {import('../King').King?} */
+  #king = null;
+
   get facing() {
     return this.#facing;
+  }
+
+  get #facingVector() {
+    return Vector.Zero.setX(this.#facing === 'left' ? -1 : 1);
   }
 
   get isStanding() {
@@ -65,10 +73,18 @@ class Pig extends GameObject {
     return this.rigidbody.velocity.y > 1;
   }
 
+  get king() {
+    return /** @type {import('../King').King} */ (this.#king);
+  }
+
+  get kingDirectionX() {
+    return Math.sign(this.king.transform.origin.subtract(this.transform.origin).x);
+  }
+
   /**
-   * @param {{ initialPos: Vector, facing?: 'left' | 'right' }} props
+   * @param {{ initialPos: Vector, level: import('../../scenes/LevelScene').LevelScene, facing?: 'left' | 'right' }} props
    */
-  onActivate({ initialPos, facing }) {
+  onActivate({ initialPos, level, facing }) {
     this.#state = new PigIdle(this);
 
     this.transform.origin = initialPos ?? Vector.Zero;
@@ -78,12 +94,32 @@ class Pig extends GameObject {
 
     this.rigidbody.addGravity();
     this.setCollider(BoxCollider, [new Vector(24, 18), new Vector(5, 10)]);
+
+    this.#king = level.king;
   }
 
   /**
    * @param {import('../../shared/Frame').Frame} frame
    */
   onUpdate(frame) {
+    if (!this.#kingWasSpotted) {
+      const detectionCenter = this.transform.origin.add(this.#facingVector.scale(PIG_HALF_DETECTION_SIZE.x));
+      const detectionTopLeft = detectionCenter.subtract(PIG_HALF_DETECTION_SIZE);
+      const detectionBottomRight = detectionCenter.add(PIG_HALF_DETECTION_SIZE);
+
+      if (
+        detectionTopLeft.x <= this.king.transform.origin.x &&
+        this.king.transform.origin.x <= detectionBottomRight.x &&
+        detectionTopLeft.y <= this.king.transform.origin.y &&
+        this.king.transform.origin.y <= detectionBottomRight.y
+      ) {
+        this.#kingWasSpotted = true;
+      }
+    } else {
+      this.#facing = this.kingDirectionX <= 0 ? 'left' : 'right';
+      this.animation.flipped = this.#facing !== PIG_DEFAULT_FACING;
+    }
+
     this.#state?.update(frame);
     this.#isStanding = false;
   }

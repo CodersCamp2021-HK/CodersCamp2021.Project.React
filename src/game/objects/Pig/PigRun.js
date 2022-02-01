@@ -1,6 +1,9 @@
 import { AssetsManager } from '../../assets';
 import { PigStateAnimated } from './PigStateAnimated';
 
+const PIG_RUNNING_SPEED = 1.5;
+const PIG_JUMP_THRESHOLD = 32;
+
 class PigRun extends PigStateAnimated {
   /**
    * @param {import('./Pig').Pig} pig
@@ -13,12 +16,12 @@ class PigRun extends PigStateAnimated {
    * @param {import('../../shared').Frame} _frame
    */
   update(_frame) {
-    // TODO: running logic
+    this.pig.rigidbody.velocity = this.pig.rigidbody.velocity.setX(this.pig.kingDirectionX * PIG_RUNNING_SPEED);
 
     if (this.pig.isFalling) {
       this.pig.transitionState('fall');
-    } else {
-      // TODO: attacking logic
+    } else if (this.pig.transform.origin.y - this.pig.king.transform.origin.y > PIG_JUMP_THRESHOLD) {
+      this.pig.transitionState('jump');
     }
   }
 }

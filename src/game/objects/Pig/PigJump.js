@@ -2,7 +2,8 @@ import { AssetsManager } from '../../assets';
 import { Vector } from '../../shared';
 import { PigStateAnimated } from './PigStateAnimated';
 
-const PIG_JUMP_IMPULSE = new Vector(0, -6);
+const PIG_JUMP_HORIZONTAL_SPEED = 0.5;
+const PIG_JUMP_IMPULSE = new Vector(0, -5);
 
 class PigJump extends PigStateAnimated {
   /**
@@ -17,6 +18,8 @@ class PigJump extends PigStateAnimated {
    * @param {import('../../shared').Frame} _frame
    */
   update(_frame) {
+    this.pig.rigidbody.velocity = this.pig.rigidbody.velocity.setX(this.pig.kingDirectionX * PIG_JUMP_HORIZONTAL_SPEED);
+
     if (this.pig.isFalling) {
       this.pig.transitionState('fall');
     }

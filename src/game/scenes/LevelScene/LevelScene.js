@@ -30,6 +30,13 @@ class LevelScene extends GameScene {
   // @ts-ignore
   #widthTiles;
 
+  /** @type {King?} */
+  #king = null;
+
+  get king() {
+    return this.#king;
+  }
+
   /**
    * @param {number} x
    * @param {number} y
@@ -114,7 +121,7 @@ class LevelScene extends GameScene {
       },
     });
 
-    this.create(King, {
+    this.#king = this.create(King, {
       args: {
         position: this.#findSpecialTile('S')?.scale(TILE_SIZE) ?? Vector.Zero,
       },
