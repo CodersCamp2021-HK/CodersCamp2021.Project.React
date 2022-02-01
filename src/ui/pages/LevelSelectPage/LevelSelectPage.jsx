@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { theme } from '../../../shared/theme';
 import { PageHeader, LevelButton, LEVEL_BUTTON_SIZE } from '../../components';
 import { scenes } from '../../../game/scenes';
@@ -40,29 +40,26 @@ const LevelSelectPage = () => {
   const [selected, setSelected] = React.useState(/** @type {number?} */ (null));
 
   return (
-    <>
-      <main css={wrapper}>
-        <PageHeader>Level Select</PageHeader>
-        <section css={levelGrid}>
-          {levels.map((_, i) => {
-            const levelNumber = i + 1;
+    <main css={wrapper}>
+      <PageHeader>Level Select</PageHeader>
+      <section css={levelGrid}>
+        {levels.map((_, i) => {
+          const levelNumber = i + 1;
 
-            return (
-              <Link to='/game' key={levelNumber}>
-                <LevelButton
-                  type={selected === levelNumber ? 'selected' : 'unlocked'}
-                  onSelect={() => setSelected(levelNumber)}
-                >
-                  {levelNumber}
-                </LevelButton>
-              </Link>
-            );
-          })}
-        </section>
-      </main>
-      <Outlet />
-    </>
+          return (
+            <Link to={`/level-select/${levelNumber}`} key={levelNumber}>
+              <LevelButton
+                type={selected === levelNumber ? 'selected' : 'unlocked'}
+                onSelect={() => setSelected(levelNumber)}
+              >
+                {levelNumber}
+              </LevelButton>
+            </Link>
+          );
+        })}
+      </section>
+    </main>
   );
 };
 
-export { LevelSelectPage };
+export { LevelSelectPage, levels };
