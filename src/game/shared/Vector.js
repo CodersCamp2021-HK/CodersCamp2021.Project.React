@@ -77,6 +77,13 @@ class Vector {
     const length = Math.sqrt(this.x ** 2 + this.y ** 2);
     return length === 0 ? Vector.Zero : new Vector(this.x / length, this.y / length);
   }
+
+  /**
+   * @param {Vector} v
+   */
+  distanceSquaredTo(v) {
+    return (this.x - v.x) ** 2 + (this.y - v.y) ** 2;
+  }
 }
 
 export { Vector };

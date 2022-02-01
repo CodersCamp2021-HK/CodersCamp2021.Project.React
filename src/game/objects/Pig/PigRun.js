@@ -3,6 +3,7 @@ import { PigStateAnimated } from './PigStateAnimated';
 
 const PIG_RUNNING_SPEED = 1.5;
 const PIG_JUMP_THRESHOLD = 32;
+const PIG_ATTACK_RANGE = 16;
 
 class PigRun extends PigStateAnimated {
   /**
@@ -18,7 +19,9 @@ class PigRun extends PigStateAnimated {
   update(_frame) {
     this.pig.rigidbody.velocity = this.pig.rigidbody.velocity.setX(this.pig.kingDirectionX * PIG_RUNNING_SPEED);
 
-    if (this.pig.isFalling) {
+    if (this.pig.king.transform.origin.distanceSquaredTo(this.pig.transform.origin) <= PIG_ATTACK_RANGE ** 2) {
+      this.pig.transitionState('attack');
+    } else if (this.pig.isFalling) {
       this.pig.transitionState('fall');
     } else if (this.pig.transform.origin.y - this.pig.king.transform.origin.y > PIG_JUMP_THRESHOLD) {
       this.pig.transitionState('jump');

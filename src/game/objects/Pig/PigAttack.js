@@ -1,5 +1,8 @@
 import { AssetsManager } from '../../assets';
 import { PigStateAnimated } from './PigStateAnimated';
+import { PigSwing } from './PigSwing';
+
+const PIG_ATTACK_OFFSET = 8;
 
 class PigAttack extends PigStateAnimated {
   /**
@@ -7,6 +10,13 @@ class PigAttack extends PigStateAnimated {
    */
   constructor(pig) {
     super(pig, AssetsManager.pig.attack, true);
+    this.pig.rigidbody.velocity = this.pig.rigidbody.velocity.setX(0);
+
+    this.pig.create(PigSwing, {
+      args: {
+        attackCenter: this.pig.transform.origin.add(this.pig.facingVector.scale(PIG_ATTACK_OFFSET)),
+      },
+    });
   }
 
   /**

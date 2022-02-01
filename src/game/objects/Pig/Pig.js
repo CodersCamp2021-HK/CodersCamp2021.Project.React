@@ -53,7 +53,7 @@ class Pig extends GameObject {
     return this.#facing;
   }
 
-  get #facingVector() {
+  get facingVector() {
     return Vector.Zero.setX(this.#facing === 'left' ? -1 : 1);
   }
 
@@ -82,7 +82,7 @@ class Pig extends GameObject {
   }
 
   /**
-   * @param {{ initialPos: Vector, level: import('../../scenes/LevelScene').LevelScene, facing?: 'left' | 'right' }} props
+   * @param {{ initialPos: Vector, level: import('../../scenes/LevelScene').LevelScene, facing?: 'left' | 'right' }} args
    */
   onActivate({ initialPos, level, facing }) {
     this.#state = new PigIdle(this);
@@ -103,7 +103,7 @@ class Pig extends GameObject {
    */
   onUpdate(frame) {
     if (!this.#kingWasSpotted) {
-      const detectionCenter = this.transform.origin.add(this.#facingVector.scale(PIG_HALF_DETECTION_SIZE.x));
+      const detectionCenter = this.transform.origin.add(this.facingVector.scale(PIG_HALF_DETECTION_SIZE.x));
       const detectionTopLeft = detectionCenter.subtract(PIG_HALF_DETECTION_SIZE);
       const detectionBottomRight = detectionCenter.add(PIG_HALF_DETECTION_SIZE);
 

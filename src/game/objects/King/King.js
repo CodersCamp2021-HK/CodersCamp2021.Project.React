@@ -13,6 +13,7 @@ import { KingRunLeft } from './KingRunLeft';
 import { KingRunRight } from './KingRunRight';
 // eslint-disable-next-line import/no-cycle
 import { SolidTile } from '../SolidTile';
+import { PigSwing } from '../Pig/PigSwing';
 
 /**
  * @typedef {'attack' | 'collision' | 'dead' | 'doorIn' | 'doorOut' | 'fall' | 'ground' | 'hit' | 'idle' | 'jump' | 'runLeft' | 'runRight' } KingStateKey
@@ -86,6 +87,8 @@ class King extends GameObject {
   onCollision(collision, target) {
     if (target instanceof SolidTile && collision.resolutionVector.y < 0) {
       this.#isOnGround = true;
+    } else if (target instanceof PigSwing) {
+      // TODO
     }
   }
 
