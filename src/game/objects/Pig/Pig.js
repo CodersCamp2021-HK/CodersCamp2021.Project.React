@@ -9,10 +9,11 @@ import { PigAttack } from './PigAttack';
 import { PigHit } from './PigHit';
 import { PigDead } from './PigDead';
 import { PIG_DEFAULT_FACING } from './PigStateAnimated';
+import { KingSwing } from '../King/KingSwing';
 // eslint-disable-next-line import/no-cycle
 import { SolidTile } from '../SolidTile';
 
-const PIG_MAX_HP = 100;
+const PIG_MAX_HP = 2;
 const PIG_HALF_DETECTION_SIZE = new Vector(64, 32);
 
 const stateMap = Object.freeze({
@@ -81,6 +82,15 @@ class Pig extends GameObject {
     return Math.sign(this.king.transform.origin.subtract(this.transform.origin).x);
   }
 
+  #damage() {
+    this.#kingWasSpotted = true;
+
+    if (!(this.#state instanceof PigHit || this.#state instanceof PigDead)) {
+      this.#hp -= 1;
+      this.transitionState('hit');
+    }
+  }
+
   /**
    * @param {{ initialPos: Vector, level: import('../../scenes/LevelScene').LevelScene, facing?: 'left' | 'right' }} args
    */
@@ -115,7 +125,7 @@ class Pig extends GameObject {
       ) {
         this.#kingWasSpotted = true;
       }
-    } else {
+    } else if (!(this.#state instanceof PigDead)) {
       this.#facing = this.kingDirectionX <= 0 ? 'left' : 'right';
       this.animation.flipped = this.#facing !== PIG_DEFAULT_FACING;
     }
@@ -131,6 +141,8 @@ class Pig extends GameObject {
   onCollision(collision, target) {
     if (target instanceof SolidTile && collision.resolutionVector.y < 0) {
       this.#isStanding = true;
+    } else if (target instanceof KingSwing) {
+      this.#damage();
     }
   }
 

@@ -1,9 +1,9 @@
 import { AssetsManager } from '../../assets';
-import { PigStateAnimated } from './PigStateAnimated';
+import { PigStateAnimated, PIG_ANIMATION_INTERVAL } from './PigStateAnimated';
 
 const PIG_RUNNING_SPEED = 1.5;
 const PIG_JUMP_THRESHOLD = 32;
-const PIG_ATTACK_RANGE = 16;
+const PIG_ATTACK_RANGE = 12;
 
 class PigRun extends PigStateAnimated {
   /**
@@ -25,6 +25,11 @@ class PigRun extends PigStateAnimated {
       this.pig.transitionState('fall');
     } else if (this.pig.transform.origin.y - this.pig.king.transform.origin.y > PIG_JUMP_THRESHOLD) {
       this.pig.transitionState('jump');
+    }
+
+    // In case we return to running after being hit
+    if (this.pig.animation.isFinished) {
+      this.pig.animation.reset(PIG_ANIMATION_INTERVAL, AssetsManager.pig.run);
     }
   }
 }

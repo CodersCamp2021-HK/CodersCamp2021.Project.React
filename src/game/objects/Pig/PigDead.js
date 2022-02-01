@@ -7,6 +7,7 @@ class PigDead extends PigStateAnimated {
    */
   constructor(pig) {
     super(pig, AssetsManager.pig.dead, true);
+    this.pig.rigidbody.velocity = this.pig.rigidbody.velocity.setX(0);
   }
 
   /**

@@ -88,7 +88,7 @@ class King extends GameObject {
     if (target instanceof SolidTile && collision.resolutionVector.y < 0) {
       this.#isOnGround = true;
     } else if (target instanceof PigSwing) {
-      // TODO
+      this.transitionState('hit');
     }
   }
 

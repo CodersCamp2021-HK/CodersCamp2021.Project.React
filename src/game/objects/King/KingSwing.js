@@ -1,17 +1,17 @@
 import { BoxCollider, GameObject } from '../../engine';
 import { Vector } from '../../shared';
 
-const PIG_SWING_SIZE = new Vector(16, 32);
+const KING_SWING_SIZE = new Vector(64, 48);
 
-class PigSwing extends GameObject {
+class KingSwing extends GameObject {
   /**
    * @param {{ attackCenter: Vector }} args
    */
   onActivate({ attackCenter }) {
     this.transform.origin = attackCenter ?? Vector.Zero;
-    this.transform.width = PIG_SWING_SIZE.x;
-    this.transform.height = PIG_SWING_SIZE.y;
-    this.setCollider(BoxCollider, [PIG_SWING_SIZE]);
+    this.transform.width = KING_SWING_SIZE.x;
+    this.transform.height = KING_SWING_SIZE.y;
+    this.setCollider(BoxCollider, [KING_SWING_SIZE]);
   }
 
   onUpdate() {
@@ -19,4 +19,4 @@ class PigSwing extends GameObject {
   }
 }
 
-export { PigSwing };
+export { KingSwing };

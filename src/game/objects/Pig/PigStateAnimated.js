@@ -33,4 +33,4 @@ class PigStateAnimated {
   update(_frame) {}
 }
 
-export { PigStateAnimated, PIG_DEFAULT_FACING };
+export { PigStateAnimated, PIG_DEFAULT_FACING, PIG_ANIMATION_INTERVAL };

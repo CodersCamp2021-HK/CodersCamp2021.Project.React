@@ -22,6 +22,8 @@ class PigJump extends PigStateAnimated {
 
     if (this.pig.isFalling) {
       this.pig.transitionState('fall');
+    } else if (this.pig.isStanding) {
+      this.pig.transitionState('ground');
     }
   }
 }
