@@ -9,10 +9,7 @@ class PigHit extends PigStateAnimated {
     super(pig, AssetsManager.pig.hit, true);
   }
 
-  /**
-   * @param {import('../../shared').Frame} _frame
-   */
-  update(_frame) {
+  update() {
     if (this.pig.animation.isFinished) {
       if (this.pig.hp <= 0) {
         this.pig.transitionState('dead');

@@ -9,10 +9,7 @@ class PigFall extends PigStateAnimated {
     super(pig, AssetsManager.pig.fall);
   }
 
-  /**
-   * @param {import('../../shared').Frame} _frame
-   */
-  update(_frame) {
+  update() {
     if (this.pig.isStanding) {
       this.pig.transitionState('ground');
     }

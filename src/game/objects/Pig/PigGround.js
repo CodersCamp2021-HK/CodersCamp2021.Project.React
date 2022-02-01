@@ -9,10 +9,7 @@ class PigGround extends PigStateAnimated {
     super(pig, AssetsManager.pig.ground, true);
   }
 
-  /**
-   * @param {import('../../shared').Frame} _frame
-   */
-  update(_frame) {
+  update() {
     if (this.pig.animation.isFinished) {
       if (this.pig.kingWasSpotted) {
         this.pig.transitionState('run');

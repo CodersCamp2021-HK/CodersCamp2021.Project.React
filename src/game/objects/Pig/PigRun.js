@@ -13,10 +13,7 @@ class PigRun extends PigStateAnimated {
     super(pig, AssetsManager.pig.run);
   }
 
-  /**
-   * @param {import('../../shared').Frame} _frame
-   */
-  update(_frame) {
+  update() {
     this.pig.rigidbody.velocity = this.pig.rigidbody.velocity.setX(this.pig.kingDirectionX * PIG_RUNNING_SPEED);
 
     if (this.pig.king.transform.origin.distanceSquaredTo(this.pig.transform.origin) <= PIG_ATTACK_RANGE ** 2) {

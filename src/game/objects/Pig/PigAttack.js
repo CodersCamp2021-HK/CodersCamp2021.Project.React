@@ -19,10 +19,7 @@ class PigAttack extends PigStateAnimated {
     });
   }
 
-  /**
-   * @param {import('../../shared').Frame} _frame
-   */
-  update(_frame) {
+  update() {
     if (this.pig.animation.isFinished) {
       this.pig.transitionState('run');
     }

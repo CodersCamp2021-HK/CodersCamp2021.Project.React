@@ -109,9 +109,9 @@ class Pig extends GameObject {
   }
 
   /**
-   * @param {import('../../shared/Frame').Frame} frame
+   * @param {import('../../shared/Frame').Frame} _frame
    */
-  onUpdate(frame) {
+  onUpdate(_frame) {
     if (!this.#kingWasSpotted) {
       const detectionCenter = this.transform.origin.add(this.facingVector.scale(PIG_HALF_DETECTION_SIZE.x));
       const detectionTopLeft = detectionCenter.subtract(PIG_HALF_DETECTION_SIZE);
@@ -130,7 +130,7 @@ class Pig extends GameObject {
       this.animation.flipped = this.#facing !== PIG_DEFAULT_FACING;
     }
 
-    this.#state?.update(frame);
+    this.#state?.update();
     this.#isStanding = false;
   }
 

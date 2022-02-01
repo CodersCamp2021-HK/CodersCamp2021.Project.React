@@ -26,11 +26,8 @@ class PigStateAnimated {
     return this.#pig;
   }
 
-  /**
-   * @param {import('../../shared/Frame').Frame} _frame
-   */
   // eslint-disable-next-line class-methods-use-this
-  update(_frame) {}
+  update() {}
 }
 
 export { PigStateAnimated, PIG_DEFAULT_FACING, PIG_ANIMATION_INTERVAL };

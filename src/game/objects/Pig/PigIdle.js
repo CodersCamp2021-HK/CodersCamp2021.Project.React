@@ -9,10 +9,7 @@ class PigIdle extends PigStateAnimated {
     super(pig, AssetsManager.pig.idle);
   }
 
-  /**
-   * @param {import('../../shared').Frame} _frame
-   */
-  update(_frame) {
+  update() {
     if (this.pig.isFalling) {
       this.pig.transitionState('fall');
     } else if (this.pig.kingWasSpotted) {

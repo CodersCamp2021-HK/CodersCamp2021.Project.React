@@ -14,10 +14,7 @@ class PigJump extends PigStateAnimated {
     pig.rigidbody.addVelocity(PIG_JUMP_IMPULSE);
   }
 
-  /**
-   * @param {import('../../shared').Frame} _frame
-   */
-  update(_frame) {
+  update() {
     this.pig.rigidbody.velocity = this.pig.rigidbody.velocity.setX(this.pig.kingDirectionX * PIG_JUMP_HORIZONTAL_SPEED);
 
     if (this.pig.isFalling) {

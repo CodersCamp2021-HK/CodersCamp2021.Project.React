@@ -10,10 +10,7 @@ class PigDead extends PigStateAnimated {
     this.pig.rigidbody.velocity = this.pig.rigidbody.velocity.setX(0);
   }
 
-  /**
-   * @param {import('../../shared').Frame} _frame
-   */
-  update(_frame) {
+  update() {
     if (this.pig.animation.isFinished) {
       this.pig.destroy(this.pig);
     }
