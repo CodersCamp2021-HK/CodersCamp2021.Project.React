@@ -1,7 +1,7 @@
 import { AssetsManager } from '../../assets';
-import { PigState } from './PigState';
+import { PigStateAnimated } from './PigStateAnimated';
 
-class PigHit extends PigState {
+class PigHit extends PigStateAnimated {
   /**
    * @param {import('./Pig').Pig} pig
    */
@@ -17,7 +17,7 @@ class PigHit extends PigState {
       if (this.pig.hp <= 0) {
         this.pig.transitionState('dead');
       } else {
-        // TODO: return to previous state
+        this.pig.returnToPreviousState();
       }
     }
   }

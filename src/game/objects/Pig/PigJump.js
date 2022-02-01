@@ -1,10 +1,10 @@
 import { AssetsManager } from '../../assets';
 import { Vector } from '../../shared';
-import { PigState } from './PigState';
+import { PigStateAnimated } from './PigStateAnimated';
 
 const PIG_JUMP_IMPULSE = new Vector(0, -6);
 
-class PigJump extends PigState {
+class PigJump extends PigStateAnimated {
   /**
    * @param {import('./Pig').Pig} pig
    */

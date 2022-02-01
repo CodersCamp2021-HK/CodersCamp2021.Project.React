@@ -4,7 +4,7 @@ const PIG_DEFAULT_FACING = 'left';
 /**
  * @abstract
  */
-class PigState {
+class PigStateAnimated {
   #pig;
 
   /**
@@ -13,7 +13,7 @@ class PigState {
    * @param {boolean} doOnce
    */
   constructor(pig, sprites, doOnce = false) {
-    if (this.constructor === PigState) {
+    if (this.constructor === PigStateAnimated) {
       throw new Error('Abstract class constructor.');
     }
 
@@ -37,4 +37,4 @@ class PigState {
   update(_frame) {}
 }
 
-export { PigState, PIG_DEFAULT_FACING };
+export { PigStateAnimated, PIG_DEFAULT_FACING };

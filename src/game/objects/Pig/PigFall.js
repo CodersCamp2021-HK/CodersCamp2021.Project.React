@@ -1,7 +1,7 @@
 import { AssetsManager } from '../../assets';
-import { PigState } from './PigState';
+import { PigStateAnimated } from './PigStateAnimated';
 
-class PigFall extends PigState {
+class PigFall extends PigStateAnimated {
   /**
    * @param {import('./Pig').Pig} pig
    */
