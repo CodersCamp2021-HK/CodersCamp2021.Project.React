@@ -4,25 +4,25 @@ import { levelFrom } from '../LevelScene';
 
 const Level1 = levelFrom({
   map: `
-  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-  XX...........XXX...............X
-  X.............XX...............X
-  X...XXXX.......X...............X
-  X.....XXX...XXXX...............X
-  XXX...XXXX.....X...............X
-  X.....XXXXX....X...............X
-  X...XXXXXXXX.E.X...............X
-  X.S.XXXXXXXXXXXX...............X
-  X.XXXXXXXXXXXXXX...............X
-  X.SXXXXXXXXXXXXX...............X
-  X.S.XXXXXXXXXXXX...............X
-  X.S.XXXXXXXXXXXX...............X
-  X.S.XXXXXX....................XX
-  X..............................X
-  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX`,
+  XXXXXXXXXXXXXXXXXXXXXXXXX
+  XXX.........X...........X
+  XXX.........X...........X
+  X...........XXX.........X
+  X.......................X
+  X.E.X..............XX...X
+  XXXXX.....XXXXXXX.......X
+  X...........X.........XXX
+  X....XXX................X
+  X...................X...X
+  X.S........XX.......X...X
+  XXXX......XXX.......XXXXX
+  XXXXXXXXXXXXXXXXXXXXXXXXX`,
   additionalObjects: (create) => {
-    create(Pig, new Vector(6, 2));
-    create(Pig, new Vector(12, 1));
+    create(Pig, new Vector(4, 4));
+    create(Pig, new Vector(22, 10));
+    create(Pig, new Vector(20, 8));
+    create(Pig, new Vector(14, 2));
+    create(Pig, new Vector(6, 7));
   },
 });
 
