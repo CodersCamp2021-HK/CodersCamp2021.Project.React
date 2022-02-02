@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { Sprite, Vector, Crop } from '../shared';
-import { TILE_SIZE } from '../scenes/LevelScene/levelUtils';
 import { tilesetRowCount } from '../scenes/LevelScene/tileRules';
+import { TILE_SIZE } from '../config';
 import doorUrl from './door.png';
 import tilesetUrl from './tileset.png';
 import kingUrl from './king.png';

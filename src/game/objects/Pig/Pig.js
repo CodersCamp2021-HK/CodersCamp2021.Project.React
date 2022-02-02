@@ -1,5 +1,6 @@
 import { BoxCollider, GameObject } from '../../engine';
 import { Vector } from '../../shared';
+import { PIG_BASIC_MAX_HP, PIG_DEFAULT_ASSET_FACING, PIG_DETECTION_SIZE_HALF, PIG_KING_MAX_HP } from '../../config';
 import { PigIdle } from './PigIdle';
 import { PigFall } from './PigFall';
 import { PigGround } from './PigGround';
@@ -8,14 +9,9 @@ import { PigJump } from './PigJump';
 import { PigAttack } from './PigAttack';
 import { PigHit } from './PigHit';
 import { PigDead } from './PigDead';
-import { PIG_DEFAULT_FACING } from './PigStateAnimated';
 import { KingSwing } from '../King/KingSwing';
 // eslint-disable-next-line import/no-cycle
 import { SolidTile } from '../SolidTile';
-
-const PIG_BASIC_MAX_HP = 2;
-const PIG_KING_MAX_HP = 10;
-const PIG_HALF_DETECTION_SIZE = new Vector(64, 32);
 
 const stateMap = Object.freeze({
   idle: PigIdle,
@@ -43,7 +39,7 @@ class Pig extends GameObject {
   #variant = 'basic';
 
   /** @type {'left' | 'right'} */
-  #facing = PIG_DEFAULT_FACING;
+  #facing = PIG_DEFAULT_ASSET_FACING;
 
   #isStanding = false;
 
@@ -107,11 +103,11 @@ class Pig extends GameObject {
     this.transform.width = 34;
     this.transform.height = 28;
     this.#variant = variant ?? 'basic';
-    this.#facing = facing ?? PIG_DEFAULT_FACING;
+    this.#facing = facing ?? PIG_DEFAULT_ASSET_FACING;
     this.#hp = variant === 'king' ? PIG_KING_MAX_HP : PIG_BASIC_MAX_HP;
 
     this.#state = new PigIdle(this);
-    this.animation.flipped = this.#facing !== PIG_DEFAULT_FACING;
+    this.animation.flipped = this.#facing !== PIG_DEFAULT_ASSET_FACING;
 
     this.rigidbody.addGravity();
     this.setCollider(BoxCollider, [new Vector(24, 18), new Vector(5, 10)]);
@@ -124,9 +120,9 @@ class Pig extends GameObject {
    */
   onUpdate(_frame) {
     if (!this.#kingWasSpotted) {
-      const detectionCenter = this.transform.origin.add(this.facingVector.scale(PIG_HALF_DETECTION_SIZE.x));
-      const detectionTopLeft = detectionCenter.subtract(PIG_HALF_DETECTION_SIZE);
-      const detectionBottomRight = detectionCenter.add(PIG_HALF_DETECTION_SIZE);
+      const detectionCenter = this.transform.origin.add(this.facingVector.scale(PIG_DETECTION_SIZE_HALF.x));
+      const detectionTopLeft = detectionCenter.subtract(PIG_DETECTION_SIZE_HALF);
+      const detectionBottomRight = detectionCenter.add(PIG_DETECTION_SIZE_HALF);
 
       if (
         detectionTopLeft.x <= this.king.transform.origin.x &&
@@ -138,7 +134,7 @@ class Pig extends GameObject {
       }
     } else if (!(this.#state instanceof PigDead)) {
       this.#facing = this.kingDirectionX <= 0 ? 'left' : 'right';
-      this.animation.flipped = this.#facing !== PIG_DEFAULT_FACING;
+      this.animation.flipped = this.#facing !== PIG_DEFAULT_ASSET_FACING;
     }
 
     this.#state?.update();

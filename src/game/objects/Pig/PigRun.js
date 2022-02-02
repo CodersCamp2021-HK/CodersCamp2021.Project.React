@@ -1,9 +1,6 @@
 import { AssetsManager } from '../../assets';
-import { PigStateAnimated, PIG_ANIMATION_INTERVAL } from './PigStateAnimated';
-
-const PIG_RUNNING_SPEED = 1.5;
-const PIG_JUMP_THRESHOLD = 32;
-const PIG_ATTACK_RANGE = 12;
+import { PIG_ANIMATION_INTERVAL, PIG_ATTACK_RANGE, PIG_JUMP_THRESHOLD, PIG_RUN_VELOCITY } from '../../config';
+import { PigStateAnimated } from './PigStateAnimated';
 
 class PigRun extends PigStateAnimated {
   /**
@@ -14,7 +11,7 @@ class PigRun extends PigStateAnimated {
   }
 
   update() {
-    this.pig.rigidbody.velocity = this.pig.rigidbody.velocity.setX(this.pig.kingDirectionX * PIG_RUNNING_SPEED);
+    this.pig.rigidbody.velocity = this.pig.rigidbody.velocity.setX(this.pig.kingDirectionX * PIG_RUN_VELOCITY);
 
     if (this.pig.king.transform.origin.distanceSquaredTo(this.pig.transform.origin) <= PIG_ATTACK_RANGE ** 2) {
       this.pig.transitionState('attack');

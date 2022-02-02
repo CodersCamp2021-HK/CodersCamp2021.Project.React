@@ -1,7 +1,6 @@
+import { PIG_ATTACK_SIZE } from '../../config';
 import { BoxCollider, GameObject } from '../../engine';
 import { Vector } from '../../shared';
-
-const PIG_SWING_SIZE = new Vector(16, 32);
 
 class PigSwing extends GameObject {
   /**
@@ -9,9 +8,9 @@ class PigSwing extends GameObject {
    */
   onActivate({ attackCenter }) {
     this.transform.origin = attackCenter ?? Vector.Zero;
-    this.transform.width = PIG_SWING_SIZE.x;
-    this.transform.height = PIG_SWING_SIZE.y;
-    this.setCollider(BoxCollider, [PIG_SWING_SIZE]);
+    this.transform.width = PIG_ATTACK_SIZE.x;
+    this.transform.height = PIG_ATTACK_SIZE.y;
+    this.setCollider(BoxCollider, [PIG_ATTACK_SIZE]);
   }
 
   onUpdate() {
