@@ -1,4 +1,5 @@
 import { AssetsManager } from '../../assets';
+import { Vector } from '../../shared';
 import { KingAnimated } from './KingAnimated';
 
 const SPRITE_ANIMATION_UPDATE = 10;
@@ -9,16 +10,16 @@ class KingDoorIn extends KingAnimated {
    */
   constructor(king) {
     super(king, AssetsManager.king.doorIn, SPRITE_ANIMATION_UPDATE, true);
+    this.king.rigidbody.velocity = Vector.Zero;
   }
 
   /**
-   * @param {import("../../shared/Frame").Frame} frame
+   * @param {import("../../shared/Frame").Frame} _frame
    */
-  update(frame) {
-    if (this.king.animation.isFinished && !this.king.keyboard.pressed('ArrowDown')) {
-      return this.king.transitionState('idle').onUpdate(frame);
+  update(_frame) {
+    if (this.king.animation.isFinished) {
+      this.king.ui.levelFinished();
     }
-    return super.update(frame);
   }
 }
 

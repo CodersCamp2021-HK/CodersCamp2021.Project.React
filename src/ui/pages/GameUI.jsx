@@ -71,7 +71,7 @@ const GameUI = () => {
         <section css={gameBorder}>
           <canvas css={{ width: '65vw' }} height={512} width={1024} id='GameCanvas' ref={ref} />
           <div css={buttonWrapper}>
-            <Link to='/'>
+            <Link to='/level-select'>
               <Button type='silver'>
                 change <br />
                 level

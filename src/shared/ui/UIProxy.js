@@ -1,16 +1,16 @@
 class UIProxy {
-  #setLoseCb;
+  #levelFinishedCb;
 
   /**
 
-   * @param {() => void} setLoseCb
+   * @param {() => void} onLevelFinished
    */
-  constructor(setLoseCb) {
-    this.#setLoseCb = setLoseCb;
+  constructor(onLevelFinished) {
+    this.#levelFinishedCb = onLevelFinished;
   }
 
-  setLose() {
-    this.#setLoseCb();
+  levelFinished() {
+    this.#levelFinishedCb();
   }
 }
 

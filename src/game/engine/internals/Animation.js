@@ -49,6 +49,7 @@ class Animation {
     this.#sprite = this.#assets.length > 0 ? this.#assets[0] : undefined;
     this.#frameCount = 0;
     this.#doOnce = doOnce;
+    this.#isFinished = false;
   }
 
   /**

@@ -3,9 +3,10 @@ import { BoxCollider, GameObject } from '../engine';
 import { TILE_SIZE } from '../scenes/LevelScene/levelUtils';
 import { Vector } from '../shared';
 
-class Door extends GameObject {
-  static #SPRITE = AssetsManager.door;
+const DOOR_HITBOX_SIZE = 4;
+const DOOR_ANIMATION_INTERVAL = 10;
 
+class Door extends GameObject {
   /** @type {'start' | 'end'} */
   #type = 'start';
 
@@ -16,18 +17,23 @@ class Door extends GameObject {
    */
   onActivate({ type, position }) {
     this.#type = type;
-    this.position = position.add(new Vector(TILE_SIZE / 2 - Door.#SPRITE.width / 2, TILE_SIZE - Door.#SPRITE.height));
+    this.transform.width = 46;
+    this.transform.height = 56;
+    this.transform.origin = position.add(new Vector(TILE_SIZE / 2, TILE_SIZE - 28));
 
-    if (this.#type === 'end') {
-      this.setCollider(BoxCollider, [new Vector(Door.#SPRITE.width, Door.#SPRITE.height)]);
+    if (this.#type === 'start') {
+      this.animation.reset(DOOR_ANIMATION_INTERVAL, AssetsManager.door.close, true);
+    } else {
+      this.animation.reset(DOOR_ANIMATION_INTERVAL, AssetsManager.door.normal);
+      this.setCollider(BoxCollider, [
+        new Vector(DOOR_HITBOX_SIZE, DOOR_HITBOX_SIZE),
+        new Vector((this.transform.width - DOOR_HITBOX_SIZE) / 2, this.transform.height - DOOR_HITBOX_SIZE),
+      ]);
     }
   }
 
-  /**
-   * @param {import('../shared').Frame} frame
-   */
-  onUpdate(frame) {
-    frame.buffer.draw(this.position, Door.#SPRITE);
+  open() {
+    this.animation.reset(DOOR_ANIMATION_INTERVAL, AssetsManager.door.open, true);
   }
 }
 

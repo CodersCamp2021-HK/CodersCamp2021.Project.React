@@ -15,7 +15,13 @@ function levelFrom(levelInfo) {
 
       if (levelInfo.additionalObjects) {
         levelInfo.additionalObjects((Cls, pos, otherArgs = {}) => {
-          this.create(Cls, { args: { initialPos: pos.add(new Vector(0.5, 0.5)).scale(TILE_SIZE), ...otherArgs } });
+          this.create(Cls, {
+            args: {
+              initialPos: pos.add(new Vector(0.5, 0.5)).scale(TILE_SIZE),
+              level: this,
+              ...otherArgs,
+            },
+          });
         });
       }
     }
