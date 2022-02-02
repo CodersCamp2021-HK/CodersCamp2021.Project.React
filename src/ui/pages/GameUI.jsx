@@ -69,7 +69,7 @@ const GameUI = () => {
       <main css={wrapper}>
         <PageHeader>Level {params.levelSelectId}</PageHeader>{' '}
         <section css={gameBorder}>
-          <canvas css={{ width: '65vw' }} height={512} width={1024} id='GameCanvas' ref={ref} />
+          <canvas css={{ width: '65vw' }} height={416} width={800} id='GameCanvas' ref={ref} />
           <div css={buttonWrapper}>
             <Link to='/level-select'>
               <Button type='silver'>
