@@ -4,12 +4,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { GameEngineProvider, GlobalStyles } from './shared';
 import { GameUI, LevelSelectPage, CreditsPage, HomePage, NotFound } from './ui';
 import './public/index.css';
+import process from 'process';
+
 
 const App = () => {
   return (
     <>
       <GlobalStyles />
-      <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <BrowserRouter  basename={ process.env.NODE_ENV === 'production' ? 'CodersCamp2021.Project.React/' : ''}>
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/level-select' element={<LevelSelectPage />} />
