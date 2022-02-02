@@ -1,11 +1,13 @@
 import _ from 'lodash';
 import { Sprite, Vector, Crop } from '../shared';
 import { tilesetRowCount } from '../scenes/LevelScene/tileRules';
+import { TILE_SIZE } from '../config';
 import doorUrl from './door.png';
 import tilesetUrl from './tileset.png';
 import kingUrl from './king.png';
 import pigUrl from './pig.png';
-import { TILE_SIZE } from '../config';
+import flagUrl from './flag.png';
+import windowUrl from './window.png';
 
 const AssetsManager = Object.freeze({
   king: {
@@ -30,6 +32,8 @@ const AssetsManager = Object.freeze({
     open: _.times(3, (x) => new Sprite(doorUrl, new Crop(new Vector(46 * x, 0), 46, 56))),
     close: _.times(3, (x) => new Sprite(doorUrl, new Crop(new Vector(92 - 46 * x, 0), 46, 56))),
   },
+  flag: new Sprite(flagUrl, new Crop(new Vector(0, 0), 26, 89)),
+  window: new Sprite(windowUrl, new Crop(new Vector(0, 0), 54, 57)),
   pig: Object.fromEntries(
     ['basic', 'king'].map((variant, i) => [
       variant,

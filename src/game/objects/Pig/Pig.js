@@ -99,14 +99,15 @@ class Pig extends GameObject {
    * @param {{ initialPos: Vector, level: import('../../scenes/LevelScene').LevelScene, variant: 'basic' | 'king', facing?: 'left' | 'right' }} args
    */
   onActivate({ initialPos, level, variant, facing }) {
-    this.#state = new PigIdle(this);
-
     this.transform.origin = initialPos ?? Vector.Zero;
     this.transform.width = 34;
     this.transform.height = 28;
     this.#variant = variant ?? 'basic';
     this.#facing = facing ?? PIG_DEFAULT_ASSET_FACING;
     this.#hp = variant === 'king' ? PIG_KING_MAX_HP : PIG_BASIC_MAX_HP;
+
+    this.#state = new PigIdle(this);
+    this.animation.flipped = this.#facing !== PIG_DEFAULT_FACING;
 
     this.rigidbody.addGravity();
     this.setCollider(BoxCollider, [new Vector(24, 18), new Vector(5, 10)]);
