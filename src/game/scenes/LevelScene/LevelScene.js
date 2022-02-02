@@ -114,6 +114,12 @@ class LevelScene extends GameScene {
       },
     });
 
+    if (levelInfo.additionalObjects) {
+      levelInfo.additionalObjects((Cls, pos, otherArgs = {}) => {
+        this.create(Cls, { args: { initialPos: pos.add(new Vector(0.5, 0.5)).scale(TILE_SIZE), ...otherArgs } });
+      });
+    }
+
     this.create(King, {
       args: {
         position: this.#findSpecialTile('S')?.scale(TILE_SIZE) ?? Vector.Zero,
