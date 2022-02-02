@@ -6,6 +6,8 @@ import doorUrl from './door.png';
 import tilesetUrl from './tileset.png';
 import kingUrl from './king.png';
 import pigUrl from './pig.png';
+import flagUrl from './flag.png';
+import windowUrl from './window.png';
 
 const AssetsManager = Object.freeze({
   king: {
@@ -36,6 +38,8 @@ const AssetsManager = Object.freeze({
     hit: _.times(2, (x) => new Sprite(pigUrl, new Crop(new Vector(34 * x, 112), 34, 28))),
     dead: _.times(4, (x) => new Sprite(pigUrl, new Crop(new Vector(68 + 34 * x, 112), 34, 28))),
   },
+  flag: new Sprite(flagUrl, new Crop(new Vector(0, 0), 26, 89)),
+  window: new Sprite(windowUrl, new Crop(new Vector(0, 0), 54, 57)),
 });
 
 export { AssetsManager };

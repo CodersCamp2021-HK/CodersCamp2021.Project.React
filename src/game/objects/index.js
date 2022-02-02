@@ -6,3 +6,4 @@ export * from './BackgroundTiles';
 export * from './Door';
 // eslint-disable-next-line import/no-cycle
 export * from './Pig';
+export * from './Decoration';
