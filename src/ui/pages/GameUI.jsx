@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import { useLayoutEffect, useMemo, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useParams, Navigate, Link } from 'react-router-dom';
+import { _ } from 'lodash';
+import { levels } from './LevelSelectPage/LevelSelectPage';
 import { useGameEngine, UIProxy, theme } from '../../shared';
 import backgroundUrl from '../../public/img/background.jpg';
 import { Button, BUTTON_HEIGHT_SIZE, BUTTON_WIDTH_SIZE, PageHeader } from '../components';
@@ -32,6 +34,7 @@ const buttonWrapper = css`
 
 const GameUI = () => {
   const gameEngine = useGameEngine();
+  const params = useParams();
 
   useEffect(() => {
     gameEngine.start();
@@ -54,22 +57,30 @@ const GameUI = () => {
     }
   }, [gameEngine, uiProxy]);
 
-  return (
-    <main css={wrapper}>
-      <PageHeader>Level 1</PageHeader>{' '}
-      <section css={gameBorder}>
-        <canvas css={{ width: '65vw' }} height={416} width={800} id='GameCanvas' ref={ref} />
+  const levelExists = () => {
+    const levelsArray = _.range(1, levels.length + 1);
 
-        <div css={buttonWrapper}>
-          <Link to='/level-select'>
-            <Button type='silver'>
-              change <br />
-              level
-            </Button>
-          </Link>
-        </div>
-      </section>
-    </main>
+    return levelsArray.includes(Number(params.levelSelectId));
+  };
+
+  return (
+    <>
+      {!levelExists() ? <Navigate to='/level-select' replace /> : ''}
+      <main css={wrapper}>
+        <PageHeader>Level {params.levelSelectId}</PageHeader>{' '}
+        <section css={gameBorder}>
+          <canvas css={{ width: '65vw' }} height={416} width={800} id='GameCanvas' ref={ref} />
+          <div css={buttonWrapper}>
+            <Link to='/level-select'>
+              <Button type='silver'>
+                change <br />
+                level
+              </Button>
+            </Link>
+          </div>
+        </section>
+      </main>
+    </>
   );
 };
 
