@@ -61,7 +61,7 @@ const GameUI = () => {
         <canvas css={{ width: '65vw' }} height={416} width={800} id='GameCanvas' ref={ref} />
 
         <div css={buttonWrapper}>
-          <Link to='/'>
+          <Link to='/level-select'>
             <Button type='silver'>
               change <br />
               level
