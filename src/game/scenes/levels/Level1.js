@@ -31,7 +31,7 @@ const Level1 = levelFrom({
     create(Pig, new Vector(20, 8));
     create(Pig, new Vector(14, 2));
     create(Pig, new Vector(6, 7));
-    create(Pig, new Vector(7, 2));
+    create(Pig, new Vector(7, 2), { variant: 'king' });
   },
 });
 
