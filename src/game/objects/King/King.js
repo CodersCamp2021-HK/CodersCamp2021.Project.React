@@ -88,11 +88,14 @@ class King extends GameObject {
   onCollision(collision, target) {
     if (target instanceof SolidTile && collision.resolutionVector.y < 0) {
       this.#isOnGround = true;
-    } else if (target instanceof PigSwing) {
-      this.transitionState('hit');
     } else if (target instanceof Door && !(this.#state instanceof KingDoorIn)) {
       target.open();
       this.transitionState('doorIn');
+    } else if (
+      target instanceof PigSwing &&
+      ![KingDoorIn, KingHit, KingDead].some((state) => this.#state instanceof state)
+    ) {
+      this.transitionState('hit');
     }
   }
 
