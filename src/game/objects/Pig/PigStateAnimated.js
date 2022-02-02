@@ -1,4 +1,4 @@
-import { PIG_ANIMATION_INTERVAL, PIG_DEFAULT_ASSET_FACING } from '../../config';
+import { PIG_ANIMATION_INTERVAL } from '../../config';
 
 /**
  * @abstract
@@ -29,4 +29,4 @@ class PigStateAnimated {
   update() {}
 }
 
-export { PigStateAnimated, PIG_DEFAULT_ASSET_FACING as PIG_DEFAULT_FACING, PIG_ANIMATION_INTERVAL };
+export { PigStateAnimated };

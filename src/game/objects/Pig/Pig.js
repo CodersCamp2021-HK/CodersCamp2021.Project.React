@@ -1,6 +1,6 @@
 import { BoxCollider, GameObject } from '../../engine';
 import { Vector } from '../../shared';
-import { PIG_BASIC_MAX_HP, PIG_DETECTION_SIZE_HALF, PIG_KING_MAX_HP } from '../../config';
+import { PIG_BASIC_MAX_HP, PIG_DEFAULT_ASSET_FACING, PIG_DETECTION_SIZE_HALF, PIG_KING_MAX_HP } from '../../config';
 import { PigIdle } from './PigIdle';
 import { PigFall } from './PigFall';
 import { PigGround } from './PigGround';
@@ -9,7 +9,6 @@ import { PigJump } from './PigJump';
 import { PigAttack } from './PigAttack';
 import { PigHit } from './PigHit';
 import { PigDead } from './PigDead';
-import { PIG_DEFAULT_FACING } from './PigStateAnimated';
 import { KingSwing } from '../King/KingSwing';
 // eslint-disable-next-line import/no-cycle
 import { SolidTile } from '../SolidTile';
@@ -40,7 +39,7 @@ class Pig extends GameObject {
   #variant = 'basic';
 
   /** @type {'left' | 'right'} */
-  #facing = PIG_DEFAULT_FACING;
+  #facing = PIG_DEFAULT_ASSET_FACING;
 
   #isStanding = false;
 
@@ -106,7 +105,7 @@ class Pig extends GameObject {
     this.transform.width = 34;
     this.transform.height = 28;
     this.#variant = variant ?? 'basic';
-    this.#facing = facing ?? PIG_DEFAULT_FACING;
+    this.#facing = facing ?? PIG_DEFAULT_ASSET_FACING;
     this.#hp = variant === 'king' ? PIG_KING_MAX_HP : PIG_BASIC_MAX_HP;
 
     this.rigidbody.addGravity();
@@ -134,7 +133,7 @@ class Pig extends GameObject {
       }
     } else if (!(this.#state instanceof PigDead)) {
       this.#facing = this.kingDirectionX <= 0 ? 'left' : 'right';
-      this.animation.flipped = this.#facing !== PIG_DEFAULT_FACING;
+      this.animation.flipped = this.#facing !== PIG_DEFAULT_ASSET_FACING;
     }
 
     this.#state?.update();

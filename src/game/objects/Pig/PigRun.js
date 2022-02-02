@@ -1,6 +1,6 @@
 import { AssetsManager } from '../../assets';
-import { PIG_ATTACK_RANGE, PIG_JUMP_THRESHOLD, PIG_RUN_VELOCITY } from '../../config';
-import { PigStateAnimated, PIG_ANIMATION_INTERVAL } from './PigStateAnimated';
+import { PIG_ANIMATION_INTERVAL, PIG_ATTACK_RANGE, PIG_JUMP_THRESHOLD, PIG_RUN_VELOCITY } from '../../config';
+import { PigStateAnimated } from './PigStateAnimated';
 
 class PigRun extends PigStateAnimated {
   /**
