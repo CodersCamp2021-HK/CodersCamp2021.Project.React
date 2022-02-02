@@ -9,7 +9,7 @@ class PigAttack extends PigStateAnimated {
    * @param {import('./Pig').Pig} pig
    */
   constructor(pig) {
-    super(pig, AssetsManager.pig.attack, true);
+    super(pig, AssetsManager.pig[pig.variant].attack, true);
     this.pig.rigidbody.velocity = this.pig.rigidbody.velocity.setX(0);
 
     this.pig.create(PigSwing, {

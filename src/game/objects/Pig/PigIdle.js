@@ -6,7 +6,7 @@ class PigIdle extends PigStateAnimated {
    * @param {import('./Pig').Pig} pig
    */
   constructor(pig) {
-    super(pig, AssetsManager.pig.idle);
+    super(pig, AssetsManager.pig[pig.variant].idle);
   }
 
   update() {

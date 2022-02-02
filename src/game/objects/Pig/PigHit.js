@@ -6,7 +6,7 @@ class PigHit extends PigStateAnimated {
    * @param {import('./Pig').Pig} pig
    */
   constructor(pig) {
-    super(pig, AssetsManager.pig.hit, true);
+    super(pig, AssetsManager.pig[pig.variant].hit, true);
   }
 
   update() {

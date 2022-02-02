@@ -10,7 +10,7 @@ class PigJump extends PigStateAnimated {
    * @param {import('./Pig').Pig} pig
    */
   constructor(pig) {
-    super(pig, AssetsManager.pig.jump);
+    super(pig, AssetsManager.pig[pig.variant].jump);
     pig.rigidbody.addVelocity(PIG_JUMP_IMPULSE);
   }
 

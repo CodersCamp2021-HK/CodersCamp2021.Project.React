@@ -6,7 +6,7 @@ class PigGround extends PigStateAnimated {
    * @param {import('./Pig').Pig} pig
    */
   constructor(pig) {
-    super(pig, AssetsManager.pig.ground, true);
+    super(pig, AssetsManager.pig[pig.variant].ground, true);
   }
 
   update() {

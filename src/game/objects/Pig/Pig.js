@@ -13,7 +13,8 @@ import { KingSwing } from '../King/KingSwing';
 // eslint-disable-next-line import/no-cycle
 import { SolidTile } from '../SolidTile';
 
-const PIG_MAX_HP = 2;
+const PIG_BASIC_MAX_HP = 2;
+const PIG_KING_MAX_HP = 10;
 const PIG_HALF_DETECTION_SIZE = new Vector(64, 32);
 
 const stateMap = Object.freeze({
@@ -38,6 +39,9 @@ class Pig extends GameObject {
   /** @type {import('./PigStateAnimated').PigStateAnimated?} */
   #previousState = null;
 
+  /** @type {'basic' | 'king'} */
+  #variant = 'basic';
+
   /** @type {'left' | 'right'} */
   #facing = PIG_DEFAULT_FACING;
 
@@ -45,10 +49,14 @@ class Pig extends GameObject {
 
   #kingWasSpotted = false;
 
-  #hp = PIG_MAX_HP;
+  #hp = PIG_BASIC_MAX_HP;
 
   /** @type {import('../King').King?} */
   #king = null;
+
+  get variant() {
+    return this.#variant;
+  }
 
   get facing() {
     return this.#facing;
@@ -92,15 +100,17 @@ class Pig extends GameObject {
   }
 
   /**
-   * @param {{ initialPos: Vector, level: import('../../scenes/LevelScene').LevelScene, facing?: 'left' | 'right' }} args
+   * @param {{ initialPos: Vector, level: import('../../scenes/LevelScene').LevelScene, variant: 'basic' | 'king', facing?: 'left' | 'right' }} args
    */
-  onActivate({ initialPos, level, facing }) {
+  onActivate({ initialPos, level, variant, facing }) {
     this.#state = new PigIdle(this);
 
     this.transform.origin = initialPos ?? Vector.Zero;
     this.transform.width = 34;
     this.transform.height = 28;
+    this.#variant = variant ?? 'basic';
     this.#facing = facing ?? PIG_DEFAULT_FACING;
+    this.#hp = variant === 'king' ? PIG_KING_MAX_HP : PIG_BASIC_MAX_HP;
 
     this.rigidbody.addGravity();
     this.setCollider(BoxCollider, [new Vector(24, 18), new Vector(5, 10)]);

@@ -10,7 +10,7 @@ class PigRun extends PigStateAnimated {
    * @param {import('./Pig').Pig} pig
    */
   constructor(pig) {
-    super(pig, AssetsManager.pig.run);
+    super(pig, AssetsManager.pig[pig.variant].run);
   }
 
   update() {
@@ -26,7 +26,7 @@ class PigRun extends PigStateAnimated {
 
     // In case we return to running after being hit
     if (this.pig.animation.isFinished) {
-      this.pig.animation.reset(PIG_ANIMATION_INTERVAL, AssetsManager.pig.run);
+      this.pig.animation.reset(PIG_ANIMATION_INTERVAL, AssetsManager.pig[this.pig.variant].run);
     }
   }
 }
