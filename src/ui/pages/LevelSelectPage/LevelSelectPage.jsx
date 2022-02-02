@@ -66,7 +66,6 @@ const LevelSelectPage = () => {
           return (
             <Link to={`/level-select/${levelNumber}`} key={levelNumber}>
             <LevelButton type={checkLevelState({ levelNumber })}>{levelNumber}</LevelButton>
-                {levelNumber}
             </Link>
           );
         })}
