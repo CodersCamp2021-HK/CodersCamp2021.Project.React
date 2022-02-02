@@ -26,12 +26,12 @@ const Level1 = levelFrom({
     create(Decoration, new Vector(20, 3), { type: 'window' });
     create(Decoration, new Vector(22, 1), { type: 'flag' });
     create(Decoration, new Vector(3, 7), { type: 'flag' });
-    create(Pig, new Vector(3, 5));
+    create(Pig, new Vector(3, 5), { variant: 'king', facing: 'right' });
     create(Pig, new Vector(22, 10));
     create(Pig, new Vector(20, 8));
-    create(Pig, new Vector(14, 2));
-    create(Pig, new Vector(6, 7));
-    create(Pig, new Vector(7, 2), { variant: 'king' });
+    create(Pig, new Vector(14, 2), { facing: 'right' });
+    create(Pig, new Vector(6, 7), { facing: 'right' });
+    create(Pig, new Vector(7, 2), { facing: 'right' });
   },
 });
 
