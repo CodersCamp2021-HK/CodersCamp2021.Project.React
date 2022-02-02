@@ -5,7 +5,7 @@ import levelButtonSelectedUrl from '../../../public/img/levelButtonSelected.png'
 const LEVEL_BUTTON_SIZE = '4rem';
 
 /**
- * @param {{ children: React.ReactNode, type: 'locked' | 'unlocked' | 'selected' }} props
+ * @param {{ children: React.ReactNode, type: 'locked' | 'unlocked'}} props
  */
 const LevelButton = ({ children, type }) => {
   return (
@@ -14,8 +14,8 @@ const LevelButton = ({ children, type }) => {
       css={{
         width: LEVEL_BUTTON_SIZE,
         height: LEVEL_BUTTON_SIZE,
-        background: `url(${type === 'selected' ? levelButtonSelectedUrl : levelButtonUrl}) center center / cover`,
-        color: type === 'selected' ? theme.colors.primary.main : theme.colors.common.white,
+        background: `url(${levelButtonUrl}) center center / cover`,
+        color: theme.colors.common.white,
         opacity: type === 'locked' ? '0.25' : '0.9',
         transition: 'opacity 0.25s',
         '&:hover': {
