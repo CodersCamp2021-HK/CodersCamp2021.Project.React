@@ -13,7 +13,7 @@ import {
 import { scenes } from '../../../game/scenes';
 import { LevelScene } from '../../../game/scenes/LevelScene';
 import backgroundUrl from '../../../public/img/background.jpg';
-import { checkLevelState, unlockedLevel } from '../../../shared/game/localStorageFun';
+import { checkLevelState } from '../../../shared/game/localStorageFun';
 
 const LEVEL_GRID_SPACING = '2rem';
 

@@ -6,6 +6,7 @@ import { levels } from './LevelSelectPage/LevelSelectPage';
 import { useGameEngine, UIProxy, theme } from '../../shared';
 import backgroundUrl from '../../public/img/background.jpg';
 import { Button, BUTTON_HEIGHT_SIZE, BUTTON_WIDTH_SIZE, PageHeader } from '../components';
+import { getLocalStorage } from '../../shared/game/localStorageFun';
 
 const wrapper = css`
   min-height: 100vh;
@@ -58,7 +59,7 @@ const GameUI = () => {
   }, [gameEngine, uiProxy]);
 
   const levelExists = () => {
-    const levelsArray = _.range(1, levels.length + 1);
+    const levelsArray = _.range(1, getLocalStorage().length + 1);
 
     return levelsArray.includes(Number(params.levelSelectId));
   };
