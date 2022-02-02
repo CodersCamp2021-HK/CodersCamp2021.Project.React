@@ -2,32 +2,36 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { GameEngineProvider, GlobalStyles } from './shared';
-import { GameUI, HomePage, LevelSelectPage, CreditsPage, NotFound } from './ui';
+import { GameUI, LevelSelectPage, CreditsPage, HomePage, NotFound } from './ui';
 import './public/index.css';
 
 const App = () => {
-  return <HomePage />;
+  return (
+    <>
+      <GlobalStyles />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/level-select' element={<LevelSelectPage />} />
+          <Route
+            path='/level-select/:levelSelectId'
+            element={
+              <GameEngineProvider>
+                <GameUI />
+              </GameEngineProvider>
+            }
+          />
+          <Route path='credits' element={<CreditsPage />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 };
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalStyles />
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<App />} />
-        <Route
-          path='game'
-          element={
-            <GameEngineProvider>
-              <GameUI />
-            </GameEngineProvider>
-          }
-        />
-        <Route path='level-select' element={<LevelSelectPage />} />
-        <Route path='credits' element={<CreditsPage />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <App />
   </React.StrictMode>,
   document.getElementById('root'),
 );

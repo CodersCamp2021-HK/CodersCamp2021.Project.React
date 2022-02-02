@@ -64,7 +64,7 @@ const LevelSelectPage = () => {
           const levelNumber = i + 1;
 
           return (
-            <Link to='/game' key={levelNumber}>
+            <Link to={`/level-select/${levelNumber}`} key={levelNumber}>
               <LevelButton
                 type={selected === levelNumber ? 'selected' : 'unlocked'}
                 onSelect={() => setSelected(levelNumber)}
@@ -84,4 +84,4 @@ const LevelSelectPage = () => {
   );
 };
 
-export { LevelSelectPage };
+export { LevelSelectPage, levels };
