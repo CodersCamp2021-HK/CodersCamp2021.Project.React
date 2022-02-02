@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import { Sprite, Vector, Crop } from '../shared';
-import { TILE_SIZE } from '../scenes/LevelScene/levelUtils';
 import { tilesetRowCount } from '../scenes/LevelScene/tileRules';
 import doorUrl from './door.png';
 import tilesetUrl from './tileset.png';
 import kingUrl from './king.png';
 import pigUrl from './pig.png';
+import { TILE_SIZE } from '../config';
 
 const AssetsManager = Object.freeze({
   king: {
