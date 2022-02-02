@@ -1,5 +1,4 @@
-const PIG_ANIMATION_INTERVAL = 10;
-const PIG_DEFAULT_FACING = 'left';
+import { PIG_ANIMATION_INTERVAL } from '../../config';
 
 /**
  * @abstract
@@ -30,4 +29,4 @@ class PigStateAnimated {
   update() {}
 }
 
-export { PigStateAnimated, PIG_DEFAULT_FACING, PIG_ANIMATION_INTERVAL };
+export { PigStateAnimated };

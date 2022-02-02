@@ -1,8 +1,7 @@
 import { AssetsManager } from '../../assets';
+import { PIG_ATTACK_OFFSET } from '../../config';
 import { PigStateAnimated } from './PigStateAnimated';
 import { PigSwing } from './PigSwing';
-
-const PIG_ATTACK_OFFSET = 8;
 
 class PigAttack extends PigStateAnimated {
   /**

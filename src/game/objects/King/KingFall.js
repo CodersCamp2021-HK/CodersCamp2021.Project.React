@@ -1,14 +1,13 @@
 import { AssetsManager } from '../../assets';
+import { KING_DEFAULT_ANIMATION_INTERVAL, KING_AIR_HORIZONTAL_VELOCITY } from '../../config';
 import { KingAnimated } from './KingAnimated';
-
-const SPRITE_ANIMATION_UPDATE = 10;
 
 class KingFall extends KingAnimated {
   /**
    * @param {import('./King').King} king
    */
   constructor(king) {
-    super(king, AssetsManager.king.fall, SPRITE_ANIMATION_UPDATE);
+    super(king, AssetsManager.king.fall, KING_DEFAULT_ANIMATION_INTERVAL);
   }
 
   /**
@@ -20,11 +19,11 @@ class KingFall extends KingAnimated {
     }
     if (this.king.keyboard.pressed('ArrowRight')) {
       this.king.flipRight();
-      this.king.rigidbody.velocity = this.king.rigidbody.velocity.setX(1);
+      this.king.rigidbody.velocity = this.king.rigidbody.velocity.setX(KING_AIR_HORIZONTAL_VELOCITY);
     }
     if (this.king.keyboard.pressed('ArrowLeft')) {
       this.king.flipLeft();
-      this.king.rigidbody.velocity = this.king.rigidbody.velocity.setX(-1);
+      this.king.rigidbody.velocity = this.king.rigidbody.velocity.setX(-KING_AIR_HORIZONTAL_VELOCITY);
     }
     if (!this.king.keyboard.pressed('ArrowRight') && !this.king.keyboard.pressed('ArrowLeft')) {
       this.king.rigidbody.velocity = this.king.rigidbody.velocity.setX(0);

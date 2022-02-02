@@ -1,15 +1,14 @@
 import { AssetsManager } from '../../assets';
 import { KingSwing } from './KingSwing';
 import { KingAnimated } from './KingAnimated';
-
-const SPRITE_ANIMATION_UPDATE = 5;
+import { KING_ATTACK_ANIMATION_INTERVAL } from '../../config';
 
 class KingAttack extends KingAnimated {
   /**
    * @param {import('./King').King} king
    */
   constructor(king) {
-    super(king, AssetsManager.king.attack, SPRITE_ANIMATION_UPDATE, true);
+    super(king, AssetsManager.king.attack, KING_ATTACK_ANIMATION_INTERVAL, true);
 
     this.king.create(KingSwing, {
       args: {

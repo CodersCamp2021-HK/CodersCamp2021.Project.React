@@ -1,9 +1,10 @@
 import _ from 'lodash';
 import { AssetsManager } from '../../assets';
+import { TILE_SIZE } from '../../config';
 import { GameScene } from '../../engine';
 import { BackgroundTiles, Door, SolidTile, King } from '../../objects';
 import { Vector } from '../../shared';
-import { patternsMatch, stringToCharMatrix, TILE_SIZE } from './levelUtils';
+import { patternsMatch, stringToCharMatrix } from './levelUtils';
 import { tileRules } from './tileRules';
 
 /**
@@ -120,6 +121,18 @@ class LevelScene extends GameScene {
         type: 'end',
       },
     });
+
+    if (levelInfo.additionalObjects) {
+      levelInfo.additionalObjects((Cls, pos, otherArgs = {}) => {
+        this.create(Cls, {
+          args: {
+            initialPos: pos.add(new Vector(0.5, 0.5)).scale(TILE_SIZE),
+            level: this,
+            ...otherArgs,
+          },
+        });
+      });
+    }
 
     this.#king = this.create(King, {
       args: {
