@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import { Link } from 'react-router-dom';
 import { theme } from '../../../shared/theme';
@@ -65,7 +64,7 @@ const LevelSelectPage = () => {
 
           return (
             <Link to={`/level-select/${levelNumber}`} key={levelNumber}>
-            <LevelButton type={checkLevelState({ levelNumber })}>{levelNumber}</LevelButton>
+              <LevelButton type={checkLevelState({ levelNumber })}>{levelNumber}</LevelButton>
             </Link>
           );
         })}
