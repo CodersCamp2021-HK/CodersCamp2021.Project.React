@@ -64,8 +64,9 @@ const LevelSelectPage = () => {
           const levelNumber = i + 1;
 
           return (
-            <Link to='/game' key={levelNumber}>
-              <LevelButton type={checkLevelState({ levelNumber })}>{levelNumber}</LevelButton>
+            <Link to={`/level-select/${levelNumber}`} key={levelNumber}>
+            <LevelButton type={checkLevelState({ levelNumber })}>{levelNumber}</LevelButton>
+                {levelNumber}
             </Link>
           );
         })}
@@ -79,4 +80,4 @@ const LevelSelectPage = () => {
   );
 };
 
-export { LevelSelectPage };
+export { LevelSelectPage, levels };

@@ -62,7 +62,7 @@ import('.').then(({ Pig, King }) => {
   SolidTile.collidingObjects = Object.freeze([
     {
       Cls: Pig,
-      restitution: 0.25,
+      restitution: 0.1,
     },
     {
       Cls: King,

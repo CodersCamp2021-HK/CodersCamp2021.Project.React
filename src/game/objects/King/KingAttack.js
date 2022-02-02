@@ -1,4 +1,5 @@
 import { AssetsManager } from '../../assets';
+import { KingSwing } from './KingSwing';
 import { KingAnimated } from './KingAnimated';
 
 const SPRITE_ANIMATION_UPDATE = 5;
@@ -9,6 +10,12 @@ class KingAttack extends KingAnimated {
    */
   constructor(king) {
     super(king, AssetsManager.king.attack, SPRITE_ANIMATION_UPDATE, true);
+
+    this.king.create(KingSwing, {
+      args: {
+        attackCenter: this.king.transform.origin,
+      },
+    });
   }
 
   /**
