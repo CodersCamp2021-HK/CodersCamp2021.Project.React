@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { useLayoutEffect, useMemo, useRef, useEffect } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
-import { _ } from 'lodash';
+import _ from 'lodash';
 import { levels } from './LevelSelectPage/LevelSelectPage';
 import { useGameEngine, UIProxy, theme } from '../../shared';
 import backgroundUrl from '../../public/img/background.jpg';
@@ -38,6 +38,8 @@ const GameUI = () => {
 
   useEffect(() => {
     gameEngine.start();
+
+    return () => gameEngine.stop();
   }, [gameEngine]);
 
   /** @type {React.MutableRefObject<HTMLCanvasElement | null>} */
