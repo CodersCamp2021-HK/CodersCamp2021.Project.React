@@ -107,7 +107,7 @@ class Pig extends GameObject {
     this.#hp = variant === 'king' ? PIG_KING_MAX_HP : PIG_BASIC_MAX_HP;
 
     this.#state = new PigIdle(this);
-    this.animation.flipped = this.#facing !== PIG_DEFAULT_FACING;
+    this.animation.flipped = this.#facing !== PIG_DEFAULT_ASSET_FACING;
 
     this.rigidbody.addGravity();
     this.setCollider(BoxCollider, [new Vector(24, 18), new Vector(5, 10)]);

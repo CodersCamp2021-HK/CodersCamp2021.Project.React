@@ -1,6 +1,4 @@
 import { LevelScene } from './LevelScene';
-import { Vector } from '../../shared';
-import { TILE_SIZE } from '../../config';
 
 /**
  * Generate an anonymous level class from level info.
