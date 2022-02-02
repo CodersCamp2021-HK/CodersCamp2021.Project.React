@@ -1,15 +1,14 @@
 import { AssetsManager } from '../../assets';
+import { KING_DEFAULT_ANIMATION_INTERVAL } from '../../config';
 import { Vector } from '../../shared';
 import { KingAnimated } from './KingAnimated';
-
-const SPRITE_ANIMATION_UPDATE = 10;
 
 class KingIdle extends KingAnimated {
   /**
    * @param {import('./King').King} king
    */
   constructor(king) {
-    super(king, AssetsManager.king.idle, SPRITE_ANIMATION_UPDATE);
+    super(king, AssetsManager.king.idle, KING_DEFAULT_ANIMATION_INTERVAL);
     // eslint-disable-next-line no-param-reassign
     king.rigidbody.velocity = Vector.Zero;
   }

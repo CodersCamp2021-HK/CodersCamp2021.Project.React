@@ -1,10 +1,7 @@
 import { AssetsManager } from '../assets';
+import { DOOR_ANIMATION_INTERVAL, DOOR_HITBOX_SIZE, TILE_SIZE } from '../config';
 import { BoxCollider, GameObject } from '../engine';
-import { TILE_SIZE } from '../scenes/LevelScene/levelUtils';
 import { Vector } from '../shared';
-
-const DOOR_HITBOX_SIZE = 4;
-const DOOR_ANIMATION_INTERVAL = 10;
 
 class Door extends GameObject {
   /** @type {'start' | 'end'} */

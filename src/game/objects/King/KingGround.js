@@ -1,14 +1,13 @@
 import { AssetsManager } from '../../assets';
+import { KING_DEFAULT_ANIMATION_INTERVAL } from '../../config';
 import { KingAnimated } from './KingAnimated';
-
-const SPRITE_ANIMATION_UPDATE = 10;
 
 class KingGround extends KingAnimated {
   /**
    * @param {import('./King').King} king
    */
   constructor(king) {
-    super(king, AssetsManager.king.ground, SPRITE_ANIMATION_UPDATE, true);
+    super(king, AssetsManager.king.ground, KING_DEFAULT_ANIMATION_INTERVAL, true);
   }
 
   /**

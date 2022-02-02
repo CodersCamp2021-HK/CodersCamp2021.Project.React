@@ -1,5 +1,6 @@
 import { BoxCollider, GameObject } from '../../engine';
 import { Vector } from '../../shared';
+import { PIG_BASIC_MAX_HP, PIG_DETECTION_SIZE_HALF, PIG_KING_MAX_HP } from '../../config';
 import { PigIdle } from './PigIdle';
 import { PigFall } from './PigFall';
 import { PigGround } from './PigGround';
@@ -12,10 +13,6 @@ import { PIG_DEFAULT_FACING } from './PigStateAnimated';
 import { KingSwing } from '../King/KingSwing';
 // eslint-disable-next-line import/no-cycle
 import { SolidTile } from '../SolidTile';
-
-const PIG_BASIC_MAX_HP = 2;
-const PIG_KING_MAX_HP = 10;
-const PIG_HALF_DETECTION_SIZE = new Vector(64, 32);
 
 const stateMap = Object.freeze({
   idle: PigIdle,
@@ -123,9 +120,9 @@ class Pig extends GameObject {
    */
   onUpdate(_frame) {
     if (!this.#kingWasSpotted) {
-      const detectionCenter = this.transform.origin.add(this.facingVector.scale(PIG_HALF_DETECTION_SIZE.x));
-      const detectionTopLeft = detectionCenter.subtract(PIG_HALF_DETECTION_SIZE);
-      const detectionBottomRight = detectionCenter.add(PIG_HALF_DETECTION_SIZE);
+      const detectionCenter = this.transform.origin.add(this.facingVector.scale(PIG_DETECTION_SIZE_HALF.x));
+      const detectionTopLeft = detectionCenter.subtract(PIG_DETECTION_SIZE_HALF);
+      const detectionBottomRight = detectionCenter.add(PIG_DETECTION_SIZE_HALF);
 
       if (
         detectionTopLeft.x <= this.king.transform.origin.x &&

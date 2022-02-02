@@ -1,5 +1,6 @@
 import { Vector } from '../../shared';
 import { GameObject, BoxCollider } from '../../engine';
+import { KING_ATTACK_DELAY } from '../../config';
 import { KingAttack } from './KingAttack';
 import { KingDead } from './KingDead';
 import { KingDoorIn } from './KingDoorIn';
@@ -30,7 +31,7 @@ class King extends GameObject {
 
   #canAttack = true;
 
-  #attackDelay = 500;
+  #attackDelay = KING_ATTACK_DELAY;
 
   get isOnGround() {
     return this.#isOnGround;

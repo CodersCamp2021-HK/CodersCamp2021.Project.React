@@ -1,15 +1,14 @@
 import { AssetsManager } from '../../assets';
+import { KING_DEFAULT_ANIMATION_INTERVAL } from '../../config';
 import { Vector } from '../../shared';
 import { KingAnimated } from './KingAnimated';
-
-const SPRITE_ANIMATION_UPDATE = 10;
 
 class KingDoorIn extends KingAnimated {
   /**
    * @param {import('./King').King} king
    */
   constructor(king) {
-    super(king, AssetsManager.king.doorIn, SPRITE_ANIMATION_UPDATE, true);
+    super(king, AssetsManager.king.doorIn, KING_DEFAULT_ANIMATION_INTERVAL, true);
     this.king.rigidbody.velocity = Vector.Zero;
   }
 
