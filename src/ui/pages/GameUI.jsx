@@ -6,6 +6,7 @@ import { levels } from './LevelSelectPage/LevelSelectPage';
 import { useGameEngine, UIProxy, theme } from '../../shared';
 import backgroundUrl from '../../public/img/background.jpg';
 import { Button, BUTTON_HEIGHT_SIZE, BUTTON_WIDTH_SIZE, PageHeader } from '../components';
+import { githubPrefix } from '../../shared/ui';
 
 const wrapper = css`
   min-height: 100vh;
@@ -65,13 +66,13 @@ const GameUI = () => {
 
   return (
     <>
-      {!levelExists() ? <Navigate to='/level-select' replace /> : ''}
+      {!levelExists() ? <Navigate to={`${githubPrefix}level-select`} replace /> : ''}
       <main css={wrapper}>
         <PageHeader>Level {params.levelSelectId}</PageHeader>{' '}
         <section css={gameBorder}>
           <canvas css={{ width: '65vw' }} height={416} width={800} id='GameCanvas' ref={ref} />
           <div css={buttonWrapper}>
-            <Link to='/level-select'>
+            <Link to={`${githubPrefix}level-select`}>
               <Button type='silver'>
                 change <br />
                 level

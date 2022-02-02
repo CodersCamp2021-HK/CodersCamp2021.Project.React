@@ -13,6 +13,7 @@ import {
 import { scenes } from '../../../game/scenes';
 import { LevelScene } from '../../../game/scenes/LevelScene';
 import backgroundUrl from '../../../public/img/background.jpg';
+import { githubPrefix } from '../../../shared/ui';
 
 const LEVEL_GRID_SPACING = '2rem';
 
@@ -75,7 +76,7 @@ const LevelSelectPage = () => {
           );
         })}
         <div css={buttonWrapper}>
-          <Link to='/'>
+          <Link to={githubPrefix}>
             <Button type='silver'>go back to homepage</Button>
           </Link>
         </div>

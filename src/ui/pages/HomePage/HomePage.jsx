@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import { theme } from '../../../shared/theme';
 import { PageHeader, Button, PopupControls } from '../../components';
 import backgroundUrl from '../../../public/img/background.jpg';
+import { githubPrefix } from '../../../shared/ui';
 
 const wrapper = css`
   min-height: 100vh;
@@ -37,13 +38,13 @@ const HomePage = () => {
     <main css={wrapper}>
       <PageHeader>King and Pigs</PageHeader>
       <section css={btnGroup}>
-        <Link to='/level-select'>
+        <Link to={`${githubPrefix}level-select`}>
           <Button type='gold'>start</Button>
         </Link>
         <Button type='silver' onClick={handleOpen}>
           Controls
         </Button>
-        <Link to='/credits'>
+        <Link to={`${githubPrefix}credits`}>
           <Button type='silver'>Credits</Button>
         </Link>
         <PopupControls open={open} onClose={handleClose} />
