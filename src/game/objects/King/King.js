@@ -14,6 +14,7 @@ import { KingRunRight } from './KingRunRight';
 import { Door } from '../Door';
 // eslint-disable-next-line import/no-cycle
 import { SolidTile } from '../SolidTile';
+import { PigSwing } from '../Pig/PigSwing';
 
 /**
  * @typedef {'attack' | 'collision' | 'dead' | 'doorIn' | 'doorOut' | 'fall' | 'ground' | 'hit' | 'idle' | 'jump' | 'runLeft' | 'runRight' } KingStateKey
@@ -90,6 +91,11 @@ class King extends GameObject {
     } else if (target instanceof Door && !(this.#state instanceof KingDoorIn)) {
       target.open();
       this.transitionState('doorIn');
+    } else if (
+      target instanceof PigSwing &&
+      ![KingDoorIn, KingHit, KingDead].some((state) => this.#state instanceof state)
+    ) {
+      this.transitionState('hit');
     }
   }
 

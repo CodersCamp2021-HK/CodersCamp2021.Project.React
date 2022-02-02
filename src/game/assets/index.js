@@ -30,16 +30,21 @@ const AssetsManager = Object.freeze({
     open: _.times(3, (x) => new Sprite(doorUrl, new Crop(new Vector(46 * x, 0), 46, 56))),
     close: _.times(3, (x) => new Sprite(doorUrl, new Crop(new Vector(92 - 46 * x, 0), 46, 56))),
   },
-  pig: {
-    idle: _.times(11, (x) => new Sprite(pigUrl, new Crop(new Vector(34 * x, 0), 34, 28))),
-    jump: new Sprite(pigUrl, new Crop(new Vector(0, 28), 34, 28)),
-    fall: [new Sprite(pigUrl, new Crop(new Vector(34, 28), 34, 28))],
-    ground: new Sprite(pigUrl, new Crop(new Vector(68, 28), 34, 28)),
-    run: _.times(6, (x) => new Sprite(pigUrl, new Crop(new Vector(34 * x, 56), 34, 28))),
-    attack: _.times(5, (x) => new Sprite(pigUrl, new Crop(new Vector(34 * x, 84), 34, 28))),
-    hit: _.times(2, (x) => new Sprite(pigUrl, new Crop(new Vector(34 * x, 112), 34, 28))),
-    dead: _.times(4, (x) => new Sprite(pigUrl, new Crop(new Vector(68 + 34 * x, 112), 34, 28))),
-  },
+  pig: Object.fromEntries(
+    ['basic', 'king'].map((variant, i) => [
+      variant,
+      {
+        idle: _.times(11, (x) => new Sprite(pigUrl, new Crop(new Vector(34 * x, i * 140), 34, 28))),
+        jump: [new Sprite(pigUrl, new Crop(new Vector(0, 28 + i * 140), 34, 28))],
+        fall: [new Sprite(pigUrl, new Crop(new Vector(34, 28 + i * 140), 34, 28))],
+        ground: [new Sprite(pigUrl, new Crop(new Vector(68, 28 + i * 140), 34, 28))],
+        run: _.times(6, (x) => new Sprite(pigUrl, new Crop(new Vector(34 * x, 56 + i * 140), 34, 28))),
+        attack: _.times(5, (x) => new Sprite(pigUrl, new Crop(new Vector(34 * x, 84 + i * 140), 34, 28))),
+        hit: _.times(2, (x) => new Sprite(pigUrl, new Crop(new Vector(34 * x, 112 + i * 140), 34, 28))),
+        dead: _.times(4, (x) => new Sprite(pigUrl, new Crop(new Vector(68 + 34 * x, 112 + i * 140), 34, 28))),
+      },
+    ]),
+  ),
 });
 
 export { AssetsManager };

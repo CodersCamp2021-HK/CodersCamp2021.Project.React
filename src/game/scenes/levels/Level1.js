@@ -22,7 +22,7 @@ const Level1 = levelFrom({
   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX`,
   additionalObjects: (create) => {
     create(Pig, new Vector(6, 2));
-    create(Pig, new Vector(12, 1));
+    create(Pig, new Vector(12, 1), { variant: 'king' });
   },
 });
 
