@@ -13,6 +13,7 @@ import {
 import { scenes } from '../../../game/scenes';
 import { LevelScene } from '../../../game/scenes/LevelScene';
 import backgroundUrl from '../../../public/img/background.jpg';
+import { checkLevelState, unlockedLevel } from '../../../shared/game/localStorageFun';
 
 const LEVEL_GRID_SPACING = '2rem';
 
@@ -54,8 +55,6 @@ const buttonWrapper = css`
 `;
 
 const LevelSelectPage = () => {
-  const [selected, setSelected] = React.useState(/** @type {number?} */ (null));
-
   return (
     <main css={wrapper}>
       <PageHeader>Level Select</PageHeader>
@@ -65,12 +64,7 @@ const LevelSelectPage = () => {
 
           return (
             <Link to='/game' key={levelNumber}>
-              <LevelButton
-                type={selected === levelNumber ? 'selected' : 'unlocked'}
-                onSelect={() => setSelected(levelNumber)}
-              >
-                {levelNumber}
-              </LevelButton>
+              <LevelButton type={checkLevelState({ levelNumber })}>{levelNumber}</LevelButton>
             </Link>
           );
         })}
