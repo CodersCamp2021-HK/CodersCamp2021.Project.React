@@ -1,8 +1,6 @@
 import _ from 'lodash';
 import { Vector } from '../../shared';
 
-export const TILE_SIZE = 32;
-
 /**
  * @param {string} input string with 3 non-empty lines and 3 non-whitespace characters in each line
  * @returns {string[][]} array of 3 rows, each one being an array of 3 characters
