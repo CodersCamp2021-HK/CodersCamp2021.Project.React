@@ -31,8 +31,6 @@ class King extends GameObject {
 
   #canAttack = true;
 
-  #attackDelay = KING_ATTACK_DELAY;
-
   get isOnGround() {
     return this.#isOnGround;
   }
@@ -45,7 +43,7 @@ class King extends GameObject {
     this.#canAttack = false;
     setTimeout(() => {
       this.#canAttack = true;
-    }, this.#attackDelay);
+    }, KING_ATTACK_DELAY);
   }
 
   flipRight() {
