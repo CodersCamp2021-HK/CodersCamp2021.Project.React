@@ -60,6 +60,7 @@ const LevelSelectPage = () => {
       <PageHeader>Level Select</PageHeader>
       <section css={levelGrid}>
         {levels.map((_, i) => {
+          /** @type {number} */
           const levelNumber = i + 1;
 
           return (
