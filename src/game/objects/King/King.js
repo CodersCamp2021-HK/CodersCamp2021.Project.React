@@ -1,6 +1,6 @@
 import { Vector } from '../../shared';
 import { GameObject, BoxCollider } from '../../engine';
-import { KING_ATTACK_DELAY } from '../../config';
+import { KING_ATTACK_DELAY, KING_MAX_HP } from '../../config';
 import { KingAttack } from './KingAttack';
 import { KingDead } from './KingDead';
 import { KingDoorIn } from './KingDoorIn';
@@ -31,12 +31,25 @@ class King extends GameObject {
 
   #canAttack = true;
 
+  #hp = KING_MAX_HP;
+
   get isOnGround() {
     return this.#isOnGround;
   }
 
   get canAttack() {
     return this.#canAttack;
+  }
+
+  get hp() {
+    return this.#hp;
+  }
+
+  #damage() {
+    if (!(this.#state instanceof KingHit || this.#state instanceof KingDead)) {
+      this.#hp -= 1;
+      this.transitionState('hit');
+    }
   }
 
   delayAttack() {
@@ -94,7 +107,8 @@ class King extends GameObject {
       target instanceof PigSwing &&
       ![KingDoorIn, KingHit, KingDead].some((state) => this.#state instanceof state)
     ) {
-      this.transitionState('hit');
+      // this.transitionState('hit');
+      this.#damage();
     }
   }
 

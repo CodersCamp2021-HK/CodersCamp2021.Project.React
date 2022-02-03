@@ -15,10 +15,16 @@ class KingHit extends KingAnimated {
    */
   update(frame) {
     if (this.king.animation.isFinished) {
-      if (this.king.isOnGround) {
+      if (this.king.hp <= 0) {
+        return this.king.transitionState('dead').onUpdate(frame);
+      }
+      if (this.king.hp > 0 && this.king.isOnGround) {
+        this.king.transitionState('hit').onUpdate(frame);
         return this.king.transitionState('idle').onUpdate(frame);
       }
-      return this.king.transitionState('fall').onUpdate(frame);
+      if (this.king.hp > 0 && !this.king.isOnGround) {
+        return this.king.transitionState('fall').onUpdate(frame);
+      }
     }
     return super.update(frame);
   }
