@@ -2,16 +2,15 @@ import { AssetsManager } from '../assets';
 import { GameObject } from '../engine';
 import { Vector } from '../shared';
 
-class Decoration extends GameObject {
-  #sprite = AssetsManager.window;
+class Heart extends GameObject {
+  #sprite = AssetsManager.heart;
 
   /**
    * @param {Object} props
    * @param {Vector} props.initialPos
-   * @param {'window' | 'flag'} props.type
    */
-  onActivate({ initialPos, type }) {
-    this.#sprite = type === 'window' ? AssetsManager.window : AssetsManager.heart;
+  onActivate({ initialPos }) {
+    this.#sprite = AssetsManager.heart;
     this.transform.origin = initialPos ?? Vector.Zero;
   }
 
@@ -23,4 +22,4 @@ class Decoration extends GameObject {
   }
 }
 
-export { Decoration };
+export { Heart };

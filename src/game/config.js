@@ -12,7 +12,7 @@ export const KING_DEFAULT_ANIMATION_INTERVAL = 10;
 export const KING_ATTACK_ANIMATION_INTERVAL = 5;
 export const KING_RESTITUTION = 0;
 export const KING_RUN_ANIMATION_INTERVAL = 3;
-export const KING_MAX_HP = 2;
+export const KING_MAX_HP = 5;
 
 export const PIG_RUN_VELOCITY = 1.5;
 export const PIG_JUMP_IMPULSE = -5;
