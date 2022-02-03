@@ -11,7 +11,7 @@ class Decoration extends GameObject {
    * @param {'window' | 'flag'} props.type
    */
   onActivate({ initialPos, type }) {
-    this.#sprite = type === 'window' ? AssetsManager.window : AssetsManager.heart;
+    this.#sprite = type === 'window' ? AssetsManager.window : AssetsManager.flag;
     this.transform.origin = initialPos ?? Vector.Zero;
   }
 
