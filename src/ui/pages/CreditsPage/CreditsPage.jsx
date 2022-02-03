@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { Link } from 'react-router-dom';
-import { githubPrefix } from '../../../shared/ui';
 import { theme } from '../../../shared/theme';
 import { PageHeader, Button, BUTTON_WIDTH_SIZE, BUTTON_HEIGHT_SIZE, DevInfo } from '../../components';
 import backgroundUrl from '../../../public/img/background.jpg';
@@ -120,7 +119,7 @@ const CreditsPage = () => {
           </div>
         </div>
         <div css={buttonWrapper}>
-          <Link to={githubPrefix}>
+          <Link to='/'>
             <Button type='silver'>go back to homepage</Button>
           </Link>
         </div>

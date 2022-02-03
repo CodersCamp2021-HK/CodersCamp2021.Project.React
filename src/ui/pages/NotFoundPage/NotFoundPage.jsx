@@ -3,7 +3,6 @@ import { css } from '@emotion/react';
 import { theme } from '../../../shared/theme';
 import backgroundUrl from '../../../public/img/background.jpg';
 import { Button } from '../../components/Button';
-import { githubPrefix } from '../../../shared/ui';
 
 const wrapper = css`
   min-height: 100vh;
@@ -26,7 +25,7 @@ const NotFound = () => {
       >
         Sorry, there&apos;s nothing here
       </h1>
-      <Link to={githubPrefix}>
+      <Link to='/'>
         <Button type='silver'>go back to homepage</Button>
       </Link>
     </main>
