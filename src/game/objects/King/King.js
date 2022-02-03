@@ -107,7 +107,6 @@ class King extends GameObject {
       target instanceof PigSwing &&
       ![KingDoorIn, KingHit, KingDead].some((state) => this.#state instanceof state)
     ) {
-      // this.transitionState('hit');
       this.#damage();
     }
   }
