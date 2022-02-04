@@ -5,11 +5,8 @@ export default {
   component: LevelButton,
   argTypes: {
     type: {
-      options: ['locked', 'unlocked', 'selected'],
+      options: ['locked', 'unlocked'],
       control: { type: 'radio' },
-    },
-    onSelect: {
-      action: 'selected',
     },
   },
 };
@@ -26,11 +23,5 @@ Locked.args = {
 export const Unlocked = Template.bind({});
 Unlocked.args = {
   type: 'unlocked',
-  children: '1',
-};
-
-export const Selected = Template.bind({});
-Selected.args = {
-  type: 'selected',
   children: '1',
 };
