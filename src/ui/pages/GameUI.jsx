@@ -52,8 +52,8 @@ const GameUI = () => {
   );
 
   useLayoutEffect(() => {
-    if (ref.current) {
-      gameEngine.initialize(ref.current, uiProxy);
+    if (ref.current && levelExists()) {
+      gameEngine.initialize(ref.current, uiProxy, Number(params.levelSelectId));
     }
   }, [gameEngine, uiProxy]);
 
