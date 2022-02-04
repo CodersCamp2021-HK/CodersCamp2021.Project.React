@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { useLayoutEffect, useMemo, useRef, useEffect } from 'react';
+import { useLayoutEffect, useMemo, useRef, useEffect, useCallback } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
 // @ts-ignore
 import { _ } from 'lodash';
@@ -36,6 +36,7 @@ const buttonWrapper = css`
 const GameUI = () => {
   const gameEngine = useGameEngine();
   const params = useParams();
+  const selectedLevel = Number(params.levelSelectId);
 
   useEffect(() => {
     gameEngine.start();
@@ -52,17 +53,17 @@ const GameUI = () => {
     [gameEngine],
   );
 
+  const levelsAvailable = useCallback(() => {
+    const levelsArray = _.range(1, _.size(getLocalStorage()) + 1);
+
+    return levelsArray.includes(selectedLevel);
+  }, [selectedLevel]);
+
   useLayoutEffect(() => {
-    if (ref.current && levelExists()) {
-      gameEngine.initialize(ref.current, uiProxy, Number(params.levelSelectId));
+    if (ref.current && levelsAvailable()) {
+      gameEngine.initialize(ref.current, uiProxy, selectedLevel);
     }
-  }, [gameEngine, uiProxy]);
-
-  const levelsAvailable = () => {
-    const levelsArray = _.range(1, getLocalStorage().length + 1);
-
-    return levelsArray.includes(Number(params.levelSelectId));
-  };
+  }, [gameEngine, uiProxy, selectedLevel, levelsAvailable]);
 
   return (
     <>

@@ -12,8 +12,6 @@ class GameEngineProxy {
    * @param {Number} level
    */
 
-
-
   initialize(canvas, ui, level) {
     this.#gameEngine = new GameEngine(canvas, ui, scenes);
     this.#gameEngine.load(`level${level}`);
