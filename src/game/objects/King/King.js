@@ -13,8 +13,6 @@ import { KingJump } from './KingJump';
 import { KingRunLeft } from './KingRunLeft';
 import { KingRunRight } from './KingRunRight';
 import { Door } from '../Door';
-// eslint-disable-next-line import/no-cycle
-import { SolidTile } from '../SolidTile';
 import { PigSwing } from '../Pig/PigSwing';
 
 /**
@@ -85,7 +83,7 @@ class King extends GameObject {
    * @param {GameObject} target
    */
   onCollision(collision, target) {
-    if (target instanceof SolidTile && collision.resolutionVector.y < 0) {
+    if (target.isSolidTile && collision.resolutionVector.y < 0) {
       this.#isOnGround = true;
     } else if (target instanceof Door && !(this.#state instanceof KingDoorIn)) {
       target.open();
