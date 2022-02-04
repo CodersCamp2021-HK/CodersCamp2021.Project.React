@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
 import { useLayoutEffect, useMemo, useRef, useEffect } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
+// @ts-ignore
 import { _ } from 'lodash';
-import { levels } from './LevelSelectPage/LevelSelectPage';
 import { useGameEngine, UIProxy, theme } from '../../shared';
 import backgroundUrl from '../../public/img/background.jpg';
 import { Button, BUTTON_HEIGHT_SIZE, BUTTON_WIDTH_SIZE, PageHeader } from '../components';
+import { getLocalStorage } from '../../shared/game/localStorageFun';
 
 const wrapper = css`
   min-height: 100vh;
@@ -57,15 +58,15 @@ const GameUI = () => {
     }
   }, [gameEngine, uiProxy]);
 
-  const levelExists = () => {
-    const levelsArray = _.range(1, levels.length + 1);
+  const levelsAvailable = () => {
+    const levelsArray = _.range(1, getLocalStorage().length + 1);
 
     return levelsArray.includes(Number(params.levelSelectId));
   };
 
   return (
     <>
-      {!levelExists() ? <Navigate to='/level-select' replace /> : ''}
+      {!levelsAvailable() ? <Navigate to='/level-select' replace /> : ''}
       <main css={wrapper}>
         <PageHeader>Level {params.levelSelectId}</PageHeader>{' '}
         <section css={gameBorder}>
