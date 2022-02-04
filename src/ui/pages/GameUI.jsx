@@ -58,7 +58,7 @@ const GameUI = () => {
     }
   }, [gameEngine, uiProxy]);
 
-  const levelExists = () => {
+  const levelsAvailable = () => {
     const levelsArray = _.range(1, getLocalStorage().length + 1);
 
     return levelsArray.includes(Number(params.levelSelectId));
@@ -66,7 +66,7 @@ const GameUI = () => {
 
   return (
     <>
-      {!levelExists() ? <Navigate to='/level-select' replace /> : ''}
+      {!levelsAvailable() ? <Navigate to='/level-select' replace /> : ''}
       <main css={wrapper}>
         <PageHeader>Level {params.levelSelectId}</PageHeader>{' '}
         <section css={gameBorder}>
