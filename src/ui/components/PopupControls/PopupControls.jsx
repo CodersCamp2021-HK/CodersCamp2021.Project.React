@@ -6,7 +6,6 @@ import keyboardArrowsUrl from '../../../public/img/keyboard_arrows.png';
 import jumpUrl from '../../../public/img/jump.png';
 import groundUrl from '../../../public/img/ground.png';
 import keyXUrl from '../../../public/img/key_x.png';
-import keyZUrl from '../../../public/img/key_z.png';
 import attackUrl from '../../../public/img/attack.png';
 import ButtonSilverUrl from '../../../public/img/silverButton.png';
 import steelDecorationUrl from '../../../public/img/stealDecoration.svg';
@@ -92,10 +91,9 @@ const col = css({
 });
 
 const innerWrapper2 = css({
+  height: '100%',
   display: 'inline-flex',
-  flexDirection: 'column',
-  gap: '2rem',
-  margin: '1.5rem auto 0 auto',
+  justifyContent: 'center',
 });
 
 const image1 = css({
@@ -185,13 +183,8 @@ const PopupControls = ({ open, onClose }) => {
           <h2 css={heading2}>Action</h2>
           <div css={innerWrapper2}>
             <div css={description}>
-              <img src={keyZUrl} alt='' />
-              <p css={text}>Attack</p>
-              <img src={attackUrl} css={exampleImg} alt='' />
-            </div>
-            <div css={description}>
               <img src={keyXUrl} alt='' />
-              <p css={text}>Throw</p>
+              <p css={text}>Attack</p>
               <img src={attackUrl} css={exampleImg} alt='' />
             </div>
           </div>
