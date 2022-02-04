@@ -12,10 +12,7 @@ export function getLocalStorage() {
 
 export function checkLevelState({ levelNumber }) {
   const localStorageData = getLocalStorage();
-  if (localStorageData[levelNumber] != null) {
-    return localStorageData[levelNumber];
-  }
-  return 'locked';
+  return localStorageData[levelNumber] ?? 'locked';
 }
 /**
  * @param {{levelNumber: number}} props
