@@ -1,4 +1,5 @@
 import { AssetsManager } from '../assets';
+import { KING_RESTITUTION, PIG_RESTITUTION } from '../config';
 import { BoxCollider, GameObject } from '../engine';
 import { Vector } from '../shared';
 
@@ -62,11 +63,11 @@ import('.').then(({ Pig, King }) => {
   SolidTile.collidingObjects = Object.freeze([
     {
       Cls: Pig,
-      restitution: 0.1,
+      restitution: PIG_RESTITUTION,
     },
     {
       Cls: King,
-      restitution: 0,
+      restitution: KING_RESTITUTION,
     },
   ]);
 });

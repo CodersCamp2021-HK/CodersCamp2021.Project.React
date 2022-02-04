@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import { Link } from 'react-router-dom';
 import { theme } from '../../../shared/theme';
@@ -13,6 +12,7 @@ import {
 import { scenes } from '../../../game/scenes';
 import { LevelScene } from '../../../game/scenes/LevelScene';
 import backgroundUrl from '../../../public/img/background.jpg';
+import { checkLevelState } from '../../../shared/game/localStorageFun';
 
 const LEVEL_GRID_SPACING = '2rem';
 
@@ -54,23 +54,17 @@ const buttonWrapper = css`
 `;
 
 const LevelSelectPage = () => {
-  const [selected, setSelected] = React.useState(/** @type {number?} */ (null));
-
   return (
     <main css={wrapper}>
       <PageHeader>Level Select</PageHeader>
       <section css={levelGrid}>
         {levels.map((_, i) => {
+          /** @type {number} */
           const levelNumber = i + 1;
 
           return (
             <Link to={`/level-select/${levelNumber}`} key={levelNumber}>
-              <LevelButton
-                type={selected === levelNumber ? 'selected' : 'unlocked'}
-                onSelect={() => setSelected(levelNumber)}
-              >
-                {levelNumber}
-              </LevelButton>
+              <LevelButton type={checkLevelState({ levelNumber })}>{levelNumber}</LevelButton>
             </Link>
           );
         })}

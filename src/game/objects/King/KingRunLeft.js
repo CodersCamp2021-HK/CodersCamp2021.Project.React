@@ -1,16 +1,15 @@
 import { AssetsManager } from '../../assets';
+import { KING_RUN_ANIMATION_INTERVAL, KING_RUN_VELOCITY } from '../../config';
 import { Vector } from '../../shared';
 import { KingAnimated } from './KingAnimated';
-
-const SPRITE_ANIMATION_UPDATE = 3;
 
 class KingRunLeft extends KingAnimated {
   /**
    * @param {import('./King').King} king
    */
   constructor(king) {
-    super(king, AssetsManager.king.run, SPRITE_ANIMATION_UPDATE);
-    king.rigidbody.addVelocity(new Vector(-2, 0));
+    super(king, AssetsManager.king.run, KING_RUN_ANIMATION_INTERVAL);
+    king.rigidbody.addVelocity(new Vector(-KING_RUN_VELOCITY, 0));
   }
 
   /**

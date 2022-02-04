@@ -1,4 +1,4 @@
-import { Collision, Shape, Vector } from '../shared';
+import { Collision, Vector } from '../shared';
 import { Collider } from './internals/Collider';
 
 class BoxCollider extends Collider {
@@ -73,15 +73,6 @@ class BoxCollider extends Collider {
     }
 
     throw new Error('Not supported collision detection.');
-  }
-
-  /**
-   * @param {import("./internals/CanvasBuffer").CanvasBuffer} buffer
-   */
-  DEBUG_Draw(buffer) {
-    const path = new Path2D();
-    path.rect(this.topLeft.x, this.topLeft.y, this.dimensions.x, this.dimensions.y);
-    buffer.draw(this.topLeft, new Shape(path, undefined, 'red'));
   }
 }
 

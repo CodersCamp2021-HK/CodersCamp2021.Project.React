@@ -1,9 +1,10 @@
 import _ from 'lodash';
 import { AssetsManager } from '../../assets';
+import { TILE_SIZE } from '../../config';
 import { GameScene } from '../../engine';
 import { BackgroundTiles, Door, SolidTile, King } from '../../objects';
 import { Vector } from '../../shared';
-import { patternsMatch, stringToCharMatrix, TILE_SIZE } from './levelUtils';
+import { patternsMatch, stringToCharMatrix } from './levelUtils';
 import { tileRules } from './tileRules';
 
 /**
