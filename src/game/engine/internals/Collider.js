@@ -37,15 +37,6 @@ class Collider {
     return this.#gameObject;
   }
   // #endregion
-
-  // #region debug
-
-  /**
-   * @param {import('./CanvasBuffer').CanvasBuffer} buffer
-   */
-  DEBUG_Draw(buffer) {}
-
-  // #endregion
 }
 
 export { Collider };
