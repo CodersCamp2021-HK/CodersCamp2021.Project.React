@@ -3,7 +3,9 @@ import { Vector } from '../shared';
 import { GameObject } from '../engine';
 
 class HeartList extends GameObject {
-  // @ts-ignore
+  /**
+   * @type {Array<GameObject>}
+   */
   #list = [];
 
   /**
