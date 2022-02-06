@@ -10,7 +10,6 @@ class Heart extends GameObject {
    * @param {Vector} props.initialPos
    */
   onActivate({ initialPos }) {
-    this.#sprite = AssetsManager.heart;
     this.transform.origin = initialPos ?? Vector.Zero;
   }
 
@@ -20,10 +19,6 @@ class Heart extends GameObject {
   onUpdate(frame) {
     frame.buffer.draw(this.position, this.#sprite);
   }
-
-  // onHit() {
-  //   this.destroy(this.#sprite); tutaj inny sposób jak to chciałem rozwiązać, ale tez nie działa
-  // }
 }
 
 export { Heart };
