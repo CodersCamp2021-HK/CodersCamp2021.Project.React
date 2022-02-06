@@ -74,7 +74,6 @@ class GameSceneManager {
     });
     this.#collisionDetector.detectCollisions();
     this.#updateActive();
-    this.#DEBUG_Colliders(/** @type {import('./CanvasBuffer').CanvasBuffer} */ (frame.buffer));
     this.#updateDestroy();
   }
 
@@ -141,15 +140,6 @@ class GameSceneManager {
 
   #nextID() {
     return this.#currentID++;
-  }
-
-  /**
-   * @param {import('./CanvasBuffer').CanvasBuffer} buffer
-   */
-  #DEBUG_Colliders(buffer) {
-    this.#collisionDetector.colliders.forEach((collider) => {
-      collider.DEBUG_Draw(buffer);
-    });
   }
 }
 

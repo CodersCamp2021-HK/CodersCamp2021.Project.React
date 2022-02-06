@@ -117,6 +117,10 @@ class GameObject {
     return this.#proxy.animation;
   }
 
+  get isSolidTile() {
+    return false;
+  }
+
   // #endregion
 }
 
