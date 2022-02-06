@@ -2,6 +2,8 @@ import { AssetsManager } from '../assets';
 import { KING_RESTITUTION, PIG_RESTITUTION } from '../config';
 import { BoxCollider, GameObject } from '../engine';
 import { Vector } from '../shared';
+import { King } from './King';
+import { Pig } from './Pig';
 
 class SolidTile extends GameObject {
   /**
@@ -10,7 +12,16 @@ class SolidTile extends GameObject {
    *
    * @type {Readonly<{ Cls: import('../engine/GameObject').GameObjectConstructor<Record<string, any>, import('../engine/GameObject').GameObject<Record<string, any>>>, restitution: number }[]>}
    */
-  static collidingObjects = [];
+  static collidingObjects = Object.freeze([
+    {
+      Cls: Pig,
+      restitution: PIG_RESTITUTION,
+    },
+    {
+      Cls: King,
+      restitution: KING_RESTITUTION,
+    },
+  ]);
 
   #sprite = AssetsManager.tileset[0][0];
 
@@ -56,20 +67,11 @@ class SolidTile extends GameObject {
       }
     }
   }
-}
 
-// eslint-disable-next-line import/no-cycle
-import('.').then(({ Pig, King }) => {
-  SolidTile.collidingObjects = Object.freeze([
-    {
-      Cls: Pig,
-      restitution: PIG_RESTITUTION,
-    },
-    {
-      Cls: King,
-      restitution: KING_RESTITUTION,
-    },
-  ]);
-});
+  // eslint-disable-next-line class-methods-use-this
+  get isSolidTile() {
+    return true;
+  }
+}
 
 export { SolidTile };

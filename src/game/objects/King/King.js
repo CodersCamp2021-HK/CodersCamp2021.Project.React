@@ -1,6 +1,6 @@
 import { Vector } from '../../shared';
 import { GameObject, BoxCollider } from '../../engine';
-import { KING_ATTACK_DELAY } from '../../config';
+import { KING_ATTACK_DELAY_FRAMES } from '../../config';
 import { KingAttack } from './KingAttack';
 import { KingDead } from './KingDead';
 import { KingDoorIn } from './KingDoorIn';
@@ -13,8 +13,6 @@ import { KingJump } from './KingJump';
 import { KingRunLeft } from './KingRunLeft';
 import { KingRunRight } from './KingRunRight';
 import { Door } from '../Door';
-// eslint-disable-next-line import/no-cycle
-import { SolidTile } from '../SolidTile';
 import { PigSwing } from '../Pig/PigSwing';
 
 /**
@@ -29,21 +27,18 @@ class King extends GameObject {
 
   #isOnGround = false;
 
-  #canAttack = true;
+  #attackCooldownFrames = 0;
 
   get isOnGround() {
     return this.#isOnGround;
   }
 
   get canAttack() {
-    return this.#canAttack;
+    return this.#attackCooldownFrames <= 0;
   }
 
   delayAttack() {
-    this.#canAttack = false;
-    setTimeout(() => {
-      this.#canAttack = true;
-    }, KING_ATTACK_DELAY);
+    this.#attackCooldownFrames = KING_ATTACK_DELAY_FRAMES;
   }
 
   flipRight() {
@@ -78,6 +73,10 @@ class King extends GameObject {
   onUpdate(frame) {
     this.#state?.update(frame);
     this.#isOnGround = false;
+
+    if (this.#attackCooldownFrames > 0) {
+      this.#attackCooldownFrames -= 1;
+    }
   }
 
   /**
@@ -85,7 +84,7 @@ class King extends GameObject {
    * @param {GameObject} target
    */
   onCollision(collision, target) {
-    if (target instanceof SolidTile && collision.resolutionVector.y < 0) {
+    if (target.isSolidTile && collision.resolutionVector.y < 0) {
       this.#isOnGround = true;
     } else if (target instanceof Door && !(this.#state instanceof KingDoorIn)) {
       target.open();
