@@ -1,8 +1,7 @@
 import { css } from '@emotion/react';
 import { useLayoutEffect, useMemo, useRef, useEffect } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
-// @ts-ignore
-import { _ } from 'lodash';
+import _ from 'lodash';
 import { useGameEngine, UIProxy, theme } from '../../shared';
 import backgroundUrl from '../../public/img/background.jpg';
 import { Button, BUTTON_HEIGHT_SIZE, BUTTON_WIDTH_SIZE, PageHeader } from '../components';
@@ -39,6 +38,8 @@ const GameUI = () => {
 
   useEffect(() => {
     gameEngine.start();
+
+    return () => gameEngine.stop();
   }, [gameEngine]);
 
   /** @type {React.MutableRefObject<HTMLCanvasElement | null>} */

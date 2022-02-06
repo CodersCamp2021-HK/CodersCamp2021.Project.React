@@ -36,7 +36,7 @@ class GameLoop {
       return;
     }
     this.#state = 'running';
-    this.#update(Date.now());
+    this.#update(0);
     this.#rafID = this.#raf();
   }
 
@@ -67,6 +67,7 @@ class GameLoop {
       }
 
       const elapsed = timestamp - this.#prevTimestamp;
+      this.#prevTimestamp = timestamp;
       this.#buffer.clear();
       const frame = new Frame(this.#frameID++, this.#buffer, elapsed);
       this.#onFrame(frame);
