@@ -15,8 +15,8 @@ const Level3 = levelFrom({
   X...XX........X.......XXX
   X......XXXXXX..........XX
   X...................X...X
-  X.S........XX......XX...X
-  XXXX......XXX..XX...XXXXX
+  X.S.......XX.......XX...X
+  XXXX.....XXX...XX...XXXXX
   XXXXXXXXXXXXXXXXXXXXXXXXX`,
   additionalObjects: (create) => {
     create(Decoration, new Vector(11, 6), { type: 'window' });
