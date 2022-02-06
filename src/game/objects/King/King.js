@@ -16,6 +16,7 @@ import { Door } from '../Door';
 // eslint-disable-next-line import/no-cycle
 import { SolidTile } from '../SolidTile';
 import { PigSwing } from '../Pig/PigSwing';
+import { HeartList } from '../HeartList';
 
 /**
  * @typedef {'attack' | 'collision' | 'dead' | 'doorIn' | 'doorOut' | 'fall' | 'ground' | 'hit' | 'idle' | 'jump' | 'runLeft' | 'runRight' } KingStateKey
@@ -32,6 +33,8 @@ class King extends GameObject {
   #canAttack = true;
 
   #hp = KING_MAX_HP;
+
+  #heartList = this.create(HeartList);
 
   get isOnGround() {
     return this.#isOnGround;
@@ -83,6 +86,7 @@ class King extends GameObject {
     this.transform.width = width;
     this.transform.height = height;
     this.setCollider(BoxCollider, [new Vector(15, 26), new Vector(24, 20)]);
+    this.#heartList.createHeartList(this.#hp);
   }
 
   /**
@@ -91,6 +95,8 @@ class King extends GameObject {
   onUpdate(frame) {
     this.#state?.update(frame);
     this.#isOnGround = false;
+    this.#heartList.destroy(this.#heartList);
+    this.#heartList.createHeartList(this.#hp);
   }
 
   /**
