@@ -115,12 +115,14 @@ class LevelScene extends GameScene {
       },
     });
 
-    this.create(Door, {
-      args: {
-        position: this.#findSpecialTile('E')?.scale(TILE_SIZE) ?? Vector.Zero,
-        type: 'end',
-      },
-    });
+    if (this.#findSpecialTile('E')) {
+      this.create(Door, {
+        args: {
+          position: this.#findSpecialTile('E')?.scale(TILE_SIZE) ?? Vector.Zero,
+          type: 'end',
+        },
+      });
+    }
 
     if (levelInfo.additionalObjects) {
       levelInfo.additionalObjects((Cls, pos, otherArgs = {}) => {

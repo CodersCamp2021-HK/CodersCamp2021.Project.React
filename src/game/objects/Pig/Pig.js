@@ -10,8 +10,6 @@ import { PigAttack } from './PigAttack';
 import { PigHit } from './PigHit';
 import { PigDead } from './PigDead';
 import { KingSwing } from '../King/KingSwing';
-// eslint-disable-next-line import/no-cycle
-import { SolidTile } from '../SolidTile';
 
 const stateMap = Object.freeze({
   idle: PigIdle,
@@ -146,7 +144,7 @@ class Pig extends GameObject {
    * @param {GameObject} target
    */
   onCollision(collision, target) {
-    if (target instanceof SolidTile && collision.resolutionVector.y < 0) {
+    if (target.isSolidTile && collision.resolutionVector.y < 0) {
       this.#isStanding = true;
     } else if (target instanceof KingSwing) {
       this.#damage();
