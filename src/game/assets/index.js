@@ -8,6 +8,7 @@ import kingUrl from './king.png';
 import pigUrl from './pig.png';
 import flagUrl from './flag.png';
 import windowUrl from './window.png';
+import heartUrl from './heart.png';
 
 const AssetsManager = Object.freeze({
   king: {
@@ -34,6 +35,7 @@ const AssetsManager = Object.freeze({
   },
   flag: new Sprite(flagUrl, new Crop(new Vector(0, 0), 26, 89)),
   window: new Sprite(windowUrl, new Crop(new Vector(0, 0), 54, 57)),
+  heart: new Sprite(heartUrl, new Crop(new Vector(0, 0), 18, 14)),
   pig: Object.fromEntries(
     ['basic', 'king'].map((variant, i) => [
       variant,

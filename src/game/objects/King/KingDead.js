@@ -14,8 +14,8 @@ class KingDead extends KingAnimated {
    * @param {import("../../shared/Frame").Frame} frame
    */
   update(frame) {
-    if (this.king.animation.isFinished && !this.king.keyboard.pressed('d')) {
-      return this.king.transitionState('idle').onUpdate(frame);
+    if (this.king.animation.isFinished) {
+      return this.king.ui.levelFinished();
     }
     return super.update(frame);
   }
