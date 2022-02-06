@@ -9,10 +9,12 @@ class GameEngineProxy {
   /**
    * @param {HTMLCanvasElement} canvas
    * @param {import('../ui').UIProxy} ui
+   * @param {Number} level
    */
-  initialize(canvas, ui) {
+
+  initialize(canvas, ui, level) {
     this.#gameEngine = new GameEngine(canvas, ui, scenes);
-    this.#gameEngine.load('level1');
+    this.#gameEngine.load(`level${level}`);
     return this;
   }
 

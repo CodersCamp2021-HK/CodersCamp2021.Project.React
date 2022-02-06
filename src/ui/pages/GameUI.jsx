@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-import { useLayoutEffect, useMemo, useRef, useEffect } from 'react';
+import { useLayoutEffect, useMemo, useRef, useEffect, useCallback } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
-import { _ } from 'lodash';
-import { levels } from './LevelSelectPage/LevelSelectPage';
+import _ from 'lodash';
 import { useGameEngine, UIProxy, theme } from '../../shared';
 import backgroundUrl from '../../public/img/background.jpg';
 import { Button, BUTTON_HEIGHT_SIZE, BUTTON_WIDTH_SIZE, PageHeader } from '../components';
+import { getLocalStorage } from '../../shared/game/localStorageFun';
 
 const wrapper = css`
   min-height: 100vh;
@@ -35,9 +35,12 @@ const buttonWrapper = css`
 const GameUI = () => {
   const gameEngine = useGameEngine();
   const params = useParams();
+  const selectedLevel = Number(params.levelSelectId);
 
   useEffect(() => {
     gameEngine.start();
+
+    return () => gameEngine.stop();
   }, [gameEngine]);
 
   /** @type {React.MutableRefObject<HTMLCanvasElement | null>} */
@@ -51,21 +54,21 @@ const GameUI = () => {
     [gameEngine],
   );
 
+  const levelsAvailable = useCallback(() => {
+    const levelsArray = _.range(1, _.size(getLocalStorage()) + 1);
+
+    return levelsArray.includes(selectedLevel);
+  }, [selectedLevel]);
+
   useLayoutEffect(() => {
-    if (ref.current) {
-      gameEngine.initialize(ref.current, uiProxy);
+    if (ref.current && levelsAvailable()) {
+      gameEngine.initialize(ref.current, uiProxy, selectedLevel);
     }
-  }, [gameEngine, uiProxy]);
-
-  const levelExists = () => {
-    const levelsArray = _.range(1, levels.length + 1);
-
-    return levelsArray.includes(Number(params.levelSelectId));
-  };
+  }, [gameEngine, uiProxy, selectedLevel, levelsAvailable]);
 
   return (
     <>
-      {!levelExists() ? <Navigate to='/level-select' replace /> : ''}
+      {!levelsAvailable() ? <Navigate to='/level-select' replace /> : ''}
       <main css={wrapper}>
         <PageHeader>Level {params.levelSelectId}</PageHeader>{' '}
         <section css={gameBorder}>
