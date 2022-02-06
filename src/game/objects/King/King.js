@@ -52,7 +52,7 @@ class King extends GameObject {
     if (!(this.#state instanceof KingHit || this.#state instanceof KingDead)) {
       this.#hp -= 1;
       this.transitionState('hit');
-      this.#heartList.destroy(this.#heartList);
+      this.#heartList.clearHeartList();
       this.#heartList.createHeartList(this.#hp);
     }
   }
