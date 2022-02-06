@@ -1,7 +1,6 @@
 import { Pig } from '../../objects/Pig';
 import { Vector } from '../../shared';
 import { levelFrom } from '../LevelScene';
-<<<<<<< HEAD
 import { Decoration } from '../../objects';
 
 const Level3 = levelFrom({
