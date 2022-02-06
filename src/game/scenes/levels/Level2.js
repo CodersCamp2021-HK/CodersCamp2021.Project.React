@@ -15,7 +15,7 @@ const Level2 = levelFrom({
   X...X.......XXX......XX.X
   X.........X.....XX....X.X
   X......X..X..X..........X
-  X...X........X......XXXXX
+  X...XX.......X......XXXXX
   X.S.X........XX.........X
   XXXXXXXXXXXXXXXXXXXXXXXXX`,
   additionalObjects: (create) => {
