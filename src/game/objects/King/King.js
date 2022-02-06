@@ -52,6 +52,8 @@ class King extends GameObject {
     if (!(this.#state instanceof KingHit || this.#state instanceof KingDead)) {
       this.#hp -= 1;
       this.transitionState('hit');
+      this.#heartList.destroy(this.#heartList);
+      this.#heartList.createHeartList(this.#hp);
     }
   }
 
@@ -95,8 +97,6 @@ class King extends GameObject {
   onUpdate(frame) {
     this.#state?.update(frame);
     this.#isOnGround = false;
-    this.#heartList.destroy(this.#heartList);
-    this.#heartList.createHeartList(this.#hp);
   }
 
   /**

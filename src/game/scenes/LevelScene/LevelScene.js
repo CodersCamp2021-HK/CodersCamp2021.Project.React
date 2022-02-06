@@ -1,9 +1,8 @@
 import _ from 'lodash';
 import { AssetsManager } from '../../assets';
-import { KING_MAX_HP, TILE_SIZE } from '../../config';
+import { TILE_SIZE } from '../../config';
 import { GameScene } from '../../engine';
 import { BackgroundTiles, Door, SolidTile, King } from '../../objects';
-import { Heart } from '../../objects/Heart';
 import { Vector } from '../../shared';
 import { patternsMatch, stringToCharMatrix } from './levelUtils';
 import { tileRules } from './tileRules';
