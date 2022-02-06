@@ -10,10 +10,8 @@ class HeartList extends GameObject {
    * @param {number} hp
    */
   createHeartList(hp) {
-    let start = 0;
     for (let i = 0; i < hp; i++) {
-      this.#list.push(this.create(Heart, { args: { initialPos: new Vector(start, 0) } }));
-      start += 15;
+      this.#list.push(this.create(Heart, { args: { initialPos: new Vector(i * 15, 0) } }));
     }
   }
 
