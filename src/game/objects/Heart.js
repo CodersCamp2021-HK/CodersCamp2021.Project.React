@@ -20,6 +20,10 @@ class Heart extends GameObject {
   onUpdate(frame) {
     frame.buffer.draw(this.position, this.#sprite);
   }
+
+  // onHit() {
+  //   this.destroy(this.#sprite); tutaj inny sposób jak to chciałem rozwiązać, ale tez nie działa
+  // }
 }
 
 export { Heart };

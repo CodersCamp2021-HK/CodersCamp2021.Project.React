@@ -30,7 +30,7 @@ const Level1 = levelFrom({
     create(Decoration, new Vector(20, 3), { type: 'window' });
     create(Decoration, new Vector(22, 1), { type: 'flag' });
     create(Decoration, new Vector(3, 7), { type: 'flag' });
-    for (i = 0; i <= KING_MAX_HP; i++) {
+    for (i = 0; i < KING_MAX_HP; i++) {
       start += 0.5;
       create(Heart, new Vector(start, 0), { type: 'heart' });
     }

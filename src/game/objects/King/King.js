@@ -108,6 +108,7 @@ class King extends GameObject {
       ![KingDoorIn, KingHit, KingDead].some((state) => this.#state instanceof state)
     ) {
       this.#damage();
+      // this.destroy(Heart) coś takiego myślałem, zeby tutaj moze niszczyc ten obraz z sercem, ale nie wiem jak to wywołać
     }
   }
 
