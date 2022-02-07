@@ -1,6 +1,6 @@
 import { Vector } from '../../shared';
 import { GameObject, BoxCollider } from '../../engine';
-import { KING_ATTACK_DELAY_FRAMES } from '../../config';
+import { KING_ATTACK_DELAY_FRAMES, KING_MAX_HP } from '../../config';
 import { KingAttack } from './KingAttack';
 import { KingDead } from './KingDead';
 import { KingDoorIn } from './KingDoorIn';
@@ -14,6 +14,7 @@ import { KingRunLeft } from './KingRunLeft';
 import { KingRunRight } from './KingRunRight';
 import { Door } from '../Door';
 import { PigSwing } from '../Pig/PigSwing';
+import { HeartList } from '../HeartList';
 
 /**
  * @typedef {'attack' | 'collision' | 'dead' | 'doorIn' | 'doorOut' | 'fall' | 'ground' | 'hit' | 'idle' | 'jump' | 'runLeft' | 'runRight' } KingStateKey
@@ -29,12 +30,29 @@ class King extends GameObject {
 
   #attackCooldownFrames = 0;
 
+  #hp = KING_MAX_HP;
+
+  #heartList = this.create(HeartList);
+
   get isOnGround() {
     return this.#isOnGround;
   }
 
   get canAttack() {
     return this.#attackCooldownFrames <= 0;
+  }
+
+  get hp() {
+    return this.#hp;
+  }
+
+  #damage() {
+    if (!(this.#state instanceof KingHit || this.#state instanceof KingDead)) {
+      this.#hp -= 1;
+      this.transitionState('hit');
+      this.#heartList.clearHeartList();
+      this.#heartList.createHeartList(this.#hp);
+    }
   }
 
   delayAttack() {
@@ -65,6 +83,7 @@ class King extends GameObject {
     this.transform.width = width;
     this.transform.height = height;
     this.setCollider(BoxCollider, [new Vector(15, 26), new Vector(24, 20)]);
+    this.#heartList.createHeartList(this.#hp);
   }
 
   /**
@@ -93,7 +112,7 @@ class King extends GameObject {
       target instanceof PigSwing &&
       ![KingDoorIn, KingHit, KingDead].some((state) => this.#state instanceof state)
     ) {
-      this.transitionState('hit');
+      this.#damage();
     }
   }
 
