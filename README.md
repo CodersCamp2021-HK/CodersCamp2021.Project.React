@@ -4,6 +4,7 @@
 <div align="center">
 
 [![Demo](https://img.shields.io/badge/-demo-green?logo=github)](https://coderscamp2021-hk.github.io/CodersCamp2021.Project.React/)
+[![Figma](https://img.shields.io/badge/-mockups-blueviolet?logo=figma)](https://www.figma.com/file/TTr77tXuZd1MeQ90wl4VEk/Project.React?node-id=33%3A2)
 [![Coverage](https://img.shields.io/codecov/c/github/CodersCamp2021-HK/CodersCamp2021.Project.React?logo=codecov)](https://app.codecov.io/gh/CodersCamp2021-HK/CodersCamp2021.Project.React)
 
 </div>
