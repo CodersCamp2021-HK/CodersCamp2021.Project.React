@@ -23,7 +23,7 @@ Zespół pracował w ramach kursu [CodersCamp](https://www.coderscamp.edu.pl/). 
 <table>
   <thead>
     <tr>
-      <th colspan="2">Uczestnicy</th>
+      <th colspan="4">Uczestnicy</th>
     </tr>
   </thead>
   <tbody>
@@ -33,21 +33,6 @@ Zespół pracował w ramach kursu [CodersCamp](https://www.coderscamp.edu.pl/). 
 ![MM](src/public/img/mm_pixel.png?raw=true)
       </td>
       <td>**Marta Mejer** ([@mmejer](https://github.com/mmejer))</td>
-    </tr>
-    <tr>
-      <td>Tech Lead</td>
-    </tr>
-    <tr>
-      <td rowspan="2">
-        
-![JS](src/public/img/js_pixel.png?raw=true)
-      </td>
-      <td>**Justyna Skrajna** ([@jskrajna](https://github.com/jskrajna))</td>
-    </tr>
-    <tr>
-      <td>Designer</td>
-    </tr>
-    <tr>
       <td rowspan="2">
         
 ![TC](src/public/img/tc_pixel.png?raw=true)
@@ -55,9 +40,15 @@ Zespół pracował w ramach kursu [CodersCamp](https://www.coderscamp.edu.pl/). 
       <td>**Tomasz Chojnacki** ([@tchojnacki](https://github.com/tchojnacki))</td>
     </tr>
     <tr>
+      <td>Tech Lead</td>
       <td>Project Manager</td>
     </tr>
     <tr>
+      <td rowspan="2">
+        
+![JS](src/public/img/js_pixel.png?raw=true)
+      </td>
+      <td>**Justyna Skrajna** ([@jskrajna](https://github.com/jskrajna))</td>
       <td rowspan="2">
         
 ![KD](src/public/img/kd_pixel.png?raw=true)
@@ -65,6 +56,7 @@ Zespół pracował w ramach kursu [CodersCamp](https://www.coderscamp.edu.pl/). 
       <td>**Kamil Dudek** ([@KamilDudek](https://github.com/mmejer))</td>
     </tr>
     <tr>
+      <td>Designer</td>
       <td>Scrum Master</td>
     </tr>
   </tbody>
