@@ -1,6 +1,12 @@
 <h1 align="center">CodersCamp2021 | Projekt Zespołowy | React</h1>
 
 ![Wyróżniony obrazek](docs/featured.png?raw=true)
+<div align="center">
+
+[![Demo](https://img.shields.io/badge/-demo-green?logo=github)](https://coderscamp2021-hk.github.io/CodersCamp2021.Project.React/)
+[![Coverage](https://img.shields.io/codecov/c/github/CodersCamp2021-HK/CodersCamp2021.Project.React?logo=codecov)](https://app.codecov.io/gh/CodersCamp2021-HK/CodersCamp2021.Project.React)
+
+</div>
 
 ## Zespół projektowy 👨‍💻
 Zespół pracował w ramach kursu [CodersCamp](https://www.coderscamp.edu.pl/). Aplikację wykonali uczestnicy kursu przy pomocy mentora.
