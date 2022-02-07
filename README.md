@@ -1,4 +1,4 @@
-<h1 align="center">CodersCamp2021 | Projekt Zespołowy | JavaScript</h1>
+<h1 align="center">CodersCamp2021 | Projekt Zespołowy | React</h1>
 
 ![Wyróżniony obrazek](docs/featured.png?raw=true)
 
