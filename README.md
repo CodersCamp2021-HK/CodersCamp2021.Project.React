@@ -2,7 +2,7 @@
 
 ![Wyróżniony obrazek](docs/featured.png?raw=true)
 
-## Zespół projektowy
+## Zespół projektowy 👨‍💻
 Zespół pracował w ramach kursu [CodersCamp](https://www.coderscamp.edu.pl/). Aplikację wykonali uczestnicy kursu przy pomocy mentora.
 
 <table>
@@ -64,7 +64,7 @@ Zespół pracował w ramach kursu [CodersCamp](https://www.coderscamp.edu.pl/). 
   </tbody>
 </table>
 
-## Kings and Pigs
+## Kings and Pigs 👑🐷
 ### Cel projektu
 Celem projektu było stworzenie gry platformowej dostępnej online. W tym celu wykorzystaliśmy darmowy pakiet grafik ze strony [itch.io](https://pixelfrog-assets.itch.io/kings-and-pigs). Aplikacja została wykonana według wymagań dostarczonych przez organizatorów CodersCamp.
 
@@ -96,7 +96,7 @@ Z tego ekranu możemy również powrócić do ekranu wyboru poziomu.
 
 ![Rozgrywka](docs/game.png?raw=true)
 
-## Development projektu
+## Development projektu 🛠
 ### Wykorzystywane technologie
 Do stworzenia aplikacji wykorzystaliśmy:
 - JavaScript z biblioteką React
