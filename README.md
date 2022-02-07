@@ -76,7 +76,7 @@ Celem projektu było stworzenie gry platformowej dostępnej online. W tym celu w
 
 ### Działanie aplikacji
 #### Menu główne
-Menu główne stanowi zbiór przycisków przenoszących nas do innych sekcji aplikacji.
+Menu główne stanowi zbiór przycisków przenoszących użytkownika do innych sekcji aplikacji.
 
 ![Menu główne](docs/menu.png?raw=true)
 
@@ -91,14 +91,14 @@ Widok spisu autorów przedstawia autorów projektu, mentora zespołu oraz zawier
 ![Spis autorów](docs/credits.png?raw=true)
 
 #### Wybór poziomu
-Na tym ekranie użytkownik może wybrać poziom na którym będzie grał spośród odblokowanych.
+Na tym ekranie użytkownik może wybrać poziom spośród odblokowanych, na którym będzie grał.
 
 ![Wybór poziomu](docs/levels.png?raw=true)
 
 #### Rozgrywka
-Postać użytkownika - król zaczyna rozgrywkę w miejscu drzwi wejściowych i musi dostać się do drugich drzwi pokonując po drodze przeciwników. Zgodnie z popupem wyjaśniającym sterowanie, gracz porusza się korzystając ze strzałek, a atakuje naciskając przycisk X na klawiaturze. Życie króla jest ograniczone i reprezentowane przez serduszka wyświetlane w lewym górnym rogu ekranu. Przeciwnicy - świnki, zaczynają gonić gracza po zauważeniu go oraz atakują gdy go dopadną. Każdy atak świnki zmniejsza nasze zdrowie o jeden, jeżeli stracimy wszystkie punkty życia przegrywamy poziom i musimy go rozegrać od początku.
+Postać użytkownika - król zaczyna rozgrywkę w miejscu drzwi wejściowych i musi dostać się do drugich drzwi pokonując po drodze przeciwników. Zgodnie z popupem wyjaśniającym sterowanie, gracz porusza się korzystając ze strzałek, a atakuje naciskając przycisk X na klawiaturze. Życie króla jest ograniczone i reprezentowane przez serduszka wyświetlane w lewym górnym rogu ekranu. Przeciwnicy - świnki, zaczynają gonić gracza po zauważeniu go oraz atakują gdy do niego dobiegną. Każdy atak świnki zmniejsza zdrowie króla o jeden, po straceniu wszystkich punktów życia gracz przegrywa poziom i musi go rozegrać od początku.
 
-Z tego ekranu możemy również powrócić do ekranu wyboru poziomu.
+Z tego ekranu gracz może również powrócić do ekranu wyboru poziomu.
 
 ![Rozgrywka](docs/game.png?raw=true)
 
