@@ -70,7 +70,7 @@ Zespół pracował w ramach kursu [CodersCamp](https://www.coderscamp.edu.pl/). 
   </tbody>
 </table>
 
-## Kings and Pigs 👑🐷
+## King and Pigs 👑🐷
 ### Cel projektu
 Celem projektu było stworzenie gry platformowej dostępnej online. W tym celu wykorzystaliśmy darmowy pakiet grafik ze strony [itch.io](https://pixelfrog-assets.itch.io/kings-and-pigs). Aplikacja została wykonana według wymagań dostarczonych przez organizatorów CodersCamp.
 
@@ -96,7 +96,7 @@ Na tym ekranie użytkownik może wybrać poziom na którym będzie grał spośr�
 ![Wybór poziomu](docs/levels.png?raw=true)
 
 #### Rozgrywka
-Postać użytkownika - król zaczyna rozgrywkę w miejscu drzwi wejściowych i musi dostać się do drugich drzwi pokonując po drodze przeciwników. Zgodnie z popupem wyjaśniającym sterowanie, gracz porusza się korzystając ze strzałek, a atakuje naciskając przycisk X na klawiaturze. Życie postaci jest ograniczone i reprezentowane przez serduszka wyświetlane w lewym górnym rogu ekranu. Przeciwnicy - świnki, zaczynają gonić gracza po zauważeniu go oraz atakują gdy go dopadną. Każdy atak świnki zmniejsza nasze zdrowie o jeden, jeżeli stracimy wszystkie punkty życia przegrywamy poziom i musimy go rozegrać od początku.
+Postać użytkownika - król zaczyna rozgrywkę w miejscu drzwi wejściowych i musi dostać się do drugich drzwi pokonując po drodze przeciwników. Zgodnie z popupem wyjaśniającym sterowanie, gracz porusza się korzystając ze strzałek, a atakuje naciskając przycisk X na klawiaturze. Życie króla jest ograniczone i reprezentowane przez serduszka wyświetlane w lewym górnym rogu ekranu. Przeciwnicy - świnki, zaczynają gonić gracza po zauważeniu go oraz atakują gdy go dopadną. Każdy atak świnki zmniejsza nasze zdrowie o jeden, jeżeli stracimy wszystkie punkty życia przegrywamy poziom i musimy go rozegrać od początku.
 
 Z tego ekranu możemy również powrócić do ekranu wyboru poziomu.
 
