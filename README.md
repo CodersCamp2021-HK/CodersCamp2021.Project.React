@@ -13,7 +13,7 @@ Zespół pracował w ramach kursu [CodersCamp](https://www.coderscamp.edu.pl/). 
     <tr>
       <td>
 
-![HK](https://github.com/CodersCamp2021-HK/CodersCamp2021.Project.React/blob/main/src/public/img/hk_pixel.png?raw=true)
+![HK](src/public/img/hk_pixel.png?raw=true)
       </td>
       <td>**Hubert Kawałek** ([@htk4](https://github.com/htk4))</td>
     </tr>
@@ -30,7 +30,7 @@ Zespół pracował w ramach kursu [CodersCamp](https://www.coderscamp.edu.pl/). 
     <tr>
       <td rowspan="2">
         
-![MM](https://github.com/CodersCamp2021-HK/CodersCamp2021.Project.React/blob/main/src/public/img/mm_pixel.png?raw=true)
+![MM](src/public/img/mm_pixel.png?raw=true)
       </td>
       <td>**Marta Mejer** ([@mmejer](https://github.com/mmejer))</td>
     </tr>
@@ -40,7 +40,7 @@ Zespół pracował w ramach kursu [CodersCamp](https://www.coderscamp.edu.pl/). 
     <tr>
       <td rowspan="2">
         
-![JS](https://github.com/CodersCamp2021-HK/CodersCamp2021.Project.React/blob/main/src/public/img/js_pixel.png?raw=true)
+![JS](src/public/img/js_pixel.png?raw=true)
       </td>
       <td>**Justyna Skrajna** ([@jskrajna](https://github.com/jskrajna))</td>
     </tr>
@@ -50,7 +50,7 @@ Zespół pracował w ramach kursu [CodersCamp](https://www.coderscamp.edu.pl/). 
     <tr>
       <td rowspan="2">
         
-![TC](https://github.com/CodersCamp2021-HK/CodersCamp2021.Project.React/blob/main/src/public/img/tc_pixel.png?raw=true)
+![TC](src/public/img/tc_pixel.png?raw=true)
       </td>
       <td>**Tomasz Chojnacki** ([@tchojnacki](https://github.com/tchojnacki))</td>
     </tr>
@@ -60,7 +60,7 @@ Zespół pracował w ramach kursu [CodersCamp](https://www.coderscamp.edu.pl/). 
     <tr>
       <td rowspan="2">
         
-![KD](https://github.com/CodersCamp2021-HK/CodersCamp2021.Project.React/blob/main/src/public/img/kd_pixel.png?raw=true)
+![KD](src/public/img/kd_pixel.png?raw=true)
       </td>
       <td>**Kamil Dudek** ([@KamilDudek](https://github.com/mmejer))</td>
     </tr>
@@ -139,7 +139,7 @@ Spośród członków zespołu wyznaczyliśmy osoby pełniące następujące role
   - przeprowadzanie code review
   - pomoc innym członkom zespołu
 
-Do organizacji wykorzystaliśmy rozwiązania dostarczane przez GitHub, głównie GitHub Issues oraz GitHub Projects. Pracę nad projektem podzieliliśmy na cztery tygodniowe sprinty, podczas których wykonywaliśmy daną część zadań rozpisanych uprzednio w zakładce [Issues](https://github.com/CodersCamp2021-HK/CodersCamp2021.Project.JavaScript/issues). Postęp nad zadaniami wizualizowaliśmy za pomocą [tablicy kanban](https://github.com/CodersCamp2021-HK/CodersCamp2021.Project.JavaScript/projects/1) oferowanej jako funkcjonalność GitHub Projects. Kod integrowaliśmy do projektu otwierając pull requesty, w których zmiany musiały być zaakceptowane przez co najmniej dwóch członków zespołu. Członkowie wzajemnie wykonywali code review swoich rozwiązań. Zwracaliśmy również uwagę na pokrycie kodu testami.
+Do organizacji wykorzystaliśmy rozwiązania dostarczane przez GitHub, głównie GitHub Issues oraz GitHub Projects. Pracę nad projektem podzieliliśmy na cztery tygodniowe sprinty, podczas których wykonywaliśmy daną część zadań rozpisanych uprzednio w zakładce [Issues](https://github.com/CodersCamp2021-HK/CodersCamp2021.Project.React/issues). Postęp nad zadaniami wizualizowaliśmy za pomocą [tablicy kanban](https://github.com/CodersCamp2021-HK/CodersCamp2021.Project.React/projects/1) oferowanej jako funkcjonalność GitHub Projects. Kod integrowaliśmy do projektu otwierając pull requesty, w których zmiany musiały być zaakceptowane przez co najmniej dwóch członków zespołu. Członkowie wzajemnie wykonywali code review swoich rozwiązań. Zwracaliśmy również uwagę na pokrycie kodu testami.
 
 Projekty interfejsu użytkownika wykonywaliśmy za pomocą narzędzia o nazwie [Figma](https://www.figma.com/). Poszczególne widoki implementowaliśmy w oparciu o wykonane wcześniej projekty.
 
