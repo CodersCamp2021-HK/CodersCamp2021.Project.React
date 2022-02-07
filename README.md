@@ -1,5 +1,7 @@
 <h1 align="center">CodersCamp2021 | Projekt Zespołowy | JavaScript</h1>
 
+![Wyróżniony obrazek](docs/featured.png?raw=true)
+
 ## Zespół projektowy
 Zespół pracował w ramach kursu [CodersCamp](https://www.coderscamp.edu.pl/). Aplikację wykonali uczestnicy kursu przy pomocy mentora.
 
@@ -70,19 +72,29 @@ Celem projektu było stworzenie gry platformowej dostępnej online. W tym celu w
 #### Menu główne
 Menu główne stanowi zbiór przycisków przenoszących nas do innych sekcji aplikacji.
 
+![Menu główne](docs/menu.png?raw=true)
+
 #### Sterowanie
 Popup ze sterowaniem wyjaśnia użytkownikowi w jaki sposób poruszać się po poziomach oraz jak atakować przeciwników.
+
+![Sterowanie](docs/controls.png?raw=true)
 
 #### Spis autorów
 Widok spisu autorów przedstawia autorów projektu, mentora zespołu oraz zawiera odnośniki do stron repozytorium projektu i autora grafik.
 
+![Spis autorów](docs/credits.png?raw=true)
+
 #### Wybór poziomu
 Na tym ekranie użytkownik może wybrać poziom na którym będzie grał spośród odblokowanych.
+
+![Wybór poziomu](docs/levels.png?raw=true)
 
 #### Rozgrywka
 Postać użytkownika - król zaczyna rozgrywkę w miejscu drzwi wejściowych i musi dostać się do drugich drzwi pokonując po drodze przeciwników. Zgodnie z popupem wyjaśniającym sterowanie, gracz porusza się korzystając ze strzałek, a atakuje naciskając przycisk X na klawiaturze. Życie postaci jest ograniczone i reprezentowane przez serduszka wyświetlane w lewym górnym rogu ekranu. Przeciwnicy - świnki, zaczynają gonić gracza po zauważeniu go oraz atakują gdy go dopadną. Każdy atak świnki zmniejsza nasze zdrowie o jeden, jeżeli stracimy wszystkie punkty życia przegrywamy poziom i musimy go rozegrać od początku.
 
 Z tego ekranu możemy również powrócić do ekranu wyboru poziomu.
+
+![Rozgrywka](docs/game.png?raw=true)
 
 ## Development projektu
 ### Wykorzystywane technologie
