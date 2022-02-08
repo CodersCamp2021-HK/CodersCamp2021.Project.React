@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-import { useLayoutEffect, useMemo, useRef, useEffect, useCallback } from 'react';
+import { useLayoutEffect, useMemo, useRef, useEffect, useCallback, useState } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
 import _ from 'lodash';
 import { useGameEngine, UIProxy, theme } from '../../shared';
 import backgroundUrl from '../../public/img/background.jpg';
-import { Button, BUTTON_HEIGHT_SIZE, BUTTON_WIDTH_SIZE, PageHeader } from '../components';
-import { getLocalStorage } from '../../shared/game/localStorageFun';
+import { Button, BUTTON_HEIGHT_SIZE, BUTTON_WIDTH_SIZE, PageHeader, PopupLevel } from '../components';
+import { getLocalStorage, unlockedLevel } from '../../shared/game/localStorageFun';
 
 const wrapper = css`
   min-height: 100vh;
@@ -37,6 +37,9 @@ const GameUI = () => {
   const params = useParams();
   const selectedLevel = Number(params.levelSelectId);
 
+  const [open, setOpen] = useState(false);
+  const [variant, setVariant] = useState('victory');
+
   useEffect(() => {
     gameEngine.start();
 
@@ -48,10 +51,22 @@ const GameUI = () => {
 
   const uiProxy = useMemo(
     () =>
-      new UIProxy(() => {
-        gameEngine.stop();
-      }),
-    [gameEngine],
+      new UIProxy(
+        () => {
+          gameEngine.stop();
+          setOpen(true);
+
+          unlockedLevel({ levelNumber: selectedLevel + 1 });
+          setVariant('victory');
+        },
+        () => {
+          gameEngine.stop();
+          setOpen(true);
+
+          setVariant('defeat');
+        },
+      ),
+    [gameEngine, selectedLevel],
   );
 
   const levelsAvailable = useCallback(() => {
@@ -83,6 +98,8 @@ const GameUI = () => {
           </div>
         </section>
       </main>
+      {/* @ts-ignore */}
+      <PopupLevel open={open} onClose={() => {}} variant={variant} />{' '}
     </>
   );
 };

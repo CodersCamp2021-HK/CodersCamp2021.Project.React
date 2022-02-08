@@ -17,7 +17,7 @@ class KingDoorIn extends KingAnimated {
    */
   update(_frame) {
     if (this.king.animation.isFinished) {
-      this.king.ui.levelFinished();
+      this.king.ui.levelWon();
     }
   }
 }
