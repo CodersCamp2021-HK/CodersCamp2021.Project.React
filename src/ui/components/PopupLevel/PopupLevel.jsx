@@ -26,10 +26,10 @@ const button = css`
 `;
 
 /**
- * @param {{ open: boolean, onClick: () => void, variant: 'victory' | 'defeat', nextLevel: number  }} props
+ * @param {{ open: boolean, onClick: () => void, variant: 'victory' | 'defeat' | 'gameOver', nextLevel: number, path: string  }} props
  */
 
-const PopupLevel = ({ open, onClick, variant, nextLevel }) => {
+const PopupLevel = ({ open, onClick, variant, nextLevel, path }) => {
   let showImg;
   let buttonText;
   let altText;
@@ -37,10 +37,16 @@ const PopupLevel = ({ open, onClick, variant, nextLevel }) => {
     showImg = victoryPopup;
     buttonText = 'next';
     altText = 'victory';
-  } else {
+  }
+  if (variant === 'defeat') {
     showImg = defeatPopup;
     buttonText = 'retry';
     altText = 'defeat';
+  }
+  if (variant === 'gameOver') {
+    showImg = victoryPopup;
+    buttonText = 'homepage';
+    altText = 'victory';
   }
 
   return (
@@ -48,7 +54,7 @@ const PopupLevel = ({ open, onClick, variant, nextLevel }) => {
       <div css={box}>
         <img css={img} src={showImg} alt={altText} />
         <div css={button}>
-          <Link to={`/level-select/${nextLevel}`} key={nextLevel}>
+          <Link to={path} key={nextLevel}>
             <Button onClick={onClick} type='gold'>
               {buttonText}
             </Button>

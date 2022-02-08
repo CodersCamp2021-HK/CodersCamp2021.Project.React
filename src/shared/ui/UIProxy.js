@@ -3,13 +3,17 @@ class UIProxy {
 
   #levelLostCb;
 
+  #gameOverCb;
+
   /**
    * @param {() => void} onLevelWon
    * @param {() => void} onLevelLost
+   * @param {() => void} onGameOver
    */
-  constructor(onLevelWon, onLevelLost) {
+  constructor(onLevelWon, onLevelLost, onGameOver) {
     this.#levelWonCb = onLevelWon;
     this.#levelLostCb = onLevelLost;
+    this.#gameOverCb = onGameOver;
   }
 
   levelWon() {
@@ -18,6 +22,10 @@ class UIProxy {
 
   levelLost() {
     this.#levelLostCb();
+  }
+
+  gameOver() {
+    this.#gameOverCb();
   }
 }
 

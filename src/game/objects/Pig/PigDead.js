@@ -10,8 +10,10 @@ class PigDead extends PigStateAnimated {
     this.pig.rigidbody.velocity = this.pig.rigidbody.velocity.setX(0);
   }
 
+  // eslint-disable-next-line consistent-return
   update() {
     if (this.pig.animation.isFinished) {
+      if (this.pig.variant === 'king') return this.pig.ui.gameOver();
       this.pig.destroy(this.pig);
     }
   }

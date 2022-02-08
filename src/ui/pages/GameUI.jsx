@@ -39,12 +39,13 @@ const GameUI = () => {
   const selectedLevel = Number(params.levelSelectId);
 
   const [open, setOpen] = useState(false);
-  const [variant, setVariant] = useState(/** @type {'victory' | 'defeat'} */ ('victory'));
+  const [variant, setVariant] = useState(/** @type {'victory' | 'defeat' | 'gameOver'} */ ('victory'));
   const [nextLevel, setNextLevel] = useState(selectedLevel);
+  const [path, setPath] = useState('/');
 
   const handleClick = () => {
     setOpen(false);
-    navigate(`/level-select/${nextLevel}`);
+    navigate(path);
 
     gameEngine.reset();
     gameEngine.start();
@@ -65,18 +66,26 @@ const GameUI = () => {
         () => {
           gameEngine.stop();
           setNextLevel(selectedLevel + 1);
-          unlockedLevel({ levelNumber: nextLevel });
+          unlockedLevel({ levelNumber: selectedLevel + 1 });
+          setPath(`/level-select/${selectedLevel + 1}`);
           setOpen(true);
           setVariant('victory');
         },
         () => {
           gameEngine.stop();
           setNextLevel(selectedLevel);
+          setPath(`/level-select/${selectedLevel}`);
           setOpen(true);
           setVariant('defeat');
         },
+        () => {
+          gameEngine.stop();
+          setPath('/');
+          setOpen(true);
+          setVariant('gameOver');
+        },
       ),
-    [gameEngine, nextLevel, selectedLevel],
+    [gameEngine, selectedLevel],
   );
 
   const levelsAvailable = useCallback(() => {
@@ -108,7 +117,7 @@ const GameUI = () => {
           </div>
         </section>
       </main>
-      <PopupLevel open={open} onClick={handleClick} variant={variant} nextLevel={nextLevel} />
+      <PopupLevel open={open} onClick={handleClick} variant={variant} nextLevel={nextLevel} path={path} />
     </>
   );
 };
