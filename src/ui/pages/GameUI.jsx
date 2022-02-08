@@ -35,7 +35,7 @@ const buttonWrapper = css`
 const GameUI = () => {
   const gameEngine = useGameEngine();
   const params = useParams();
-  const selectedLevel = Number(params.levelSelectId);
+  const [selectedLevel, setSelectedLevel] = useState(Number(params.levelSelectId));
 
   const [open, setOpen] = useState(false);
   const [variant, setVariant] = useState('victory');
@@ -43,13 +43,14 @@ const GameUI = () => {
 
   const handleClick = () => {
     setOpen(false);
+    setSelectedLevel(nextLevel);
   };
 
   useEffect(() => {
     gameEngine.start();
 
     return () => gameEngine.stop();
-  }, [gameEngine]);
+  }, [gameEngine, selectedLevel]);
 
   /** @type {React.MutableRefObject<HTMLCanvasElement | null>} */
   const ref = useRef(null);
