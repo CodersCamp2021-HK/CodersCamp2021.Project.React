@@ -36,14 +36,14 @@ const GameUI = () => {
   const gameEngine = useGameEngine();
   const params = useParams();
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
   const [variant, setVariant] = useState(/** @type {'playing' | 'victory' | 'defeat' | 'gameOver'} */ ('playing'));
+  const open = variant !== 'playing';
   const selectedLevel = Number(params.levelSelectId);
   const nextLevel = variant === 'victory' ? selectedLevel + 1 : selectedLevel;
   const path = variant === 'victory' || variant === 'defeat' ? `/level-select/${nextLevel}` : '/';
 
   const handleClick = () => {
-    setOpen(false);
+    setVariant('playing');
     navigate(path);
     setTimeout(() => {
       gameEngine.reset();
@@ -66,17 +66,14 @@ const GameUI = () => {
         () => {
           gameEngine.stop();
           unlockedLevel({ levelNumber: selectedLevel + 1 });
-          setOpen(true);
           setVariant('victory');
         },
         () => {
           gameEngine.stop();
-          setOpen(true);
           setVariant('defeat');
         },
         () => {
           gameEngine.stop();
-          setOpen(true);
           setVariant('gameOver');
         },
       ),
