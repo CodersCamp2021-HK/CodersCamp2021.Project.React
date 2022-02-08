@@ -50,3 +50,24 @@ export const DefeatPopup = () => {
     </>
   );
 };
+
+export const GameOverPopup = () => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <>
+      <Button type='silver' onClick={handleOpen}>
+        Controls
+      </Button>
+      <PopupLevel open={open} onClose={handleClose} variant='gameOver' />
+    </>
+  );
+};

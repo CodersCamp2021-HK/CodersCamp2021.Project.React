@@ -5,6 +5,7 @@ import { Popup } from '../Popup';
 
 import defeatPopup from '../../../public/img/defeatPopup.png';
 import victoryPopup from '../../../public/img/victoryPopup.png';
+import gameOverPopup from '../../../public/img/gameOverPopup.png';
 
 const box = css`
   display: flex;
@@ -15,7 +16,6 @@ const box = css`
 
 const img = css`
   width: 17.5rem;
-  height: 13rem;
   margin-bottom: 3rem;
   margin-top: 2rem;
 `;
@@ -44,7 +44,7 @@ const PopupLevel = ({ open, onClick, variant, nextLevel, path }) => {
     altText = 'defeat';
   }
   if (variant === 'gameOver') {
-    showImg = victoryPopup;
+    showImg = gameOverPopup;
     buttonText = 'homepage';
     altText = 'victory';
   }
