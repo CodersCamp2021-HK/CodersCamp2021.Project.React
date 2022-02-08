@@ -46,9 +46,10 @@ const GameUI = () => {
   const handleClick = () => {
     setOpen(false);
     navigate(path);
-
-    gameEngine.reset();
-    gameEngine.start();
+    setTimeout(() => {
+      gameEngine.reset();
+      gameEngine.start();
+    }, 0);
   };
 
   useEffect(() => {
@@ -96,9 +97,9 @@ const GameUI = () => {
 
   useLayoutEffect(() => {
     if (ref.current && levelsAvailable()) {
-      gameEngine.initialize(ref.current, uiProxy, nextLevel);
+      gameEngine.initialize(ref.current, uiProxy, selectedLevel);
     }
-  }, [gameEngine, uiProxy, nextLevel, levelsAvailable]);
+  }, [gameEngine, uiProxy, selectedLevel, levelsAvailable]);
 
   return (
     <>
