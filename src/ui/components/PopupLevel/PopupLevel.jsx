@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { Link } from 'react-router-dom';
 import { Button } from '../Button';
 import { Popup } from '../Popup';
 
@@ -25,10 +26,10 @@ const button = css`
 `;
 
 /**
- * @param {{ open: boolean, onClose: () => void, variant: 'victory' | 'defeat'  }} props
+ * @param {{ open: boolean, onClick: () => void, variant: 'victory' | 'defeat', nextLevel: number  }} props
  */
 
-const PopupLevel = ({ open, onClose, variant }) => {
+const PopupLevel = ({ open, onClick, variant, nextLevel }) => {
   let showImg;
   let buttonText;
   let altText;
@@ -43,13 +44,15 @@ const PopupLevel = ({ open, onClose, variant }) => {
   }
 
   return (
-    <Popup open={open} onClose={onClose} variant='LevelPopup'>
+    <Popup open={open} onClose={() => {}} variant='LevelPopup'>
       <div css={box}>
         <img css={img} src={showImg} alt={altText} />
         <div css={button}>
-          <Button type='gold' onClick={() => {}}>
-            {buttonText}
-          </Button>
+          <Link to={`/level-select/${nextLevel}`} key={nextLevel}>
+            <Button onClick={onClick} type='gold'>
+              {buttonText}
+            </Button>
+          </Link>
         </div>
       </div>
     </Popup>

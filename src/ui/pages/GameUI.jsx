@@ -39,6 +39,11 @@ const GameUI = () => {
 
   const [open, setOpen] = useState(false);
   const [variant, setVariant] = useState('victory');
+  const [nextLevel, setNextLevel] = useState(0);
+
+  const handleClick = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     gameEngine.start();
@@ -54,19 +59,19 @@ const GameUI = () => {
       new UIProxy(
         () => {
           gameEngine.stop();
+          setNextLevel(selectedLevel + 1);
+          unlockedLevel({ levelNumber: nextLevel });
           setOpen(true);
-
-          unlockedLevel({ levelNumber: selectedLevel + 1 });
           setVariant('victory');
         },
         () => {
           gameEngine.stop();
+          setNextLevel(selectedLevel);
           setOpen(true);
-
           setVariant('defeat');
         },
       ),
-    [gameEngine, selectedLevel],
+    [gameEngine, nextLevel, selectedLevel],
   );
 
   const levelsAvailable = useCallback(() => {
@@ -99,7 +104,7 @@ const GameUI = () => {
         </section>
       </main>
       {/* @ts-ignore */}
-      <PopupLevel open={open} onClose={() => {}} variant={variant} />{' '}
+      <PopupLevel open={open} onClick={handleClick} variant={variant} nextLevel={nextLevel} />
     </>
   );
 };
