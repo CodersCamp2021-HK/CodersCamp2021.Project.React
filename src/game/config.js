@@ -15,8 +15,8 @@ export const KING_RUN_ANIMATION_INTERVAL = 3;
 export const KING_MAX_HP = 5;
 
 export const PIG_RUN_VELOCITY = 1.5;
-export const PIG_JUMP_IMPULSE = -5;
-export const PIG_AIR_HORIZONTAL_VELOCITY = 0.5;
+export const PIG_JUMP_IMPULSE = 4.5;
+export const PIG_AIR_HORIZONTAL_VELOCITY = 0.75;
 export const PIG_JUMP_THRESHOLD = 32;
 export const PIG_ATTACK_SIZE = new Vector(16, 32);
 export const PIG_ATTACK_OFFSET = 8;
