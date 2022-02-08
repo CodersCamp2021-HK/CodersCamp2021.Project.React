@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { useLayoutEffect, useMemo, useRef, useEffect, useCallback, useState } from 'react';
-import { useParams, Navigate, Link } from 'react-router-dom';
+import { useParams, useNavigate, Navigate, Link } from 'react-router-dom';
 import _ from 'lodash';
 import { useGameEngine, UIProxy, theme } from '../../shared';
 import backgroundUrl from '../../public/img/background.jpg';
@@ -35,22 +35,26 @@ const buttonWrapper = css`
 const GameUI = () => {
   const gameEngine = useGameEngine();
   const params = useParams();
-  const [selectedLevel, setSelectedLevel] = useState(Number(params.levelSelectId));
+  const navigate = useNavigate();
+  const selectedLevel = Number(params.levelSelectId);
 
   const [open, setOpen] = useState(false);
-  const [variant, setVariant] = useState('victory');
-  const [nextLevel, setNextLevel] = useState(0);
+  const [variant, setVariant] = useState(/** @type {'victory' | 'defeat'} */ ('victory'));
+  const [nextLevel, setNextLevel] = useState(selectedLevel);
 
   const handleClick = () => {
     setOpen(false);
-    setSelectedLevel(nextLevel);
+    navigate(`/level-select/${nextLevel}`);
+
+    gameEngine.reset();
+    gameEngine.start();
   };
 
   useEffect(() => {
     gameEngine.start();
 
     return () => gameEngine.stop();
-  }, [gameEngine, selectedLevel]);
+  }, [gameEngine]);
 
   /** @type {React.MutableRefObject<HTMLCanvasElement | null>} */
   const ref = useRef(null);
@@ -83,9 +87,9 @@ const GameUI = () => {
 
   useLayoutEffect(() => {
     if (ref.current && levelsAvailable()) {
-      gameEngine.initialize(ref.current, uiProxy, selectedLevel);
+      gameEngine.initialize(ref.current, uiProxy, nextLevel);
     }
-  }, [gameEngine, uiProxy, selectedLevel, levelsAvailable]);
+  }, [gameEngine, uiProxy, nextLevel, levelsAvailable]);
 
   return (
     <>
@@ -104,7 +108,6 @@ const GameUI = () => {
           </div>
         </section>
       </main>
-      {/* @ts-ignore */}
       <PopupLevel open={open} onClick={handleClick} variant={variant} nextLevel={nextLevel} />
     </>
   );
