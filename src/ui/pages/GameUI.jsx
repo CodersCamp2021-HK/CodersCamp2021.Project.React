@@ -36,12 +36,11 @@ const GameUI = () => {
   const gameEngine = useGameEngine();
   const params = useParams();
   const navigate = useNavigate();
-  const selectedLevel = Number(params.levelSelectId);
-
   const [open, setOpen] = useState(false);
-  const [variant, setVariant] = useState(/** @type {'victory' | 'defeat' | 'gameOver'} */ ('victory'));
-  const [nextLevel, setNextLevel] = useState(selectedLevel);
-  const [path, setPath] = useState('/');
+  const [variant, setVariant] = useState(/** @type {'playing' | 'victory' | 'defeat' | 'gameOver'} */ ('playing'));
+  const selectedLevel = Number(params.levelSelectId);
+  const nextLevel = variant === 'victory' ? selectedLevel + 1 : selectedLevel;
+  const path = variant === 'victory' || variant === 'defeat' ? `/level-select/${nextLevel}` : '/';
 
   const handleClick = () => {
     setOpen(false);
@@ -66,22 +65,17 @@ const GameUI = () => {
       new UIProxy(
         () => {
           gameEngine.stop();
-          setNextLevel(selectedLevel + 1);
           unlockedLevel({ levelNumber: selectedLevel + 1 });
-          setPath(`/level-select/${selectedLevel + 1}`);
           setOpen(true);
           setVariant('victory');
         },
         () => {
           gameEngine.stop();
-          setNextLevel(selectedLevel);
-          setPath(`/level-select/${selectedLevel}`);
           setOpen(true);
           setVariant('defeat');
         },
         () => {
           gameEngine.stop();
-          setPath('/');
           setOpen(true);
           setVariant('gameOver');
         },

@@ -26,7 +26,7 @@ const button = css`
 `;
 
 /**
- * @param {{ open: boolean, onClick: () => void, variant: 'victory' | 'defeat' | 'gameOver', nextLevel: number, path: string  }} props
+ * @param {{ open: boolean, onClick: () => void, variant: 'playing' | 'victory' | 'defeat' | 'gameOver', nextLevel: number, path: string  }} props
  */
 
 const PopupLevel = ({ open, onClick, variant, nextLevel, path }) => {
