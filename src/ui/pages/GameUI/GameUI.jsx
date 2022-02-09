@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-import { useLayoutEffect, useMemo, useRef, useEffect, useCallback } from 'react';
-import { useParams, Navigate, Link } from 'react-router-dom';
+import { useLayoutEffect, useMemo, useRef, useEffect, useCallback, useState } from 'react';
+import { useParams, useNavigate, Navigate, Link } from 'react-router-dom';
 import _ from 'lodash';
 import { useGameEngine, UIProxy, theme } from '../../../shared';
 import backgroundUrl from '../../../public/img/background.jpg';
-import { Button, BUTTON_HEIGHT_SIZE, BUTTON_WIDTH_SIZE, PageHeader } from '../../components';
-import { getLocalStorage } from '../../../shared/game/localStorageFun';
+import { Button, BUTTON_HEIGHT_SIZE, BUTTON_WIDTH_SIZE, PageHeader, PopupLevel } from '../../components';
+import { getLocalStorage, unlockedLevel } from '../../../shared/game/localStorageFun';
 
 const wrapper = css`
   min-height: 100vh;
@@ -35,7 +35,21 @@ const buttonWrapper = css`
 const GameUI = () => {
   const gameEngine = useGameEngine();
   const params = useParams();
+  const navigate = useNavigate();
+  const [variant, setVariant] = useState(/** @type {'playing' | 'victory' | 'defeat' | 'gameOver'} */ ('playing'));
+  const open = variant !== 'playing';
   const selectedLevel = Number(params.levelSelectId);
+  const nextLevel = variant === 'victory' ? selectedLevel + 1 : selectedLevel;
+  const path = variant === 'victory' || variant === 'defeat' ? `/level-select/${nextLevel}` : '/';
+
+  const handleClick = () => {
+    setVariant('playing');
+    navigate(path);
+    setTimeout(() => {
+      gameEngine.reset();
+      gameEngine.start();
+    }, 0);
+  };
 
   useEffect(() => {
     gameEngine.start();
@@ -48,10 +62,22 @@ const GameUI = () => {
 
   const uiProxy = useMemo(
     () =>
-      new UIProxy(() => {
-        gameEngine.stop();
-      }),
-    [gameEngine],
+      new UIProxy(
+        () => {
+          gameEngine.stop();
+          unlockedLevel({ levelNumber: selectedLevel + 1 });
+          setVariant('victory');
+        },
+        () => {
+          gameEngine.stop();
+          setVariant('defeat');
+        },
+        () => {
+          gameEngine.stop();
+          setVariant('gameOver');
+        },
+      ),
+    [gameEngine, selectedLevel],
   );
 
   const levelsAvailable = useCallback(() => {
@@ -83,6 +109,7 @@ const GameUI = () => {
           </div>
         </section>
       </main>
+      <PopupLevel open={open} onClick={handleClick} variant={variant} nextLevel={nextLevel} path={path} />
     </>
   );
 };

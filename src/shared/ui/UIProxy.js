@@ -1,16 +1,31 @@
 class UIProxy {
-  #levelFinishedCb;
+  #levelWonCb;
+
+  #levelLostCb;
+
+  #gameOverCb;
 
   /**
-
-   * @param {() => void} onLevelFinished
+   * @param {() => void} onLevelWon
+   * @param {() => void} onLevelLost
+   * @param {() => void} onGameOver
    */
-  constructor(onLevelFinished) {
-    this.#levelFinishedCb = onLevelFinished;
+  constructor(onLevelWon, onLevelLost, onGameOver) {
+    this.#levelWonCb = onLevelWon;
+    this.#levelLostCb = onLevelLost;
+    this.#gameOverCb = onGameOver;
   }
 
-  levelFinished() {
-    this.#levelFinishedCb();
+  levelWon() {
+    this.#levelWonCb();
+  }
+
+  levelLost() {
+    this.#levelLostCb();
+  }
+
+  gameOver() {
+    this.#gameOverCb();
   }
 }
 

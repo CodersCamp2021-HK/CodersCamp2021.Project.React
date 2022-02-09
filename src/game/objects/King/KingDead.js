@@ -15,7 +15,7 @@ class KingDead extends KingAnimated {
    */
   update(frame) {
     if (this.king.animation.isFinished) {
-      return this.king.ui.levelFinished();
+      return this.king.ui.levelLost();
     }
     return super.update(frame);
   }

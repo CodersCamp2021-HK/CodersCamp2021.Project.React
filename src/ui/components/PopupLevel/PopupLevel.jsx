@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
+import { Link } from 'react-router-dom';
 import { Button } from '../Button';
 import { Popup } from '../Popup';
 
 import defeatPopup from '../../../public/img/defeatPopup.png';
 import victoryPopup from '../../../public/img/victoryPopup.png';
+import gameOverPopup from '../../../public/img/gameOverPopup.png';
 
 const box = css`
   display: flex;
@@ -14,7 +16,6 @@ const box = css`
 
 const img = css`
   width: 17.5rem;
-  height: 13rem;
   margin-bottom: 3rem;
   margin-top: 2rem;
 `;
@@ -25,10 +26,10 @@ const button = css`
 `;
 
 /**
- * @param {{ open: boolean, onClose: () => void, variant: 'victory' | 'defeat'  }} props
+ * @param {{ open: boolean, onClick: () => void, variant: 'playing' | 'victory' | 'defeat' | 'gameOver', nextLevel: number, path: string  }} props
  */
 
-const PopupLevel = ({ open, onClose, variant }) => {
+const PopupLevel = ({ open, onClick, variant, nextLevel, path }) => {
   let showImg;
   let buttonText;
   let altText;
@@ -36,20 +37,28 @@ const PopupLevel = ({ open, onClose, variant }) => {
     showImg = victoryPopup;
     buttonText = 'next';
     altText = 'victory';
-  } else {
+  }
+  if (variant === 'defeat') {
     showImg = defeatPopup;
     buttonText = 'retry';
     altText = 'defeat';
   }
+  if (variant === 'gameOver') {
+    showImg = gameOverPopup;
+    buttonText = 'homepage';
+    altText = 'victory';
+  }
 
   return (
-    <Popup open={open} onClose={onClose} variant='LevelPopup'>
+    <Popup open={open} onClose={() => {}} variant='LevelPopup'>
       <div css={box}>
         <img css={img} src={showImg} alt={altText} />
         <div css={button}>
-          <Button type='gold' onClick={() => {}}>
-            {buttonText}
-          </Button>
+          <Link to={path} key={nextLevel}>
+            <Button onClick={onClick} type='gold'>
+              {buttonText}
+            </Button>
+          </Link>
         </div>
       </div>
     </Popup>
