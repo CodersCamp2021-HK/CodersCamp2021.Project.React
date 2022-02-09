@@ -2,10 +2,10 @@ import { css } from '@emotion/react';
 import { useLayoutEffect, useMemo, useRef, useEffect, useCallback, useState } from 'react';
 import { useParams, useNavigate, Navigate, Link } from 'react-router-dom';
 import _ from 'lodash';
-import { useGameEngine, UIProxy, theme } from '../../shared';
-import backgroundUrl from '../../public/img/background.jpg';
-import { Button, BUTTON_HEIGHT_SIZE, BUTTON_WIDTH_SIZE, PageHeader, PopupLevel } from '../components';
-import { getLocalStorage, unlockedLevel } from '../../shared/game/localStorageFun';
+import { useGameEngine, UIProxy, theme } from '../../../shared';
+import backgroundUrl from '../../../public/img/background.jpg';
+import { Button, BUTTON_HEIGHT_SIZE, BUTTON_WIDTH_SIZE, PageHeader, PopupLevel } from '../../components';
+import { getLocalStorage, unlockedLevel } from '../../../shared/game/localStorageFun';
 
 const wrapper = css`
   min-height: 100vh;
